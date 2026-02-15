@@ -1,0 +1,38 @@
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Nuxt / Vite / Nitro outputs
+.nuxt/
+.output/
+.nitro/
+.vite/
+dist/
+build/
+.cache/
+coverage/
+
+# IDEs
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
