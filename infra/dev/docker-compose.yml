@@ -1,0 +1,81 @@
+name: akpp-dev
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    volumes:
+      - akpp_dev_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - '${REDIS_PORT}:6379'
+    volumes:
+      - akpp_dev_redis:/data
+
+  directus:
+    image: directus/directus:11
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+      CACHE_ENABLED: 'true'
+      CACHE_STORE: redis
+      REDIS: redis://redis:6379
+
+      WEBSOCKETS_ENABLED: 'true'
+      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
+    ports:
+      - '${DIRECTUS_PORT}:8055'
+    volumes:
+      - akpp_dev_directus_uploads:/directus/uploads
+      - akpp_dev_directus_extensions:/directus/extensions
+
+  web:
+    build:
+      context: ../..
+      dockerfile: infra/dev/web.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - directus
+    environment:
+      NODE_ENV: development
+      NITRO_PORT: 3000
+      NITRO_HOST: 0.0.0.0
+      NUXT_PUBLIC_DIRECTUS_URL: ${DIRECTUS_INTERNAL_URL}
+    ports:
+      - '${WEB_PORT}:3000'
+
+volumes:
+  akpp_dev_postgres:
+  akpp_dev_redis:
+  akpp_dev_directus_uploads:
+  akpp_dev_directus_extensions:
