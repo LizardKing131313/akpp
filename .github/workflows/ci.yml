@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - main
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Enable Corepack and pnpm
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.3 --activate
+          pnpm --version
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm -w install --frozen-lockfile
+
+      - name: Lint
+        shell: bash
+        run: pnpm lint
+
+      - name: Typecheck web
+        shell: bash
+        run: pnpm -C apps/web typecheck
+
+      - name: Format check
+        shell: bash
+        run: pnpm prettier --check .
