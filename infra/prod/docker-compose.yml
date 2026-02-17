@@ -46,6 +46,28 @@ services:
       - akpp_prod_directus_uploads:/directus/uploads
       - akpp_prod_directus_extensions:/directus/extensions
 
+  directus-schema-apply:
+    image: directus/directus:11
+    depends_on:
+      directus:
+        condition: service_started
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./schema.json:/schema/schema.json:ro
+    entrypoint: >
+      sh -c "
+        echo 'Waiting for Directus to be ready...' &&
+        sleep 10 &&
+        npx directus schema apply /schema/schema.json --yes
+      "
+    restart: 'no'
+
   web:
     build:
       context: ../..
