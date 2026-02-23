@@ -48,13 +48,7 @@ const nuxtAutoImports = {
 
 export default [
   {
-    ignores: [
-      '**/.nuxt/**',
-      '**/.output/**',
-      '**/dist/**',
-      '**/node_modules/**',
-      '**/coverage/**',
-    ],
+    ignores: ['**/.nuxt/**', '**/.output/**', '**/dist/**', '**/node_modules/**', '**/coverage/**'],
   },
   {
     files: ['apps/web/**/*.{ts,tsx,js,jsx,vue}'],
@@ -82,17 +76,17 @@ export default [
       vue: vuePlugin,
     },
     rules: {
-      "no-console": ['error', {allow: ['warn', 'error']}],
-      "no-debugger": 'error',
-      eqeqeq: ['error', 'always', {null: 'ignore'}],
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+      'no-debugger': 'error',
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
 
-      '@typescript-eslint/consistent-type-imports': ['error', {prefer: 'type-imports'}],
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-misused-promises': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
-        {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
 
       'import/no-unresolved': 'off',
@@ -113,7 +107,7 @@ export default [
           ],
         },
       ],
-      'perfectionist/sort-named-imports': ['error', {type: 'natural', order: 'asc'}],
+      'perfectionist/sort-named-imports': ['error', { type: 'natural', order: 'asc' }],
 
       'promise/catch-or-return': 'error',
       'promise/no-nesting': 'warn',

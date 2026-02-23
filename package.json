@@ -13,6 +13,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@typescript-eslint/eslint-plugin": "^8.55.0",
     "@typescript-eslint/parser": "^8.55.0",
     "eslint": "^10.0.0",

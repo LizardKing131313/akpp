@@ -4,6 +4,109 @@
   "vendor": "postgres",
   "collections": [
     {
+      "collection": "blocks",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": "name",
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "blocks",
+        "color": "#FF6666",
+        "display_template": "{{name}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "code_blocks",
+        "item_duplication_fields": null,
+        "note": "Блоки страниц",
+        "preview_url": "{{name}}",
+        "singleton": false,
+        "sort": 3,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "en-US",
+            "plural": "blocks",
+            "singular": "block",
+            "translation": "Blocks"
+          },
+          {
+            "language": "ru-RU",
+            "plural": "блоки",
+            "singular": "блок",
+            "translation": "Блоки"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": true
+      },
+      "schema": {
+        "name": "blocks"
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "blocks_content",
+        "color": null,
+        "display_template": null,
+        "group": "blocks",
+        "hidden": true,
+        "icon": "import_export",
+        "item_duplication_fields": null,
+        "note": null,
+        "preview_url": null,
+        "singleton": false,
+        "sort": 1,
+        "sort_field": null,
+        "translations": null,
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "blocks_content"
+      }
+    },
+    {
+      "collection": "car",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "car",
+        "color": "#E5F94D",
+        "display_template": null,
+        "group": "data",
+        "hidden": false,
+        "icon": "electric_car",
+        "item_duplication_fields": null,
+        "note": "Данные о машинах",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 2,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Cars"
+          },
+          {
+            "language": "ru-RU",
+            "translation": "Автомобили"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      }
+    },
+    {
       "collection": "car_brands",
       "meta": {
         "accountability": "all",
@@ -14,14 +117,14 @@
         "collection": "car_brands",
         "color": "#FFA439",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "car",
         "hidden": false,
         "icon": "local_car_wash",
         "item_duplication_fields": null,
         "note": "Список брендов автомобилей",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 1,
         "sort_field": "sort",
         "translations": [
           {
@@ -55,14 +158,14 @@
         "collection": "car_models",
         "color": "#CCA439",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "car",
         "hidden": false,
         "icon": "developer_mode",
         "item_duplication_fields": null,
         "note": "Модели бренда",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 2,
         "sort_field": "sort",
         "translations": [
           {
@@ -96,14 +199,14 @@
         "collection": "cases",
         "color": "#2ECDA7",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "contacts",
         "hidden": false,
         "icon": "cases",
         "item_duplication_fields": null,
         "note": "Примеры работ",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 2,
         "sort_field": "sort",
         "translations": [
           {
@@ -137,14 +240,14 @@
         "collection": "cities",
         "color": "#3399FF",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "data",
         "hidden": false,
         "icon": "map",
         "item_duplication_fields": null,
         "note": "Города",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 1,
         "sort_field": "sort",
         "translations": [
           {
@@ -168,6 +271,108 @@
       }
     },
     {
+      "collection": "contacts",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "contacts",
+        "color": "#3399FF",
+        "display_template": null,
+        "group": "data",
+        "hidden": false,
+        "icon": "contactless",
+        "item_duplication_fields": null,
+        "note": "Cвязь",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 4,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Contacts"
+          },
+          {
+            "language": "ru-RU",
+            "translation": "Контакты"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "content",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "content",
+        "color": "#E35169",
+        "display_template": null,
+        "group": null,
+        "hidden": false,
+        "icon": "page_header",
+        "item_duplication_fields": null,
+        "note": "Контент",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 2,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Content"
+          },
+          {
+            "language": "ru-RU",
+            "translation": "Контент"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "data",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "data",
+        "color": "#FFC23B",
+        "display_template": null,
+        "group": null,
+        "hidden": false,
+        "icon": "database",
+        "item_duplication_fields": null,
+        "note": "Данные",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 1,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Data"
+          },
+          {
+            "language": "ru-RU",
+            "translation": "Данные"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      }
+    },
+    {
       "collection": "faq",
       "meta": {
         "accountability": "all",
@@ -178,14 +383,14 @@
         "collection": "faq",
         "color": "#002AFF",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "contacts",
         "hidden": false,
         "icon": "perm_device_information",
         "item_duplication_fields": null,
         "note": "Ответы на популярные вопросы",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 3,
         "sort_field": "sort",
         "translations": [
           {
@@ -213,21 +418,21 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "slug",
+        "archive_field": null,
         "archive_value": null,
         "collapse": "open",
         "collection": "globals",
         "color": "#D400FF",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "content",
         "hidden": false,
         "icon": "globe_book",
         "item_duplication_fields": null,
         "note": "Глобальные переменные",
         "preview_url": null,
         "singleton": true,
-        "sort": null,
-        "sort_field": "sort",
+        "sort": 1,
+        "sort_field": null,
         "translations": [
           {
             "language": "en-US",
@@ -260,14 +465,14 @@
         "collection": "leads",
         "color": "#5AE718",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "contacts",
         "hidden": false,
         "icon": "social_leaderboard",
         "item_duplication_fields": null,
         "note": "Заявки",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 1,
         "sort_field": "sort",
         "translations": [
           {
@@ -291,47 +496,6 @@
       }
     },
     {
-      "collection": "page_blocks",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": "slug",
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "page_blocks",
-        "color": "#5CFFAB",
-        "display_template": "{{slug}}",
-        "group": null,
-        "hidden": false,
-        "icon": "code_blocks",
-        "item_duplication_fields": null,
-        "note": "Блоки страниц",
-        "preview_url": null,
-        "singleton": false,
-        "sort": null,
-        "sort_field": "sort",
-        "translations": [
-          {
-            "language": "en-US",
-            "plural": "blocks",
-            "singular": "block",
-            "translation": "Page blocks"
-          },
-          {
-            "language": "ru-RU",
-            "plural": "блоки",
-            "singular": "блок",
-            "translation": "Блоки страниц"
-          }
-        ],
-        "unarchive_value": null,
-        "versioning": true
-      },
-      "schema": {
-        "name": "page_blocks"
-      }
-    },
-    {
       "collection": "pages",
       "meta": {
         "accountability": "all",
@@ -342,14 +506,14 @@
         "collection": "pages",
         "color": "#732D1C",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "content",
         "hidden": false,
         "icon": "two_pager",
         "item_duplication_fields": null,
         "note": "Страницы",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 2,
         "sort_field": "sort",
         "translations": [
           {
@@ -373,6 +537,68 @@
       }
     },
     {
+      "collection": "pages_blocks",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "pages_blocks",
+        "color": null,
+        "display_template": null,
+        "group": "pages",
+        "hidden": true,
+        "icon": "import_export",
+        "item_duplication_fields": null,
+        "note": null,
+        "preview_url": null,
+        "singleton": false,
+        "sort": 1,
+        "sort_field": "sort",
+        "translations": null,
+        "unarchive_value": null,
+        "versioning": true
+      },
+      "schema": {
+        "name": "pages_blocks"
+      }
+    },
+    {
+      "collection": "service",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "service",
+        "color": "#6644FF",
+        "display_template": null,
+        "group": "data",
+        "hidden": false,
+        "icon": "medical_services",
+        "item_duplication_fields": null,
+        "note": "Услуги",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 3,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Services"
+          },
+          {
+            "language": "ru-RU",
+            "translation": "Услуги"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      }
+    },
+    {
       "collection": "service_price_items",
       "meta": {
         "accountability": "all",
@@ -383,14 +609,14 @@
         "collection": "service_price_items",
         "color": "#F01AFF",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "service",
         "hidden": false,
         "icon": "price_check",
         "item_duplication_fields": null,
         "note": "Цены услуг",
         "preview_url": null,
         "singleton": false,
-        "sort": null,
+        "sort": 2,
         "sort_field": "sort",
         "translations": [
           {
@@ -424,14 +650,14 @@
         "collection": "services",
         "color": "#FF0000",
         "display_template": "{{slug}}",
-        "group": null,
+        "group": "service",
         "hidden": false,
         "icon": "room_service",
         "item_duplication_fields": null,
         "note": "Услуги",
         "preview_url": "{{slug}}",
         "singleton": false,
-        "sort": null,
+        "sort": 1,
         "sort_field": "sort",
         "translations": [
           {
@@ -457,6 +683,703 @@
   ],
   "fields": [
     {
+      "collection": "blocks",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": null,
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "blocks",
+        "data_type": "integer",
+        "default_value": "nextval('blocks_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "user_created",
+      "type": "uuid",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "user",
+        "display_options": {
+          "circle": true
+        },
+        "field": "user_created",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{avatar}} {{first_name}} {{last_name}}"
+        },
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": ["user-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Автор"
+          },
+          {
+            "language": "en-US",
+            "translation": "Author"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_created",
+        "table": "blocks",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "user_updated",
+      "type": "uuid",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "user",
+        "display_options": {
+          "circle": true
+        },
+        "field": "user_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{avatar}} {{first_name}} {{last_name}}"
+        },
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 6,
+        "special": ["user-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Обновил"
+          },
+          {
+            "language": "en-US",
+            "translation": "Updated by"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_updated",
+        "table": "blocks",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "name",
+      "type": "string",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "raw",
+        "display_options": null,
+        "field": "name",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": null,
+        "options": {
+          "iconLeft": "abc",
+          "trim": true
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 8,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Название"
+          },
+          {
+            "language": "en-US",
+            "translation": "Block"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "name",
+        "table": "blocks",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": true,
+        "is_indexed": true,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "blocks",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "raw",
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          },
+          {
+            "language": "en-US",
+            "translation": "Sorting"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "blocks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": true,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_created",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": null,
+        "options": {
+          "includeSeconds": true
+        },
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 5,
+        "special": ["date-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата создания"
+          },
+          {
+            "language": "ru-RU",
+            "translation": "Date created"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_created",
+        "table": "blocks",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": null,
+        "options": {
+          "includeSeconds": true
+        },
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 7,
+        "special": ["date-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата последнего обновления"
+          },
+          {
+            "language": "en-US",
+            "translation": "Last update date"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_updated",
+        "table": "blocks",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "content",
+      "type": "alias",
+      "meta": {
+        "collection": "blocks",
+        "conditions": null,
+        "display": "related-values",
+        "display_options": null,
+        "field": "content",
+        "group": null,
+        "hidden": false,
+        "interface": "list-m2a",
+        "note": null,
+        "options": {
+          "prefix": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 9,
+        "special": ["m2a"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Содержание"
+          },
+          {
+            "language": "en-US",
+            "translation": "Content"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "blocks_content",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "blocks_content",
+        "data_type": "integer",
+        "default_value": "nextval('blocks_content_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "field": "blocks_id",
+      "type": "integer",
+      "meta": {
+        "collection": "blocks_content",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "blocks_id",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "blocks_id",
+        "table": "blocks_content",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "blocks",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "field": "item",
+      "type": "string",
+      "meta": {
+        "collection": "blocks_content",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "item",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "item",
+        "table": "blocks_content",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "field": "collection",
+      "type": "string",
+      "meta": {
+        "collection": "blocks_content",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "collection",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "collection",
+        "table": "blocks_content",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
       "collection": "car_brands",
       "field": "id",
       "type": "integer",
@@ -476,7 +1399,16 @@
         "searchable": true,
         "sort": 1,
         "special": null,
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          },
+          {
+            "language": "en-US",
+            "translation": "ID"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -502,85 +1434,6 @@
     },
     {
       "collection": "car_brands",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "car_brands",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "car_brands",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "car_brands",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -592,7 +1445,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -621,7 +1474,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -689,7 +1542,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -844,7 +1697,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -877,7 +1730,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -901,7 +1754,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -934,7 +1787,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -958,7 +1811,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -1016,7 +1869,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -1060,6 +1913,107 @@
       }
     },
     {
+      "collection": "car_brands",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "car_brands",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "car_brands",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
       "collection": "car_models",
       "field": "id",
       "type": "integer",
@@ -1079,7 +2033,16 @@
         "searchable": true,
         "sort": 1,
         "special": null,
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          },
+          {
+            "language": "en-US",
+            "translation": "ID"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -1110,20 +2073,34 @@
       "meta": {
         "collection": "car_models",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{logo}} {{name}}"
+        },
         "field": "brand_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{logo}} {{name}}"
+        },
         "readonly": false,
         "required": true,
         "searchable": true,
         "sort": 9,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Бренд"
+          },
+          {
+            "language": "en-US",
+            "translation": "Бренд"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -1138,7 +2115,7 @@
         "numeric_scale": 0,
         "is_nullable": false,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -1237,85 +2214,6 @@
     },
     {
       "collection": "car_models",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "car_models",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "car_models",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "car_models",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -1327,7 +2225,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -1356,7 +2254,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -1382,7 +2280,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -1415,7 +2313,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -1439,7 +2337,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -1472,7 +2370,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -1494,7 +2392,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -1552,7 +2450,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -1610,7 +2508,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -1651,6 +2549,107 @@
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "car_models",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "car_models",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "car_models",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -1748,20 +2747,34 @@
       "meta": {
         "collection": "cases",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}}"
+        },
         "field": "city_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 10,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Город"
+          },
+          {
+            "language": "en-US",
+            "translation": "City"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -1776,7 +2789,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -1792,20 +2805,34 @@
       "meta": {
         "collection": "cases",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{logo}} {{name}}"
+        },
         "field": "brand_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{logo}} {{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 11,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Бренд"
+          },
+          {
+            "language": "en-US",
+            "translation": "Brand"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -1820,7 +2847,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -1836,20 +2863,34 @@
       "meta": {
         "collection": "cases",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}} "
+        },
         "field": "model_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 12,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Модель"
+          },
+          {
+            "language": "en-US",
+            "translation": "Model"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -1864,7 +2905,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -2359,85 +3400,6 @@
     },
     {
       "collection": "cases",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "cases",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "cases",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "cases",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -2449,7 +3411,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -2478,7 +3440,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -2504,7 +3466,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -2537,7 +3499,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -2561,7 +3523,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -2594,7 +3556,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -2616,7 +3578,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -2674,7 +3636,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -2732,7 +3694,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -2773,6 +3735,107 @@
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "cases",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "cases",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -3261,85 +4324,6 @@
     },
     {
       "collection": "cities",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "cities",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "cities",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "cities",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -3351,7 +4335,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -3380,7 +4364,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -3406,7 +4390,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -3439,7 +4423,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -3463,7 +4447,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -3496,7 +4480,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -3518,7 +4502,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -3576,7 +4560,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -3634,7 +4618,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -3675,6 +4659,107 @@
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cities",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "cities",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "cities",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -3728,20 +4813,34 @@
       "meta": {
         "collection": "faq",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}}"
+        },
         "field": "city_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 9,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Город"
+          },
+          {
+            "language": "en-US",
+            "translation": "City"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -3756,7 +4855,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -3816,20 +4915,34 @@
       "meta": {
         "collection": "faq",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{short_name}}"
+        },
         "field": "service_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{short_name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 11,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Услуга"
+          },
+          {
+            "language": "en-US",
+            "translation": "Service"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -3844,7 +4957,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -3860,20 +4973,34 @@
       "meta": {
         "collection": "faq",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{logo}} {{name}}"
+        },
         "field": "brand_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{logo}} {{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 12,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Бренд"
+          },
+          {
+            "language": "en-US",
+            "translation": "Бренд"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -3888,7 +5015,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -3987,85 +5114,6 @@
     },
     {
       "collection": "faq",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "faq",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "faq",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "faq",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -4077,7 +5125,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -4106,7 +5154,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -4132,7 +5180,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -4165,7 +5213,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -4189,7 +5237,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -4222,7 +5270,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -4244,7 +5292,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -4302,7 +5350,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -4360,7 +5408,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -4401,6 +5449,107 @@
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "faq",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "faq",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "faq",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -4465,7 +5614,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 9,
+        "sort": 8,
         "special": null,
         "translations": null,
         "validation": null,
@@ -4478,50 +5627,6 @@
         "data_type": "character varying",
         "default_value": null,
         "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "globals",
-      "field": "logo",
-      "type": "uuid",
-      "meta": {
-        "collection": "globals",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "logo",
-        "group": null,
-        "hidden": false,
-        "interface": "file",
-        "note": null,
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["file"],
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "logo",
-        "table": "globals",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
         "is_nullable": true,
@@ -4553,7 +5658,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 11,
+        "sort": 9,
         "special": null,
         "translations": null,
         "validation": null,
@@ -4597,7 +5702,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 12,
+        "sort": 10,
         "special": null,
         "translations": null,
         "validation": null,
@@ -4641,7 +5746,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 13,
+        "sort": 11,
         "special": null,
         "translations": null,
         "validation": null,
@@ -4685,7 +5790,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 14,
+        "sort": 12,
         "special": null,
         "translations": null,
         "validation": null,
@@ -4713,195 +5818,6 @@
     },
     {
       "collection": "globals",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "globals",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "globals",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "globals",
-      "field": "sort",
-      "type": "integer",
-      "meta": {
-        "collection": "globals",
-        "conditions": null,
-        "display": "raw",
-        "display_options": null,
-        "field": "sort",
-        "group": null,
-        "hidden": true,
-        "interface": null,
-        "note": "$t:sort",
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 3,
-        "special": ["sort"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Сортировка"
-          },
-          {
-            "language": "en-US",
-            "translation": "Sorting"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "sort",
-        "table": "globals",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "globals",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "globals",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "$t:date_created",
-        "options": {
-          "includeSeconds": true
-        },
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 5,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          },
-          {
-            "language": "ru-RU",
-            "translation": "Date created"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "globals",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "globals",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -4915,14 +5831,14 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
         "readonly": true,
         "required": false,
         "searchable": true,
-        "sort": 7,
+        "sort": 6,
         "special": ["date-updated"],
         "translations": [
           {
@@ -4948,127 +5864,13 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "globals",
-      "field": "slug",
-      "type": "string",
-      "meta": {
-        "collection": "globals",
-        "conditions": null,
-        "display": "raw",
-        "display_options": null,
-        "field": "slug",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": "$t:slug",
-        "options": {
-          "iconLeft": "link",
-          "trim": true
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 8,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "URL"
-          },
-          {
-            "language": "en-US",
-            "translation": "URL"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "slug",
-        "table": "globals",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "globals",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "globals",
-        "conditions": null,
-        "display": "user",
-        "display_options": {
-          "circle": true
-        },
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
-        "options": {
-          "enableLink": true,
-          "template": "{{avatar}} {{first_name}} {{last_name}}"
-        },
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 4,
-        "special": ["m2o", "user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Автор"
-          },
-          {
-            "language": "en-US",
-            "translation": "Author"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "globals",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -5086,7 +5888,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -5094,7 +5896,7 @@
         "readonly": true,
         "required": false,
         "searchable": true,
-        "sort": 6,
+        "sort": 5,
         "special": ["m2o", "user-updated"],
         "translations": [
           {
@@ -5126,6 +5928,50 @@
         "generation_expression": null,
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "globals",
+      "field": "logo",
+      "type": "uuid",
+      "meta": {
+        "collection": "globals",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "logo",
+        "group": null,
+        "hidden": false,
+        "interface": "file-image",
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 7,
+        "special": ["file"],
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "logo",
+        "table": "globals",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_files",
         "foreign_key_column": "id"
       }
     },
@@ -5224,20 +6070,34 @@
       "meta": {
         "collection": "leads",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}}"
+        },
         "field": "city_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 10,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Город"
+          },
+          {
+            "language": "en-US",
+            "translation": "City"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -5252,7 +6112,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -5356,20 +6216,34 @@
       "meta": {
         "collection": "leads",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{logo}} {{name}}"
+        },
         "field": "brand_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{logo}} {{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 13,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Бренд"
+          },
+          {
+            "language": "en-US",
+            "translation": "Brand"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -5384,7 +6258,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -5400,20 +6274,34 @@
       "meta": {
         "collection": "leads",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}}"
+        },
         "field": "model_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 14,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Модель"
+          },
+          {
+            "language": "en-US",
+            "translation": "Model"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -5428,7 +6316,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -5444,20 +6332,34 @@
       "meta": {
         "collection": "leads",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{short_name}}"
+        },
         "field": "service_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{short_name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 15,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Услуга"
+          },
+          {
+            "language": "en-US",
+            "translation": "Service"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -5472,7 +6374,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -5615,85 +6517,6 @@
     },
     {
       "collection": "leads",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "leads",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "leads",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "leads",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -5705,7 +6528,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -5734,7 +6557,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -5760,7 +6583,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -5793,7 +6616,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -5817,7 +6640,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -5850,7 +6673,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -5872,7 +6695,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -5930,7 +6753,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -5988,7 +6811,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -6032,286 +6855,44 @@
       }
     },
     {
-      "collection": "page_blocks",
-      "field": "id",
-      "type": "integer",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "id",
-        "group": null,
-        "hidden": true,
-        "interface": null,
-        "note": null,
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 1,
-        "special": null,
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "id",
-        "table": "page_blocks",
-        "data_type": "integer",
-        "default_value": "nextval('page_blocks_id_seq'::regclass)",
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_indexed": false,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": true,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "page_id",
-      "type": "integer",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "page_id",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown-m2o",
-        "note": null,
-        "options": null,
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 9,
-        "special": ["m2o"],
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "page_id",
-        "table": "page_blocks",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "pages",
-        "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "city_id",
-      "type": "integer",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "city_id",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown-m2o",
-        "note": null,
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["m2o"],
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "city_id",
-        "table": "page_blocks",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "cities",
-        "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "block_key",
-      "type": "string",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "block_key",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": null,
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 11,
-        "special": null,
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "block_key",
-        "table": "page_blocks",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "block_type",
-      "type": "string",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "block_type",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": null,
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": null,
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "block_type",
-        "table": "page_blocks",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "data",
-      "type": "json",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "data",
-        "group": null,
-        "hidden": false,
-        "interface": "input-code",
-        "note": null,
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 13,
-        "special": null,
-        "translations": null,
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "data",
-        "table": "page_blocks",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
+      "collection": "leads",
       "field": "status",
       "type": "string",
       "meta": {
-        "collection": "page_blocks",
+        "collection": "leads",
         "conditions": null,
-        "display": null,
+        "display": "labels",
         "display_options": {
-          "choices": null,
-          "showAsDot": true
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
         },
         "field": "status",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
+        "note": null,
         "options": {
           "choices": [
             {
@@ -6334,7 +6915,7 @@
             }
           ],
           "icon": "flag",
-          "placeholder": "$t:status_placeholder"
+          "placeholder": null
         },
         "readonly": false,
         "required": false,
@@ -6357,7 +6938,7 @@
       },
       "schema": {
         "name": "status",
-        "table": "page_blocks",
+        "table": "leads",
         "data_type": "character varying",
         "default_value": "draft",
         "max_length": 255,
@@ -6372,345 +6953,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "sort",
-      "type": "integer",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": "raw",
-        "display_options": null,
-        "field": "sort",
-        "group": null,
-        "hidden": true,
-        "interface": null,
-        "note": "$t:sort",
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 3,
-        "special": ["sort"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Сортировка"
-          },
-          {
-            "language": "en-US",
-            "translation": "Sorting"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "sort",
-        "table": "page_blocks",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "$t:date_created",
-        "options": {
-          "includeSeconds": true
-        },
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 5,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          },
-          {
-            "language": "ru-RU",
-            "translation": "Date created"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "page_blocks",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "date_updated",
-      "type": "timestamp",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_updated",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "$t:date_updated",
-        "options": {
-          "includeSeconds": true
-        },
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 7,
-        "special": ["date-updated"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата последнего обновления"
-          },
-          {
-            "language": "en-US",
-            "translation": "Last update date"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_updated",
-        "table": "page_blocks",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "slug",
-      "type": "string",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": "raw",
-        "display_options": null,
-        "field": "slug",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": "$t:slug",
-        "options": {
-          "iconLeft": "link",
-          "trim": true
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 8,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "URL"
-          },
-          {
-            "language": "en-US",
-            "translation": "URL"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "slug",
-        "table": "page_blocks",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_indexed": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": "user",
-        "display_options": {
-          "circle": true
-        },
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
-        "options": {
-          "enableLink": true,
-          "template": "{{avatar}} {{first_name}} {{last_name}}"
-        },
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 4,
-        "special": ["m2o", "user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Автор"
-          },
-          {
-            "language": "en-US",
-            "translation": "Author"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "page_blocks",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "user_updated",
-      "type": "uuid",
-      "meta": {
-        "collection": "page_blocks",
-        "conditions": null,
-        "display": "user",
-        "display_options": {
-          "circle": true
-        },
-        "field": "user_updated",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
-        "options": {
-          "enableLink": true,
-          "template": "{{avatar}} {{first_name}} {{last_name}}"
-        },
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 6,
-        "special": ["m2o", "user-updated"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Обновил"
-          },
-          {
-            "language": "en-US",
-            "translation": "Updated by"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_updated",
-        "table": "page_blocks",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -7028,16 +7270,38 @@
       "meta": {
         "collection": "pages",
         "conditions": null,
-        "display": null,
+        "display": "labels",
         "display_options": {
-          "choices": null,
-          "showAsDot": true
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
         },
         "field": "status",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
+        "note": null,
         "options": {
           "choices": [
             {
@@ -7060,7 +7324,7 @@
             }
           ],
           "icon": "flag",
-          "placeholder": "$t:status_placeholder"
+          "placeholder": null
         },
         "readonly": false,
         "required": false,
@@ -7113,7 +7377,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -7142,7 +7406,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -7168,7 +7432,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -7201,7 +7465,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -7225,7 +7489,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -7258,7 +7522,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -7280,7 +7544,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -7338,7 +7602,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -7396,7 +7660,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -7437,6 +7701,230 @@
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "pages",
+      "field": "blocks_on_pages",
+      "type": "alias",
+      "meta": {
+        "collection": "pages",
+        "conditions": null,
+        "display": "related-values",
+        "display_options": null,
+        "field": "blocks_on_pages",
+        "group": null,
+        "hidden": false,
+        "interface": "list-m2m",
+        "note": null,
+        "options": {
+          "allowDuplicates": true,
+          "enableLink": true,
+          "template": "{{pages_id.title}} - {{blocks_id.name}}"
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 15,
+        "special": ["m2m"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Блоки"
+          },
+          {
+            "language": "en-US",
+            "translation": "Blocks"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "pages_blocks",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "pages_blocks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "pages_blocks",
+        "data_type": "integer",
+        "default_value": "nextval('pages_blocks_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "pages_blocks",
+      "field": "pages_id",
+      "type": "integer",
+      "meta": {
+        "collection": "pages_blocks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "pages_id",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "pages_id",
+        "table": "pages_blocks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "pages",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "pages_blocks",
+      "field": "blocks_id",
+      "type": "integer",
+      "meta": {
+        "collection": "pages_blocks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "blocks_id",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "blocks_id",
+        "table": "pages_blocks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "blocks",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "pages_blocks",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "pages_blocks",
+        "conditions": null,
+        "display": "raw",
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": null,
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          },
+          {
+            "language": "en-US",
+            "translation": "Sorting"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "pages_blocks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": true,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -7490,20 +7978,34 @@
       "meta": {
         "collection": "service_price_items",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{short_name}}"
+        },
         "field": "service_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{short_name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 9,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Услуга"
+          },
+          {
+            "language": "en-US",
+            "translation": "Service"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -7518,7 +8020,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -7534,20 +8036,34 @@
       "meta": {
         "collection": "service_price_items",
         "conditions": null,
-        "display": null,
-        "display_options": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}}"
+        },
         "field": "city_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
         "note": null,
-        "options": null,
+        "options": {
+          "enableLink": true,
+          "template": "{{name}}"
+        },
         "readonly": false,
         "required": false,
         "searchable": true,
         "sort": 10,
         "special": ["m2o"],
-        "translations": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Город"
+          },
+          {
+            "language": "en-US",
+            "translation": "City"
+          }
+        ],
         "validation": null,
         "validation_message": null,
         "width": "full"
@@ -7562,7 +8078,7 @@
         "numeric_scale": 0,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": false,
+        "is_indexed": true,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -7705,85 +8221,6 @@
     },
     {
       "collection": "service_price_items",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "service_price_items",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "service_price_items",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "service_price_items",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -7795,7 +8232,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -7824,7 +8261,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -7850,7 +8287,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -7883,7 +8320,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -7907,7 +8344,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -7940,7 +8377,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -7962,7 +8399,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -8020,7 +8457,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -8078,7 +8515,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -8119,6 +8556,107 @@
         "has_auto_increment": false,
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "service_price_items",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "service_price_items",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "service_price_items",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
       }
     },
     {
@@ -8475,85 +9013,6 @@
     },
     {
       "collection": "services",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "services",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "choices": null,
-          "showAsDot": true
-        },
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "$t:status_placeholder",
-        "options": {
-          "choices": [
-            {
-              "color": "#2ECDA7",
-              "icon": "published_with_changes",
-              "text": "$t:published",
-              "value": "published"
-            },
-            {
-              "color": "#FFC23B",
-              "icon": "draft_orders",
-              "text": "$t:draft",
-              "value": "draft"
-            },
-            {
-              "color": "#E35169",
-              "icon": "archive",
-              "text": "$t:archived",
-              "value": "archived"
-            }
-          ],
-          "icon": "flag",
-          "placeholder": "$t:status_placeholder"
-        },
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          },
-          {
-            "language": "en-US",
-            "translation": "Status"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "status",
-        "table": "services",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "services",
       "field": "sort",
       "type": "integer",
       "meta": {
@@ -8565,7 +9024,7 @@
         "group": null,
         "hidden": true,
         "interface": null,
-        "note": "$t:sort",
+        "note": null,
         "options": null,
         "readonly": false,
         "required": false,
@@ -8594,7 +9053,7 @@
         "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": true,
         "is_primary_key": false,
@@ -8620,7 +9079,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_created",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -8653,7 +9112,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -8677,7 +9136,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "$t:date_updated",
+        "note": null,
         "options": {
           "includeSeconds": true
         },
@@ -8710,7 +9169,7 @@
         "numeric_scale": null,
         "is_nullable": true,
         "is_unique": false,
-        "is_indexed": true,
+        "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
@@ -8732,7 +9191,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "$t:slug",
+        "note": null,
         "options": {
           "iconLeft": "link",
           "trim": true
@@ -8790,7 +9249,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_created",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -8848,7 +9307,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "$t:user_updated",
+        "note": null,
         "options": {
           "enableLink": true,
           "template": "{{avatar}} {{first_name}} {{last_name}}"
@@ -8890,6 +9349,107 @@
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id"
       }
+    },
+    {
+      "collection": "services",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "services",
+        "conditions": null,
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {
+              "background": null,
+              "color": "#2ECDA7",
+              "foreground": null,
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "defaultColor": null,
+          "format": true
+        },
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": null,
+        "options": {
+          "choices": [
+            {
+              "color": "#2ECDA7",
+              "icon": "published_with_changes",
+              "text": "$t:published",
+              "value": "published"
+            },
+            {
+              "color": "#FFC23B",
+              "icon": "draft_orders",
+              "text": "$t:draft",
+              "value": "draft"
+            },
+            {
+              "color": "#E35169",
+              "icon": "archive",
+              "text": "$t:archived",
+              "value": "archived"
+            }
+          ],
+          "icon": "flag",
+          "placeholder": null
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          },
+          {
+            "language": "en-US",
+            "translation": "Status"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "status",
+        "table": "services",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
     }
   ],
   "systemFields": [
@@ -8916,6 +9476,106 @@
     }
   ],
   "relations": [
+    {
+      "collection": "blocks",
+      "field": "user_updated",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "blocks",
+        "many_field": "user_updated",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "blocks",
+        "column": "user_updated",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "blocks_user_updated_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "blocks",
+      "field": "user_created",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "blocks",
+        "many_field": "user_created",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "blocks",
+        "column": "user_created",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "blocks_user_created_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "field": "item",
+      "related_collection": null,
+      "meta": {
+        "junction_field": "blocks_id",
+        "many_collection": "blocks_content",
+        "many_field": "item",
+        "one_allowed_collections": [
+          "faq",
+          "cases",
+          "leads",
+          "service_price_items",
+          "services",
+          "car_models",
+          "car_brands",
+          "cities"
+        ],
+        "one_collection": null,
+        "one_collection_field": "collection",
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      }
+    },
+    {
+      "collection": "blocks_content",
+      "field": "blocks_id",
+      "related_collection": "blocks",
+      "meta": {
+        "junction_field": "item",
+        "many_collection": "blocks_content",
+        "many_field": "blocks_id",
+        "one_allowed_collections": null,
+        "one_collection": "blocks",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "content",
+        "sort_field": null
+      },
+      "schema": {
+        "table": "blocks_content",
+        "column": "blocks_id",
+        "foreign_key_table": "blocks",
+        "foreign_key_column": "id",
+        "constraint_name": "blocks_content_blocks_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
     {
       "collection": "car_brands",
       "field": "user_created",
@@ -9343,31 +10003,6 @@
     },
     {
       "collection": "globals",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "globals",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "globals",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "globals_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "globals",
       "field": "user_updated",
       "related_collection": "directus_users",
       "meta": {
@@ -9389,6 +10024,31 @@
         "constraint_name": "globals_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "globals",
+      "field": "logo",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "globals",
+        "many_field": "logo",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "globals",
+        "column": "logo",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "globals_logo_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     },
     {
@@ -9542,106 +10202,6 @@
       }
     },
     {
-      "collection": "page_blocks",
-      "field": "page_id",
-      "related_collection": "pages",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "page_blocks",
-        "many_field": "page_id",
-        "one_allowed_collections": null,
-        "one_collection": "pages",
-        "one_collection_field": null,
-        "one_deselect_action": "delete",
-        "one_field": "blocks",
-        "sort_field": "sort"
-      },
-      "schema": {
-        "table": "page_blocks",
-        "column": "page_id",
-        "foreign_key_table": "pages",
-        "foreign_key_column": "id",
-        "constraint_name": "page_blocks_page_id_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "CASCADE"
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "city_id",
-      "related_collection": "cities",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "page_blocks",
-        "many_field": "city_id",
-        "one_allowed_collections": null,
-        "one_collection": "cities",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": "blocks",
-        "sort_field": null
-      },
-      "schema": {
-        "table": "page_blocks",
-        "column": "city_id",
-        "foreign_key_table": "cities",
-        "foreign_key_column": "id",
-        "constraint_name": "page_blocks_city_id_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "SET NULL"
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "page_blocks",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "page_blocks",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "page_blocks_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "page_blocks",
-      "field": "user_updated",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "page_blocks",
-        "many_field": "user_updated",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "page_blocks",
-        "column": "user_updated",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "page_blocks_user_updated_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
       "collection": "pages",
       "field": "user_created",
       "related_collection": "directus_users",
@@ -9689,6 +10249,56 @@
         "constraint_name": "pages_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "pages_blocks",
+      "field": "blocks_id",
+      "related_collection": "blocks",
+      "meta": {
+        "junction_field": "pages_id",
+        "many_collection": "pages_blocks",
+        "many_field": "blocks_id",
+        "one_allowed_collections": null,
+        "one_collection": "blocks",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "pages",
+        "sort_field": null
+      },
+      "schema": {
+        "table": "pages_blocks",
+        "column": "blocks_id",
+        "foreign_key_table": "blocks",
+        "foreign_key_column": "id",
+        "constraint_name": "pages_blocks_blocks_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "pages_blocks",
+      "field": "pages_id",
+      "related_collection": "pages",
+      "meta": {
+        "junction_field": "blocks_id",
+        "many_collection": "pages_blocks",
+        "many_field": "pages_id",
+        "one_allowed_collections": null,
+        "one_collection": "pages",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "blocks_on_pages",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "pages_blocks",
+        "column": "pages_id",
+        "foreign_key_table": "pages",
+        "foreign_key_column": "id",
+        "constraint_name": "pages_blocks_pages_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     },
     {

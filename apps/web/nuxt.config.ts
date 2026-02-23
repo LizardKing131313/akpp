@@ -15,9 +15,24 @@ export default defineNuxtConfig({
     ],
   },
 
+  modules: ['@nuxtjs/google-fonts'],
+
+  googleFonts: {
+    families: {
+      'Open Sans': [400, 600, 700],
+    },
+    display: 'swap',
+    preconnect: true,
+    preload: true,
+    download: true,
+  },
+
   runtimeConfig: {
     public: {
-      directusUrl: process.env.NUXT_PUBLIC_DIRECTUS_URL,
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+      directusUrl: process.env.NUXT_PUBLIC_DIRECTUS_URL ?? 'http://localhost:8086',
     },
+    directusSecret: process.env.DIRECTUS_SECRET ?? 'secret',
+    directusCacheTtlSeconds: Number(process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300),
   },
 })
