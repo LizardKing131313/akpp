@@ -3,5 +3,8 @@
   "semi": false,
   "printWidth": 100,
   "trailingComma": "es5",
+  "bracketSameLine": true,
+  "tailwindPreserveWhitespace": true,
+  "tailwindFunctions": ["clsx", "cn", "twMerge"],
   "plugins": ["prettier-plugin-tailwindcss"]
 }

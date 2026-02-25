@@ -12,16 +12,18 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
+    "clsx": "^2.1.1",
     "nuxt": "^4.3.1",
+    "swiper": "^12.1.2",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.1.12",
     "vue": "^3.5.28",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@nuxt/image": "^2.0.0",
     "@types/node": "^25.2.3",
-    "eslint": "^10.0.0",
-    "prettier": "^3.8.1",
-    "typescript": "^5.9.3",
+    "@yandex/ymaps3-types": "^1.0.18650382",
     "vue-tsc": "^3.2.5"
   }
 }

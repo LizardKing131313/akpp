@@ -1,5 +1,5 @@
-import { createDirectusClient } from '~~/server/services/directus'
-import { xmlDoc, xmlRawTag, xmlTag } from '~~/server/utils/xml'
+import { createDirectusClient } from '#server/services/directus'
+import { xmlDoc, xmlRawTag, xmlTag } from '#server/utils/xml'
 
 type SitemapPageItem = {
   slug: string | null

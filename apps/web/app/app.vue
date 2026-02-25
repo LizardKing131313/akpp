@@ -1,10 +1,8 @@
-<script setup lang="ts">
-import AppFooterSection from '~/components/layout/AppFooterSection.vue'
-</script>
-
 <template>
-  <div>
+  <div class="bg-surface-base flex min-h-dvh flex-col">
+    <HeaderSection />
     <NuxtPage />
-    <AppFooterSection />
+    <FooterSection class="mt-auto" />
   </div>
+  <ModalHost />
 </template>
