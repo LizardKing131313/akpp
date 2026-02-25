@@ -107,9 +107,9 @@ const menuItems = ref<MenuNode[]>([
 
     <BrandSlider />
 
-    <div class="bg-brand-dark text-surface-soft relative pt-24 pb-8">
+    <div class="bg-brand-dark text-surface-soft relative">
       <GradientBlock>
-        <div class="relative mx-auto max-w-6xl px-4">
+        <div class="relative mx-auto max-w-6xl px-4 pt-24 pb-8">
           <div class="grid gap-10 md:grid-cols-2">
             <div class="grid md:gap-x-16 lg:grid-cols-[1.5fr_1fr]">
               <div>

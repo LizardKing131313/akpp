@@ -1,0 +1,139 @@
+<script setup lang="ts">
+import { useHead, useRoute, useRuntimeConfig } from '#imports'
+import { cn } from '#shared/lib/cn'
+import { computed } from 'vue'
+
+type BreadcrumbItem = {
+  label: string
+  to?: string | null
+}
+
+interface BreadcrumbsProps {
+  backgroundSrc: string
+  title: string
+  items: BreadcrumbItem[]
+  currentUrl?: string
+}
+
+const props = withDefaults(defineProps<BreadcrumbsProps>(), {
+  currentUrl: '',
+})
+
+const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
+
+const siteUrl = computed<string>(() => {
+  const configuredUrl = runtimeConfig.public?.siteUrl
+  if (typeof configuredUrl === 'string' && configuredUrl.length > 0) return configuredUrl
+  return ''
+})
+
+const normalizedItems = computed<BreadcrumbItem[]>(() =>
+  props.items.filter((item) => item.label.trim().length > 0)
+)
+
+const resolvedCurrentAbsoluteUrl = computed<string>(() => {
+  if (props.currentUrl.length > 0) {
+    if (props.currentUrl.startsWith('http')) return props.currentUrl
+    if (siteUrl.value.length > 0) return new URL(props.currentUrl, siteUrl.value).toString()
+    return props.currentUrl
+  }
+
+  if (siteUrl.value.length > 0) return new URL(route.fullPath, siteUrl.value).toString()
+  return route.fullPath
+})
+
+const jsonLd = computed<Record<string, unknown> | null>(() => {
+  const items = normalizedItems.value
+  if (items.length === 0) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Breadcrumbs',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      item:
+        item.to && siteUrl.value
+          ? new URL(item.to, siteUrl.value).toString()
+          : resolvedCurrentAbsoluteUrl.value,
+    })),
+  }
+})
+
+useHead(() => {
+  if (jsonLd.value === null) return {}
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(jsonLd.value),
+      },
+    ],
+  }
+})
+
+const isLastIndex = (index: number): boolean => index === normalizedItems.value.length - 1
+</script>
+
+<template>
+  <section class="group relative w-full overflow-hidden">
+    <NuxtImg :src="backgroundSrc" alt="" class="absolute inset-0 h-full w-full object-cover" />
+
+    <div class="bg-brand-dark/80 absolute inset-0"></div>
+
+    <div
+      :class="
+        cn(`
+          relative z-10 flex h-full w-full flex-col
+          items-center justify-center px-1 py-4 text-center sm:px-4 sm:py-8
+        `)
+      ">
+      <h1
+        :class="
+          cn(`
+            text-surface-soft text-1xl font-bold tracking-wide
+            uppercase sm:text-4xl sm:font-extrabold
+          `)
+        ">
+        {{ title }}
+      </h1>
+
+      <nav aria-label="Breadcrumbs" class="mt-4">
+        <ol
+          :class="
+            cn(`
+              text-surface-soft flex flex-wrap items-center
+              justify-center text-xs font-medium tracking-widest uppercase
+            `)
+          ">
+          <li
+            v-for="(crumb, index) in normalizedItems"
+            :key="`${crumb.label}-${index}`"
+            class="flex items-center">
+            <NuxtLink
+              v-if="crumb.to && !isLastIndex(index)"
+              :to="crumb.to"
+              class="hover:text-brand-red transition-colors duration-200">
+              {{ crumb.label }}
+            </NuxtLink>
+
+            <span v-else aria-current="page">
+              {{ crumb.label }}
+            </span>
+
+            <span v-if="index < normalizedItems.length - 1" class="text-surface-soft px-2">
+              &gt;
+            </span>
+          </li>
+        </ol>
+
+        <div class="mt-4 flex flex-col items-center gap-2">
+          <div class="bg-brand-red h-px w-14 transition-all duration-300 group-hover:w-28"></div>
+          <div class="bg-brand-red h-px w-28 transition-all duration-300 group-hover:w-14"></div>
+        </div>
+      </nav>
+    </div>
+  </section>
+</template>
