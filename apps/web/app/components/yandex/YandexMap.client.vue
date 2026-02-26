@@ -55,6 +55,7 @@ onMounted(async () => {
   try {
     const apiKey = runtimeConfig.public.yandexMapApiKey
     if (!apiKey) {
+      // noinspection ExceptionCaughtLocallyJS
       throw new Error('Missing runtimeConfig.public.yandexMapApiKey')
     }
 
