@@ -1,3 +1,50 @@
+<script setup lang="ts">
+import type { BreadcrumbItem } from '#shared/types/layout/breadcrumb'
+import type { PageHeaderMeta } from '#shared/types/layout/header'
+import type { HeroSlide } from '#shared/types/layout/hero'
+
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const pageHeaderMeta = computed<PageHeaderMeta>(() => {
+  const candidate = route.meta.pageHeader
+  if (candidate === undefined) return { kind: 'none' }
+  return candidate as PageHeaderMeta
+})
+
+const isHeroMeta = (meta: PageHeaderMeta): meta is Extract<PageHeaderMeta, { kind: 'hero' }> =>
+  meta.kind === 'hero'
+
+const isBreadcrumbsMeta = (
+  meta: PageHeaderMeta
+): meta is Extract<PageHeaderMeta, { kind: 'breadcrumbs' }> => meta.kind === 'breadcrumbs'
+
+const heroSlides = computed<HeroSlide[]>(() => {
+  const meta = pageHeaderMeta.value
+  return isHeroMeta(meta) ? meta.slides : []
+})
+
+const breadcrumbsTitle = computed<string>(() => {
+  const meta = pageHeaderMeta.value
+  return isBreadcrumbsMeta(meta) ? meta.title : ''
+})
+
+const breadcrumbsBackgroundSrc = computed<string>(() => {
+  const meta = pageHeaderMeta.value
+  return isBreadcrumbsMeta(meta) ? meta.backgroundSrc : ''
+})
+
+const breadcrumbsItems = computed<BreadcrumbItem[]>(() => {
+  const meta = pageHeaderMeta.value
+  return isBreadcrumbsMeta(meta) ? meta.items : []
+})
+
+const isHero = computed<boolean>(() => isHeroMeta(pageHeaderMeta.value))
+const isBreadcrumbs = computed<boolean>(() => isBreadcrumbsMeta(pageHeaderMeta.value))
+</script>
+
 <template>
   <header class="w-full">
     <TopBar
@@ -35,4 +82,12 @@
 
     <Menu />
   </header>
+
+  <Hero v-if="isHero" :slides="heroSlides" />
+
+  <Breadcrumbs
+    v-else-if="isBreadcrumbs"
+    :title="breadcrumbsTitle"
+    :background-src="breadcrumbsBackgroundSrc"
+    :items="breadcrumbsItems" />
 </template>

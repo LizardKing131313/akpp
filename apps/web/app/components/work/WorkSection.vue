@@ -49,9 +49,7 @@ const works = [
 <template>
   <div class="w-full">
     <div class="bg-brand-dark/5 rounded-2xl lg:max-h-105.75">
-      <h2 class="text-brand-dark text-3xl leading-tight font-semibold sm:text-4xl">
-        Выполненные работы
-      </h2>
+      <CenteredTitle class="text-left">Выполненные работы</CenteredTitle>
 
       <div class="mt-6 grid grid-cols-2 gap-4 lg:hidden">
         <WorkExampleCard

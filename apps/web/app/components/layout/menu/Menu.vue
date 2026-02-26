@@ -55,6 +55,7 @@ const menuItems = ref<MenuNode[]>([
   new MenuNode({
     id: 'services',
     title: 'Услуги',
+    href: '/services',
   }),
 
   new MenuNode({

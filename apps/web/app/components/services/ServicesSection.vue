@@ -96,7 +96,7 @@ const services: ServiceItem[] = [
 <template>
   <section class="bg-surface-base py-14">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-brand-dark mb-8 text-center text-3xl font-extrabold">Наши услуги</h2>
+      <CenteredTitle>Наши услуги</CenteredTitle>
 
       <div class="grid grid-cols-2 gap-6 lg:grid-cols-5">
         <ServiceCard v-for="service in services" :key="service.id" :service />

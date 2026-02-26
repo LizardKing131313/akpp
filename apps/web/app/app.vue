@@ -1,7 +1,9 @@
 <template>
-  <div class="bg-surface-base flex min-h-dvh flex-col">
+  <div class="bg-brand-white flex min-h-dvh flex-col">
     <HeaderSection />
-    <NuxtPage />
+    <Section>
+      <NuxtPage />
+    </Section>
     <FooterSection class="mt-auto" />
   </div>
   <ModalHost />

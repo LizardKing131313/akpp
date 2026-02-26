@@ -103,9 +103,7 @@ const servicePrices = [
 
 <template>
   <div class="flex h-105.75 w-full flex-col">
-    <h2 class="text-brand-dark text-3xl leading-tight font-semibold sm:text-4xl">
-      Стоимость услуг
-    </h2>
+    <CenteredTitle class="text-left">Стоимость услуг</CenteredTitle>
 
     <div class="mt-8 min-h-0 flex-1 overflow-y-auto">
       <div class="divide-brand-dark/5 divide-y">

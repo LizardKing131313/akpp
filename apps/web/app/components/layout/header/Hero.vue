@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { HeroSlide } from '#shared/types/layout/hero'
+
 import { cn } from '#shared/lib/cn'
 import { useSignupModal } from '#shared/lib/modal/useSignupModal'
 import { Autoplay, Navigation } from 'swiper/modules'
@@ -8,22 +10,7 @@ import { computed } from 'vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-type HeroSlide = {
-  id: string
-  titleAccent?: string
-  titleMain: string
-  description: string
-  buttonLabel: string
-  buttonTo: string
-  imageSrc: string
-  imageAlt: string
-}
-
-interface HeroSliderProps {
-  slides: HeroSlide[]
-}
-
-const props = defineProps<HeroSliderProps>()
+const props = defineProps<{ slides: HeroSlide[] }>()
 
 const swiperModules = computed(() => [Autoplay, Navigation])
 
@@ -46,8 +33,8 @@ const handleClick = (): void => {
         class="relative h-100 w-full sm:h-110 lg:h-120">
         <SwiperSlide v-for="slide in props.slides" :key="slide.id" class="relative h-full w-full">
           <NuxtImg
-            :src="slide.imageSrc"
-            :alt="slide.imageAlt"
+            :src="slide.image.source"
+            :alt="slide.image.alt"
             class="absolute inset-0 h-full w-full object-cover" />
 
           <div class="bg-brand-dark/60 absolute inset-0"></div>

@@ -51,9 +51,7 @@ const perks: PerkItem[] = [
 <template>
   <section class="bg-surface-base py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-brand-dark mb-12 text-center text-3xl font-semibold">
-        Почему клиенты выбирают нас
-      </h2>
+      <CenteredTitle>Почему клиенты выбирают нас</CenteredTitle>
 
       <div class="grid grid-cols-2 gap-x-10 gap-y-14 lg:grid-cols-3">
         <PerkCard v-for="perk in perks" :key="perk.id" :perk class="mx-auto w-full max-w-87.5" />

@@ -5,25 +5,12 @@
   --color-brand-dark: #2b2a29;
   --color-brand-grey: #343a40;
   --color-brand-grey-light: #777777;
-  --color-surface-base: #ffffff;
-  --color-surface-soft: #e9e9e9;
+  --color-brand-white: #ffffff;
+  --color-brand-soft: #cdcdcd;
 
   --font-sans: 'Open Sans', sans-serif;
 }
 
 body {
   @apply font-sans;
-}
-
-html,
-body {
-  cursor: default;
-}
-
-:where(p, span, div, li, strong, em, small, h1, h2, h3, h4, h5, h6) {
-  cursor: default;
-}
-
-:where(input, textarea, [contenteditable='true']) {
-  cursor: text;
 }
