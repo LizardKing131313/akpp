@@ -61,7 +61,7 @@ const handleClick = (): void => {
             "></div>
 
           <div class="relative z-10 mx-auto flex h-full max-w-6xl items-center px-4">
-            <div class="mx-auto max-w-5xl px-2 text-center lg:mx-0 lg:px-20 lg:text-left">
+            <div class="mx-auto max-w-6xl text-center lg:mx-0 lg:text-left">
               <h2
                 :class="
                   cn(`
@@ -82,7 +82,7 @@ const handleClick = (): void => {
                 :class="
                   cn(`
                     text-surface-soft/70 mt-4 max-w-xl text-base
-                    leading-relaxed sm:text-lg lg:max-w-5xl
+                    leading-relaxed sm:text-lg lg:max-w-6xl
                   `)
                 ">
                 {{ slide.description }}
@@ -91,10 +91,10 @@ const handleClick = (): void => {
               <button
                 :class="
                   cn(`
-                    bg-brand-red text-surface-soft mx-auto mt-7 inline-flex items-center
-                    justify-center rounded-full px-10 py-4 text-sm font-semibold tracking-wide
-                    uppercase transition-transform duration-200
-                    hover:scale-[1.02] active:scale-[0.99] lg:mx-0
+                    bg-brand-red text-surface-soft z-20 mx-auto mt-7 inline-flex
+                    items-center justify-center rounded-full px-10 py-4 text-sm font-semibold
+                    tracking-wide uppercase transition-transform
+                    duration-200 hover:scale-[1.02] active:scale-[0.99] lg:mx-0
                   `)
                 "
                 type="button"
@@ -114,9 +114,9 @@ const handleClick = (): void => {
             :class="
               cn(`
                 hero-slider-prev bg-surface-soft/25 text-surface-soft
-                hover:bg-brand-grey-light pointer-events-auto absolute top-1/2 left-4 flex
-                h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full
-                backdrop-blur-sm transition-colors duration-200
+                hover:bg-brand-grey-light pointer-events-auto absolute top-1/2 left-0 z-20
+                flex h-14 w-14 -translate-x-16 -translate-y-1/2 cursor-pointer items-center
+                justify-center rounded-full backdrop-blur-sm transition-colors duration-200
               `)
             ">
             <Arrow direction="left" class="text-surface-soft" />
@@ -128,8 +128,8 @@ const handleClick = (): void => {
             :class="
               cn(`
                 hero-slider-next bg-surface-soft/25 text-surface-soft
-                hover:bg-brand-grey-light pointer-events-auto absolute
-                top-1/2 right-4 flex h-14 w-14 -translate-y-1/2 items-center
+                hover:bg-brand-grey-light pointer-events-auto absolute top-1/2 right-0 z-20
+                flex h-14 w-14 translate-x-16 -translate-y-1/2 cursor-pointer items-center
                 justify-center rounded-full backdrop-blur-sm transition-colors duration-200
               `)
             ">

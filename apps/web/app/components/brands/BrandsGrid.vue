@@ -201,7 +201,7 @@ const brands: BrandItem[] = [
 
 <template>
   <section class="w-full">
-    <div class="mx-auto max-w-6xl px-4">
+    <div class="mx-auto max-w-6xl">
       <div
         class="border-brand-grey-light/10 bg-surface-soft relative overflow-visible rounded-xl border px-4 pt-4 pb-6 shadow-sm sm:px-6">
         <h3 class="text-brand-grey-light/50 text-xs font-semibold tracking-wide uppercase">
