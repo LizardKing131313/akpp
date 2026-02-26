@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 interface YandexReviewsWidgetProps {
   orgId: string
-  height?: number
 }
 
-const props = withDefaults(defineProps<YandexReviewsWidgetProps>(), {
-  height: 600,
-})
+const props = defineProps<YandexReviewsWidgetProps>()
 
 const widgetUrl = computed(() => {
   return `https://yandex.ru/maps-reviews-widget/${props.orgId}?comments`
@@ -14,12 +13,11 @@ const widgetUrl = computed(() => {
 </script>
 
 <template>
-  <div class="w-full overflow-hidden">
+  <div class="h-full w-full overflow-hidden">
     <iframe
       :src="widgetUrl"
       title="Отзывы"
-      class="border-brand-grey-light/30 w-full rounded-xl border"
-      :style="{ height: props.height + 'px' }"
+      class="border-brand-grey-light/30 h-full w-full rounded-xl border"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade" />
   </div>

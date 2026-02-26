@@ -3,12 +3,10 @@
   <CenteredTitle> Полезная информация </CenteredTitle>
 
   <TwoColumns>
-    <div>
-      <slot />
-    </div>
+    <FaqSection />
 
     <ClientOnly>
-      <YandexReviews orgId="241461095271" :height="560" />
+      <YandexReviews orgId="241461095271" />
     </ClientOnly>
   </TwoColumns>
 </template>
