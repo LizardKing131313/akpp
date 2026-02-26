@@ -49,13 +49,11 @@ const perks: PerkItem[] = [
 </script>
 
 <template>
-  <section class="bg-surface-base py-16">
-    <div class="mx-auto max-w-6xl px-4">
-      <CenteredTitle>Почему клиенты выбирают нас</CenteredTitle>
+  <div class="space-y-8">
+    <CenteredTitle>Почему клиенты выбирают нас</CenteredTitle>
 
-      <div class="grid grid-cols-2 gap-x-10 gap-y-14 lg:grid-cols-3">
-        <PerkCard v-for="perk in perks" :key="perk.id" :perk class="mx-auto w-full max-w-87.5" />
-      </div>
+    <div class="grid grid-cols-2 gap-x-8 gap-y-8 lg:grid-cols-3">
+      <PerkCard v-for="perk in perks" :key="perk.id" :perk />
     </div>
-  </section>
+  </div>
 </template>

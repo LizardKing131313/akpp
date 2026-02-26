@@ -5,20 +5,19 @@ defineProps<{ perk: PerkItem }>()
 </script>
 
 <template>
-  <div class="flex flex-col items-center text-center">
+  <div class="flex flex-col items-center space-y-4 text-center">
     <NuxtImg
       :src="perk.logo.source"
       :alt="perk.logo.alt"
       width="48"
       height="48"
-      class="mb-4 block h-12 w-12 object-contain" />
+      class="block h-12 w-12 object-contain" />
 
-    <h3 v-if="perk.title" class="text-brand-dark mb-3 text-center text-sm font-semibold lg:text-lg">
+    <h3 v-if="perk.title" class="text-brand-dark text-center text-sm font-bold lg:text-lg">
       {{ perk.title }}
     </h3>
 
-    <p
-      class="text-brand-grey mx-auto hidden max-w-[36ch] text-center text-xs leading-6 md:block md:text-sm">
+    <p class="text-brand-grey hidden max-w-[36ch] text-center text-xs md:block md:text-sm">
       {{ perk.description }}
     </p>
   </div>

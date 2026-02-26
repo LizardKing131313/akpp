@@ -60,7 +60,7 @@ onMounted(() => {
   <div
     :class="
       cn(`
-          bg-surface-base relative w-full max-w-md
+        bg-brand-white relative w-full max-w-md
           overflow-hidden rounded-2xl shadow-2xl sm:rounded-[28px]
       `)
     ">
@@ -149,7 +149,7 @@ onMounted(() => {
           aria-label="submit"
           :class="
             cn(`
-              bg-brand-red/90 text-surface-soft hover:bg-brand-red mt-2 h-14 w-full
+              bg-brand-red/90 text-brand-soft hover:bg-brand-red mt-2 h-14 w-full
               rounded-full text-base font-semibold shadow-lg transition
               disabled:cursor-not-allowed disabled:opacity-60 sm:h-16 sm:text-lg
             `)

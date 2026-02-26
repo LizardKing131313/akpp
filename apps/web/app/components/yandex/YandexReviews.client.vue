@@ -14,17 +14,12 @@ const widgetUrl = computed(() => {
 </script>
 
 <template>
-  <div class="w-full overflow-hidden rounded-xl">
+  <div class="w-full overflow-hidden">
     <iframe
       :src="widgetUrl"
       title="Отзывы"
-      class="w-full"
-      :style="{
-        height: props.height + 'px',
-        border: '1px solid #e6e6e6',
-        borderRadius: '12px',
-        boxSizing: 'border-box',
-      }"
+      class="border-brand-grey-light/30 w-full rounded-xl border"
+      :style="{ height: props.height + 'px' }"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade" />
   </div>

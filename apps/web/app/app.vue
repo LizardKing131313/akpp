@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-brand-white flex min-h-dvh flex-col">
+  <div class="bg-brand-white text-brand-dark flex min-h-dvh flex-col text-xl">
     <HeaderSection />
     <Section>
       <NuxtPage />

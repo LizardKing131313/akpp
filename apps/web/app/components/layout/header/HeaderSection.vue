@@ -54,7 +54,7 @@ const isBreadcrumbs = computed<boolean>(() => isBreadcrumbsMeta(pageHeaderMeta.v
       searchIconSource="/images/icons/search.svg"
       searchPlaceholder="Поиск" />
 
-    <div class="bg-surface-soft">
+    <div class="bg-brand-soft">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:py-6">
         <Logo />
 

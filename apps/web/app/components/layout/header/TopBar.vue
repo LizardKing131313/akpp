@@ -23,7 +23,7 @@ withDefaults(defineProps<TopBarProps>(), {
 </script>
 
 <template>
-  <div class="bg-brand-dark text-surface-soft">
+  <div class="bg-brand-dark text-brand-soft">
     <div
       :class="
         cn(`
@@ -42,7 +42,7 @@ withDefaults(defineProps<TopBarProps>(), {
           height="24"
           :class="['h-6 w-6 shrink-0 object-contain', iconClass]" />
 
-        <span class="text-shadow-surface-soft text-sm underline-offset-4 hover:underline">
+        <span class="text-shadow-brand-soft text-sm underline-offset-4 hover:underline">
           {{ city }}
         </span>
       </button>
@@ -65,7 +65,7 @@ withDefaults(defineProps<TopBarProps>(), {
           aria-label="Поиск по сайту"
           :class="
             cn(`
-              bg-brand-grey text-surface-soft placeholder-brand-grey-light
+              bg-brand-grey text-brand-soft placeholder-brand-grey-light
               w-full rounded-full py-1 pr-4 pl-10 text-sm outline-none
             `)
           " />

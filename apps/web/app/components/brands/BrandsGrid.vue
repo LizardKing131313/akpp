@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { cn } from '#shared/lib/cn'
 import { BrandItem } from '#shared/types/components/brand'
 import { ItemImage } from '#shared/types/components/image'
 import { computed, ref } from 'vue'
@@ -229,31 +230,31 @@ const toggle = async (): Promise<void> => {
 
 <template>
   <section ref="sectionRef" class="w-full">
-    <div class="mx-auto max-w-6xl px-4">
-      <div
-        class="border-brand-grey-light/10 bg-surface-soft rounded-xl border px-4 pt-4 pb-6 shadow-sm sm:px-6">
-        <h3 class="text-brand-grey-light/50 text-xs font-semibold tracking-wide uppercase">
-          {{ title }}
-        </h3>
+    <div class="border-brand-grey-light/20 bg-brand-white rounded-xl border p-4">
+      <h3 class="text-brand-grey-light/50 text-xs font-bold tracking-wide uppercase">
+        {{ title }}
+      </h3>
 
-        <!-- MOBILE -->
-        <div class="mt-4 grid grid-cols-3 gap-x-6 gap-y-8 sm:hidden">
-          <BrandCard v-for="brand in mobileBrands" :key="brand.id" :brand="brand" />
-        </div>
+      <div class="grid grid-cols-3 gap-8 sm:hidden">
+        <BrandCard v-for="brand in mobileBrands" :key="brand.id" :brand="brand" />
+      </div>
 
-        <div v-if="shouldShowToggleButton" class="mt-6 flex justify-center sm:hidden">
-          <button
-            type="button"
-            class="bg-brand-red text-surface-soft rounded-full px-10 py-3 text-sm font-semibold transition-transform active:scale-[0.98]"
-            @click="toggle">
-            {{ isExpanded ? 'Свернуть' : 'Показать еще' }}
-          </button>
-        </div>
+      <div v-if="shouldShowToggleButton" class="flex justify-center sm:hidden">
+        <button
+          type="button"
+          :class="
+            cn(`
+              bg-brand-red text-brand-soft rounded-full px-10 py-4
+              text-sm font-bold transition-transform active:scale-[0.98]
+            `)
+          "
+          @click="toggle">
+          {{ isExpanded ? 'Свернуть' : 'Показать еще' }}
+        </button>
+      </div>
 
-        <!-- DESKTOP -->
-        <div class="mt-4 hidden grid-cols-4 gap-4 sm:grid md:grid-cols-6 xl:grid-cols-8">
-          <BrandCard v-for="brand in brands" :key="brand.id" :brand="brand" />
-        </div>
+      <div class="hidden grid-cols-4 gap-4 sm:grid md:grid-cols-6 xl:grid-cols-8">
+        <BrandCard v-for="brand in brands" :key="brand.id" :brand="brand" />
       </div>
     </div>
   </section>

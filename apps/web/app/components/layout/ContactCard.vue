@@ -36,7 +36,7 @@ const computedHref = computed<string>(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-3 px-6">
+  <div class="flex items-center gap-3 px-4">
     <NuxtImg
       :src="iconSource"
       :alt="iconAlt"

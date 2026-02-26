@@ -68,7 +68,7 @@ const handleClick = (): void => {
               <p
                 :class="
                   cn(`
-                    text-surface-soft/70 mt-4 max-w-xl text-base
+                    text-brand-soft/70 mt-4 max-w-xl text-base
                     leading-relaxed sm:text-lg lg:max-w-6xl
                   `)
                 ">
@@ -78,7 +78,7 @@ const handleClick = (): void => {
               <button
                 :class="
                   cn(`
-                    bg-brand-red text-surface-soft z-20 mx-auto mt-7 inline-flex
+                    bg-brand-red text-brand-soft z-20 mx-auto mt-7 inline-flex
                     items-center justify-center rounded-full px-10 py-4 text-sm font-semibold
                     tracking-wide uppercase transition-transform
                     duration-200 hover:scale-[1.02] active:scale-[0.99] lg:mx-0
@@ -100,13 +100,13 @@ const handleClick = (): void => {
             aria-label="Previous slide"
             :class="
               cn(`
-                hero-slider-prev bg-surface-soft/25 text-surface-soft
+                hero-slider-prev bg-brand-soft/25 text-brand-soft
                 hover:bg-brand-grey-light pointer-events-auto absolute top-1/2 left-0 z-20
                 flex h-14 w-14 -translate-x-16 -translate-y-1/2 cursor-pointer items-center
                 justify-center rounded-full backdrop-blur-sm transition-colors duration-200
               `)
             ">
-            <Arrow direction="left" class="text-surface-soft" />
+            <Arrow direction="left" class="text-brand-soft" />
           </button>
 
           <button
@@ -114,13 +114,13 @@ const handleClick = (): void => {
             aria-label="Next slide"
             :class="
               cn(`
-                hero-slider-next bg-surface-soft/25 text-surface-soft
+                hero-slider-next bg-brand-soft/25 text-brand-soft
                 hover:bg-brand-grey-light pointer-events-auto absolute top-1/2 right-0 z-20
                 flex h-14 w-14 translate-x-16 -translate-y-1/2 cursor-pointer items-center
                 justify-center rounded-full backdrop-blur-sm transition-colors duration-200
               `)
             ">
-            <Arrow direction="right" class="text-surface-soft" />
+            <Arrow direction="right" class="text-brand-soft" />
           </button>
         </div>
       </div>

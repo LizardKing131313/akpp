@@ -93,7 +93,7 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
       <h1
         :class="
           cn(`
-            text-surface-soft text-1xl font-bold tracking-wide
+            text-brand-soft text-1xl font-bold tracking-wide
             uppercase sm:text-4xl sm:font-extrabold
           `)
         ">
@@ -104,7 +104,7 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
         <ol
           :class="
             cn(`
-              text-surface-soft flex flex-wrap items-center
+              text-brand-soft flex flex-wrap items-center
               justify-center text-xs font-medium tracking-widest uppercase
             `)
           ">
@@ -123,7 +123,7 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
               {{ crumb.label }}
             </span>
 
-            <span v-if="index < normalizedItems.length - 1" class="text-surface-soft px-2">
+            <span v-if="index < normalizedItems.length - 1" class="text-brand-soft px-2">
               &gt;
             </span>
           </li>

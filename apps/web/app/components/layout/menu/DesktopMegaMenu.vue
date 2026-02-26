@@ -94,21 +94,21 @@ const handlePanelEnter = (): void => {
       aria-haspopup="menu"
       :class="
         cn(`
-          text-surface-soft hover:text-brand-red flex w-full cursor-pointer!
+          text-brand-soft hover:text-brand-red flex w-full cursor-pointer!
           items-center justify-center gap-1 text-center text-sm uppercase
         `)
       ">
-      <span class="text-surface-soft group-hover:text-brand-red cursor-pointer!">
+      <span class="text-brand-soft group-hover:text-brand-red cursor-pointer!">
         {{ menuNode.title }}
       </span>
-      <Arrow direction="down" class="text-surface-soft group-hover:text-brand-red" />
+      <Arrow direction="down" class="text-brand-soft group-hover:text-brand-red" />
     </button>
 
     <div
       v-if="isOpen && menuNode.hasChildren()"
       :class="
         cn(`
-          border-brand-grey-light/10 bg-surface-soft text-brand-dark absolute
+          border-brand-grey-light/10 bg-brand-white text-brand-dark absolute
           top-full left-0 z-50 mt-3 overflow-hidden rounded border shadow-xl
         `)
       "
@@ -125,8 +125,8 @@ const handlePanelEnter = (): void => {
               `group/menu-item flex w-full cursor-pointer items-center justify-between
               px-6 py-4 text-left text-sm font-semibold tracking-wide uppercase transition-colors`,
               activeLeftId === node.id
-                ? 'bg-brand-red text-surface-soft'
-                : 'text-brand-dark hover:bg-brand-red hover:text-surface-soft',
+                ? 'bg-brand-red text-brand-soft'
+                : 'text-brand-dark hover:bg-brand-red hover:text-brand-soft',
             ]"
             @mouseenter="setActiveLeft(node)">
             <span>{{ node.title }}</span>
@@ -138,8 +138,8 @@ const handlePanelEnter = (): void => {
                 cn(
                   'transition-colors',
                   activeLeftId === node.id
-                    ? 'text-surface-soft'
-                    : 'text-brand-dark group-hover/menu-item:text-surface-soft'
+                    ? 'text-brand-soft'
+                    : 'text-brand-dark group-hover/menu-item:text-brand-soft'
                 )
               " />
           </NuxtLink>
@@ -152,7 +152,7 @@ const handlePanelEnter = (): void => {
             :to="node.href ?? '#'"
             :class="
               cn(`
-                text-brand-dark hover:bg-brand-red hover:text-surface-soft
+                text-brand-dark hover:bg-brand-red hover:text-brand-soft
                 block px-6 py-4 text-sm font-semibold tracking-wide uppercase
               `)
             "

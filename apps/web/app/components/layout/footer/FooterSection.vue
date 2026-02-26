@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { cn } from '#shared/lib/cn'
 import { MenuNode } from '#shared/types/layout/menu/menu'
 import { ref } from 'vue'
-
-import GradientBlock from '~/components/shared/GradientBlock.vue'
 
 const menuItems = ref<MenuNode[]>([
   new MenuNode({
@@ -60,7 +59,7 @@ const menuItems = ref<MenuNode[]>([
 
 <template>
   <footer class="w-full">
-    <div class="bg-surface-soft relative w-full">
+    <div class="relative w-full space-y-12">
       <div class="relative h-75 w-full overflow-hidden">
         <ClientOnly>
           <YandexMap />
@@ -69,7 +68,7 @@ const menuItems = ref<MenuNode[]>([
 
       <div class="relative mx-auto max-w-6xl px-4">
         <div class="absolute inset-x-0 top-full z-10 -translate-y-1/2">
-          <div class="bg-surface-soft rounded-full px-4 py-4 shadow-xl lg:px-8 lg:py-5">
+          <div class="bg-brand-white rounded-full px-4 py-4 shadow-xl lg:px-8 lg:py-4">
             <div class="text-brand-grey flex items-center justify-center text-sm">
               <ContactCard
                 iconSource="/images/icons/location.svg"
@@ -78,7 +77,7 @@ const menuItems = ref<MenuNode[]>([
                 subtitle="Написать письмо"
                 linkType="email"
                 href="akppcenter77@yandex.ru"
-                class="hidden! lg:flex!" />
+                class="hidden lg:flex" />
 
               <VerticalDivider />
 
@@ -89,7 +88,7 @@ const menuItems = ref<MenuNode[]>([
                 subtitle="Бесплатная консультация"
                 linkType="tel"
                 href="+74999999999"
-                class="flex!" />
+                class="flex" />
 
               <VerticalDivider />
 
@@ -98,71 +97,72 @@ const menuItems = ref<MenuNode[]>([
                 iconAlt="time"
                 title="Пн - Вс 9:00 - 21:00"
                 subtitle="Без выходных"
-                class="hidden! lg:flex!" />
+                class="hidden lg:flex" />
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <BrandSlider />
+    <BrandSlider class="mt-24 mb-12" />
 
-    <div class="bg-brand-dark text-surface-soft relative">
-      <GradientBlock>
-        <div class="relative mx-auto max-w-6xl px-4 pt-24 pb-8">
-          <div class="grid gap-10 md:grid-cols-2">
-            <div class="grid md:gap-x-16 lg:grid-cols-[1.5fr_1fr]">
-              <div>
-                <h3 class="text-surface-soft mb-2 text-2xl font-bold">
-                  АКПП<span class="text-brand-red">ЦЕНТР+</span>
-                </h3>
-                <HorizontalDivider />
-                <p class="text-brand-grey-light text-sm">
-                  АКППЦЕНТР - профильный сервис по ремонту коробок автомат. Недорого, быстро и с
-                  гарантией мы ремонтируем автоматические коробки передач уже более 10 лет.
-                </p>
-              </div>
-
-              <!-- Menu -->
-              <div>
-                <h4 class="text-surface-soft mt-8 mb-2 text-2xl font-bold lg:mt-0">Меню</h4>
-                <HorizontalDivider />
-                <ul class="text-brand-grey-light space-y-1 text-sm">
-                  <li v-for="menuItem in menuItems" :key="menuItem.id">
-                    <NuxtLink
-                      v-if="menuItem.href"
-                      :to="menuItem.href"
-                      class="hover:text-surface-soft transition">
-                      {{ menuItem.title }}
-                    </NuxtLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <FooterArticles />
-
-            <div class="text-brand-grey-light pt-4 text-xs">
-              Обратите внимание: представленная на данной странице информация, включая стоимость
-              услуг, сроки ремонта и условия гарантии, носит информационный характер и не является
-              публичной офертой.
-            </div>
-
-            <div class="text-brand-grey-light pt-4 text-sm">
-              <div>
-                Ремонт коробок передач АКПП<span class="text-brand-red">ЦЕНТР+</span> | Все права
-                защищены © 2026
-              </div>
-
-              <NuxtLink
-                to="#"
-                class="hover:text-surface-soft mt-2 inline-block underline transition">
-                Политика обработки персональных данных
-              </NuxtLink>
-            </div>
+    <div
+      :class="
+        cn(
+          `
+            absolute inset-0
+            bg-[radial-gradient(ellipse_80%_100%_at_center,#3C3C3C_0%,#222222_100%)]
+            md:bg-[radial-gradient(ellipse_40%_100%_at_center,#3C3C3C_0%,#222222_100%)]
+          `,
+          'bg-brand-dark text-brand-grey-light relative space-y-12 px-4 py-12 text-sm'
+        )
+      ">
+      <TwoColumns class="relative mx-auto max-w-6xl">
+        <TwoColumns>
+          <div class="space-y-12">
+            <FooterTitle>АКПП<span class="text-brand-red">ЦЕНТР+</span></FooterTitle>
+            <p>
+              АКППЦЕНТР - профильный сервис по ремонту коробок автомат. Недорого, быстро и с
+              гарантией мы ремонтируем автоматические коробки передач уже более 10 лет.
+            </p>
           </div>
+
+          <div class="space-y-12">
+            <FooterTitle>Меню</FooterTitle>
+            <ul class="space-y-1">
+              <li v-for="menuItem in menuItems" :key="menuItem.id">
+                <NuxtLink
+                  v-if="menuItem.href"
+                  :to="menuItem.href"
+                  class="hover:text-brand-soft transition">
+                  {{ menuItem.title }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
+        </TwoColumns>
+
+        <FooterArticles />
+      </TwoColumns>
+
+      <TwoColumns class="relative mx-auto max-w-6xl">
+        <p>
+          Обратите внимание: представленная на данной странице информация, включая стоимость услуг,
+          сроки ремонта и условия гарантии, носит информационный характер и не является публичной
+          офертой.
+        </p>
+
+        <div>
+          <p>
+            Ремонт коробок передач АКПП<span class="text-brand-red">ЦЕНТР+</span> | Все права
+            защищены © 2026
+          </p>
+
+          <NuxtLink to="#" class="hover:text-brand-white inline-block underline transition">
+            Политика обработки персональных данных
+          </NuxtLink>
         </div>
-      </GradientBlock>
+      </TwoColumns>
     </div>
 
     <ContactButton pulse />

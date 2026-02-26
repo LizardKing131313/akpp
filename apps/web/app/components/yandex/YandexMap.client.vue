@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { YMapLocationRequest } from '@yandex/ymaps3-types'
 
-import { cn } from '#shared/lib/cn'
 import { shallowRef } from 'vue'
 import { loadYandexMapComponents, type YandexMapComponents } from '~~/shared/lib/ymaps'
 
@@ -74,20 +73,13 @@ onMounted(async () => {
 
 <template>
   <div class="h-75 w-full">
-    <div
-      v-if="loadError"
-      :class="
-        cn(`
-          grid h-full w-full place-items-center rounded-lg
-          bg-neutral-100 p-4 text-sm text-neutral-700
-        `)
-      ">
+    <div v-if="loadError" class="grid h-full place-items-center rounded-xl p-4">
       {{ loadError }}
     </div>
 
-    <div v-else-if="!components" class="h-full w-full animate-pulse rounded-lg bg-neutral-200" />
+    <div v-else-if="!components" class="h-full w-full animate-pulse rounded-xl" />
 
-    <component v-else :is="components.YMap" :location="location" class="h-full w-full">
+    <component v-else :is="components.YMap" :location="location">
       <component :is="components.YMapDefaultSchemeLayer" />
       <component :is="components.YMapDefaultFeaturesLayer" />
       <component :is="components.YMapFeatureDataSource" :id="MARKER_SOURCE_ID" />

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { cn } from '#shared/lib/cn'
-
 type Article = {
   title: string
   href: string
@@ -40,51 +38,42 @@ withDefaults(defineProps<FooterArticlesProps>(), {
 </script>
 
 <template>
-  <div class="md:pl-12">
-    <h4 class="text-surface-soft mb-2 text-2xl font-bold">{{ title }}</h4>
-    <HorizontalDivider />
-    <div class="space-y-0">
+  <div class="text-brand-grey-light space-y-12">
+    <FooterTitle>{{ title }}</FooterTitle>
+    <div>
       <div
         v-for="article in articles"
         :key="article.title"
-        class="border-brand-grey mb-2 flex items-start border-b">
-        <NuxtImg
-          :src="article.image"
-          :alt="article.alt"
-          class="mr-2 mb-2 h-16 w-24 rounded object-cover" />
-        <div class="mb-2 min-w-0 flex-1">
-          <div class="flex items-start justify-between gap-4">
-            <NuxtLink
-              :to="article.href"
-              :class="
-                cn(`
-                  text-brand-grey-light hover:text-surface-soft
-                  line-clamp-2 text-sm transition
-                `)
-              ">
-              {{ article.title }}
-            </NuxtLink>
-            <Arrow direction="right" double />
-          </div>
+        class="border-b-brand-grey-light flex items-start border-b">
+        <NuxtLink :to="article.href" class="group hover:text-brand-white block w-full py-4">
+          <div class="flex items-start gap-4">
+            <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl">
+              <NuxtImg
+                :src="article.image"
+                :alt="article.alt"
+                sizes="80px"
+                class="h-full w-full object-cover" />
+            </div>
 
-          <div class="text-brand-grey-light text-xs">
-            {{ article.date }}
+            <div class="space-y-4">
+              <p class="leading-snug font-bold">
+                {{ article.title }}
+              </p>
+
+              <p class="text-xs">
+                {{ article.date }}
+              </p>
+            </div>
+
+            <Arrow
+              direction="right"
+              double
+              class="ml-auto transition-transform group-hover:translate-x-0.5" />
           </div>
-        </div>
+        </NuxtLink>
       </div>
-    </div>
 
-    <div class="text-brand-grey-light text-sm">
-      <NuxtLink
-        :to="showAllHref"
-        :class="
-          cn(`
-            text-brand-grey-light hover:text-surface-soft
-            inline-flex items-center gap-2 transition
-          `)
-        ">
-        {{ showAllText }} <Arrow direction="right" double />
-      </NuxtLink>
+      <GoToLink :href="showAllHref" class="mt-8">{{ showAllText }}</GoToLink>
     </div>
   </div>
 </template>

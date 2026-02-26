@@ -102,16 +102,14 @@ const servicePrices = [
 </script>
 
 <template>
-  <div class="flex h-105.75 w-full flex-col">
+  <div class="flex h-105.75 w-full flex-col space-y-8">
     <CenteredTitle class="text-left">Стоимость услуг</CenteredTitle>
 
-    <div class="mt-8 min-h-0 flex-1 overflow-y-auto">
-      <div class="divide-brand-dark/5 divide-y">
-        <ServicePriceCard
-          v-for="servicePrice in servicePrices"
-          :key="servicePrice.id"
-          :servicePrice />
-      </div>
+    <div class="min-h-0 flex-1 overflow-y-auto">
+      <ServicePriceCard
+        v-for="servicePrice in servicePrices"
+        :key="servicePrice.id"
+        :servicePrice />
     </div>
   </div>
 </template>

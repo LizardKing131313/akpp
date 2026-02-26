@@ -50,8 +50,8 @@ defineExpose({
         cn(
           `
             bg-brand-dark/1 text-brand-dark placeholder:text-brand-grey-light
-            focus:bg-brand-dark/1 focus:ring-brand-red h-16 w-full rounded-2xl px-6 text-base
-            ring-0 transition outline-none focus:ring-2 focus:outline-none
+            focus:bg-brand-dark/1 focus:ring-brand-red h-16 w-full rounded-2xl
+            px-6 text-base ring-0 transition outline-none focus:ring-2 focus:outline-none
           `,
           inputClass
         )

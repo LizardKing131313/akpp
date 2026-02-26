@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="text-surface-soft h-5 w-5"
+    class="text-brand-soft h-5 w-5"
     aria-hidden="true"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg">

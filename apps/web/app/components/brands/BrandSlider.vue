@@ -200,28 +200,26 @@ const brands: BrandItem[] = [
 </script>
 
 <template>
-  <div class="bg-surface-base relative z-0 pt-24 pb-12 lg:pt-24">
-    <div class="mx-auto flex max-w-6xl items-center justify-center px-4">
-      <div class="brands-marquee-wrapper w-full pt-8 pb-4">
-        <Swiper
-          :modules="swiperModules"
-          :slides-per-view="'auto'"
-          :space-between="32"
-          :loop="true"
-          :speed="12000"
-          :free-mode="{ enabled: true, momentum: true }"
-          :autoplay="{
-            delay: 0,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }"
-          :mousewheel="{ forceToAxis: true }"
-          class="brands-marquee w-full">
-          <SwiperSlide v-for="brand in brands" :key="brand.id" class="w-auto!">
-            <BrandCard :brand />
-          </SwiperSlide>
-        </Swiper>
-      </div>
+  <div class="mx-auto flex max-w-6xl items-center justify-center px-4">
+    <div class="brands-marquee-wrapper w-full pt-8 pb-4">
+      <Swiper
+        :modules="swiperModules"
+        :slides-per-view="'auto'"
+        :space-between="32"
+        :loop="true"
+        :speed="12000"
+        :free-mode="{ enabled: true, momentum: true }"
+        :autoplay="{
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }"
+        :mousewheel="{ forceToAxis: true }"
+        class="brands-marquee w-full">
+        <SwiperSlide v-for="brand in brands" :key="brand.id" class="w-auto!">
+          <BrandCard :brand />
+        </SwiperSlide>
+      </Swiper>
     </div>
   </div>
 </template>

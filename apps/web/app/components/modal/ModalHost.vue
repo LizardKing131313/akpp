@@ -77,7 +77,7 @@ const onTouchEnd = (): void => {
         :class="
           cn(`
             fixed inset-0 z-9999 flex items-start
-            justify-center p-4 pt-6 sm:items-center sm:pt-4
+            justify-center p-4 pt-4 sm:items-center sm:pt-4
           `)
         "
         role="dialog"

@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { cn } from '#shared/lib/cn'
 import { BrandItem } from '#shared/types/components/brand'
 import { ItemImage } from '#shared/types/components/image'
 import { WorkExample } from '#shared/types/components/work_example'
+
+import GoToLink from '~/components/shared/GoToLink.vue'
 
 const works = [
   new WorkExample({
@@ -47,39 +50,39 @@ const works = [
 </script>
 
 <template>
-  <div class="w-full">
-    <div class="bg-brand-dark/5 rounded-2xl lg:max-h-105.75">
-      <CenteredTitle class="text-left">Выполненные работы</CenteredTitle>
+  <div class="space-y-8 lg:max-h-105.75 lg:space-y-12">
+    <CenteredTitle class="text-left">Выполненные работы</CenteredTitle>
 
-      <div class="mt-6 grid grid-cols-2 gap-4 lg:hidden">
-        <WorkExampleCard
-          v-for="(work, index) in works.slice(0, 3)"
-          :key="work.id"
-          :work
-          variant="tile"
-          :class="index === 2 ? 'col-span-2' : ''" />
-      </div>
+    <div class="grid grid-cols-2 gap-4 lg:hidden">
+      <WorkExampleCard
+        v-for="(work, index) in works.slice(0, 3)"
+        :key="work.id"
+        :work
+        variant="tile"
+        :class="index === 2 ? 'col-span-2' : ''" />
+    </div>
 
-      <div class="mt-12 hidden space-y-8 lg:block">
-        <WorkExampleCard v-for="work in works.slice(0, 3)" :key="work.id" :work variant="list" />
-      </div>
+    <div class="hidden space-y-8 lg:block">
+      <WorkExampleCard v-for="work in works.slice(0, 3)" :key="work.id" :work variant="list" />
+    </div>
 
-      <div class="mt-6 cursor-pointer!">
-        <NuxtLink to="/works" class="group w-full cursor-pointer! transition-colors">
-          <div
-            class="bg-brand-red hover:bg-brand-red/90 mx-auto flex w-fit cursor-pointer! items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white transition-colors lg:hidden">
-            Показать ещё
-          </div>
-          <div
-            class="text-brand-grey/70 hover:text-brand-dark hidden w-full cursor-pointer! items-center text-xs font-semibold tracking-wide transition-colors lg:flex">
-            <span class="cursor-pointer!">Показать все работы</span>
-            <Arrow
-              direction="right"
-              double
-              class="ml-auto cursor-pointer! text-base leading-none" />
-          </div>
-        </NuxtLink>
-      </div>
+    <div>
+      <NuxtLink to="/works" class="group w-full transition-colors lg:hidden">
+        <div
+          :class="
+            cn(`
+              bg-brand-red hover:bg-brand-red/90 text-brand-soft mx-auto
+              flex w-fit items-center justify-center rounded-full
+              px-12 py-4 font-bold transition-colors
+            `)
+          ">
+          Показать ещё
+        </div>
+      </NuxtLink>
+
+      <GoToLink href="/works" class="hover:text-brand-dark! hidden lg:block">
+        Показать все работы
+      </GoToLink>
     </div>
   </div>
 </template>
