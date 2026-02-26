@@ -38,6 +38,7 @@
       ]" />
     <BrandsGrid class="mt-8 mb-8" />
     <ServicesSection class="mt-8 mb-8" />
+    <ServiceAndWorksSection class="mt-8 mb-8" />
     <PerksSection class="mt-8 mb-8" />
   </div>
 </template>
