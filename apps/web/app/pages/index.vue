@@ -37,5 +37,6 @@
         { label: 'Hyundai', to: '/remont-akpp/hyundai' },
       ]" />
     <BrandsGrid class="mt-8 mb-8" />
+    <ServicesSection class="mt-8 mb-8" />
   </div>
 </template>
