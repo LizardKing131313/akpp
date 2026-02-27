@@ -21,7 +21,7 @@ const handleClick = (): void => {
   <div
     class="bg-brand-white mx-auto flex h-full w-full max-w-sm flex-col text-center shadow-[0_20px_30px_0_#2222220f]">
     <!-- КАРТИНКА -->
-    <div class="mx-auto mb-8 flex h-[200px] w-[200px] items-center justify-center">
+    <div class="mx-auto mb-8 flex h-50 w-50 items-center justify-center">
       <NuxtImg
         :src="imageSrc"
         :alt="imageAlt"
