@@ -67,6 +67,7 @@ const menuItems = ref<MenuNode[]>([
   new MenuNode({
     id: 'sell',
     title: 'Продажа акпп',
+    href: '/shop',
   }),
 
   new MenuNode({
