@@ -61,6 +61,7 @@ const menuItems = ref<MenuNode[]>([
   new MenuNode({
     id: 'detect',
     title: 'Определить акпп',
+    href: '/find_transmission',
   }),
 
   new MenuNode({
