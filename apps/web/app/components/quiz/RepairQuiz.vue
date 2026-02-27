@@ -124,7 +124,7 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
               :class="labelIndex <= activeStepIndex ? 'bg-brand-red' : 'bg-brand-soft'" />
 
             <div
-              class="mt-2 truncate text-center text-[10px] leading-3.75 font-bold tracking-[0.5px] uppercase transition-colors"
+              class="mt-2 hidden truncate text-center text-[10px] leading-3.75 font-bold tracking-[0.5px] uppercase transition-colors md:block"
               :class="labelIndex === activeStepIndex ? 'text-brand-dark' : 'text-brand-grey-light'">
               {{ label }}
             </div>
@@ -135,7 +135,7 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
       <button
         v-if="canGoBack"
         type="button"
-        class="text-brand-grey-light hover:text-brand-dark group absolute top-16 left-7.5 inline-flex items-center gap-2 text-sm text-[10px] leading-3.75 font-bold tracking-[0.5px] uppercase transition-colors"
+        class="text-brand-grey-light hover:text-brand-dark group absolute top-12 left-7.5 inline-flex items-center gap-2 text-sm text-[10px] leading-3.75 font-bold tracking-[0.5px] uppercase transition-colors md:top-16"
         @click="goBack">
         <Arrow
           direction="left"
