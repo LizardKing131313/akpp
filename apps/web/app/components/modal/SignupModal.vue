@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { FormInput } from '#components'
-import type { SignupModalPayload } from '#shared/lib/modal/useModal'
+import type { SingupModalPayload } from '#shared/lib/modal/useSignupModal'
 
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
-  payload: SignupModalPayload | null
+  payload: SingupModalPayload | null
 }>()
 
 const emit = defineEmits<{
@@ -42,7 +41,7 @@ const submit = (): void => {
   emitClose()
 }
 
-const nameInputRef = ref<InstanceType<typeof FormInput> | null>(null)
+const contactFieldsRef = ref<{ nameInputElementRef: HTMLInputElement | null } | null>(null)
 
 const isDesktop = (): boolean => {
   if (!import.meta.client) return false
@@ -51,8 +50,7 @@ const isDesktop = (): boolean => {
 
 onMounted(() => {
   if (!isDesktop()) return
-
-  nameInputRef.value?.inputElementRef?.focus()
+  contactFieldsRef.value?.nameInputElementRef?.focus()
 })
 </script>
 
@@ -109,40 +107,12 @@ onMounted(() => {
         class="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
         aria-label="Записаться"
         @submit.prevent="submit">
-        <FormInput ref="nameInputRef" label="Ваше имя" v-model="name" autocomplete="name" />
-
-        <FormInput
-          label="Ваш номер телефона"
-          placeholder="Ваш номер телефона *"
-          v-model="phone"
-          type="tel"
-          inputmode="tel"
-          autocomplete="tel" />
-
-        <label class="flex items-start gap-3 pt-1">
-          <input
-            v-model="agree"
-            type="checkbox"
-            :class="
-              cn(`
-                border-brand-red hover:border-brand-red/70 hover:bg-brand-red/20
-                checked:bg-brand-red checked:border-brand-red checked:hover:bg-brand-red/70
-                relative mt-1 h-5 w-5 shrink-0 cursor-pointer! appearance-none rounded border-2
-                bg-white transition after:absolute after:top-1/2 after:left-1/2 after:h-2.5
-                after:w-1.5 after:-translate-x-1/2 after:-translate-y-1/2 after:rotate-45
-                after:border-r-2 after:border-b-2 after:border-white after:opacity-0
-                after:content-[''] checked:after:opacity-100
-              `)
-            " />
-          <span class="text-brand-grey text-sm">
-            Я согласен(а) с обработкой персональных данных и
-            <NuxtLink
-              href="#"
-              class="text-brand-red/80 hover:text-brand-red underline underline-offset-2">
-              политикой конфиденциальности
-            </NuxtLink>
-          </span>
-        </label>
+        <LeadFields
+          ref="contactFieldsRef"
+          v-model:name="name"
+          v-model:phone="phone"
+          v-model:consent="agree"
+          @enter="submit" />
 
         <button
           type="submit"

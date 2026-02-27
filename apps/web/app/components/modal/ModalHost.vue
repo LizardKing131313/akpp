@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SignupModal } from '#components'
+import { QuizModal, SignupModal } from '#components'
 import { cn } from '#shared/lib/cn'
 import { useModal } from '#shared/lib/modal/useModal'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -9,6 +9,7 @@ const { modalState, close } = useModal()
 const activeComponent = computed(() => {
   if (!modalState.value.isOpen || modalState.value.name === null) return null
   if (modalState.value.name === 'signup') return SignupModal
+  if (modalState.value.name === 'repairQuiz') return QuizModal
   return null
 })
 
@@ -98,14 +99,14 @@ const onTouchEnd = (): void => {
           <Transition name="modal-panel" appear>
             <div
               v-if="modalState.isOpen"
-              class="w-full max-w-md"
+              class="w-full max-w-md sm:max-w-4xl"
               @touchstart="onTouchStart"
               @touchmove="onTouchMove"
               @touchend="onTouchEnd">
               <component
                 :is="activeComponent"
                 v-if="activeComponent !== null"
-                :payload="modalState.payload"
+                :payload="modalState.payload ?? {}"
                 @close="close" />
             </div>
           </Transition>

@@ -1,17 +1,9 @@
-export type ModalName = 'signup'
-
-export type SignupModalPayload = {
-  source?: string
-}
-
-export type ModalPayloadByName = {
-  signup: SignupModalPayload
-}
+export type ModalName = string
 
 type ModalState = {
   isOpen: boolean
   name: ModalName | null
-  payload: ModalPayloadByName[ModalName] | null
+  payload: unknown
 }
 
 export const useModal = () => {
@@ -21,14 +13,11 @@ export const useModal = () => {
     payload: null,
   }))
 
-  const open = <TModalName extends ModalName>(
-    modalName: TModalName,
-    payload: ModalPayloadByName[TModalName]
-  ): void => {
+  const open = (modalName: ModalName, payload?: unknown): void => {
     modalState.value = {
       isOpen: true,
       name: modalName,
-      payload,
+      payload: payload ?? null,
     }
   }
 
