@@ -19,14 +19,13 @@ const handleClick = (): void => {
 
 <template>
   <div
-    class="bg-brand-white mx-auto flex h-full w-full max-w-sm flex-col text-center shadow-[0_20px_30px_0_#2222220f]">
-    <!-- КАРТИНКА -->
-    <div class="mx-auto mb-8 flex h-50 w-50 items-center justify-center">
+    class="bg-brand-white flex h-full w-full flex-col text-center shadow-[0_20px_30px_0_#2222220f]">
+    <div
+      class="mx-auto mb-6 flex h-37.5 w-37.5 items-center justify-center sm:mb-8 sm:h-50 sm:w-50">
       <NuxtImg
         :src="imageSrc"
         :alt="imageAlt"
-        width="200"
-        height="200"
+        sizes="(max-width: 640px) 150px, 200px"
         class="h-full w-full object-contain" />
     </div>
 
