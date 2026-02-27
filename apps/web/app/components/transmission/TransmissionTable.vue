@@ -228,7 +228,7 @@ const sortIndicator = (columnId: string): string => {
 
 <template>
   <div class="w-full">
-    <div class="flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
       <div class="text-brand-grey flex items-center gap-2 text-sm">
         <span class="select-none">{{ showEntriesLabel }}</span>
         <select
@@ -304,7 +304,8 @@ const sortIndicator = (columnId: string): string => {
       </table>
     </div>
 
-    <div class="text-brand-grey mt-4 flex flex-wrap items-center justify-between gap-4 text-sm">
+    <div
+      class="text-brand-grey mt-4 flex flex-col items-center gap-4 text-sm sm:flex-row sm:justify-between">
       <div class="select-none">
         Showing {{ pageStartNumber }} to {{ pageEndNumber }} of {{ totalFilteredRowsCount }} entries
       </div>
