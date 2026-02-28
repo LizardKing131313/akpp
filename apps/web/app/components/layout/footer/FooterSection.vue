@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import type { CityItem } from '#shared/types/components/city'
+import type { ContactLocation } from '#shared/types/components/location'
+import type { MapPoint } from '#shared/types/components/map'
+
+import { getCities } from '#server/api/city/city.get'
+import { getLocations } from '#server/api/contacts/contacts.get'
 import { cn } from '#shared/lib/cn'
 import { MenuNode } from '#shared/types/layout/menu/menu'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const menuItems = ref<MenuNode[]>([
   new MenuNode({
@@ -55,14 +61,62 @@ const menuItems = ref<MenuNode[]>([
     href: '/',
   }),
 ])
+
+const route = useRoute()
+
+type FooterMeta = {
+  hideContacts?: boolean
+}
+
+type RouteMeta = {
+  footer?: FooterMeta
+}
+
+const hideContacts = computed<boolean>(() => {
+  const meta = route.meta as RouteMeta
+  return meta.footer?.hideContacts === true
+})
+
+const cities: CityItem[] = getCities()
+
+const allLocations: ContactLocation[] = getLocations()
+
+const selectedCityId = ref<string>(cities[0]?.id ?? '')
+
+const filteredLocations = computed<ContactLocation[]>(() => {
+  return allLocations.filter((locationItem) => locationItem.cityId === selectedCityId.value)
+})
+
+const mapPoints = computed<MapPoint[]>(() => {
+  return filteredLocations.value.map((locationItem) => {
+    return {
+      id: locationItem.id,
+      title: locationItem.title,
+      lng: locationItem.lng,
+      lat: locationItem.lat,
+    }
+  })
+})
+
+const mapCenter = computed<[number, number]>(() => {
+  const firstLocation = filteredLocations.value[0]
+  if (firstLocation) return [firstLocation.lng, firstLocation.lat]
+  return [37.618423, 55.751244]
+})
+
+const mapZoom = computed<number>(() => {
+  const countLocations = filteredLocations.value.length
+  if (countLocations <= 1) return 12
+  return 10
+})
 </script>
 
 <template>
   <footer class="w-full">
-    <div class="relative w-full space-y-12">
+    <div class="relative w-full space-y-12" v-if="!hideContacts">
       <div class="relative h-75 w-full overflow-hidden">
         <ClientOnly>
-          <YandexMap />
+          <YandexMap :locations="mapPoints" :center="mapCenter" :zoom="mapZoom" :height-px="300" />
         </ClientOnly>
       </div>
 
@@ -104,7 +158,7 @@ const menuItems = ref<MenuNode[]>([
       </div>
     </div>
 
-    <BrandSlider class="mt-24 mb-12" />
+    <BrandSlider :class="cn(hideContacts ? 'mt-0' : 'mt-36', 'mb-12')" />
 
     <div
       :class="

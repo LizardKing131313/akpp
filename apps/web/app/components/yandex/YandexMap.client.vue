@@ -1,28 +1,27 @@
 <script setup lang="ts">
+import type { MapPoint } from '#shared/types/components/map'
 import type { YMapLocationRequest } from '@yandex/ymaps3-types'
 
-import { shallowRef } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 import { loadYandexMapComponents, type YandexMapComponents } from '~~/shared/lib/ymaps'
 
-type LocationPoint = {
-  id: string
-  title: string
-  lng: number
-  lat: number
+interface YandexMapProps {
+  locations: MapPoint[]
+  center: [number, number]
+  zoom: number
+  heightPx: number
 }
+
+const props = defineProps<YandexMapProps>()
 
 const runtimeConfig = useRuntimeConfig()
 
-const locations: LocationPoint[] = [
-  { id: '1', title: 'Точка 1', lng: 37.588144, lat: 55.733842 },
-  { id: '2', title: 'Точка 2', lng: 37.620393, lat: 55.75396 },
-  { id: '3', title: 'Точка 3', lng: 37.5402, lat: 55.7174 },
-]
-
-const location: YMapLocationRequest = {
-  center: [37.618423, 55.751244],
-  zoom: 10,
-}
+const location = computed<YMapLocationRequest>(() => {
+  return {
+    center: props.center,
+    zoom: props.zoom,
+  }
+})
 
 const components = shallowRef<YandexMapComponents | null>(null)
 const loadError = shallowRef<string | null>(null)
@@ -32,22 +31,30 @@ const markerElements = shallowRef<Record<string, HTMLElement>>({})
 const MARKER_SOURCE_ID = 'marker-source'
 
 const createMarkerElement = (title: string): HTMLElement => {
-  const wrapper = document.createElement('div')
-  wrapper.style.width = '32px'
-  wrapper.style.height = '32px'
-  wrapper.style.transform = 'translate(-50%, -100%)'
-  wrapper.style.pointerEvents = 'none'
+  const wrapperElement = document.createElement('div')
+  wrapperElement.style.width = '32px'
+  wrapperElement.style.height = '32px'
+  wrapperElement.style.transform = 'translate(-50%, -100%)'
+  wrapperElement.style.pointerEvents = 'none'
 
-  const image = document.createElement('img')
-  image.src = '/images/icons/location.svg'
-  image.alt = title
-  image.draggable = false
-  image.style.width = '32px'
-  image.style.height = '32px'
-  image.style.display = 'block'
+  const imageElement = document.createElement('img')
+  imageElement.src = '/images/icons/location.svg'
+  imageElement.alt = title
+  imageElement.draggable = false
+  imageElement.style.width = '32px'
+  imageElement.style.height = '32px'
+  imageElement.style.display = 'block'
 
-  wrapper.appendChild(image)
-  return wrapper
+  wrapperElement.appendChild(imageElement)
+  return wrapperElement
+}
+
+const rebuildMarkers = (): void => {
+  const createdElements: Record<string, HTMLElement> = {}
+  for (const point of props.locations) {
+    createdElements[point.id] = createMarkerElement(point.title)
+  }
+  markerElements.value = createdElements
 }
 
 onMounted(async () => {
@@ -59,20 +66,24 @@ onMounted(async () => {
     }
 
     components.value = await loadYandexMapComponents({ apiKey, lang: 'ru_RU' })
-
-    const createdElements: Record<string, HTMLElement> = {}
-    for (const point of locations) {
-      createdElements[point.id] = createMarkerElement(point.title)
-    }
-    markerElements.value = createdElements
+    rebuildMarkers()
   } catch (caughtError: unknown) {
     loadError.value = caughtError instanceof Error ? caughtError.message : 'Unknown error'
   }
 })
+
+watch(
+  () => props.locations,
+  () => {
+    if (!import.meta.client) return
+    rebuildMarkers()
+  },
+  { deep: true }
+)
 </script>
 
 <template>
-  <div class="h-75 w-full">
+  <div class="w-full" :style="{ height: heightPx + 'px' }">
     <div v-if="loadError" class="grid h-full place-items-center rounded-xl p-4">
       {{ loadError }}
     </div>
@@ -84,6 +95,7 @@ onMounted(async () => {
       <component :is="components.YMapDefaultFeaturesLayer" />
       <component :is="components.YMapFeatureDataSource" :id="MARKER_SOURCE_ID" />
       <component :is="components.YMapLayer" :source="MARKER_SOURCE_ID" type="markers" />
+
       <component
         v-for="point in locations"
         :key="point.id"

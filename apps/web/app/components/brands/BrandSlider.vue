@@ -13,7 +13,7 @@ const brands = getBrands()
 
 <template>
   <div class="mx-auto flex max-w-6xl items-center justify-center px-4">
-    <div class="brands-marquee-wrapper w-full pt-8 pb-4">
+    <div class="brands-marquee-wrapper w-full pb-4">
       <Swiper
         :modules="swiperModules"
         :slides-per-view="'auto'"
