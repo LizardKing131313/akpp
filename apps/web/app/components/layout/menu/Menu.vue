@@ -79,7 +79,7 @@ const menuItems = ref<MenuNode[]>([
 </script>
 
 <template>
-  <nav class="bg-brand-dark text-brand-soft">
+  <nav class="bg-brand-dark text-brand-white">
     <NavMenu :items="menuItems" />
 
     <div class="mx-auto flex h-11 max-w-6xl items-center justify-end lg:hidden">

@@ -5,7 +5,7 @@ defineProps<{ menuNode: MenuNode }>()
 
 const buttonClass =
   'flex-1 py-4 text-center uppercase ' +
-  'text-sm cursor-pointer text-shadow-brand-soft hover:text-red-500'
+  'text-sm cursor-pointer text-brand-white hover:text-brand-red'
 </script>
 
 <template>

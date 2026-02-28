@@ -137,21 +137,21 @@ onBeforeUnmount(() => {
         ref="drawerRef"
         aria-label="Меню"
         aria-modal="true"
-        class="bg-brand-soft text-brand-dark fixed top-0 left-0 z-200 flex h-dvh w-65 flex-col"
+        class="bg-brand-white text-brand-dark fixed top-0 left-0 z-200 flex h-dvh w-65 flex-col"
         role="dialog"
         tabindex="-1"
         @click.stop>
         <div
-          class="bg-brand-red text-brand-soft grid h-14 items-center"
+          class="bg-brand-red text-brand-white grid h-14 items-center"
           :class="showLogo ? 'grid-cols-[56px_1fr_56px]' : 'grid-cols-[56px_1fr]'">
           <div class="flex h-14 w-14 items-center justify-center">
             <button
               v-if="canGoBack"
-              class="bg-brand-dark text-brand-soft flex h-14 w-14 items-center justify-center"
+              class="bg-brand-dark text-brand-white flex h-14 w-14 items-center justify-center"
               type="button"
               aria-label="Назад"
               @click="goBack">
-              <Arrow direction="left" class="text-brand-soft" />
+              <Arrow direction="left" class="text-brand-white" />
             </button>
           </div>
 

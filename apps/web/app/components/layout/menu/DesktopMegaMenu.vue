@@ -94,14 +94,14 @@ const handlePanelEnter = (): void => {
       aria-haspopup="menu"
       :class="
         cn(`
-          text-brand-soft hover:text-brand-red flex w-full cursor-pointer!
+          text-brand-white hover:text-brand-red flex w-full cursor-pointer!
           items-center justify-center gap-1 text-center text-sm uppercase
         `)
       ">
-      <span class="text-brand-soft group-hover:text-brand-red cursor-pointer!">
+      <span class="text-brand-white group-hover:text-brand-red cursor-pointer!">
         {{ menuNode.title }}
       </span>
-      <Arrow direction="down" class="text-brand-soft group-hover:text-brand-red" />
+      <Arrow direction="down" class="text-brand-white group-hover:text-brand-red" />
     </button>
 
     <div
@@ -125,8 +125,8 @@ const handlePanelEnter = (): void => {
               `group/menu-item flex w-full cursor-pointer items-center justify-between
               px-6 py-4 text-left text-sm font-semibold tracking-wide uppercase transition-colors`,
               activeLeftId === node.id
-                ? 'bg-brand-red text-brand-soft'
-                : 'text-brand-dark hover:bg-brand-red hover:text-brand-soft',
+                ? 'bg-brand-red text-brand-white'
+                : 'text-brand-dark hover:bg-brand-red hover:text-brand-white',
             ]"
             @mouseenter="setActiveLeft(node)">
             <span>{{ node.title }}</span>
@@ -138,8 +138,8 @@ const handlePanelEnter = (): void => {
                 cn(
                   'transition-colors',
                   activeLeftId === node.id
-                    ? 'text-brand-soft'
-                    : 'text-brand-dark group-hover/menu-item:text-brand-soft'
+                    ? 'text-brand-white'
+                    : 'text-brand-dark group-hover/menu-item:text-brand-white'
                 )
               " />
           </NuxtLink>
@@ -152,7 +152,7 @@ const handlePanelEnter = (): void => {
             :to="node.href ?? '#'"
             :class="
               cn(`
-                text-brand-dark hover:bg-brand-red hover:text-brand-soft
+                text-brand-dark hover:bg-brand-red hover:text-brand-white
                 block px-6 py-4 text-sm font-semibold tracking-wide uppercase
               `)
             "
