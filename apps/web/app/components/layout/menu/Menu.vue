@@ -73,6 +73,7 @@ const menuItems = ref<MenuNode[]>([
   new MenuNode({
     id: 'contacts',
     title: 'Контакты',
+    href: '/contacts',
   }),
 ])
 </script>
