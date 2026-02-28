@@ -4,12 +4,12 @@ import { BreadcrumbItem } from '#shared/types/layout/breadcrumb'
 definePageMeta({
   pageHeader: {
     kind: 'breadcrumbs',
-    title: 'АКПП',
+    title: 'Бренд',
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Определить АКПП', to: '/find_transmission' }),
-      new BreadcrumbItem({ label: 'АКПП', to: '/find_transmission/id' }),
+      new BreadcrumbItem({ label: 'Бренды', to: '/brands' }),
+      new BreadcrumbItem({ label: 'Бренд', to: '/brands/id' }),
     ],
   },
 })

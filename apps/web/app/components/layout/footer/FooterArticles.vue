@@ -19,20 +19,20 @@ withDefaults(defineProps<FooterArticlesProps>(), {
   articles: () => [
     {
       title: 'Как менять масло в АКПП: полная или частичная замена',
-      href: '/',
+      href: '/articles/1',
       date: '27.01.2026',
       image: '/images/articles/article1.png',
       alt: 'Масло',
     },
     {
       title: 'Сброс, калибровка и адаптация АКПП',
-      href: '/',
+      href: '/articles/2',
       date: '20.01.2026',
       image: '/images/articles/article2.png',
       alt: 'Сброс',
     },
   ],
-  showAllHref: '/',
+  showAllHref: '/articles',
   showAllText: 'показать все статьи',
 })
 </script>

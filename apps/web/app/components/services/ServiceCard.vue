@@ -23,7 +23,7 @@ const cardClass = computed<string>(() => {
     <NuxtImg
       :src="service.logo.source"
       :alt="service.logo.alt"
-      sizes="(max-width: 1023px) 50vw, 20vw"
+      sizes="lg:20vw md:50vw sm:50vw"
       :class="
         cn(`
           absolute inset-0 h-full w-full scale-100 object-cover
