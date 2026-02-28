@@ -4,6 +4,10 @@ import type { SingupModalPayload } from '#shared/lib/modal/useSignupModal'
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
+import SubmitButton from '~/components/form/SubmitButton.vue'
+import ModalClose from '~/components/modal/components/ModalClose.vue'
+import ModalWindow from '~/components/modal/components/ModalWindow.vue'
+
 const props = defineProps<{
   payload: SingupModalPayload | null
 }>()
@@ -11,6 +15,12 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'close'): void
 }>()
+
+type FormInputExposed = {
+  inputElementRef: HTMLInputElement | null
+}
+
+const nameInputRef = ref<FormInputExposed | null>(null)
 
 const name = ref<string>('')
 const phone = ref<string>('')
@@ -41,8 +51,6 @@ const submit = (): void => {
   emitClose()
 }
 
-const contactFieldsRef = ref<{ nameInputElementRef: HTMLInputElement | null } | null>(null)
-
 const isDesktop = (): boolean => {
   if (!import.meta.client) return false
   return window.matchMedia('(min-width: 640px)').matches
@@ -50,31 +58,13 @@ const isDesktop = (): boolean => {
 
 onMounted(() => {
   if (!isDesktop()) return
-  contactFieldsRef.value?.nameInputElementRef?.focus()
+  nameInputRef.value?.inputElementRef?.focus()
 })
 </script>
 
 <template>
-  <div
-    :class="
-      cn(`
-        bg-brand-white relative w-full max-w-md
-          overflow-hidden rounded-2xl shadow-2xl sm:rounded-[28px]
-      `)
-    ">
-    <button
-      type="button"
-      :class="
-        cn(`
-          text-brand-grey hover:text-brand-grey-light absolute top-3
-          right-3 grid h-9 w-9 place-items-center rounded-full transition
-          sm:top-5 sm:right-5 sm:h-10 sm:w-10
-        `)
-      "
-      aria-label="Закрыть окно"
-      @click="emitClose">
-      <span class="text-2xl leading-none">×</span>
-    </button>
+  <ModalWindow>
+    <ModalClose @click="emitClose" />
 
     <div
       class="max-h-[85svh] overflow-y-auto px-5 pt-7 pb-6 sm:max-h-none sm:px-8 sm:pt-10 sm:pb-8">
@@ -107,27 +97,17 @@ onMounted(() => {
         class="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
         aria-label="Записаться"
         @submit.prevent="submit">
-        <LeadFields
-          ref="contactFieldsRef"
-          v-model:name="name"
-          v-model:phone="phone"
-          v-model:consent="agree"
-          @enter="submit" />
+        <LeadFields v-model:phone="phone" v-model:consent="agree" @enter="submit">
+          <FormInput
+            ref="nameInputRef"
+            v-model="name"
+            label="Имя"
+            placeholder="Как вас зовут?"
+            autocomplete="name" />
+        </LeadFields>
 
-        <button
-          type="submit"
-          aria-label="submit"
-          :class="
-            cn(`
-              bg-brand-red/90 text-brand-soft hover:bg-brand-red mt-2 h-14 w-full
-              rounded-full text-base font-semibold shadow-lg transition
-              disabled:cursor-not-allowed disabled:opacity-60 sm:h-16 sm:text-lg
-            `)
-          "
-          :disabled="isSubmitDisabled">
-          Оставить заявку
-        </button>
+        <SubmitButton :disabled="isSubmitDisabled">Оставить заявку</SubmitButton>
       </form>
     </div>
-  </div>
+  </ModalWindow>
 </template>

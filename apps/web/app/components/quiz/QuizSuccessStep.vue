@@ -1,9 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex min-h-[520px] w-full flex-col items-center justify-center text-center">
+  <div class="flex min-h-130 w-full flex-col items-center justify-center text-center">
     <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#e9f7ee]">
-      <svg class="h-10 w-10 text-[#2ea44f]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <svg class="text-brand-red h-10 w-10" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path
           d="M9.2 12.6l1.8 1.8L15.8 9.6"
           stroke="currentColor"

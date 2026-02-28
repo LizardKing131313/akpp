@@ -4,6 +4,7 @@ import importPlugin from 'eslint-plugin-import'
 import nPlugin from 'eslint-plugin-n'
 import perfectionist from 'eslint-plugin-perfectionist'
 import promise from 'eslint-plugin-promise'
+import sonarjs from 'eslint-plugin-sonarjs'
 import unicorn from 'eslint-plugin-unicorn'
 import vuePlugin from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
@@ -72,6 +73,7 @@ export default [
       n: nPlugin,
       perfectionist,
       promise,
+      sonarjs,
       unicorn,
       vue: vuePlugin,
     },
@@ -122,6 +124,11 @@ export default [
       'vue/no-unused-vars': 'error',
       'vue/require-default-prop': 'off',
       'vue/require-prop-types': 'off',
+
+      'sonarjs/no-duplicate-string': ['warn', { threshold: 3 }],
+      'sonarjs/no-identical-functions': 'warn',
+      'sonarjs/no-redundant-boolean': 'warn',
+      'sonarjs/cognitive-complexity': ['warn', 20],
     },
   },
 ]

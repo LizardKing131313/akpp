@@ -75,19 +75,11 @@ const handleClick = (): void => {
                 {{ slide.description }}
               </p>
 
-              <button
-                :class="
-                  cn(`
-                    bg-brand-red text-brand-soft z-20 mx-auto mt-7 inline-flex
-                    items-center justify-center rounded-full px-10 py-4 text-sm font-semibold
-                    tracking-wide uppercase transition-transform
-                    duration-200 hover:scale-[1.02] active:scale-[0.99] lg:mx-0
-                  `)
-                "
-                type="button"
-                @click="handleClick">
+              <MainButton
+                @click="handleClick"
+                class="z-20 mt-7 w-auto px-10 tracking-wide uppercase">
                 {{ slide.buttonLabel }}
-              </button>
+              </MainButton>
             </div>
           </div>
         </SwiperSlide>

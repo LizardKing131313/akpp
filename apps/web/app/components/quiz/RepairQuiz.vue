@@ -113,7 +113,7 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
 </script>
 
 <template>
-  <section class="w-full px-4 py-12">
+  <section>
     <div
       class="bg-brand-white relative mx-auto w-full max-w-140 rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)]">
       <div v-if="currentStep !== 'success'" class="px-7.5 pt-7.5">

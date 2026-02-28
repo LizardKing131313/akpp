@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QuizModal, SignupModal } from '#components'
+import { QuizModal, ShopModal, SignupModal } from '#components'
 import { cn } from '#shared/lib/cn'
 import { useModal } from '#shared/lib/modal/useModal'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -9,6 +9,7 @@ const { modalState, close } = useModal()
 const activeComponent = computed(() => {
   if (!modalState.value.isOpen || modalState.value.name === null) return null
   if (modalState.value.name === 'signup') return SignupModal
+  if (modalState.value.name === 'shop') return ShopModal
   if (modalState.value.name === 'repairQuiz') return QuizModal
   return null
 })

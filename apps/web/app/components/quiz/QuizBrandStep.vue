@@ -67,13 +67,9 @@ watch(
         autocomplete="off"
         @keydown.enter.prevent="handleNext" />
 
-      <button
-        type="button"
-        class="bg-brand-red text-brand-white h-11.5 shrink-0 cursor-pointer rounded-4xl px-8 text-lg font-bold transition-colors hover:opacity-95 disabled:opacity-40"
-        :disabled="isNextDisabled"
-        @click="handleNext">
+      <MainButton :disabled="isNextDisabled" @click="handleNext" class="w-auto px-8 py-2">
         Далее
-      </button>
+      </MainButton>
     </div>
 
     <div>

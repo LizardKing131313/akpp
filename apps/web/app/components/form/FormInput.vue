@@ -25,6 +25,10 @@ withDefaults(defineProps<InputProps>(), {
   inputClass: '',
 })
 
+const emit = defineEmits<{
+  (eventName: 'enter'): void
+}>()
+
 const modelValue = defineModel<string>({ required: true })
 
 const inputElementRef = ref<HTMLInputElement | null>(null)
@@ -32,6 +36,11 @@ const inputElementRef = ref<HTMLInputElement | null>(null)
 defineExpose({
   inputElementRef,
 })
+
+const handleKeydown = (event: KeyboardEvent): void => {
+  if (event.key !== 'Enter') return
+  emit('enter')
+}
 </script>
 
 <template>
@@ -55,6 +64,7 @@ defineExpose({
           `,
           inputClass
         )
-      " />
+      "
+      @keydown="handleKeydown" />
   </label>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSignupModal } from '#shared/lib/modal/useSignupModal'
+import { useShopModal } from '#shared/lib/modal/useShopModal'
 
 interface ProductCardProps {
   title: string
@@ -11,9 +11,9 @@ interface ProductCardProps {
 
 defineProps<ProductCardProps>()
 
-const { openSignupModal } = useSignupModal()
+const { openShopModal } = useShopModal()
 const handleClick = (): void => {
-  openSignupModal('footer')
+  openShopModal('shop')
 }
 </script>
 
@@ -33,29 +33,21 @@ const handleClick = (): void => {
       {{ title }}
     </h3>
 
-    <!-- ТЕКСТ РАСТЯГИВАЕМ -->
     <div class="flex flex-1 flex-col">
       <p class="text-brand-grey-light mb-4 text-sm leading-relaxed">
         {{ description }}
       </p>
 
-      <!-- DIVIDER УХОДИТ ВНИЗ -->
       <div class="bg-brand-soft/70 mt-auto h-px w-full"></div>
     </div>
 
-    <!-- НИЗ -->
     <div class="mt-4 flex flex-col items-center">
       <div
         class="bg-brand-red text-brand-white mx-auto mb-2 inline-block rounded-full px-8 py-1 text-[16px] font-bold">
         {{ price }}
       </div>
 
-      <button
-        type="button"
-        @click="handleClick"
-        class="border-brand-red text-brand-red hover:bg-brand-red hover:text-brand-white w-full rounded-full border py-2 text-[16px] leading-6 font-bold transition-colors">
-        Купить
-      </button>
+      <MainButton reverse class="py-2" @click="handleClick">Купить</MainButton>
     </div>
   </div>
 </template>

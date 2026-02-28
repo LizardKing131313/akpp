@@ -37,7 +37,7 @@ const handleSubmit = (): void => {
       Оставьте телефон, мастер уже делает смету.
     </QuizStepTitle>
 
-    <div class="text-brand-dark font-bol mt-5 space-y-2 text-sm">
+    <div class="text-brand-dark mt-5 space-y-2 text-sm font-bold">
       <div>
         Авто: <span class="font-medium">{{ brandTitle }}</span>
       </div>
@@ -52,23 +52,21 @@ const handleSubmit = (): void => {
     </div>
 
     <LeadFields
-      v-model:name="customerName"
       v-model:phone="customerPhone"
       v-model:consent="isConsentAccepted"
-      @enter="handleSubmit" />
+      @enter="handleSubmit">
+      <FormInput
+        v-model="customerName"
+        label="Имя"
+        placeholder="Как вас зовут?"
+        autocomplete="name" />
+    </LeadFields>
 
-    <button
-      type="button"
-      class="bg-brand-red text-brand-white mt-8 flex h-16 w-full items-center justify-center gap-3 rounded-2xl px-8 text-xl font-extrabold transition-colors hover:opacity-95 disabled:opacity-40"
+    <MainButton
       :disabled="isSubmitDisabled"
-      @click="handleSubmit">
-      Узнать стоимость
-      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path
-          fill-rule="evenodd"
-          d="M7.22 15.78a.75.75 0 0 1 0-1.06L11.94 10 7.22 5.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0Z"
-          clip-rule="evenodd" />
-      </svg>
-    </button>
+      @click="handleSubmit"
+      class="mt-8 flex items-center justify-center gap-3">
+      Узнать стоимость <Arrow direction="right" class="text-brand-white" />
+    </MainButton>
   </div>
 </template>

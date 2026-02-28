@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
 
+import ModalClose from '~/components/modal/components/ModalClose.vue'
+
 type BrandLike = {
   title: string
 }
@@ -36,22 +38,9 @@ const handleQuizSubmit = (): void => {
         overflow-hidden rounded-2xl shadow-2xl sm:rounded-[28px]
       `)
     ">
-    <button
-      type="button"
-      :class="
-        cn(`
-          text-brand-grey hover:text-brand-grey-light absolute top-3
-          right-3 grid h-9 w-9 place-items-center rounded-full transition
-          sm:top-5 sm:right-5 sm:h-10 sm:w-10
-        `)
-      "
-      aria-label="Закрыть окно"
-      @click="emitClose">
-      <span class="text-2xl leading-none">×</span>
-    </button>
+    <ModalClose @click="emitClose" />
 
-    <div
-      class="max-h-[85svh] overflow-y-auto px-5 pt-7 pb-6 sm:max-h-none sm:px-8 sm:pt-10 sm:pb-8">
+    <div class="mt-12 max-h-[85svh] overflow-y-auto sm:max-h-none">
       <RepairQuiz
         v-if="payload !== null"
         :brands="payload.brands"
