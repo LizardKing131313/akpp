@@ -18,6 +18,14 @@ const menuItems = ref<MenuNode[]>([
       new MenuNode({
         id: 'hyundai',
         title: 'Hyundai',
+        href: '/remont-akp-hyundai',
+        children: [
+          new MenuNode({
+            id: 'logan',
+            title: 'Logan',
+            href: '/remont-akp-hyundai/i40',
+          }),
+        ],
       }),
       new MenuNode({
         id: 'renault',

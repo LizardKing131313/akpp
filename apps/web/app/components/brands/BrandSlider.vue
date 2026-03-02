@@ -29,7 +29,11 @@ const brands = getBrands()
         :mousewheel="{ forceToAxis: true }"
         class="brands-marquee w-full">
         <SwiperSlide v-for="brand in brands" :key="brand.id" class="w-auto!">
-          <BrandCard :brand />
+          <SliderItem
+            :title="brand.title"
+            :href="brand.href"
+            :source="brand.logo.source"
+            :alt="brand.logo.alt ?? brand.title" />
         </SwiperSlide>
       </Swiper>
     </div>

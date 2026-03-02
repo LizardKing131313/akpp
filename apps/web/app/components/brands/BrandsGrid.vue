@@ -49,7 +49,13 @@ const toggle = async (): Promise<void> => {
       </h3>
 
       <div class="grid grid-cols-3 gap-8 sm:hidden">
-        <BrandCard v-for="brand in mobileBrands" :key="brand.id" :brand="brand" />
+        <SliderItem
+          v-for="brand in mobileBrands"
+          :key="brand.id"
+          :title="brand.title"
+          :href="brand.href"
+          :source="brand.logo.source"
+          :alt="brand.logo.alt ?? brand.title" />
       </div>
 
       <div v-if="shouldShowToggleButton" class="flex justify-center sm:hidden">
@@ -59,7 +65,13 @@ const toggle = async (): Promise<void> => {
       </div>
 
       <div class="hidden grid-cols-4 gap-4 sm:grid md:grid-cols-6 xl:grid-cols-8">
-        <BrandCard v-for="brand in brands" :key="brand.id" :brand="brand" />
+        <SliderItem
+          v-for="brand in brands"
+          :key="brand.id"
+          :title="brand.title"
+          :href="brand.href"
+          :source="brand.logo.source"
+          :alt="brand.logo.alt ?? brand.title" />
       </div>
     </div>
   </section>

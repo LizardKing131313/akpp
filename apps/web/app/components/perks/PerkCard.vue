@@ -17,7 +17,9 @@ defineProps<{ perk: PerkItem }>()
       {{ perk.title }}
     </h3>
 
-    <p class="text-brand-grey hidden max-w-[36ch] text-center text-xs md:block md:text-sm">
+    <p
+      v-if="perk.description"
+      class="text-brand-grey hidden max-w-[36ch] text-center text-xs md:block md:text-sm">
       {{ perk.description }}
     </p>
   </div>

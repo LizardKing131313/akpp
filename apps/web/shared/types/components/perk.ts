@@ -3,13 +3,13 @@ import { type ItemImage } from '#shared/types/components/image'
 export class PerkItem {
   public readonly id: string
   public readonly title?: string | undefined
-  public readonly description: string
+  public readonly description?: string | undefined
   public readonly logo: ItemImage
 
   constructor(params: {
     id: string
     title?: string | undefined
-    description: string
+    description?: string | undefined
     logo: ItemImage
   }) {
     this.id = params.id

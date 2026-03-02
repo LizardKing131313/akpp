@@ -5,27 +5,12 @@ defineProps<{
   pulse?: boolean
 }>()
 
-const quizProblems = getProblems()
+import { useSignupModal } from '#shared/lib/modal/useSignupModal'
 
-const quizSymptoms: Readonly<Record<string, readonly string[]>> = getSymptoms()
-
-const brands = getBrands()
-
-import { getBrands } from '#server/api/brands/brands.get'
-import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
-import { useRepairQuizModal } from '#shared/lib/modal/useRepairQuizModal'
-//import { useSignupModal } from '#shared/lib/modal/useSignupModal'
-
-//const { openSignupModal } = useSignupModal()
-const { openRepairQuizModal } = useRepairQuizModal()
+const { openSignupModal } = useSignupModal()
 
 const handleClick = (): void => {
-  //openSignupModal('footer')
-  openRepairQuizModal({
-    brands,
-    problems: quizProblems,
-    symptoms: quizSymptoms,
-  })
+  openSignupModal('footer')
 }
 </script>
 
