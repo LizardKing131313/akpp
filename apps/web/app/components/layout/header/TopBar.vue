@@ -20,6 +20,14 @@ withDefaults(defineProps<TopBarProps>(), {
   searchIconClass: '',
   searchPlaceholder: '',
 })
+
+import { useSelectCityModal } from '#shared/lib/modal/useSelectCityModal'
+
+const { openSelectCityModal } = useSelectCityModal()
+
+const handleClick = (): void => {
+  openSelectCityModal('msk')
+}
 </script>
 
 <template>
@@ -34,7 +42,8 @@ withDefaults(defineProps<TopBarProps>(), {
       <button
         class="group hover:text-brand-red flex items-center gap-2 transition-colors duration-200"
         type="button"
-        aria-label="Выбрать город">
+        aria-label="Выбрать город"
+        @click="handleClick">
         <NuxtImg
           :src="iconSource"
           :alt="iconAlt"

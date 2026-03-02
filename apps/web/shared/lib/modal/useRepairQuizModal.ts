@@ -11,7 +11,7 @@ export type RepairQuizModalPayload = {
 }
 
 export const useRepairQuizModal = () => {
-  const { open } = useModal()
+  const { open, close, isOpen } = useModal()
 
   const openRepairQuizModal = (payload: RepairQuizModalPayload): void => {
     open('repairQuiz', payload)
@@ -19,5 +19,7 @@ export const useRepairQuizModal = () => {
 
   return {
     openRepairQuizModal,
+    closeModal: close,
+    isRepairQuizModalOpen: (): boolean => isOpen('repairQuiz'),
   }
 }
