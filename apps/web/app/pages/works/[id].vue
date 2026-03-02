@@ -16,15 +16,15 @@ definePageMeta({
 
 const caseImages = [
   {
-    src: '/images/transmission.png',
+    source: '/images/transmission.png',
     alt: 'Ford Focus вид сзади',
   },
   {
-    src: '/images/transmission.png',
+    source: '/images/transmission.png',
     alt: 'Процесс ремонта',
   },
   {
-    src: '/images/transmission.png',
+    source: '/images/transmission.png',
     alt: 'АКПП на стенде',
   },
 ]

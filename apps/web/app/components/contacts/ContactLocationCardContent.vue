@@ -60,12 +60,7 @@ const handleSignupClick = (): void => {
     Записаться на ремонт
   </MainButton>
 
-  <div v-if="detail" class="mt-6 grid grid-cols-2 gap-4">
-    <NuxtImg
-      v-for="imageItem in location.images"
-      :key="imageItem.source"
-      :src="imageItem.source"
-      :alt="imageItem.alt"
-      class="h-40 w-full rounded-xl object-cover" />
+  <div v-if="detail" class="mt-6">
+    <Gallery :images="location.images ?? []" />
   </div>
 </template>

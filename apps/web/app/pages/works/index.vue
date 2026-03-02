@@ -21,6 +21,7 @@ const items = [
     title: 'Ремонт гидроблока',
     date: '12.02.2026',
     href: '/works/1',
+
     imageSrc: '/images/transmission.png',
     imageAlt: 'Гидроблок',
   },

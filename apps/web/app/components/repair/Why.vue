@@ -12,7 +12,7 @@ type Props = {
   signupLabel?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   mainImageAlt: 'Фото',
   calculateLabel: 'Рассчитать стоимость',
   signupLabel: 'Записаться',
@@ -59,34 +59,26 @@ const perks: PerkItem[] = [
 </script>
 
 <template>
-  <TwoColumns inverse>
+  <TwoColumns inverse class="gap-1 lg:gap-20">
     <NuxtImg src="/images/transmission.png" alt="transmission" class="h-85 w-full object-contain" />
 
     <div class="space-y-10">
-      <div class="space-y-4">
+      <div class="hidden space-y-4 lg:block">
         <CenteredTitle>Почему клиенты выбирают нас</CenteredTitle>
         <span class="text-brand-grey block w-full text-center text-sm">
           даже рассмотрев все предложения на рынке
         </span>
       </div>
 
-      <div class="flex flex-col gap-4 sm:flex-row">
+      <div class="hidden flex-row gap-4 lg:flex">
         <PerkCard v-for="perk in perks" :key="perk.id" :perk />
       </div>
 
-      <div class="flex flex-col gap-4 sm:flex-row">
-        <MainButton @click="handleCalculateClick">
-          {{ props.calculateLabel }}
-        </MainButton>
-
-        <MainButton
-          @click="handleSignupClick"
-          class="bg-brand-grey text-brand-white relative w-full overflow-hidden rounded-full border-0 py-5 text-2xl font-semibold transition hover:opacity-95">
-          <span
-            class="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0.15)_25%,transparent_25%)]"></span>
-          {{ props.signupLabel }}
-        </MainButton>
-      </div>
+      <ActionButtons
+        :calculateLabel="calculateLabel"
+        :signupLabel="signupLabel"
+        @calculate="handleCalculateClick"
+        @signup="handleSignupClick" />
     </div>
   </TwoColumns>
 </template>

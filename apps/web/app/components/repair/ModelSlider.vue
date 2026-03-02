@@ -11,15 +11,21 @@ const models = getModels()
 </script>
 
 <template>
-  <div class="relative mx-auto max-w-5xl">
+  <div class="relative mx-auto max-w-6xl">
     <Swiper
       :modules="swiperModules"
       :loop="false"
-      :slides-per-view="5"
+      :slides-per-view="1"
       :slides-per-group="1"
       :space-between="16"
       :navigation="true"
       :watch-overflow="true"
+      :breakpoints="{
+        640: { slidesPerView: 2, spaceBetween: 14 },
+        768: { slidesPerView: 3, spaceBetween: 16 },
+        1024: { slidesPerView: 4, spaceBetween: 16 },
+        1280: { slidesPerView: 5, spaceBetween: 16 },
+      }"
       class="model-slider relative">
       <SwiperSlide v-for="model in models" :key="model.id">
         <SliderItem
@@ -60,5 +66,17 @@ const models = getModels()
 .model-slider :deep(.swiper-button-disabled) {
   color: var(--color-brand-grey-light);
   border-color: var(--color-brand-grey-light);
+}
+
+.model-slider :deep(.swiper-button-prev),
+.model-slider :deep(.swiper-button-next) {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .model-slider :deep(.swiper-button-prev),
+  .model-slider :deep(.swiper-button-next) {
+    display: flex;
+  }
 }
 </style>

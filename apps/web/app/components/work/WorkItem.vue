@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
-type GalleryImage = {
-  src: string
-  alt: string
-}
+import { computed } from 'vue'
 
 type CaseDetails = {
   transmission: string
@@ -22,7 +17,7 @@ type Costs = {
 
 type Props = {
   mainImageAlt?: string
-  images: readonly GalleryImage[]
+  images: ItemImage[]
   details: CaseDetails
   works: readonly string[]
   costs: Costs
@@ -36,35 +31,17 @@ const props = withDefaults(defineProps<Props>(), {
   signupLabel: 'Записаться',
 })
 
-const emit = defineEmits<{
-  (event: 'selectImage', payload: { index: number; image: GalleryImage }): void
-}>()
-
-const selectedImageIndex = ref(0)
-
-const selectedImage = computed<GalleryImage | null>(() => {
-  return props.images[selectedImageIndex.value] ?? null
-})
-
 const totalRub = computed<number>(() => {
   return props.costs.totalRub ?? props.costs.partsRub + props.costs.laborRub
 })
-
-const handleSelectImage = (index: number): void => {
-  const image = props.images[index]
-  if (!image) {
-    return
-  }
-
-  selectedImageIndex.value = index
-  emit('selectImage', { index, image })
-}
 
 const quizProblems = getProblems()
 
 const quizSymptoms: Readonly<Record<string, readonly string[]>> = getSymptoms()
 
 const brands = getBrands()
+
+import type { ItemImage } from '#shared/types/components/image'
 
 import { getBrands } from '#server/api/brands/brands.get'
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
@@ -89,26 +66,7 @@ const handleSignupClick = (): void => {
 
 <template>
   <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
-    <div class="flex flex-col gap-4">
-      <div class="border-brand-soft overflow-hidden rounded-xl border">
-        <NuxtImg
-          :src="selectedImage?.src ?? props.images[0]?.src ?? '/images/transmission.png'"
-          :alt="selectedImage?.alt ?? props.mainImageAlt"
-          class="h-105 w-full object-contain" />
-      </div>
-
-      <div class="flex gap-3 overflow-x-auto">
-        <button
-          v-for="(image, index) in props.images"
-          :key="image.src + index"
-          type="button"
-          class="border-brand-soft hover:border-brand-red cursor-pointer overflow-hidden rounded-lg border transition-colors"
-          :class="index === selectedImageIndex ? 'border-brand-red' : ''"
-          @click="handleSelectImage(index)">
-          <NuxtImg :src="image.src" :alt="image.alt" class="h-20 w-28 object-contain" />
-        </button>
-      </div>
-    </div>
+    <Gallery :images="images" />
 
     <div class="flex flex-col gap-6">
       <div class="text-brand-grey space-y-3 text-base">
@@ -179,19 +137,11 @@ const handleSignupClick = (): void => {
         </div>
       </div>
 
-      <div class="mt-4 flex flex-col gap-4 sm:flex-row">
-        <MainButton @click="handleCalculateClick">
-          {{ props.calculateLabel }}
-        </MainButton>
-
-        <MainButton
-          @click="handleSignupClick"
-          class="bg-brand-grey text-brand-white relative w-full overflow-hidden rounded-full border-0 py-5 text-2xl font-semibold transition hover:opacity-95">
-          <span
-            class="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0.15)_25%,transparent_25%)]"></span>
-          {{ props.signupLabel }}
-        </MainButton>
-      </div>
+      <ActionButtons
+        :calculateLabel="calculateLabel"
+        :signupLabel="signupLabel"
+        @calculate="handleCalculateClick"
+        @signup="handleSignupClick" />
     </div>
   </div>
 </template>
