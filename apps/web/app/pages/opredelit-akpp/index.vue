@@ -10,7 +10,7 @@ definePageMeta({
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Определить АКПП', to: '/find_transmission' }),
+      new BreadcrumbItem({ label: 'Определить АКПП', to: '/opredelit-akpp' }),
     ],
   },
 })

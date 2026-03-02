@@ -115,11 +115,11 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
             <NuxtLink
               v-if="crumb.to && !isLastIndex(index)"
               :to="crumb.to"
-              class="hover:text-brand-red transition-colors duration-200">
+              class="hover:text-brand-red uppercase transition-colors duration-200">
               {{ crumb.label }}
             </NuxtLink>
 
-            <span v-else aria-current="page">
+            <span v-else aria-current="page" class="uppercase">
               {{ crumb.label }}
             </span>
 

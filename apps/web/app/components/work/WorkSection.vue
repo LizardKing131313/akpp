@@ -80,7 +80,7 @@ const works = [
         </div>
       </NuxtLink>
 
-      <GoToLink href="/works" class="hover:text-brand-dark! hidden lg:block">
+      <GoToLink href="/apps/web/app/pages/work" class="hover:text-brand-dark! hidden lg:block">
         Показать все работы
       </GoToLink>
     </div>

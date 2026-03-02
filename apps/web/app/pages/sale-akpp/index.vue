@@ -8,7 +8,7 @@ definePageMeta({
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Продажа АКПП', to: '/shop' }),
+      new BreadcrumbItem({ label: 'Продажа АКПП', to: '/sale-akpp' }),
     ],
   },
 })

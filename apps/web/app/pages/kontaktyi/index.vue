@@ -15,7 +15,7 @@ definePageMeta({
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Контакты', to: '/contacts' }),
+      new BreadcrumbItem({ label: 'Контакты', to: '/kontaktyi' }),
     ],
   },
   footer: {
