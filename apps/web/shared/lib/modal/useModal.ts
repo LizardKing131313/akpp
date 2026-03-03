@@ -1,5 +1,3 @@
-import { useState } from '#imports'
-
 export type ModalName = string
 
 type ModalState = {
