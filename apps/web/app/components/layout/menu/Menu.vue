@@ -69,19 +69,19 @@ const menuItems = ref<MenuNode[]>([
   new MenuNode({
     id: 'detect',
     title: 'Определить акпп',
-    href: '/find_transmission',
+    href: '/opredelit-akpp',
   }),
 
   new MenuNode({
     id: 'sell',
     title: 'Продажа акпп',
-    href: '/shop',
+    href: '/sale-akpp',
   }),
 
   new MenuNode({
     id: 'contacts',
     title: 'Контакты',
-    href: '/contacts',
+    href: '/kontaktyi',
   }),
 ])
 </script>

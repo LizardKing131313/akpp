@@ -17,7 +17,7 @@ const works = [
     }),
     title: 'Ремонт АКПП Шкода Октавия III',
     date: '27.02.2024',
-    href: '/works/repair_skoda',
+    href: '/work/repair_skoda',
     image: new ItemImage({ source: '/images/work/repair_skoda.png', alt: 'repair_skoda' }),
   }),
   new WorkExample({
@@ -30,7 +30,7 @@ const works = [
     }),
     title: 'Ремонт АКПП BMW X6',
     date: '27.02.2024',
-    href: '/works/repair-bmw',
+    href: '/work/repair-bmw',
     image: new ItemImage({ source: '/images/work/repair_bmw.png', alt: 'repair_bmw' }),
   }),
   new WorkExample({
@@ -43,7 +43,7 @@ const works = [
     }),
     title: 'Замена масла Ford Focus',
     date: '05.02.2024',
-    href: '/works/repair_ford',
+    href: '/work/repair_ford',
     image: new ItemImage({ source: '/images/work/repair_ford.png', alt: 'repair_ford' }),
   }),
 ]
@@ -80,7 +80,7 @@ const works = [
         </div>
       </NuxtLink>
 
-      <GoToLink href="/apps/web/app/pages/work" class="hover:text-brand-dark! hidden lg:block">
+      <GoToLink href="/work" class="hover:text-brand-dark! hidden lg:block">
         Показать все работы
       </GoToLink>
     </div>

@@ -8,8 +8,8 @@ definePageMeta({
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Примеры работ', to: '/works' }),
-      new BreadcrumbItem({ label: 'Пример работы', to: '/works/id' }),
+      new BreadcrumbItem({ label: 'Примеры работ', to: '/work' }),
+      new BreadcrumbItem({ label: 'Пример работы', to: '/work/id' }),
     ],
   },
 })
