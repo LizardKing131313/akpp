@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useShopModal } from '#shared/lib/modal/useShopModal'
+import { useShopModal } from '~/composables/modal/useShopModal'
 
 interface ProductCardProps {
   title: string

@@ -3,7 +3,8 @@ import type { MapPoint } from '#shared/types/components/map'
 import type { YMapLocationRequest } from '@yandex/ymaps3-types'
 
 import { computed, shallowRef, watch } from 'vue'
-import { loadYandexMapComponents, type YandexMapComponents } from '~~/shared/lib/ymaps'
+
+import { loadYandexMapComponents, type YandexMapComponents } from '~/composables/ymaps'
 
 interface YandexMapProps {
   locations: MapPoint[]

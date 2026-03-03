@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ContactLocation } from '#shared/types/components/location'
 
-import { useSignupModal } from '#shared/lib/modal/useSignupModal'
+import { useSignupModal } from '~/composables/modal/useSignupModal'
 
 const props = defineProps<{
   location: ContactLocation

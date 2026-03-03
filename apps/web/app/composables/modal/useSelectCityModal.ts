@@ -1,4 +1,4 @@
-import { useModal } from '#shared/lib/modal/useModal'
+import { useModal } from '~/composables/modal/useModal'
 
 export type SelectCityPayload = {
   source?: string

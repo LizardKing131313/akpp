@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SingupModalPayload } from '#shared/lib/modal/useSignupModal'
+import type { SingupModalPayload } from '~/composables/modal/useSignupModal'
 
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'

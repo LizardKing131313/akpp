@@ -45,8 +45,9 @@ import type { ItemImage } from '#shared/types/components/image'
 
 import { getBrands } from '#server/api/brands/brands.get'
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
-import { useRepairQuizModal } from '#shared/lib/modal/useRepairQuizModal'
-import { useSignupModal } from '#shared/lib/modal/useSignupModal'
+
+import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
+import { useSignupModal } from '~/composables/modal/useSignupModal'
 
 const { openSignupModal } = useSignupModal()
 const { openRepairQuizModal } = useRepairQuizModal()

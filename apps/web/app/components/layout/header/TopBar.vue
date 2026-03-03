@@ -21,7 +21,7 @@ withDefaults(defineProps<TopBarProps>(), {
   searchPlaceholder: '',
 })
 
-import { useSelectCityModal } from '#shared/lib/modal/useSelectCityModal'
+import { useSelectCityModal } from '~/composables/modal/useSelectCityModal'
 
 const { openSelectCityModal } = useSelectCityModal()
 

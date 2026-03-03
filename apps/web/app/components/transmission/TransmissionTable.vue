@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useDebouncedRef } from '#shared/lib/useDebouncedRef'
 import {
   type ColumnDef,
   FlexRender,
@@ -12,6 +11,8 @@ import {
   useVueTable,
 } from '@tanstack/vue-table'
 import { computed, h, ref, watch } from 'vue'
+
+import { useDebouncedRef } from '~/composables/useDebouncedRef'
 
 export type GearboxRow = {
   brand: string

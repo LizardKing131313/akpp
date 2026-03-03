@@ -2,10 +2,11 @@
 import type { HeroSlide } from '#shared/types/layout/hero'
 
 import { cn } from '#shared/lib/cn'
-import { useSignupModal } from '#shared/lib/modal/useSignupModal'
 import { Autoplay, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { computed } from 'vue'
+
+import { useSignupModal } from '~/composables/modal/useSignupModal'
 
 import 'swiper/css'
 import 'swiper/css/navigation'

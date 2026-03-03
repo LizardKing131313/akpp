@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { CitySelectModal, QuizModal, ShopModal, SignupModal } from '#components'
 import { cn } from '#shared/lib/cn'
-import { useModal } from '#shared/lib/modal/useModal'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
+import { useModal } from '~/composables/modal/useModal'
 
 const { modalState, close } = useModal()
 

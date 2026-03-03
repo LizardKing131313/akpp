@@ -5,7 +5,7 @@ defineProps<{
   pulse?: boolean
 }>()
 
-import { useSignupModal } from '#shared/lib/modal/useSignupModal'
+import { useSignupModal } from '~/composables/modal/useSignupModal'
 
 const { openSignupModal } = useSignupModal()
 
