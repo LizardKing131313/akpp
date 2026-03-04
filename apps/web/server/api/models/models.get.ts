@@ -1,5 +1,9 @@
-import { ItemImage } from '~~/shared/types/components/image'
-import { ModelItem } from '~~/shared/types/components/model'
+import { ModelsRepository } from '#server/services/repo/entity/models.repo'
+
+export default defineEventHandler(async () => {
+  const repo = new ModelsRepository()
+  return await repo.list()
+})
 
 export const getModels = () => [
   new ModelItem({

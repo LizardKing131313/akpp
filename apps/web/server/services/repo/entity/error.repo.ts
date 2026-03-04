@@ -1,4 +1,4 @@
-import type { ErrorSettings } from '#shared/types/404'
+import type { ErrorSettings } from '#shared/types/error'
 
 import { createDirectusClient } from '#server/services/directus'
 

@@ -1,4 +1,4 @@
-import { CalculateRepository } from '../services/repo/entity/calculate.repo'
+import { CalculateRepository } from '#server/services/repo/entity/calculate.repo'
 
 export default defineEventHandler(async () => {
   const repo = new CalculateRepository()

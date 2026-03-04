@@ -1,4 +1,4 @@
-import { WhyRepository } from '../services/repo/entity/why.repo'
+import { WhyRepository } from '#server/services/repo/entity/why.repo'
 
 export default defineEventHandler(async () => {
   const repo = new WhyRepository()

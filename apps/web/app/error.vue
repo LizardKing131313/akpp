@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ErrorSettings } from '#shared/types/404'
+import type { ErrorSettings } from '#shared/types/error'
 
 const error = useError()
 

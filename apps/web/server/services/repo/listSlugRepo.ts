@@ -1,3 +1,5 @@
+import type { SlugEntityItem } from '#shared/types/entity'
+
 import { SlugRepository } from '#server/services/repo/slugRepo'
 
 export abstract class ListSlugRepository<

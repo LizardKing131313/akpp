@@ -1,4 +1,4 @@
-import { PolicyRepository } from '../services/repo/entity/policy.repo'
+import { PolicyRepository } from '#server/services/repo/entity/policy.repo'
 
 export default defineEventHandler(async () => {
   const repo = new PolicyRepository()
