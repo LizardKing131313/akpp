@@ -8,7 +8,7 @@ definePageMeta({
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Услуги', to: '/services' }),
+      new BreadcrumbItem({ label: 'Услуги', to: '/uslugi' }),
     ],
   },
 })

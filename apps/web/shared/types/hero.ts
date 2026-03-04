@@ -2,7 +2,7 @@ import type { EntityItem, ImageItem } from '#shared/types/entity'
 
 export type HeroItem = EntityItem &
   ImageItem & {
-    readonly titleAccent: string
-    readonly titleMain: string
+    readonly title_accent: string
+    readonly title_main: string
     readonly description: string
   }

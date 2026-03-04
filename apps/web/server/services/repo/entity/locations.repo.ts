@@ -1,6 +1,6 @@
-import type { LocationItem } from '#shared/types/location'
+import type { LocationItem } from 'apps/web/shared/types/location'
 
-import { ListRepository } from '#server/services/repo/listRepo'
+import { ListRepository } from 'apps/web/server/services/repo/listRepo'
 
 export class LocationsRepository extends ListRepository<LocationItem> {
   protected readonly collection = 'locations'

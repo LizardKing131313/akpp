@@ -5,4 +5,12 @@ export type TransmissionItem = EntityItem &
     readonly price: number
   }
 
-export type TransmissionRange = EntityItem
+export type TransmissionRange = SlugEntityItem & {
+  readonly content: string
+}
+
+export type TransmissionRangeWithVariants = TransmissionRange & {
+  transmission_range_model_variants: {
+    model_variants_id: ModelVariantItem
+  }[]
+}

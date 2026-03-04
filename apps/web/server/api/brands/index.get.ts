@@ -1,5 +1,9 @@
-import { BrandItem } from '~~/shared/types/components/brand'
-import { ItemImage } from '~~/shared/types/components/image'
+import { BrandsRepository } from '../../services/repo/entity/brands.repo'
+
+export default defineEventHandler(async () => {
+  const repo = new BrandsRepository()
+  return await repo.list()
+})
 
 export const getBrands = () => [
   new BrandItem({

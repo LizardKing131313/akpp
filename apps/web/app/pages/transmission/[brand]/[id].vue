@@ -6,12 +6,12 @@ const route = useRoute()
 watchEffect(() => {
   route.meta.pageHeader = {
     kind: 'breadcrumbs',
-    title: 'Услуга',
+    title: 'Модель',
     backgroundSrc: '/images/breadcrumbs.jpg',
     items: [
       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Услуги', to: '/services' }),
-      new BreadcrumbItem({ label: 'Услуга', to: '/services/1' }),
+      new BreadcrumbItem({ label: 'Коробки передач', to: '/transmission' }),
+      new BreadcrumbItem({ label: 'Hyundai Tucson', to: '/transmission/tucson' }),
     ],
   }
 })
@@ -19,7 +19,6 @@ watchEffect(() => {
 
 <template>
   <Why />
-  <ModelSlider />
   <RepairQuizBlock />
   <ServiceAndWorksSection />
   <Article>

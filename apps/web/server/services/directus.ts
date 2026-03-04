@@ -81,6 +81,28 @@ export const createDirectusClient = () => {
     return { Authorization: `Bearer ${directusSecret}` }
   }
 
+  const getSingleton = async <Item>(
+    collection: string,
+    query: DirectusQuery = {}
+  ): Promise<Item> => {
+    const url =
+      `${directusBaseUrl}/items/${encodeURIComponent(collection)}/singleton` +
+      buildQueryString(query)
+
+    try {
+      const response = await $fetch<DirectusItemsResponse<Item>>(url, {
+        method: 'GET',
+        headers: {
+          ...getAuthHeader(),
+        },
+      })
+
+      return response.data
+    } catch (unknownError: unknown) {
+      return toNuxtError(unknownError)
+    }
+  }
+
   const getItems = async <Item>(
     collection: string,
     query: DirectusQuery
@@ -177,5 +199,5 @@ export const createDirectusClient = () => {
     }
   }
 
-  return { getItems, getItem, createItem, updateItem, deleteItem, equals }
+  return { getSingleton, getItems, getItem, createItem, updateItem, deleteItem, equals }
 }

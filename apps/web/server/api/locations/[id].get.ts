@@ -1,4 +1,4 @@
-import { LocationsRepository } from '#server/services/repo/locations.repo'
+import { LocationsRepository } from '#server/services/repo/entity/locations.repo'
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)

@@ -1,4 +1,4 @@
-import { CitiesRepository } from '#server/services/repo/cities.repo'
+import { CitiesRepository } from '#server/services/repo/entity/cities.repo'
 
 export default defineEventHandler(async (event) => {
   const { slug } = getRouterParams(event)
