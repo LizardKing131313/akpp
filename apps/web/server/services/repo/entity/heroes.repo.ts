@@ -1,6 +1,6 @@
-import type { HeroItem } from '../../../../shared/types/hero'
+import type { HeroItem } from '#shared/types/hero'
 
-import { ListRepository } from '../listRepo'
+import { ListRepository } from '#server/services/repo/listRepo'
 
 export class HeroesRepository extends ListRepository<HeroItem> {
   protected readonly collection = 'heroes'

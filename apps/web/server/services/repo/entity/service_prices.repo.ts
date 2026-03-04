@@ -1,6 +1,6 @@
-import type { ServicePriceItem } from '../../../../shared/types/service'
+import type { ServicePriceItem } from '#shared/types/service'
 
-import { ListRepository } from '../listRepo'
+import { ListRepository } from '#server/services/repo/listRepo'
 
 export class ServicePricesRepository extends ListRepository<ServicePriceItem> {
   protected readonly collection = 'service_prices'

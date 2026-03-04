@@ -1,6 +1,6 @@
-import type { PolicySettings } from '../../../../shared/types/policy'
+import type { PolicySettings } from '#shared/types/policy'
 
-import { createDirectusClient } from '../../directus'
+import { createDirectusClient } from '#server/services/directus'
 
 export class PolicyRepository {
   public async get(): Promise<PolicySettings> {

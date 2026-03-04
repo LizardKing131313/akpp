@@ -1,6 +1,6 @@
 import type { FooterSettings } from '#shared/types/footer'
 
-import { createDirectusClient } from '../../directus'
+import { createDirectusClient } from '#server/services/directus'
 
 export class FooterRepository {
   public async get(): Promise<FooterSettings> {

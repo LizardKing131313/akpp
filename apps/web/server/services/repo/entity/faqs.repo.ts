@@ -1,6 +1,6 @@
-import type { FaqItem } from '../../../../shared/types/faq'
+import type { FaqItem } from '#shared/types/faq'
 
-import { ListRepository } from '../listRepo'
+import { ListRepository } from '#server/services/repo/listRepo'
 
 export class FaqsRepository extends ListRepository<FaqItem> {
   protected readonly collection = 'faqs'

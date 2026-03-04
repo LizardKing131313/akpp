@@ -1,4 +1,6 @@
-import { ListSlugRepository } from 'apps/web/server/services/repo/listSlugRepo'
+import type { CityItem } from '#shared/types/city'
+
+import { ListSlugRepository } from '#server/services/repo/listSlugRepo'
 
 export class CitiesRepository extends ListSlugRepository<CityItem> {
   protected readonly collection = 'cities'

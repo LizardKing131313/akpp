@@ -1,6 +1,6 @@
-import type { CaseItem } from '../../../../shared/types/case'
+import type { CaseItem } from '#shared/types/case'
 
-import { ListSlugRepository } from '../listSlugRepo'
+import { ListSlugRepository } from '#server/services/repo/listSlugRepo'
 
 export class CasesRepository extends ListSlugRepository<CaseItem> {
   protected readonly collection = 'cases'

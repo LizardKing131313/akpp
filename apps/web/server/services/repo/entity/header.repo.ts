@@ -1,6 +1,6 @@
-import type { HeaderSettings } from '../../../../shared/types/header'
+import type { HeaderSettings } from '#shared/types/header'
 
-import { createDirectusClient } from '../../directus'
+import { createDirectusClient } from '#server/services/directus'
 
 export class HeaderRepository {
   public async get(): Promise<HeaderSettings> {

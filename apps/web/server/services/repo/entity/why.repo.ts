@@ -1,6 +1,6 @@
-import type { WhySettings } from '../../../../shared/types/why'
+import type { WhySettings } from '#shared/types/why'
 
-import { createDirectusClient } from '../../directus'
+import { createDirectusClient } from '#server/services/directus'
 
 export class WhyRepository {
   public async get(): Promise<WhySettings> {

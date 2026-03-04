@@ -1,6 +1,6 @@
-import type { TransmissionRangeWithVariants } from '../../../../shared/types/transmission'
+import type { TransmissionRangeWithVariants } from '#shared/types/transmission'
 
-import { ListSlugRepository } from '../listSlugRepo'
+import { ListSlugRepository } from '#server/services/repo/listSlugRepo'
 
 export class TransmissionRangeModelVariantsRepository extends ListSlugRepository<TransmissionRangeWithVariants> {
   protected readonly collection = 'transmission_range_model_variants'

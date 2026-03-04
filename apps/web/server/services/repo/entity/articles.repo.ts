@@ -1,6 +1,6 @@
-import type { ArticleItem } from '../../../../shared/types/article'
+import type { ArticleItem } from '#shared/types/article'
 
-import { ListSlugRepository } from '../listSlugRepo'
+import { ListSlugRepository } from '#server/services/repo/listSlugRepo'
 
 export class ArticlesRepository extends ListSlugRepository<ArticleItem> {
   protected readonly collection = 'articles'

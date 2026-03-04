@@ -1,6 +1,6 @@
-import type { TransmissionItem } from '../../../../shared/types/transmission'
+import type { TransmissionItem } from '#shared/types/perk'
 
-import { ListRepository } from '../listRepo'
+import { ListRepository } from '#server/services/repo/listRepo'
 
 export class TransmissionsRepository extends ListRepository<TransmissionItem> {
   protected readonly collection = 'transmissions'
