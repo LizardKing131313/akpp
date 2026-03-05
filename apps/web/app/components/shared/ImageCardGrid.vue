@@ -1,17 +1,9 @@
 <script setup lang="ts">
+import type { ImageCardItem } from '#shared/types/entity'
 import type { Component } from 'vue'
 
-interface GridItem {
-  id: string
-  imageSrc: string
-  imageAlt: string
-  title: string
-  date: string
-  href: string
-}
-
 interface CardGridProps {
-  items: GridItem[]
+  items: ImageCardItem[]
   cardComponent?: Component
 }
 

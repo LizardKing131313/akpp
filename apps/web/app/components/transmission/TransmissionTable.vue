@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { ModelVariantItem } from '#shared/types/model'
+import type { TransmissionRangeWithVariants } from '#shared/types/transmission'
+
 import {
   type ColumnDef,
   FlexRender,
@@ -10,50 +13,92 @@ import {
   type SortingState,
   useVueTable,
 } from '@tanstack/vue-table'
-import { computed, h, ref, watch } from 'vue'
+import { computed, h, ref, resolveComponent, watch } from 'vue'
 
 import { useDebouncedRef } from '~/composables/useDebouncedRef'
 
-export type GearboxRow = {
-  brand: string
-  model: string
-  years: string
-  engine: string
-  drive: string
-  akpp: string
-  href: string
-}
-
 type GearboxTableProps = {
-  rows: GearboxRow[]
-  searchPlaceholder?: string
-  pageSizeOptions?: number[]
-  showEntriesLabel?: string
-  emptyText?: string
+  rows: TransmissionRangeWithVariants[]
+  readonly baseHref?: string
+
+  readonly searchPlaceholder?: string
+
+  readonly pageSizeOptions?: readonly number[]
+  readonly defaultPageSize?: number
+
+  readonly showEntriesLabel?: string
+  readonly entriesLabel?: string
+
+  readonly emptyText?: string
+
+  readonly previousLabel?: string
+  readonly nextLabel?: string
+
+  readonly showingLabel?: string
+  readonly toLabel?: string
+  readonly ofLabel?: string
+
+  readonly pageLabel?: string
+  readonly pageOfLabel?: string
 }
 
 const props = withDefaults(defineProps<GearboxTableProps>(), {
-  searchPlaceholder: 'Search:',
+  baseHref: '/transmissions',
+
+  searchPlaceholder: 'Search',
+
   pageSizeOptions: () => [10, 25, 50, 100],
+  defaultPageSize: 10,
+
   showEntriesLabel: 'Show',
+  entriesLabel: 'entries',
+
   emptyText: 'Ничего не найдено',
+
+  previousLabel: 'Previous',
+  nextLabel: 'Next',
+
+  showingLabel: 'Showing',
+  toLabel: 'to',
+  ofLabel: 'of',
+
+  pageLabel: 'Page',
+  pageOfLabel: 'of',
 })
 
-const columns: Array<ColumnDef<GearboxRow, unknown>> = [
-  {
-    accessorKey: 'brand',
-    header: 'МАРКА',
-    cell: (info) => info.getValue(),
-  },
+type TableRow = ModelVariantItem & {
+  readonly akpp: string
+  readonly href: string
+}
+
+const tableRows = computed<TableRow[]>(() => {
+  return props.rows.flatMap((rangeItem) => {
+    const rangeHref = `${props.baseHref}/${rangeItem.slug}`
+    const akppTitle = rangeItem.name ?? rangeItem.slug
+
+    return rangeItem.transmission_range_model_variants.map((relationItem) => {
+      return {
+        ...relationItem.model_variants_id,
+        akpp: akppTitle,
+        href: rangeHref,
+      }
+    })
+  }) as TableRow[]
+})
+
+const columns: Array<ColumnDef<TableRow>> = [
   {
     accessorKey: 'model',
     header: 'МОДЕЛЬ',
     cell: (info) => info.getValue(),
   },
   {
-    accessorKey: 'years',
+    id: 'years',
     header: 'ГОДА',
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const rowOriginal = info.row.original
+      return `${rowOriginal.from} - ${rowOriginal.to}`
+    },
   },
   {
     accessorKey: 'engine',
@@ -69,52 +114,63 @@ const columns: Array<ColumnDef<GearboxRow, unknown>> = [
     accessorKey: 'akpp',
     header: 'АКПП',
     cell: (info) => {
-      const row = info.row.original
-      const value = String(info.getValue() ?? '')
+      const rowOriginal = info.row.original
+      const cellValue = String(info.getValue() ?? '')
       const NuxtLinkComponent = resolveComponent('NuxtLink')
 
       return h(
         NuxtLinkComponent,
         {
-          to: row.href,
+          to: rowOriginal.href,
           class: 'text-brand-red hover:text-brand-dark font-semibold transition-colors',
         },
-        () => value
+        () => cellValue
       )
     },
   },
 ]
 
 const sortingState = ref<SortingState>([])
-const paginationState = ref<PaginationState>({ pageIndex: 0, pageSize: 10 })
+const paginationState = ref<PaginationState>({
+  pageIndex: 0,
+  pageSize: props.defaultPageSize,
+})
 
 const searchValue = ref<string>('')
 const debouncedSearchValue = useDebouncedRef(searchValue, { delayMs: 400 })
 
+// noinspection JSUnusedGlobalSymbols
 const tableInstance = useVueTable({
   get data() {
-    return props.rows
+    return tableRows.value
   },
+
   get columns() {
     return columns
   },
+
   state: {
     get sorting() {
       return sortingState.value
     },
+
     get pagination() {
       return paginationState.value
     },
+
     get globalFilter() {
       return debouncedSearchValue.value
     },
   },
+
   onSortingChange: (updater) => {
     sortingState.value = typeof updater === 'function' ? updater(sortingState.value) : updater
   },
+
   onPaginationChange: (updater) => {
     paginationState.value = typeof updater === 'function' ? updater(paginationState.value) : updater
   },
+
   globalFilterFn: (row, _columnId, filterValue) => {
     const normalizedFilter = String(filterValue ?? '')
       .trim()
@@ -129,6 +185,7 @@ const tableInstance = useVueTable({
 
     return false
   },
+
   getCoreRowModel: getCoreRowModel(),
   getSortedRowModel: getSortedRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
@@ -145,6 +202,7 @@ watch(
 const totalFilteredRowsCount = computed(() => tableInstance.getFilteredRowModel().rows.length)
 const pageIndex = computed(() => tableInstance.getState().pagination.pageIndex)
 const pageSize = computed(() => tableInstance.getState().pagination.pageSize)
+const pagesCount = computed(() => tableInstance.getPageCount())
 
 const pageStartNumber = computed(() => {
   if (totalFilteredRowsCount.value === 0) return 0
@@ -156,49 +214,12 @@ const pageEndNumber = computed(() => {
   return Math.min((pageIndex.value + 1) * pageSize.value, totalFilteredRowsCount.value)
 })
 
-type PaginationItem =
-  | { kind: 'page'; pageIndex: number; isCurrent: boolean }
-  | { kind: 'ellipsis'; key: string }
-
-const buildPaginationItems = (pagesCount: number, currentIndex: number): PaginationItem[] => {
-  if (pagesCount <= 1) return [{ kind: 'page', pageIndex: 0, isCurrent: true }]
-
-  const firstIndex = 0
-  const lastIndex = pagesCount - 1
-
-  const indicesToShow = new Set<number>([
-    firstIndex,
-    lastIndex,
-    currentIndex,
-    Math.max(firstIndex, currentIndex - 1),
-    Math.min(lastIndex, currentIndex + 1),
-  ])
-
-  const sortedIndices = Array.from(indicesToShow).sort((left, right) => left - right)
-
-  const items: PaginationItem[] = []
-  let previousIndex: number | null = null
-
-  for (const index of sortedIndices) {
-    if (previousIndex !== null && index - previousIndex > 1) {
-      items.push({ kind: 'ellipsis', key: `ellipsis-${previousIndex}-${index}` })
-    }
-
-    items.push({ kind: 'page', pageIndex: index, isCurrent: index === currentIndex })
-    previousIndex = index
-  }
-
-  return items
-}
-
-const pagesCount = computed(() => tableInstance.getPageCount())
-const paginationItems = computed(() => buildPaginationItems(pagesCount.value, pageIndex.value))
-
 const handlePageSizeChange = (event: Event): void => {
   const targetElement = event.target as HTMLSelectElement | null
-  const defaultSize = props.pageSizeOptions[0] ?? 10
-  const nextValue = targetElement?.value ? Number(targetElement.value) : defaultSize
-  tableInstance.setPageSize(Number.isFinite(nextValue) && nextValue > 0 ? nextValue : defaultSize)
+  const defaultSize = props.pageSizeOptions[0] ?? props.defaultPageSize
+  const nextValue = Number(targetElement?.value ?? defaultSize)
+
+  tableInstance.setPageSize(nextValue > 0 ? nextValue : defaultSize)
   tableInstance.setPageIndex(0)
 }
 
@@ -215,13 +236,10 @@ const handleNextClick = (): void => {
   tableInstance.nextPage()
 }
 
-const handlePageClick = (nextIndex: number): void => {
-  tableInstance.setPageIndex(nextIndex)
-}
-
 const sortIndicator = (columnId: string): string => {
   const sortedState = tableInstance.getState().sorting
   const entry = sortedState.find((item) => item.id === columnId)
+
   if (!entry) return ''
   return entry.desc ? '▼' : '▲'
 }
@@ -240,7 +258,7 @@ const sortIndicator = (columnId: string): string => {
             {{ sizeOption }}
           </option>
         </select>
-        <span class="select-none">entries</span>
+        <span class="select-none">{{ entriesLabel }}</span>
       </div>
 
       <label class="text-brand-grey flex items-center gap-2 text-sm">
@@ -308,37 +326,21 @@ const sortIndicator = (columnId: string): string => {
     <div
       class="text-brand-grey mt-4 flex flex-col items-center gap-4 text-sm sm:flex-row sm:justify-between">
       <div class="select-none">
-        Showing {{ pageStartNumber }} to {{ pageEndNumber }} of {{ totalFilteredRowsCount }} entries
+        {{ showingLabel }} {{ pageStartNumber }} {{ toLabel }} {{ pageEndNumber }} {{ ofLabel }}
+        {{ totalFilteredRowsCount }} {{ entriesLabel }}
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-3">
         <button
           class="border-brand-soft bg-brand-white text-brand-dark cursor-pointer rounded-md border px-3 py-1.5 disabled:opacity-50"
           type="button"
           :disabled="!tableInstance.getCanPreviousPage()"
           @click="handlePrevClick">
-          Previous
+          {{ previousLabel }}
         </button>
 
-        <div class="flex items-center gap-1">
-          <template
-            v-for="item in paginationItems"
-            :key="item.kind === 'page' ? item.pageIndex : item.key">
-            <button
-              v-if="item.kind === 'page'"
-              class="min-w-9 cursor-pointer rounded-md border px-3 py-1.5"
-              :class="
-                item.isCurrent
-                  ? 'border-brand-red bg-brand-red text-brand-white'
-                  : 'border-brand-soft bg-brand-white text-brand-dark hover:border-brand-grey-light'
-              "
-              type="button"
-              @click="handlePageClick(item.pageIndex)">
-              {{ item.pageIndex + 1 }}
-            </button>
-
-            <span v-else class="text-brand-grey-light px-2 select-none">...</span>
-          </template>
+        <div class="text-brand-grey-light select-none">
+          {{ pageLabel }} {{ pageIndex + 1 }} {{ pageOfLabel }} {{ pagesCount }}
         </div>
 
         <button
@@ -346,7 +348,7 @@ const sortIndicator = (columnId: string): string => {
           type="button"
           :disabled="!tableInstance.getCanNextPage()"
           @click="handleNextClick">
-          Next
+          {{ nextLabel }}
         </button>
       </div>
     </div>

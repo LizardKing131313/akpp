@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import type { WorkExample } from '#shared/types/components/work_example'
+import type { CaseItem } from '#shared/types/case'
 
-defineProps<{ work: WorkExample; lineClamp?: string }>()
+defineProps<{ caseItem: CaseItem }>()
 </script>
+
 <template>
   <div>
-    <BrandLogo :brand="work.brand" />
+    <BrandLogo :brand="caseItem.brand" />
 
     <p class="text-brand-dark line-clamp-1 text-sm leading-snug font-bold group-hover:underline">
-      {{ work.title }}
+      {{ caseItem.name }}
     </p>
 
     <p class="text-brand-grey-light text-xs">
-      {{ work.date }}
+      {{ caseItem.case_date }}
     </p>
   </div>
 </template>

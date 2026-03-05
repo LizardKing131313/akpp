@@ -6,6 +6,7 @@ export class CasesRepository extends ListSlugRepository<CaseItem> {
   protected readonly collection = 'cases'
 
   protected readonly fields =
-    'id,slug,name,description,case_date,transmission,model_date,' +
-    'engine,mileage,works,part_price,work_price,total,images,sort'
+    'id,slug,name,case_date,transmission,model_date,' +
+    'engine,mileage,reason,works,part_price,work_price,images,sort,' +
+    'brand.id,brand.slug,brand.name,brand.image_source,brand.image_alt'
 }

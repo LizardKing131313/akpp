@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-interface YandexReviewsWidgetProps {
-  orgId: string
-}
-
-const props = defineProps<YandexReviewsWidgetProps>()
+const runtimeConfig = useRuntimeConfig()
 
 const widgetUrl = computed(() => {
-  return `https://yandex.ru/maps-reviews-widget/${props.orgId}?comments`
+  return `https://yandex.ru/maps-reviews-widget/${runtimeConfig.public.yandexOrgId}?comments`
 })
 </script>
 

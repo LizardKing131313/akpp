@@ -6,10 +6,16 @@ const emit = defineEmits<{
   (event: 'signup'): void
 }>()
 
-const props = defineProps<{
-  calculateLabel: string
-  signupLabel: string
-}>()
+withDefaults(
+  defineProps<{
+    calculateLabel?: string
+    signupLabel?: string
+  }>(),
+  {
+    calculateLabel: 'Рассчитать стоимость',
+    signupLabel: 'Записаться',
+  }
+)
 
 const handleCalculateClick = (): void => {
   emit('calculate')
@@ -23,7 +29,7 @@ const handleSignupClick = (): void => {
 <template>
   <div class="flex flex-col gap-4 sm:flex-row">
     <MainButton @click="handleCalculateClick">
-      {{ props.calculateLabel }}
+      {{ calculateLabel }}
     </MainButton>
 
     <MainButton
@@ -41,7 +47,7 @@ const handleSignupClick = (): void => {
             bg-[linear-gradient(135deg,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0.15)_25%,transparent_25%)]
           `)
         "></span>
-      {{ props.signupLabel }}
+      {{ signupLabel }}
     </MainButton>
   </div>
 </template>

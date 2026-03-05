@@ -12,10 +12,17 @@ export interface ImageItem {
   readonly image_alt?: string
 }
 
+export type ImageCardItem = SlugEntityItem &
+  ImageItem & {
+    readonly date: string
+  }
+
 export interface MapPoint {
-  readonly latitude: number
-  readonly longitude: number
+  readonly lat: number
+  readonly lng: number
 }
+
+export type YandexMapPoint = EntityItem & MapPoint
 
 export type EntityId = string
 

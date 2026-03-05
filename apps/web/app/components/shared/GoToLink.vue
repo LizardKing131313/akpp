@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{ href: string }>()
 </script>
+
 <template>
   <NuxtLink
     :to="href"

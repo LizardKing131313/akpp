@@ -1,21 +1,17 @@
 <script setup lang="ts">
-interface BaseCardProps {
-  imageSrc: string
-  imageAlt: string
-  title: string
-  date: string
-  href: string
-}
+import type { ImageCardItem } from '#shared/types/entity'
 
-defineProps<BaseCardProps>()
+const props = withDefaults(defineProps<{ label?: string } & ImageCardItem>(), {
+  label: 'Подробнее',
+})
 </script>
 
 <template>
-  <NuxtLink :to="href" class="group bg-brand-white flex h-full flex-col overflow-hidden shadow-xl">
+  <NuxtLink :to="slug" class="group bg-brand-white flex h-full flex-col overflow-hidden shadow-xl">
     <div class="overflow-hidden">
       <NuxtImg
-        :src="imageSrc"
-        :alt="imageAlt"
+        :src="image_source"
+        :alt="image_alt"
         width="600"
         height="400"
         class="h-48 w-full object-contain transition-transform duration-300 group-hover:scale-105" />
@@ -28,12 +24,12 @@ defineProps<BaseCardProps>()
 
       <h3
         class="text-brand-dark group-hover:text-brand-red text-base leading-snug font-bold transition-colors">
-        {{ title }}
+        {{ props.name }}
       </h3>
 
       <span
         class="text-brand-grey-light group-hover:text-brand-red mt-auto flex justify-end text-sm">
-        Подробнее
+        {{ label }}
         <Arrow direction="right" class="text-brand-grey-light group-hover:text-brand-red" />
       </span>
     </div>

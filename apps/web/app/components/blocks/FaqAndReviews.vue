@@ -6,7 +6,7 @@
     <FaqSection />
 
     <ClientOnly>
-      <YandexReviews orgId="241461095271" />
+      <YandexReviews />
     </ClientOnly>
   </TwoColumns>
 </template>

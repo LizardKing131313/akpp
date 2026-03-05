@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MapPoint } from '#shared/types/components/map'
+import type { YandexMapPoint } from '#shared/types/entity'
 import type { YMapLocationRequest } from '@yandex/ymaps3-types'
 
 import { computed, shallowRef, watch } from 'vue'
@@ -7,10 +7,9 @@ import { computed, shallowRef, watch } from 'vue'
 import { loadYandexMapComponents, type YandexMapComponents } from '~/composables/ymaps'
 
 interface YandexMapProps {
-  locations: MapPoint[]
+  locations: YandexMapPoint[]
   center: [number, number]
   zoom: number
-  heightPx: number
 }
 
 const props = defineProps<YandexMapProps>()
@@ -53,7 +52,7 @@ const createMarkerElement = (title: string): HTMLElement => {
 const rebuildMarkers = (): void => {
   const createdElements: Record<string, HTMLElement> = {}
   for (const point of props.locations) {
-    createdElements[point.id] = createMarkerElement(point.title)
+    createdElements[point.id] = createMarkerElement(point.name ?? '')
   }
   markerElements.value = createdElements
 }
@@ -84,7 +83,7 @@ watch(
 </script>
 
 <template>
-  <div class="w-full" :style="{ height: heightPx + 'px' }">
+  <div class="w-full">
     <div v-if="loadError" class="grid h-full place-items-center rounded-xl p-4">
       {{ loadError }}
     </div>

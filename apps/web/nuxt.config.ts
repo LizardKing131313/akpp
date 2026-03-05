@@ -47,6 +47,7 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
       directusUrl: process.env.NUXT_PUBLIC_DIRECTUS_URL ?? 'http://localhost:8086',
       yandexMapApiKey: process.env.YANDEX_MAP_API_KEY ?? '',
+      yandexOrgId: process.env.YANDEX_ORG_ID ?? '',
     },
     directusSecret: process.env.DIRECTUS_SECRET ?? 'secret',
     directusCacheTtlSeconds: Number(process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300),

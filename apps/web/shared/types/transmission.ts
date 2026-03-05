@@ -2,6 +2,7 @@ import type { EntityItem, ImageItem } from '#shared/types/entity'
 
 export type TransmissionItem = EntityItem &
   ImageItem & {
+    readonly description: string
     readonly price: number
   }
 

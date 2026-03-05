@@ -6,29 +6,26 @@ const emit = defineEmits<{
 }>()
 
 const props = withDefaults(
-  defineProps<{
-    alt?: string | undefined
-    class?: string
-    href?: string | undefined
-    sizes?: string
-    source: string
-    title: string
-  }>(),
+  defineProps<
+    {
+      class?: string
+      sizes?: string
+    } & SlugEntityItem &
+      ImageItem
+  >(),
   {
-    alt: undefined,
     class: '',
-    href: undefined,
     sizes: '96px',
   }
 )
 
-const isLink = computed<boolean>(() => Boolean(props.href))
+const isLink = computed<boolean>(() => Boolean(props.slug))
 </script>
 
 <template>
   <component
     :is="isLink ? 'NuxtLink' : 'button'"
-    :to="isLink ? props.href : undefined"
+    :to="isLink ? slug : undefined"
     type="button"
     @click="!isLink && emit('click')"
     :class="
@@ -47,15 +44,15 @@ const isLink = computed<boolean>(() => Boolean(props.href))
         )
       ">
       <NuxtImg
-        :src="source"
-        :alt="alt"
+        :src="image_source"
+        :alt="image_alt"
         fill
         :sizes="sizes"
         class="absolute inset-0 h-full w-full object-contain" />
     </div>
 
     <span class="text-brand-dark text-center text-xs font-bold tracking-wide uppercase">
-      {{ title }}
+      {{ props.name }}
     </span>
   </component>
 </template>
