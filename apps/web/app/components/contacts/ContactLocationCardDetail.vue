@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ContactLocation } from '#shared/types/components/location'
+import type { LocationItem } from '#shared/types/location'
 
-defineProps<{ location: ContactLocation; onBack: () => void }>()
+defineProps<{ location: LocationItem; onBack: () => void }>()
 </script>
 
 <template>

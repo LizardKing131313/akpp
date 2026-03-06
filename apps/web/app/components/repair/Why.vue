@@ -1,23 +1,56 @@
 <script setup lang="ts">
-import { getBrands } from '#server/api/brands/brands.get'
+import { getBrands } from '#server/api/brands/index.get'
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
-import { ItemImage } from '#shared/types/components/image'
-import { PerkItem } from '#shared/types/components/perk'
 
 import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
 import { useSignupModal } from '~/composables/modal/useSignupModal'
 
-type Props = {
-  mainImageAlt?: string
-  calculateLabel?: string
-  signupLabel?: string
-}
+const props = withDefaults(defineProps<WhySettings>(), {
+  title: 'Почему клиенты выбирают нас',
+  description: 'даже рассмотрев все предложения на рынке',
 
-withDefaults(defineProps<Props>(), {
-  mainImageAlt: 'Фото',
+  image_source: '/images/transmission.png',
+  image_alt: 'transmission',
+
+  diagnostic: 'Диагностика за 15 минут!',
+  diagnostic_image: '/images/perks/car.svg',
+  diagnostic_alt: 'diagnostic',
+
+  tow: 'Бесплатный эвакуатор!',
+  tow_image: '/images/perks/truck.svg',
+  tow_alt: 'truck',
+
+  guarantee: 'Гарантия сроком на 1 год!',
+  guarantee_image: '/images/perks/float.svg',
+  guarantee_alt: 'float',
+
   calculateLabel: 'Рассчитать стоимость',
   signupLabel: 'Записаться',
 })
+
+const perks = computed(() => [
+  {
+    id: 'diagnostic',
+    name: props.diagnostic,
+    image_source: props.diagnostic_image,
+    image_alt: props.diagnostic_alt,
+    description: '',
+  },
+  {
+    id: 'tow',
+    name: props.tow,
+    image_source: props.tow_image,
+    image_alt: props.tow_alt,
+    description: '',
+  },
+  {
+    id: 'guarantee',
+    name: props.guarantee,
+    image_source: props.guarantee_image,
+    image_alt: props.guarantee_alt,
+    description: '',
+  },
+])
 
 const { openSignupModal } = useSignupModal()
 const { openRepairQuizModal } = useRepairQuizModal()
@@ -39,35 +72,17 @@ const handleCalculateClick = (): void => {
 const handleSignupClick = (): void => {
   openSignupModal('work')
 }
-
-const perks: PerkItem[] = [
-  new PerkItem({
-    id: 'diagnostic',
-    title: 'Диагностика за 15 минут!',
-    logo: new ItemImage({ source: '/images/perks/car.svg', alt: 'diagnostic' }),
-  }),
-  new PerkItem({
-    id: 'truck',
-    title: 'Бесплатный эвакуатор!',
-    logo: new ItemImage({ source: '/images/perks/truck.svg', alt: 'truck' }),
-  }),
-  new PerkItem({
-    id: 'float',
-    title: 'Гарантия сроком на 1 год!',
-    logo: new ItemImage({ source: '/images/perks/float.svg', alt: 'float' }),
-  }),
-]
 </script>
 
 <template>
   <TwoColumns inverse class="gap-1 lg:gap-20">
-    <NuxtImg src="/images/transmission.png" alt="transmission" class="h-85 w-full object-contain" />
+    <NuxtImg :src="image_source" :alt="image_alt" class="h-85 w-full object-contain" />
 
     <div class="space-y-10">
       <div class="hidden space-y-4 lg:block">
-        <CenteredTitle>Почему клиенты выбирают нас</CenteredTitle>
+        <CenteredTitle>{{ title }}</CenteredTitle>
         <span class="text-brand-grey block w-full text-center text-sm">
-          даже рассмотрев все предложения на рынке
+          {{ description }}
         </span>
       </div>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BrandItem } from '#shared/types/components/brand'
+import type { BrandItem } from '#shared/types/brand'
 
 defineProps<{ brand: BrandItem }>()
 </script>
@@ -7,12 +7,12 @@ defineProps<{ brand: BrandItem }>()
 <template>
   <div class="flex items-center gap-2">
     <NuxtImg
-      :src="brand.logo.source"
-      :alt="brand.logo.alt"
+      :src="brand.image_source"
+      :alt="brand.image_alt"
       sizes="28px"
       class="h-7 w-7 rounded-full object-contain p-0.5" />
     <span class="text-brand-grey truncate text-sm font-bold tracking-wide uppercase">
-      {{ brand.title }}
+      {{ brand.name }}
     </span>
   </div>
 </template>

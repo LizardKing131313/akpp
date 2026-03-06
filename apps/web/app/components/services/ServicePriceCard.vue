@@ -1,38 +1,39 @@
 <script setup lang="ts">
-import type { ServicePriceItem } from '#shared/types/components/service'
-
 import { cn } from '#shared/lib/cn'
+import { getMoneyView } from '#shared/lib/money'
+import { computed } from 'vue'
 
-defineProps<{ servicePrice: ServicePriceItem }>()
+const props = defineProps<{ servicePrice: ServicePriceItem }>()
+
+const moneyView = computed(() => {
+  return getMoneyView(props.servicePrice.price, props.servicePrice.isFrom)
+})
+
+const priceClassName = computed(() => {
+  return cn(
+    'text-right text-base font-semibold whitespace-nowrap uppercase sm:text-lg',
+    moneyView.value.isFree ? 'text-brand-red' : 'text-brand-dark'
+  )
+})
 </script>
 
 <template>
   <div class="grid grid-cols-[1fr_auto] items-start gap-x-4 py-4">
     <p class="text-brand-dark min-w-0 text-base leading-snug sm:text-lg">
-      {{ servicePrice.title }}
+      {{ servicePrice.name }}
     </p>
 
-    <div
-      :class="
-        cn(
-          'text-right text-base font-semibold whitespace-nowrap uppercase sm:text-lg',
-          servicePrice.price.isFree() ? 'text-brand-red' : 'text-brand-dark'
-        )
-      ">
+    <div :class="priceClassName">
       <span
-        v-if="servicePrice.price.isFrom() && !servicePrice.price.isFree()"
+        v-if="moneyView.isFrom && !moneyView.isFree"
         class="text-brand-grey-light mr-1 text-sm lowercase">
-        {{ servicePrice.price.priceFromText }}
+        {{ moneyView.fromText }}
       </span>
 
-      {{
-        servicePrice.price.isFree()
-          ? servicePrice.price.priceFreeText
-          : servicePrice.price.getMoney()
-      }}
+      {{ moneyView.amountText }}
 
-      <span v-if="!servicePrice.price.isFree()" class="ml-1 lowercase">
-        {{ servicePrice.price.currency }}
+      <span v-if="!moneyView.isFree" class="ml-1 lowercase">
+        {{ moneyView.currencyText }}
       </span>
     </div>
   </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { getModels } from '#server/api/models/models.get'
+import type { ModelItem } from '#shared/types/model'
+
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -7,7 +8,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 const swiperModules = [Navigation]
-const models = getModels()
+
+withDefaults(defineProps<{ items?: ModelItem[] }>(), { items: () => [] })
 </script>
 
 <template>
@@ -27,14 +29,8 @@ const models = getModels()
         1280: { slidesPerView: 5, spaceBetween: 16 },
       }"
       class="model-slider relative">
-      <SwiperSlide v-for="model in models" :key="model.id">
-        <SliderItem
-          :title="model.title"
-          :href="model.href"
-          :source="model.logo.source"
-          :alt="model.logo.alt ?? model.title"
-          sizes="200px"
-          class="h-50 w-50" />
+      <SwiperSlide v-for="model in items" :key="model.id">
+        <SliderItem v-bind="model" sizes="200px" class="h-50 w-50" />
       </SwiperSlide>
     </Swiper>
   </div>

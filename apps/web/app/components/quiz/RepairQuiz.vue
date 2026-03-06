@@ -1,9 +1,6 @@
 <script setup lang="ts">
+import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
-
-type BrandLike = {
-  title: string
-}
 
 type QuizStep = 'brand' | 'problem' | 'symptom' | 'contact' | 'success'
 
@@ -17,7 +14,7 @@ type QuizSubmitPayload = {
 
 const props = withDefaults(
   defineProps<{
-    brands: readonly BrandLike[]
+    brands: readonly BrandItem[]
     problems: readonly string[]
     symptoms: Readonly<Record<string, readonly string[]>>
     initialStep?: QuizStep
@@ -135,7 +132,13 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
       <button
         v-if="canGoBack"
         type="button"
-        class="text-brand-grey-light hover:text-brand-dark group absolute top-12 left-7.5 inline-flex items-center gap-2 text-sm text-[10px] leading-3.75 font-bold tracking-[0.5px] uppercase transition-colors md:top-16"
+        :class="
+          cn(`
+            text-brand-grey-light hover:text-brand-dark group absolute top-12 left-7.5
+            inline-flex items-center gap-2 text-sm text-[10px] leading-3.75
+            font-bold tracking-[0.5px] uppercase transition-colors md:top-16
+          `)
+        "
         @click="goBack">
         <Arrow
           direction="left"

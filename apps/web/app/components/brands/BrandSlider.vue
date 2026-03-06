@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getBrands } from '#server/api/brands/brands.get'
+import { getBrands } from '#server/api/brands/index.get'
 import { Autoplay, FreeMode, Mousewheel } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -29,11 +29,7 @@ const brands = getBrands()
         :mousewheel="{ forceToAxis: true }"
         class="brands-marquee w-full">
         <SwiperSlide v-for="brand in brands" :key="brand.id" class="w-auto!">
-          <SliderItem
-            :title="brand.title"
-            :href="brand.href"
-            :source="brand.logo.source"
-            :alt="brand.logo.alt ?? brand.title" />
+          <SliderItem v-bind="brand" />
         </SwiperSlide>
       </Swiper>
     </div>

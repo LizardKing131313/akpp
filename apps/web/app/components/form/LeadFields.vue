@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-type LeadFieldsProps = {
-  phonePlaceholder?: string
-}
-
-const props = withDefaults(defineProps<LeadFieldsProps>(), {
-  phonePlaceholder: '+7 (___) ___-__-__',
-})
+withDefaults(
+  defineProps<{
+    label?: string
+    phonePlaceholder?: string
+  }>(),
+  {
+    label: 'Телефон',
+    phonePlaceholder: '+7 (___) ___-__-__',
+  }
+)
 
 const phoneModel = defineModel<string>('phone', { required: true })
 const consentModel = defineModel<boolean>('consent', { required: true })
@@ -39,8 +42,8 @@ const handlePhoneEnter = (): void => {
       <FormInput
         ref="phoneInputRef"
         v-model="phoneModel"
-        label="Телефон"
-        :placeholder="props.phonePlaceholder"
+        :label="label"
+        :placeholder="phonePlaceholder"
         type="tel"
         inputmode="tel"
         autocomplete="tel"

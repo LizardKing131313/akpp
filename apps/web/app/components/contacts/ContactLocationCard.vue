@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ContactLocation } from '#shared/types/components/location'
+import type { LocationItem } from '#shared/types/location'
 
-const props = defineProps<{ location: ContactLocation }>()
+const props = defineProps<{ location: LocationItem }>()
 
 const emit = defineEmits<{
-  (event: 'open', location: ContactLocation): void
+  (event: 'open', location: LocationItem): void
 }>()
 
 const handleOpen = (): void => {

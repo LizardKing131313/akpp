@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ContactLocation } from '#shared/types/components/location'
+import type { LocationItem } from '#shared/types/location'
 
 import { useSignupModal } from '~/composables/modal/useSignupModal'
 
 const props = defineProps<{
-  location: ContactLocation
+  location: LocationItem
   detail?: boolean
   onBack?: () => void
 }>()
@@ -26,7 +26,7 @@ const handleSignupClick = (): void => {
   </button>
 
   <div class="text-brand-dark text-left font-bold group-hover:underline">
-    {{ location.title }}
+    {{ location.name }}
   </div>
 
   <div class="text-brand-grey mt-2 text-left text-sm leading-5">
@@ -36,8 +36,8 @@ const handleSignupClick = (): void => {
   <div v-if="location.metro" class="mt-3 flex items-center gap-2 text-left">
     <span
       class="h-2.5 w-2.5 rounded-full text-left"
-      :style="{ backgroundColor: location.metro.lineColorHex }" />
-    <span class="text-brand-grey text-left text-sm">м. {{ location.metro.title }}</span>
+      :style="{ backgroundColor: location.metro_color }" />
+    <span class="text-brand-grey text-left text-sm">м. {{ location.metro }}</span>
   </div>
 
   <div class="text-brand-grey mt-2 text-left text-sm">

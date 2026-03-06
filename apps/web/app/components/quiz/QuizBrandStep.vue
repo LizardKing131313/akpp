@@ -1,12 +1,9 @@
 <script setup lang="ts">
+import { cn } from '#shared/lib/cn'
 import { computed, ref, watch } from 'vue'
 
-type BrandLike = {
-  title: string
-}
-
 const props = defineProps<{
-  brands: readonly BrandLike[]
+  brands: readonly BrandItem[]
 }>()
 
 const emit = defineEmits<{
@@ -20,16 +17,16 @@ let debounceTimerId: ReturnType<typeof setTimeout> | null = null
 
 const normalizedQuery = computed<string>(() => debouncedQuery.value.trim().toLowerCase())
 
-const filteredBrands = computed<readonly BrandLike[]>(() => {
+const filteredBrands = computed<readonly BrandItem[]>(() => {
   const queryValue = normalizedQuery.value
   if (queryValue.length === 0) return props.brands
-  return props.brands.filter((brandItem) => brandItem.title.toLowerCase().includes(queryValue))
+  return props.brands.filter((brandItem) => brandItem.name?.toLowerCase().includes(queryValue))
 })
 
 const isNextDisabled = computed<boolean>(() => inputValue.value.trim().length === 0)
 
-const handleSelectBrand = (brandTitle: string): void => {
-  emit('next', { brandTitle })
+const handleSelectBrand = (brandTitle: string | undefined): void => {
+  emit('next', { brandTitle: brandTitle ?? '' })
 }
 
 const handleNext = (): void => {
@@ -82,11 +79,17 @@ watch(
           class="scrollbar-thin grid max-h-27.5 flex-1 grid-cols-1 gap-4 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3">
           <button
             v-for="brandItem in filteredBrands"
-            :key="brandItem.title"
+            :key="brandItem.name"
             type="button"
-            class="border-brand-grey-light/20 bg-brand-white text-brand-dark hover:text-brand-red hover:border-brand-red cursor-pointer rounded-xl border px-5 py-2 text-center text-[14px] leading-5.75 font-medium transition-colors"
-            @click="handleSelectBrand(brandItem.title)">
-            {{ brandItem.title }}
+            :class="
+              cn(`
+                border-brand-grey-light/20 bg-brand-white text-brand-dark
+                hover:text-brand-red hover:border-brand-red cursor-pointer rounded-xl
+                border px-5 py-2 text-center text-[14px] leading-5.75 font-medium transition-colors
+              `)
+            "
+            @click="handleSelectBrand(brandItem.name)">
+            {{ brandItem.name }}
           </button>
         </div>
 

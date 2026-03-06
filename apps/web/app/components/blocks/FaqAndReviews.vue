@@ -1,6 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+withDefaults(defineProps<{ title?: string }>(), { title: 'Полезная информация' })
+</script>
+
 <template>
-  <CenteredTitle> Полезная информация </CenteredTitle>
+  <CenteredTitle>{{ title }}</CenteredTitle>
 
   <TwoColumns>
     <FaqSection />

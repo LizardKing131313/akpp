@@ -3,7 +3,7 @@ import type { CaseItem, CaseItemSetting } from '#shared/types/case'
 
 import { getBrands } from '#server/api/brands/index.get'
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
-import { getMoney } from '#shared/lib/money'
+import { getMoneyView } from '#shared/lib/money'
 import { computed } from 'vue'
 
 import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
@@ -43,15 +43,15 @@ const settings = computed<CaseItemSetting>(() => ({
 }))
 
 const partMoney = computed<string>(() => {
-  return getMoney(props.caseItem.part_price)
+  return getMoneyView(props.caseItem.part_price).value
 })
 
 const workMoney = computed<string>(() => {
-  return getMoney(props.caseItem.work_price)
+  return getMoneyView(props.caseItem.work_price).value
 })
 
 const totalMoney = computed<string>(() => {
-  return getMoney(props.caseItem.part_price + props.caseItem.work_price)
+  return getMoneyView(props.caseItem.part_price + props.caseItem.work_price).value
 })
 
 const quizProblems = getProblems()

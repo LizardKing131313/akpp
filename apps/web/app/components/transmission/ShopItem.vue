@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getMoney } from '#shared/lib/money'
+import { getMoneyView } from '#shared/lib/money'
 import { computed } from 'vue'
 
 import { useShopModal } from '~/composables/modal/useShopModal'
@@ -17,7 +17,7 @@ const handleClick = (): void => {
 }
 
 const price = computed<string>(() => {
-  return getMoney(props.transmissionItem.price)
+  return getMoneyView(props.transmissionItem.price).value
 })
 </script>
 

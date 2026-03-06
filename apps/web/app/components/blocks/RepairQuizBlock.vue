@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import type { BrandItem } from '#shared/types/components/brand'
+import type { BrandItem } from '#shared/types/brand'
 
-import { getBrands } from '#server/api/brands/brands.get'
+import { getBrands } from '#server/api/brands/index.get'
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
 import { cn } from '#shared/lib/cn'
-import { computed } from 'vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     brands?: readonly BrandItem[]
   }>(),
   {
     brands: getBrands,
   }
-)
-
-const quizBrands = computed(() =>
-  props.brands.map((brandItem) => ({
-    title: brandItem.title,
-  }))
 )
 
 const quizProblems = getProblems()
@@ -58,7 +51,7 @@ const handleQuizSubmit = (payload: {
 
       <RepairQuiz
         class="w-full px-4 py-12"
-        :brands="quizBrands"
+        :brands="brands"
         :problems="quizProblems"
         :symptoms="quizSymptoms"
         @submit="handleQuizSubmit" />

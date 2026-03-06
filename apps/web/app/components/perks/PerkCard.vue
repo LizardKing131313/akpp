@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PerkItem } from '#shared/types/components/perk'
+import type { PerkItem } from '#shared/types/perk'
 
 defineProps<{ perk: PerkItem }>()
 </script>
@@ -7,14 +7,14 @@ defineProps<{ perk: PerkItem }>()
 <template>
   <div class="flex flex-col items-center space-y-4 text-center">
     <NuxtImg
-      :src="perk.logo.source"
-      :alt="perk.logo.alt"
+      :src="perk.image_source"
+      :alt="perk.image_alt"
       width="48"
       height="48"
       class="block h-12 w-12 object-contain" />
 
-    <h3 v-if="perk.title" class="text-brand-dark text-center text-sm font-bold lg:text-lg">
-      {{ perk.title }}
+    <h3 v-if="perk.name" class="text-brand-dark text-center text-sm font-bold lg:text-lg">
+      {{ perk.name }}
     </h3>
 
     <p

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { ServiceItem } from '#shared/types/components/service'
-
 import { cn } from '#shared/lib/cn'
 import { computed } from 'vue'
 
@@ -19,10 +17,10 @@ const cardClass = computed<string>(() => {
 </script>
 
 <template>
-  <NuxtLink :to="service.href" :class="cardClass">
+  <NuxtLink :to="service.slug" :class="cardClass">
     <NuxtImg
-      :src="service.logo.source"
-      :alt="service.logo.alt"
+      :src="service.image_source"
+      :alt="service.image_alt"
       sizes="lg:20vw md:50vw sm:50vw"
       :class="
         cn(`
@@ -48,7 +46,7 @@ const cardClass = computed<string>(() => {
     <div class="relative flex h-full items-end">
       <div class="flex w-full items-center gap-3 px-5 pb-4">
         <span class="text-brand-soft text-[11px] font-bold uppercase drop-shadow lg:text-sm">
-          {{ service.title }}
+          {{ service.name }}
         </span>
 
         <Arrow direction="right" />
