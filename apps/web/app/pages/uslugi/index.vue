@@ -1,7 +1,7 @@
 <template>
   <BrandsGrid />
   <RepairQuizBlock />
-  <ServiceAndWorksSection />
+  <ServiceAndCaseSection />
   <Article>
     adfskfdas';f';sdla 'jasdflk'j dskl kdsjflksdajfsd;kjflksda jflkdsjflk sdjf;lksdjflksdajf
     sdklfj;lsdkjf;lkdjf;lksdjfklsd kldsafj;klasdjf;klsdjf;lksdjflksdklfsd

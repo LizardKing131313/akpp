@@ -23,7 +23,7 @@ withDefaults(
           class="aspect-16/10 w-full object-cover" />
       </div>
 
-      <WorkExampleCardContent :caseItem="caseItem" class="space-y-4 p-3" />
+      <CaseExampleCardContent :caseItem="caseItem" class="space-y-4 p-3" />
     </template>
 
     <template v-else>
@@ -36,7 +36,7 @@ withDefaults(
             class="h-full w-full object-cover" />
         </div>
 
-        <WorkExampleCardContent :caseItem="caseItem" class="min-w-0 flex-1 space-y-1" />
+        <CaseExampleCardContent :caseItem="caseItem" class="min-w-0 flex-1 space-y-1" />
 
         <Arrow direction="right" double class="transition-transform group-hover:translate-x-0.5" />
       </div>

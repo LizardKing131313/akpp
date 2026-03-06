@@ -11,7 +11,7 @@ definePageMeta({
   <BrandsGrid />
   <ServicesSection />
   <RepairQuizBlock />
-  <ServiceAndWorksSection />
+  <ServiceAndCaseSection />
   <PerksSection />
   <FaqAndReviews />
 </template>

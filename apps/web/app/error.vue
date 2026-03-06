@@ -20,18 +20,15 @@ withDefaults(defineProps<ErrorSettings>(), {
 
 <template>
   <App>
-    <div class="mx-auto max-w-6xl items-center justify-center px-6 text-center">
-      <div class="space-y-6">
-        <h1 class="text-brand-red text-6xl font-bold">
-          {{ status }}
-        </h1>
-
-        <h2 class="text-2xl font-bold">{{ title }}</h2>
-
-        <p class="text-brand-grey">{{ description }}</p>
-
-        <MainButton @click="handleClearError">{{ buttonText }}</MainButton>
-      </div>
+    <div class="space-y-8">
+      <CenteredTitle class="text-brand-red">{{ status }}</CenteredTitle>
+      <CenteredTitle>{{ title }}</CenteredTitle>
+      <CenteredTitle>{{ description }}</CenteredTitle>
+      <MainButton
+        @click="handleClearError"
+        class="mx-auto mt-32 block w-auto items-center justify-center px-14"
+        >{{ buttonText }}</MainButton
+      >
     </div>
   </App>
 </template>

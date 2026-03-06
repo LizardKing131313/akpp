@@ -13,7 +13,7 @@ const widgetUrl = computed(() => {
     <iframe
       :src="widgetUrl"
       title="Отзывы"
-      class="border-brand-grey-light/30 h-full w-full rounded-xl border"
+      class="border-brand-grey-light/30 h-full min-h-100 w-full rounded-xl border"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade" />
   </div>

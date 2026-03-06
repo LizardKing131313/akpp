@@ -1,15 +1,15 @@
 <script setup lang="ts">
-// definePageMeta({
-//   pageHeader: {
-//     kind: 'breadcrumbs',
-//     title: 'Примеры работ',
-//     backgroundSrc: '/images/breadcrumbs.jpg',
-//     items: [
-//       new BreadcrumbItem({ label: 'Главная', to: '/' }),
-//       new BreadcrumbItem({ label: 'Примеры работ', to: '/work' }),
-//     ],
-//   },
-// })
+definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    title: 'Примеры работ',
+    backgroundSrc: '/images/breadcrumbs.jpg',
+    items: [
+      { label: 'Главная', to: '/' },
+      { label: 'Примеры работ', to: '/work' },
+    ],
+  },
+})
 </script>
 
 <template>

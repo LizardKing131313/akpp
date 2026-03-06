@@ -1,6 +1,6 @@
 <template>
   <TwoColumns>
     <ServicePriceSection />
-    <WorkSection />
+    <CaseSection />
   </TwoColumns>
 </template>

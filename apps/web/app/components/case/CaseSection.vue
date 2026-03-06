@@ -24,7 +24,7 @@ withDefaults(
     <CenteredTitle class="text-left">{{ title }}</CenteredTitle>
 
     <div class="grid grid-cols-2 gap-4 lg:hidden">
-      <WorkExampleCard
+      <CaseExampleCard
         v-for="(caseItem, index) in cases.slice(0, 3)"
         :key="caseItem.id"
         :caseItem="caseItem"
@@ -33,7 +33,7 @@ withDefaults(
     </div>
 
     <div class="hidden space-y-8 lg:block">
-      <WorkExampleCard
+      <CaseExampleCard
         v-for="caseItem in cases.slice(0, 3)"
         :key="caseItem.id"
         :caseItem="caseItem"
