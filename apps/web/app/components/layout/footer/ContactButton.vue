@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
 
+import { useSignupModal } from '~/composables/modal/useSignupModal'
+
 defineProps<{
   pulse?: boolean
 }>()
 
-import { useSignupModal } from '~/composables/modal/useSignupModal'
-
-const { openSignupModal } = useSignupModal()
-
 const handleClick = (): void => {
-  openSignupModal('footer')
+  useSignupModal().openModal()
 }
 </script>
 

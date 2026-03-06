@@ -1,10 +1,29 @@
 <script setup lang="ts">
+import type { BrandItem } from '#shared/types/brand'
+
 import { cn } from '#shared/lib/cn'
 import { computed, ref, watch } from 'vue'
 
-const props = defineProps<{
-  brands: readonly BrandItem[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    readonly brands: readonly BrandItem[]
+
+    readonly title?: string
+    readonly description?: string
+    readonly inputPlaceholder?: string
+    readonly nextLabel?: string
+    readonly popularLabel?: string
+    readonly emptyLabel?: string
+  }>(),
+  {
+    title: 'Укажите марку автомобиля',
+    description: 'Введите вручную или выберите из списка популярных',
+    inputPlaceholder: 'Введите марку (например: Dodge)...',
+    nextLabel: 'Далее',
+    popularLabel: 'Популярные марки:',
+    emptyLabel: 'Ничего не найдено',
+  }
+)
 
 const emit = defineEmits<{
   (event: 'next', payload: { brandTitle: string }): void
@@ -19,7 +38,11 @@ const normalizedQuery = computed<string>(() => debouncedQuery.value.trim().toLow
 
 const filteredBrands = computed<readonly BrandItem[]>(() => {
   const queryValue = normalizedQuery.value
-  if (queryValue.length === 0) return props.brands
+
+  if (queryValue.length === 0) {
+    return props.brands
+  }
+
   return props.brands.filter((brandItem) => brandItem.name?.toLowerCase().includes(queryValue))
 })
 
@@ -31,14 +54,20 @@ const handleSelectBrand = (brandTitle: string | undefined): void => {
 
 const handleNext = (): void => {
   const brandTitle = inputValue.value.trim()
-  if (brandTitle.length === 0) return
+
+  if (brandTitle.length === 0) {
+    return
+  }
+
   emit('next', { brandTitle })
 }
 
 watch(
   () => inputValue.value,
   (newValue) => {
-    if (debounceTimerId !== null) clearTimeout(debounceTimerId)
+    if (debounceTimerId !== null) {
+      clearTimeout(debounceTimerId)
+    }
 
     debounceTimerId = setTimeout(() => {
       debouncedQuery.value = newValue
@@ -51,8 +80,8 @@ watch(
 
 <template>
   <div class="w-full space-y-5">
-    <QuizStepTitle title="Укажите марку автомобиля">
-      Введите вручную или выберите из списка популярных
+    <QuizStepTitle :title="props.title">
+      {{ props.description }}
     </QuizStepTitle>
 
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -60,18 +89,18 @@ watch(
         v-model.trim="inputValue"
         type="text"
         class="bg-brand-white text-brand-dark focus:border-brand-red h-11.5 w-full rounded-xl px-5 text-lg outline-none"
-        placeholder="Введите марку (например: Dodge)..."
+        :placeholder="props.inputPlaceholder"
         autocomplete="off"
         @keydown.enter.prevent="handleNext" />
 
       <MainButton :disabled="isNextDisabled" @click="handleNext" class="w-auto px-8 py-2">
-        Далее
+        {{ props.nextLabel }}
       </MainButton>
     </div>
 
     <div>
       <div class="text-brand-grey-light text-[13px] leading-5 font-bold tracking-wide uppercase">
-        Популярные марки:
+        {{ props.popularLabel }}
       </div>
 
       <div class="mt-5">
@@ -96,7 +125,7 @@ watch(
         <div
           v-if="filteredBrands.length === 0"
           class="text-brand-grey-light bg-brand-white text-base">
-          Ничего не найдено
+          {{ props.emptyLabel }}
         </div>
       </div>
     </div>

@@ -11,9 +11,8 @@ const props = withDefaults(
   }
 )
 
-const { openShopModal } = useShopModal()
 const handleClick = (): void => {
-  openShopModal('shop')
+  useShopModal().openModal()
 }
 
 const price = computed<string>(() => {

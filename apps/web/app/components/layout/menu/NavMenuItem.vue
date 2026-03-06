@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { MenuNode } from '#shared/types/layout/menu/menu'
-
-defineProps<{ menuNode: MenuNode }>()
+defineProps<{ menuNode: MenuItem }>()
 
 const buttonClass =
   'flex-1 py-4 text-center uppercase ' +
@@ -9,13 +7,13 @@ const buttonClass =
 </script>
 
 <template>
-  <NuxtLink v-if="menuNode.href" :to="menuNode.href" :class="buttonClass">
-    {{ menuNode.title }}
+  <NuxtLink v-if="menuNode.slug" :to="menuNode.slug" :class="buttonClass">
+    {{ menuNode.name }}
   </NuxtLink>
 
-  <DesktopMegaMenu v-else-if="menuNode.hasChildren()" :menuNode :class="buttonClass" />
+  <DesktopMegaMenu v-else-if="menuNode.children != null" :menuNode :class="buttonClass" />
 
   <span v-else :class="buttonClass">
-    {{ menuNode.title }}
+    {{ menuNode.name }}
   </span>
 </template>

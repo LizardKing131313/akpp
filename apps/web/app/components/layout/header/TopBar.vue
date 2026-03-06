@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
 
+import { useSelectCityModal } from '~/composables/modal/useSelectCityModal'
+
 interface TopBarProps {
   iconSource: string
   iconAlt?: string
@@ -21,12 +23,8 @@ withDefaults(defineProps<TopBarProps>(), {
   searchPlaceholder: '',
 })
 
-import { useSelectCityModal } from '~/composables/modal/useSelectCityModal'
-
-const { openSelectCityModal } = useSelectCityModal()
-
 const handleClick = (): void => {
-  openSelectCityModal('msk')
+  useSelectCityModal().openModal()
 }
 </script>
 

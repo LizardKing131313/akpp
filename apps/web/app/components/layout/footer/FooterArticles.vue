@@ -1,40 +1,18 @@
 <script setup lang="ts">
-type Article = {
-  title: string
-  href: string
-  date: string
-  image: string
-  alt: string
-}
-
-interface FooterArticlesProps {
-  title?: string
-  articles?: Article[]
-  showAllHref?: string
-  showAllText?: string
-}
-
-withDefaults(defineProps<FooterArticlesProps>(), {
-  title: 'Полезные статьи',
-  articles: () => [
-    {
-      title: 'Как менять масло в АКПП: полная или частичная замена',
-      href: '/articles/1',
-      date: '27.01.2026',
-      image: '/images/articles/article1.png',
-      alt: 'Масло',
-    },
-    {
-      title: 'Сброс, калибровка и адаптация АКПП',
-      href: '/articles/2',
-      date: '20.01.2026',
-      image: '/images/articles/article2.png',
-      alt: 'Сброс',
-    },
-  ],
-  showAllHref: '/articles',
-  showAllText: 'показать все статьи',
-})
+withDefaults(
+  defineProps<{
+    title?: string
+    articles?: ArticleItem[]
+    showAllHref?: string
+    showAllText?: string
+  }>(),
+  {
+    title: 'Полезные статьи',
+    articles: () => [],
+    showAllHref: '/articles',
+    showAllText: 'показать все статьи',
+  }
+)
 </script>
 
 <template>
@@ -43,21 +21,21 @@ withDefaults(defineProps<FooterArticlesProps>(), {
     <div>
       <div
         v-for="article in articles"
-        :key="article.title"
+        :key="article.id"
         class="border-b-brand-grey-light flex items-start border-b">
-        <NuxtLink :to="article.href" class="group hover:text-brand-white block w-full py-4">
+        <NuxtLink :to="article.slug" class="group hover:text-brand-white block w-full py-4">
           <div class="flex items-start gap-4">
             <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl">
               <NuxtImg
-                :src="article.image"
-                :alt="article.alt"
+                :src="article.image_source"
+                :alt="article.image_alt"
                 sizes="80px"
                 class="h-full w-full object-cover" />
             </div>
 
             <div class="space-y-4">
               <p class="leading-snug font-bold">
-                {{ article.title }}
+                {{ article.name }}
               </p>
 
               <p class="text-xs">

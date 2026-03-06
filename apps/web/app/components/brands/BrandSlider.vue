@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { getBrands } from '#server/api/brands/index.get'
 import { Autoplay, FreeMode, Mousewheel } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -8,7 +7,7 @@ import 'swiper/css/free-mode'
 
 const swiperModules = [Autoplay, FreeMode, Mousewheel]
 
-const brands = getBrands()
+const brands = [] as BrandItem[]
 </script>
 
 <template>

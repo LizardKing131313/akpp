@@ -10,6 +10,7 @@ interface YandexMapProps {
   locations: YandexMapPoint[]
   center: [number, number]
   zoom: number
+  heightPx?: number
 }
 
 const props = defineProps<YandexMapProps>()
@@ -83,7 +84,7 @@ watch(
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full" :style="{ height: heightPx + 'px' }">
     <div v-if="loadError" class="grid h-full place-items-center rounded-xl p-4">
       {{ loadError }}
     </div>

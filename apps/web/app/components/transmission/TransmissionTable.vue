@@ -18,7 +18,7 @@ import { computed, h, ref, resolveComponent, watch } from 'vue'
 import { useDebouncedRef } from '~/composables/useDebouncedRef'
 
 type GearboxTableProps = {
-  rows: TransmissionRangeWithVariants[]
+  rows?: TransmissionRangeWithVariants[]
   readonly baseHref?: string
 
   readonly searchPlaceholder?: string
@@ -43,6 +43,7 @@ type GearboxTableProps = {
 }
 
 const props = withDefaults(defineProps<GearboxTableProps>(), {
+  rows: () => [],
   baseHref: '/transmissions',
 
   searchPlaceholder: 'Search',

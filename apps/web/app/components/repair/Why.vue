@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { getBrands } from '#server/api/brands/index.get'
-import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
+import type { WhySettings } from '#shared/types/why'
 
 import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
 import { useSignupModal } from '~/composables/modal/useSignupModal'
@@ -52,25 +51,12 @@ const perks = computed(() => [
   },
 ])
 
-const { openSignupModal } = useSignupModal()
-const { openRepairQuizModal } = useRepairQuizModal()
-
-const quizProblems = getProblems()
-
-const quizSymptoms: Readonly<Record<string, readonly string[]>> = getSymptoms()
-
-const brands = getBrands()
-
 const handleCalculateClick = (): void => {
-  openRepairQuizModal({
-    brands,
-    problems: quizProblems,
-    symptoms: quizSymptoms,
-  })
+  useRepairQuizModal().openModal()
 }
 
 const handleSignupClick = (): void => {
-  openSignupModal('work')
+  useSignupModal().openModal()
 }
 </script>
 

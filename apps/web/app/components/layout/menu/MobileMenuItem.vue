@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { MenuNode } from '#shared/types/layout/menu/menu'
-
 import { cn } from '#shared/lib/cn'
 import { computed } from 'vue'
 
@@ -9,14 +7,14 @@ const buttonClass = cn(`
   text-left text-sm font-semibold tracking-wide uppercase
 `)
 
-const props = defineProps<{ entry: MenuNode }>()
+const props = defineProps<{ entry: MenuItem }>()
 
 const emit = defineEmits<{
-  (event: 'navigate', entry: MenuNode): void
-  (event: 'select', entry: MenuNode): void
+  (event: 'navigate', entry: MenuItem): void
+  (event: 'select', entry: MenuItem): void
 }>()
 
-const hasChildren = computed<boolean>(() => props.entry.hasChildren())
+const hasChildren = computed<boolean>(() => props.entry.children != null)
 
 const navigate = (): void => {
   emit('navigate', props.entry)
@@ -33,23 +31,23 @@ const select = (): void => {
       v-if="hasChildren"
       :class="buttonClass"
       type="button"
-      :aria-label="`Открыть раздел ${entry.title}`"
+      :aria-label="`Открыть раздел ${entry.name}`"
       @click="navigate">
-      <span>{{ entry.title }}</span>
+      <span>{{ entry.name }}</span>
       <Arrow direction="down" />
     </button>
 
-    <NuxtLink v-else-if="entry.href" :to="entry.href" :class="buttonClass" @click="select">
-      <span>{{ entry.title }}</span>
+    <NuxtLink v-else-if="entry.slug" :to="entry.slug" :class="buttonClass" @click="select">
+      <span>{{ entry.name }}</span>
     </NuxtLink>
 
     <button
       v-else
       :class="buttonClass"
       type="button"
-      :aria-label="`Выбрать пункт ${entry.title}`"
+      :aria-label="`Выбрать пункт ${entry.name}`"
       @click="select">
-      <span>{{ entry.title }}</span>
+      <span>{{ entry.name }}</span>
     </button>
   </div>
 </template>

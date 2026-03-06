@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ items: TransmissionItem[] }>()
+withDefaults(defineProps<{ items?: TransmissionItem[] }>(), { items: () => [] })
 </script>
 
 <template>

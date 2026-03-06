@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
 
-import { getBrands } from '#server/api/brands/index.get'
 import { computed, ref } from 'vue'
 
 interface BrandsGridProps {
@@ -13,7 +12,7 @@ interface BrandsGridProps {
 
 const props = withDefaults(defineProps<BrandsGridProps>(), {
   title: 'Выберите марку автомобиля',
-  brands: getBrands,
+  brands: () => [],
   show: 'Показать еще',
   collapse: 'Свернуть',
 })

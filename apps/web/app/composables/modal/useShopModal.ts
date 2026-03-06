@@ -1,19 +1,16 @@
+import type { UseModalReturnType } from '#shared/types/modal'
+
 import { useModal } from '~/composables/modal/useModal'
 
-export type ShopModalPayload = {
-  source?: string
-}
+export const useShopModal = (): UseModalReturnType => {
+  const modalName = 'ShopModal'
 
-export const useShopModal = () => {
   const { open, close, isOpen } = useModal()
 
-  const openShopModal = (source?: string): void => {
-    open('shop', source === undefined ? {} : { source })
-  }
-
   return {
-    openShopModal,
+    modalName,
+    openModal: () => open(modalName, {}),
     closeModal: close,
-    isSellAkppModalOpen: (): boolean => isOpen('shop'),
+    isModalOpen: (): boolean => isOpen(modalName),
   }
 }

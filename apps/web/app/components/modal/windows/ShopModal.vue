@@ -2,17 +2,6 @@
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
-import SubmitButton from '~/components/form/SubmitButton.vue'
-import ModalClose from '~/components/modal/components/ModalClose.vue'
-
-type SellAkppModalPayload = {
-  source?: string
-}
-
-const props = defineProps<{
-  payload: SellAkppModalPayload | null
-}>()
-
 const emit = defineEmits<{
   (eventName: 'close'): void
 }>()
@@ -34,8 +23,6 @@ const emitClose = (): void => {
 
 const submit = (): void => {
   const leadPayload = {
-    modal: 'sellAkpp',
-    source: props.payload?.source ?? 'unknown',
     car: car.value.trim(),
     vin: vin.value.trim(),
     phone: phone.value.trim(),

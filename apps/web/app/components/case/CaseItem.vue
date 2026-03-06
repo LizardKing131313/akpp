@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { CaseItem, CaseItemSetting } from '#shared/types/case'
 
-import { getBrands } from '#server/api/brands/index.get'
-import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
 import { getMoneyView } from '#shared/lib/money'
 import { computed } from 'vue'
 
@@ -54,25 +52,12 @@ const totalMoney = computed<string>(() => {
   return getMoneyView(props.caseItem.part_price + props.caseItem.work_price).value
 })
 
-const quizProblems = getProblems()
-
-const quizSymptoms: Readonly<Record<string, readonly string[]>> = getSymptoms()
-
-const brands = getBrands()
-
-const { openSignupModal } = useSignupModal()
-const { openRepairQuizModal } = useRepairQuizModal()
-
 const handleCalculateClick = (): void => {
-  openRepairQuizModal({
-    brands,
-    problems: quizProblems,
-    symptoms: quizSymptoms,
-  })
+  useRepairQuizModal().openModal()
 }
 
 const handleSignupClick = (): void => {
-  openSignupModal('work')
+  useSignupModal().openModal()
 }
 </script>
 

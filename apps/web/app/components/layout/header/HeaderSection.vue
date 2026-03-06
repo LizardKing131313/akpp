@@ -1,77 +1,102 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from '#shared/types/layout/breadcrumb'
-import type { PageHeaderMeta } from '#shared/types/layout/header'
-import type { HeroSlide } from '#shared/types/layout/hero'
+import type { BreadcrumbItem } from '#shared/types/breadcrumb'
+import type { CityItem } from '#shared/types/city'
+import type { HeroItem } from '#shared/types/hero'
 
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
+type HeaderSectionMode = 'none' | 'hero' | 'breadcrumbs'
 
-const pageHeaderMeta = computed<PageHeaderMeta>(() => {
-  const candidate = route.meta.pageHeader
-  if (candidate === undefined) return { kind: 'none' }
-  return candidate as PageHeaderMeta
+type HeaderSectionProps = {
+  readonly city?: CityItem
+
+  readonly mode?: HeaderSectionMode
+
+  readonly heroSlides?: HeroItem[]
+
+  readonly breadcrumbsTitle?: string
+  readonly breadcrumbsImageSource?: string
+  readonly breadcrumbsItems?: BreadcrumbItem[]
+
+  readonly locationIconSource?: string
+  readonly locationIconAlt?: string
+
+  readonly searchIconSource?: string
+  readonly searchPlaceholder?: string
+
+  readonly timeIconSource?: string
+  readonly timeIconAlt?: string
+
+  readonly phoneIconSource?: string
+  readonly phoneIconAlt?: string
+}
+
+const props = withDefaults(defineProps<HeaderSectionProps>(), {
+  city: () => ({
+    id: 'msk',
+    name: 'Москва',
+    slug: 'msk',
+    is_default: true,
+    work_hours_text: 'Пн - Вс 9:00 - 21:00',
+    work_hours_subtext: 'Без выходных',
+    phone_number: '+74999999999',
+    phone_text: 'Бесплатная консультация',
+    email_value: '',
+    email_text: '',
+  }),
+  mode: 'none',
+  heroSlides: () => [],
+  breadcrumbsTitle: '',
+  breadcrumbsImageSource: '',
+  breadcrumbsItems: () => [],
+  locationIconSource: '/images/icons/location.svg',
+  locationIconAlt: 'location',
+  searchIconSource: '/images/icons/search.svg',
+  searchPlaceholder: 'Поиск',
+  timeIconSource: '/images/icons/time.svg',
+  timeIconAlt: 'time',
+  phoneIconSource: '/images/icons/phone.svg',
+  phoneIconAlt: 'phone',
 })
 
-const isHeroMeta = (meta: PageHeaderMeta): meta is Extract<PageHeaderMeta, { kind: 'hero' }> =>
-  meta.kind === 'hero'
+const cityName = computed<string>(() => props.city.name ?? '')
+const workHoursTitle = computed<string>(() => props.city.work_hours_text)
+const workHoursSubtitle = computed<string>(() => props.city.work_hours_subtext)
+const phoneTitle = computed<string>(() => props.city.phone_number)
+const phoneSubtitle = computed<string>(() => props.city.phone_text)
+const phoneHref = computed<string>(() => props.city.phone_number)
 
-const isBreadcrumbsMeta = (
-  meta: PageHeaderMeta
-): meta is Extract<PageHeaderMeta, { kind: 'breadcrumbs' }> => meta.kind === 'breadcrumbs'
-
-const heroSlides = computed<HeroSlide[]>(() => {
-  const meta = pageHeaderMeta.value
-  return isHeroMeta(meta) ? meta.slides : []
-})
-
-const breadcrumbsTitle = computed<string>(() => {
-  const meta = pageHeaderMeta.value
-  return isBreadcrumbsMeta(meta) ? meta.title : ''
-})
-
-const breadcrumbsBackgroundSrc = computed<string>(() => {
-  const meta = pageHeaderMeta.value
-  return isBreadcrumbsMeta(meta) ? meta.backgroundSrc : ''
-})
-
-const breadcrumbsItems = computed<BreadcrumbItem[]>(() => {
-  const meta = pageHeaderMeta.value
-  return isBreadcrumbsMeta(meta) ? meta.items : []
-})
-
-const isHero = computed<boolean>(() => isHeroMeta(pageHeaderMeta.value))
-const isBreadcrumbs = computed<boolean>(() => isBreadcrumbsMeta(pageHeaderMeta.value))
+const isHero = computed<boolean>(() => props.mode === 'hero')
+const isBreadcrumbs = computed<boolean>(() => props.mode === 'breadcrumbs')
 </script>
 
 <template>
   <header class="w-full">
     <TopBar
-      iconSource="/images/icons/location.svg"
-      iconAlt="location"
-      city="Москва"
-      searchIconSource="/images/icons/search.svg"
-      searchPlaceholder="Поиск" />
+      :iconSource="locationIconSource"
+      :iconAlt="locationIconAlt"
+      :city="cityName"
+      :searchIconSource="searchIconSource"
+      :searchPlaceholder="searchPlaceholder" />
 
     <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:py-6">
       <Logo />
 
       <div class="flex items-center gap-0">
         <ContactCard
-          iconSource="/images/icons/time.svg"
-          iconAlt="time"
-          title="Пн - Вс 9:00 - 21:00"
-          subtitle="Без выходных"
+          :iconSource="timeIconSource"
+          :iconAlt="timeIconAlt"
+          :title="workHoursTitle"
+          :subtitle="workHoursSubtitle"
           class="hidden lg:flex" />
 
         <ContactCard
-          iconSource="/images/icons/phone.svg"
-          iconAlt="phone"
-          title="+7 499 999 99 99"
-          subtitle="Бесплатная консультация"
+          :iconSource="phoneIconSource"
+          :iconAlt="phoneIconAlt"
+          :title="phoneTitle"
+          :subtitle="phoneSubtitle"
           linkType="tel"
-          href="+74999999999"
+          :href="phoneHref"
           class="gap-1! px-0! lg:gap-3! lg:px-6!"
           titleClass="lg:text-lg! text-sm!"
           subtitleClass="hidden lg:block" />
@@ -86,6 +111,6 @@ const isBreadcrumbs = computed<boolean>(() => isBreadcrumbsMeta(pageHeaderMeta.v
   <Breadcrumbs
     v-else-if="isBreadcrumbs"
     :title="breadcrumbsTitle"
-    :background-src="breadcrumbsBackgroundSrc"
+    :image_source="breadcrumbsImageSource"
     :items="breadcrumbsItems" />
 </template>

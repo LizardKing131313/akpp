@@ -3,12 +3,8 @@ import { cn } from '#shared/lib/cn'
 
 import ModalClose from '~/components/modal/components/ModalClose.vue'
 
-type BrandLike = {
-  title: string
-}
-
 type QuizModalPayload = {
-  brands: readonly BrandLike[]
+  brands: readonly BrandItem[]
   problems: readonly string[]
   symptoms: Readonly<Record<string, readonly string[]>>
 } | null

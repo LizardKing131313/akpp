@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { MenuNode } from '#shared/types/layout/menu/menu'
-
-defineProps<{ items: MenuNode[] }>()
+defineProps<{ items: MenuItem[] }>()
 </script>
 
 <template>

@@ -1,23 +1,10 @@
 <script setup lang="ts">
-import { BreadcrumbItem } from '#shared/types/layout/breadcrumb'
-
-const route = useRoute()
-
-watchEffect(() => {
-  route.meta.pageHeader = {
-    kind: 'breadcrumbs',
-    title: 'Ремонт АКПП ХЕНДАЙ',
-    backgroundSrc: '/images/breadcrumbs.jpg',
-    items: [
-      new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Ремонт АКПП ХЕНДАЙ', to: '/remont-akp-hyundai' }),
-    ],
-  }
-})
+import type { WhySettings } from '#shared/types/why'
+const value = {} as WhySettings
 </script>
 
 <template>
-  <Why />
+  <Why v-bind="value" />
   <ModelSlider />
   <RepairQuizBlock />
   <ServiceAndWorksSection />

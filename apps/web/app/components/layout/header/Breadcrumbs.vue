@@ -1,23 +1,25 @@
 <script setup lang="ts">
+import type { BreadcrumbItem } from '#shared/types/breadcrumb'
+import type { ImageItem } from '#shared/types/entity'
+
 import { useHead, useRoute, useRuntimeConfig } from '#imports'
 import { cn } from '#shared/lib/cn'
 import { computed } from 'vue'
 
-type BreadcrumbItem = {
-  label: string
-  to?: string | null
-}
-
-interface BreadcrumbsProps {
-  backgroundSrc: string
-  title: string
-  items: BreadcrumbItem[]
-  currentUrl?: string
-}
-
-const props = withDefaults(defineProps<BreadcrumbsProps>(), {
-  currentUrl: '',
-})
+const props = withDefaults(
+  defineProps<
+    {
+      title: string
+      items: BreadcrumbItem[]
+      currentUrl?: string
+    } & ImageItem
+  >(),
+  {
+    currentUrl: '',
+    image_source: '/images/breadcrumbs.jpg',
+    image_alt: 'breadcrumbs background',
+  }
+)
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -29,7 +31,10 @@ const siteUrl = computed<string>(() => {
 })
 
 const normalizedItems = computed<BreadcrumbItem[]>(() =>
-  props.items.filter((item) => item.label.trim().length > 0)
+  props.items.filter((item) => {
+    if (!item.name) return false
+    return item.name.trim().length > 0
+  })
 )
 
 const resolvedCurrentAbsoluteUrl = computed<string>(() => {
@@ -53,10 +58,10 @@ const jsonLd = computed<Record<string, unknown> | null>(() => {
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      name: item.label,
+      name: item.name,
       item:
-        item.to && siteUrl.value
-          ? new URL(item.to, siteUrl.value).toString()
+        item.slug && siteUrl.value
+          ? new URL(item.slug, siteUrl.value).toString()
           : resolvedCurrentAbsoluteUrl.value,
     })),
   }
@@ -79,7 +84,10 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
 
 <template>
   <section class="group relative w-full overflow-hidden">
-    <NuxtImg :src="backgroundSrc" alt="" class="absolute inset-0 h-full w-full object-cover" />
+    <NuxtImg
+      :src="image_source"
+      :alt="image_alt"
+      class="absolute inset-0 h-full w-full object-cover" />
 
     <div class="bg-brand-dark/80 absolute inset-0"></div>
 
@@ -110,17 +118,17 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
           ">
           <li
             v-for="(crumb, index) in normalizedItems"
-            :key="`${crumb.label}-${index}`"
+            :key="`${crumb.name}-${index}`"
             class="flex items-center">
             <NuxtLink
-              v-if="crumb.to && !isLastIndex(index)"
-              :to="crumb.to"
+              v-if="crumb.slug && !isLastIndex(index)"
+              :to="crumb.slug"
               class="hover:text-brand-red uppercase transition-colors duration-200">
-              {{ crumb.label }}
+              {{ crumb.name }}
             </NuxtLink>
 
             <span v-else aria-current="page" class="uppercase">
-              {{ crumb.label }}
+              {{ crumb.name }}
             </span>
 
             <span v-if="index < normalizedItems.length - 1" class="text-brand-white px-2">

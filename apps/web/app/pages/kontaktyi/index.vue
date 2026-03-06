@@ -1,40 +1,28 @@
 <script setup lang="ts">
-import type { CityItem } from '#shared/types/components/city'
-import type { ContactLocation } from '#shared/types/components/location'
-import type { MapPoint } from '#shared/types/components/map'
+import type { CityItem } from '#shared/types/city'
+import type { YandexMapPoint } from '#shared/types/entity'
+import type { LocationItem } from '#shared/types/location'
 
-import { getCities } from '#server/api/city/city.get'
-import { getLocations } from '#server/api/contacts/contacts.get'
-import { BreadcrumbItem } from '#shared/types/layout/breadcrumb'
 import { computed, ref, watch } from 'vue'
 
 definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    title: 'Контакты',
-    backgroundSrc: '/images/breadcrumbs.jpg',
-    items: [
-      new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Контакты', to: '/kontaktyi' }),
-    ],
-  },
   footer: {
     hideContacts: true,
   },
 })
 
-const cities: CityItem[] = getCities()
+const cities: CityItem[] = []
 
-const allLocations: ContactLocation[] = getLocations()
+const allLocations: LocationItem[] = []
 
 const selectedCityId = ref<string>(cities[0]?.id ?? '')
 const selectedLocationId = ref<string | null>(null)
 
-const filteredLocations = computed<ContactLocation[]>(() => {
-  return allLocations.filter((locationItem) => locationItem.cityId === selectedCityId.value)
+const filteredLocations = computed<LocationItem[]>(() => {
+  return allLocations.filter((locationItem) => locationItem.city_id === selectedCityId.value)
 })
 
-const selectedLocation = computed<ContactLocation | null>(() => {
+const selectedLocation = computed<LocationItem | null>(() => {
   if (!selectedLocationId.value) return null
   return (
     filteredLocations.value.find((locationItem) => locationItem.id === selectedLocationId.value) ??
@@ -49,12 +37,12 @@ watch(
   }
 )
 
-const mapPoints = computed<MapPoint[]>(() => {
+const mapPoints = computed<YandexMapPoint[]>(() => {
   if (selectedLocation.value) {
     return [
       {
         id: selectedLocation.value.id,
-        title: selectedLocation.value.title,
+        title: selectedLocation.value.name,
         lng: selectedLocation.value.lng,
         lat: selectedLocation.value.lat,
       },
@@ -63,7 +51,7 @@ const mapPoints = computed<MapPoint[]>(() => {
 
   return filteredLocations.value.map((locationItem) => ({
     id: locationItem.id,
-    title: locationItem.title,
+    title: locationItem.name,
     lng: locationItem.lng,
     lat: locationItem.lat,
   }))
@@ -87,7 +75,7 @@ const mapZoom = computed<number>(() => {
   return 10
 })
 
-const openLocation = (location: ContactLocation): void => {
+const openLocation = (location: LocationItem): void => {
   selectedLocationId.value = location.id
 }
 
@@ -107,7 +95,7 @@ const goBack = (): void => {
             v-model="selectedCityId"
             class="bg-brand-white text-brand-dark w-full cursor-pointer py-4 text-base font-bold focus:ring-0 focus:outline-none">
             <option v-for="cityItem in cities" :key="cityItem.id" :value="cityItem.id">
-              {{ cityItem.title }}
+              {{ cityItem.name }}
             </option>
           </select>
         </label>

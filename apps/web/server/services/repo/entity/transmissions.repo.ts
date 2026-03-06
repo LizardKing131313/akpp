@@ -1,4 +1,4 @@
-import type { TransmissionItem } from '#shared/types/perk'
+import type { TransmissionItem } from '#shared/types/transmission'
 
 import { ListRepository } from '#server/services/repo/listRepo'
 

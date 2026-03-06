@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { HeroSlide } from '#shared/types/layout/hero'
+import type { HeroItem } from '#shared/types/hero'
 
 import { cn } from '#shared/lib/cn'
 import { Autoplay, Navigation } from 'swiper/modules'
@@ -11,14 +11,14 @@ import { useSignupModal } from '~/composables/modal/useSignupModal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-const props = defineProps<{ slides: HeroSlide[] }>()
+const props = withDefaults(defineProps<{ slides: HeroItem[]; buttonLabel?: string }>(), {
+  buttonLabel: 'Записаться',
+})
 
 const swiperModules = computed(() => [Autoplay, Navigation])
 
-const { openSignupModal } = useSignupModal()
-
 const handleClick = (): void => {
-  openSignupModal('footer')
+  useSignupModal().openModal()
 }
 </script>
 
@@ -34,8 +34,8 @@ const handleClick = (): void => {
         class="relative h-100 w-full sm:h-110 lg:h-120">
         <SwiperSlide v-for="slide in props.slides" :key="slide.id" class="relative h-full w-full">
           <NuxtImg
-            :src="slide.image.source"
-            :alt="slide.image.alt"
+            :src="slide.image_source"
+            :alt="slide.image_alt"
             class="absolute inset-0 h-full w-full object-cover" />
 
           <div class="bg-brand-dark/60 absolute inset-0"></div>
@@ -58,12 +58,12 @@ const handleClick = (): void => {
                   `)
                 ">
                 <span
-                  v-if="slide.titleAccent && slide.titleAccent.length > 0"
+                  v-if="slide.title_accent && slide.title_accent.length > 0"
                   class="text-brand-red">
-                  {{ slide.titleAccent }}
+                  {{ slide.title_accent }}
                 </span>
-                <span v-if="slide.titleAccent && slide.titleAccent.length > 0" class="mr-4" />
-                <span>{{ slide.titleMain }}</span>
+                <span v-if="slide.title_accent && slide.title_accent.length > 0" class="mr-4" />
+                <span>{{ slide.title_main }}</span>
               </h2>
 
               <p
@@ -79,7 +79,7 @@ const handleClick = (): void => {
               <MainButton
                 @click="handleClick"
                 class="z-20 mt-7 w-auto px-10 tracking-wide uppercase">
-                {{ slide.buttonLabel }}
+                {{ buttonLabel }}
               </MainButton>
             </div>
           </div>

@@ -81,44 +81,23 @@ export const createDirectusClient = () => {
     return { Authorization: `Bearer ${directusSecret}` }
   }
 
+  const collectionUrl = (collection: string) =>
+    `${directusBaseUrl}/items/${encodeURIComponent(collection)}`
+
   const getSingleton = async <Item>(
     collection: string,
     query: DirectusQuery = {}
   ): Promise<Item> => {
-    const url =
-      `${directusBaseUrl}/items/${encodeURIComponent(collection)}/singleton` +
-      buildQueryString(query)
-
-    try {
-      const response = await $fetch<DirectusItemsResponse<Item>>(url, {
-        method: 'GET',
-        headers: {
-          ...getAuthHeader(),
-        },
-      })
-
-      return response.data
-    } catch (unknownError: unknown) {
-      return toNuxtError(unknownError)
-    }
+    const url = `${collectionUrl(collection)}/singleton${buildQueryString(query)}`
+    return await get(url)
   }
 
   const getItems = async <Item>(
     collection: string,
     query: DirectusQuery
   ): Promise<readonly Item[]> => {
-    const url = `${directusBaseUrl}/items/${encodeURIComponent(collection)}${buildQueryString(query)}`
-    try {
-      const response = await $fetch<DirectusItemsResponse<readonly Item[]>>(url, {
-        method: 'GET',
-        headers: {
-          ...getAuthHeader(),
-        },
-      })
-      return response.data
-    } catch (unknownError: unknown) {
-      return toNuxtError(unknownError)
-    }
+    const url = `${collectionUrl(collection)}${buildQueryString(query)}`
+    return await get(url)
   }
 
   const getItem = async <Item>(
@@ -126,7 +105,11 @@ export const createDirectusClient = () => {
     id: string,
     query: DirectusQuery = {}
   ): Promise<Item> => {
-    const url = `${directusBaseUrl}/items/${encodeURIComponent(collection)}/${encodeURIComponent(id)}${buildQueryString(query)}`
+    const url = `${collectionUrl(collection)}/${encodeURIComponent(id)}${buildQueryString(query)}`
+    return await get(url)
+  }
+
+  const get = async <Item>(url: string): Promise<Item> => {
     try {
       const response = await $fetch<DirectusItemsResponse<Item>>(url, {
         method: 'GET',
@@ -144,9 +127,8 @@ export const createDirectusClient = () => {
     collection: string,
     payload: Payload
   ): Promise<Item> => {
-    const url = `${directusBaseUrl}/items/${encodeURIComponent(collection)}`
     try {
-      const response = await $fetch<DirectusItemsResponse<Item>>(url, {
+      const response = await $fetch<DirectusItemsResponse<Item>>(collectionUrl(collection), {
         method: 'POST',
         headers: {
           ...getAuthHeader(),
@@ -164,7 +146,7 @@ export const createDirectusClient = () => {
     id: string,
     payload: Payload
   ): Promise<Item> => {
-    const url = `${directusBaseUrl}/items/${encodeURIComponent(collection)}/${encodeURIComponent(id)}`
+    const url = `${collectionUrl(collection)}/${encodeURIComponent(id)}`
     try {
       const response = await $fetch<DirectusItemsResponse<Item>>(url, {
         method: 'PATCH',
@@ -180,7 +162,7 @@ export const createDirectusClient = () => {
   }
 
   const deleteItem = async (collection: string, id: string): Promise<void> => {
-    const url = `${directusBaseUrl}/items/${encodeURIComponent(collection)}/${encodeURIComponent(id)}`
+    const url = `${collectionUrl(collection)}/${encodeURIComponent(id)}`
     try {
       await $fetch<unknown>(url, {
         method: 'DELETE',

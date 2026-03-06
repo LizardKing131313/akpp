@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import type { MenuNode } from '#shared/types/layout/menu/menu'
-
 import { cn } from '#shared/lib/cn'
 import { computed, ref, useAttrs } from 'vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{ menuNode: MenuNode }>()
+const props = defineProps<{ menuNode: MenuItem }>()
 const attrs = useAttrs()
 
 const isOpen = ref<boolean>(false)
@@ -18,14 +16,14 @@ let closeTimerId: ReturnType<typeof setTimeout> | null = null
 const leftColumnWidthPx = 180
 const rightColumnWidthPx = 180
 
-const leftItems = computed<MenuNode[]>(() => props.menuNode.children ?? [])
+const leftItems = computed<MenuItem[]>(() => props.menuNode.children ?? [])
 
-const activeLeftItem = computed<MenuNode | null>(() => {
+const activeLeftItem = computed<MenuItem | null>(() => {
   if (activeLeftId.value === null) return null
   return leftItems.value.find((node) => node.id === activeLeftId.value) ?? null
 })
 
-const rightItems = computed<MenuNode[]>(() => activeLeftItem.value?.children ?? [])
+const rightItems = computed<MenuItem[]>(() => activeLeftItem.value?.children ?? [])
 
 const hasRightColumn = computed<boolean>(() => {
   return rightItems.value.length > 0
@@ -70,10 +68,10 @@ const markPointerInside = (): void => {
   hasPointerMovedInsidePanel.value = true
 }
 
-const setActiveLeft = (node: MenuNode): void => {
+const setActiveLeft = (node: MenuItem): void => {
   if (!hasPointerMovedInsidePanel.value) return
 
-  if (node.hasChildren()) {
+  if (hasChildren(node)) {
     activeLeftId.value = node.id
     return
   }
@@ -85,6 +83,8 @@ const handlePanelEnter = (): void => {
   openNow()
   markPointerInside()
 }
+
+const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
 </script>
 
 <template>
@@ -99,13 +99,13 @@ const handlePanelEnter = (): void => {
         `)
       ">
       <span class="text-brand-white group-hover:text-brand-red cursor-pointer!">
-        {{ menuNode.title }}
+        {{ menuNode.name }}
       </span>
       <Arrow direction="down" class="text-brand-white group-hover:text-brand-red" />
     </button>
 
     <div
-      v-if="isOpen && menuNode.hasChildren()"
+      v-if="isOpen && hasChildren(menuNode)"
       :class="
         cn(`
           border-brand-grey-light/10 bg-brand-white text-brand-dark absolute
@@ -120,7 +120,7 @@ const handlePanelEnter = (): void => {
           <NuxtLink
             v-for="node in leftItems"
             :key="node.id"
-            :to="node.href ?? '#'"
+            :to="node.slug ?? '#'"
             :class="[
               `group/menu-item flex w-full cursor-pointer items-center justify-between
               px-6 py-4 text-left text-sm font-semibold tracking-wide uppercase transition-colors`,
@@ -129,10 +129,10 @@ const handlePanelEnter = (): void => {
                 : 'text-brand-dark hover:bg-brand-red hover:text-brand-white',
             ]"
             @mouseenter="setActiveLeft(node)">
-            <span>{{ node.title }}</span>
+            <span>{{ node.name }}</span>
 
             <Arrow
-              v-if="node.hasChildren()"
+              v-if="hasChildren(node)"
               direction="right"
               :class="
                 cn(
@@ -149,7 +149,7 @@ const handlePanelEnter = (): void => {
           <NuxtLink
             v-for="node in rightItems"
             :key="node.id"
-            :to="node.href ?? '#'"
+            :to="node.slug ?? '#'"
             :class="
               cn(`
                 text-brand-dark hover:bg-brand-red hover:text-brand-white
@@ -157,7 +157,7 @@ const handlePanelEnter = (): void => {
               `)
             "
             @click="isOpen = false">
-            {{ node.title }}
+            {{ node.name }}
           </NuxtLink>
         </div>
       </div>

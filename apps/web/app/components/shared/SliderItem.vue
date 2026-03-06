@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ImageItem, SlugEntityItem } from '#shared/types/entity'
+
 import { cn } from '#shared/lib/cn'
 
 const emit = defineEmits<{

@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import { CitySelectModal, QuizModal, ShopModal, SignupModal } from '#components'
 import { cn } from '#shared/lib/cn'
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { useModal } from '~/composables/modal/useModal'
 
 const { modalState, close } = useModal()
 
 const activeComponent = computed(() => {
-  if (!modalState.value.isOpen || modalState.value.name === null) return null
-  if (modalState.value.name === 'signup') return SignupModal
-  if (modalState.value.name === 'shop') return ShopModal
-  if (modalState.value.name === 'repairQuiz') return QuizModal
-  if (modalState.value.name === 'selectCity') return CitySelectModal
-  return null
+  const modalName = modalState.value.name
+  if (!modalState.value.isOpen || !modalName) return null
+
+  return defineAsyncComponent(() => import(`~/components/modal/windows/${modalName}.vue`))
 })
 
 const handleKeydown = (event: KeyboardEvent): void => {

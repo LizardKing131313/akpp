@@ -11,6 +11,11 @@
   --font-sans: 'Open Sans', sans-serif;
 }
 
+@utility brand-gradient {
+  @apply absolute inset-0
+    bg-radial-[at_center] from-[#3C3C3C] from-80% to-[#222222] to-100% md:from-40%;
+}
+
 body {
   @apply font-sans;
 }

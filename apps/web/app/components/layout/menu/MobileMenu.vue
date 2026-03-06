@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import type { MenuNode } from '#shared/types/layout/menu/menu'
-
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
 type MenuScreen = {
   title: string
-  entries: MenuNode[]
+  entries: MenuItem[]
   showLogo: boolean
 }
 
 const props = defineProps<{
   open: boolean
-  items: MenuNode[]
+  items: MenuItem[]
   logoSource?: string
   logoAlt?: string
   rootTitle?: string
@@ -19,7 +17,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (event: 'update:open', value: boolean): void
-  (event: 'select', entry: MenuNode): void
+  (event: 'select', entry: MenuItem): void
 }>()
 
 const screenStack = ref<MenuScreen[]>([])
@@ -48,17 +46,17 @@ const activeScreen = computed<MenuScreen | null>(() => {
 })
 
 const activeTitle = computed<string>(() => activeScreen.value?.title ?? rootTitle.value)
-const activeEntries = computed<MenuNode[]>(() => activeScreen.value?.entries ?? [])
+const activeEntries = computed<MenuItem[]>(() => activeScreen.value?.entries ?? [])
 const showLogo = computed<boolean>(() => activeScreen.value?.showLogo ?? true)
 
-const openChildren = (entry: MenuNode): void => {
+const openChildren = (entry: MenuItem): void => {
   const childrenEntries = entry.children ?? []
   if (childrenEntries.length === 0) return
 
   screenStack.value = [
     ...screenStack.value,
     {
-      title: entry.title,
+      title: entry.name ?? '',
       entries: childrenEntries,
       showLogo: false,
     },
@@ -70,7 +68,7 @@ const goBack = (): void => {
   screenStack.value = screenStack.value.slice(0, -1)
 }
 
-const handleSelect = (entry: MenuNode): void => {
+const handleSelect = (entry: MenuItem): void => {
   emit('select', entry)
   closeDrawer()
 }

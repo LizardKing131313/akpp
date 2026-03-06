@@ -17,6 +17,9 @@ export default defineNuxtConfig({
       // @ts-ignore
       tailwindcss(),
     ],
+    build: {
+      sourcemap: false,
+    },
   },
 
   modules: ['@nuxtjs/google-fonts', '@nuxt/image'],

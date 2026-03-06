@@ -1,20 +1,3 @@
-<script setup lang="ts">
-import { BreadcrumbItem } from '#shared/types/layout/breadcrumb'
-
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    title: 'АКПП',
-    backgroundSrc: '/images/breadcrumbs.jpg',
-    items: [
-      new BreadcrumbItem({ label: 'Главная', to: '/' }),
-      new BreadcrumbItem({ label: 'Определить АКПП', to: '/opredelit-akpp' }),
-      new BreadcrumbItem({ label: 'АКПП', to: '/opredelit-akpp/id' }),
-    ],
-  },
-})
-</script>
-
 <template>
   <Article>
     adfskfdas';f';sdla 'jasdflk'j dskl kdsjflksdajfsd;kjflksda jflkdsjflk sdjf;lksdjflksdajf

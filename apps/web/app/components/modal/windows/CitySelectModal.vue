@@ -1,14 +1,8 @@
 <script setup lang="ts">
+import type { CityItem } from '#shared/types/city'
+
 import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
-
-import ModalClose from '~/components/modal/components/ModalClose.vue'
-import ModalWindow from '~/components/modal/components/ModalWindow.vue'
-
-type CityItem = {
-  id: string
-  title: string
-}
 
 const props = withDefaults(
   defineProps<{
@@ -22,10 +16,7 @@ const props = withDefaults(
     title: 'Выбрать город',
     searchPlaceholder: 'Поиск по городу',
     emptyText: 'Ничего не найдено',
-    cities: () => [
-      { id: 'msk', title: 'Москва' },
-      { id: 'sbp', title: 'Питер' },
-    ],
+    cities: () => [],
     selectedCityId: 'msk',
   }
 )
@@ -36,17 +27,21 @@ const emit = defineEmits<{
 }>()
 
 const searchValue = ref<string>('')
+const debouncedSearchValue = useDebouncedRef(searchValue, { delayMs: 300 })
 
 const normalizedSearch = computed<string>(() => {
-  return searchValue.value.trim().toLowerCase()
+  return debouncedSearchValue.value.trim().toLowerCase()
 })
 
 const filteredCities = computed<readonly CityItem[]>(() => {
-  const query = normalizedSearch.value
-  if (!query) return props.cities
+  const queryValue = normalizedSearch.value
+
+  if (queryValue.length === 0) {
+    return props.cities
+  }
 
   return props.cities.filter((cityItem) => {
-    return cityItem.title.toLowerCase().includes(query)
+    return cityItem.name?.toLowerCase().includes(queryValue)
   })
 })
 
@@ -77,7 +72,13 @@ const handleSelect = (cityId: string): void => {
           v-model="searchValue"
           type="text"
           :placeholder="props.searchPlaceholder"
-          class="bg-brand-white text-brand-dark placeholder:text-brand-grey-light focus:border-brand-red focus:ring-brand-red/25 h-12 w-full rounded-xl px-4 text-base outline-none focus:ring-2"
+          :class="
+            cn(`
+              bg-brand-white text-brand-dark placeholder:text-brand-grey-light
+              focus:border-brand-red focus:ring-brand-red/25 h-12 w-full rounded-xl
+              px-4 text-base outline-none focus:ring-2
+            `)
+          "
           autocomplete="off" />
       </div>
 
@@ -89,7 +90,8 @@ const handleSelect = (cityId: string): void => {
                 type="button"
                 :class="
                   cn(
-                    'text-brand-dark hover:text-brand-red flex w-full items-start gap-3 text-left text-lg leading-6 transition-colors',
+                    `text-brand-dark hover:text-brand-red flex w-full
+                    items-start gap-3 text-left text-lg leading-6 transition-colors`,
                     city.id === props.selectedCityId ? 'text-brand-red font-semibold' : ''
                   )
                 "
@@ -97,7 +99,7 @@ const handleSelect = (cityId: string): void => {
                 <span
                   class="text-brand-dark mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-current" />
                 <span class="min-w-0 wrap-break-word">
-                  {{ city.title }}
+                  {{ city.name }}
                 </span>
               </button>
             </li>

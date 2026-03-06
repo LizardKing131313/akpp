@@ -6,20 +6,4 @@ export abstract class ListRepository<ItemType extends EntityItem> extends Reposi
   public async list(): Promise<readonly ItemType[]> {
     return this.getAll()
   }
-
-  public async getById(id: string): Promise<ItemType | null> {
-    return this.getOneByField('id', id)
-  }
-
-  public async create(): Promise<ItemType> {
-    throw new Error(this.NOT_IMPLEMENTED)
-  }
-
-  public async update(): Promise<ItemType> {
-    throw new Error(this.NOT_IMPLEMENTED)
-  }
-
-  public async delete(): Promise<void> {
-    throw new Error(this.NOT_IMPLEMENTED)
-  }
 }

@@ -9,10 +9,8 @@ const props = defineProps<{
   onBack?: () => void
 }>()
 
-const { openSignupModal } = useSignupModal()
-
 const handleSignupClick = (): void => {
-  openSignupModal('contacts')
+  useSignupModal().openModal()
 }
 </script>
 

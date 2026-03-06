@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PerkItem } from '#shared/types/perk'
 
-withDefaults(defineProps<{ title?: string; perks: PerkItem[] }>(), {
+withDefaults(defineProps<{ title?: string; perks?: PerkItem[] }>(), {
   title: 'Почему клиенты выбирают нас',
   perks: () => [],
 })

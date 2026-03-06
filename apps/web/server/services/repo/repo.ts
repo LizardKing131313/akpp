@@ -14,13 +14,21 @@ export abstract class Repository<ItemType extends EntityItem> {
 
   public abstract list(params?: ListParams): Promise<readonly ItemType[]>
 
-  public abstract getById(id: EntityId): Promise<ItemType | null>
+  public async getById(id: string): Promise<ItemType | null> {
+    return this.getOneByField('id', id)
+  }
 
-  public abstract create(params: Omit<ItemType, 'id'>): Promise<ItemType>
+  public async create(_params: Omit<ItemType, 'id'>): Promise<ItemType> {
+    throw new Error(this.NOT_IMPLEMENTED)
+  }
 
-  public abstract update(id: EntityId, patch: Partial<Omit<ItemType, 'id'>>): Promise<ItemType>
+  public async update(_id: EntityId, _patch: Partial<Omit<ItemType, 'id'>>): Promise<ItemType> {
+    throw new Error(this.NOT_IMPLEMENTED)
+  }
 
-  public abstract delete(id: EntityId): Promise<void>
+  public async delete(_id: EntityId): Promise<void> {
+    throw new Error(this.NOT_IMPLEMENTED)
+  }
 
   public async exists(id: EntityId): Promise<boolean> {
     return (await this.getById(id)) !== null

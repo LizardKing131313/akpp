@@ -1,16 +1,6 @@
 <script setup lang="ts">
-import type { SingupModalPayload } from '~/composables/modal/useSignupModal'
-
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
-
-import SubmitButton from '~/components/form/SubmitButton.vue'
-import ModalClose from '~/components/modal/components/ModalClose.vue'
-import ModalWindow from '~/components/modal/components/ModalWindow.vue'
-
-const props = defineProps<{
-  payload: SingupModalPayload | null
-}>()
 
 const emit = defineEmits<{
   (event: 'close'): void
@@ -37,8 +27,6 @@ const emitClose = (): void => {
 
 const submit = (): void => {
   const payload = {
-    modal: 'signup',
-    source: props.payload?.source ?? 'unknown',
     name: name.value.trim(),
     phone: phone.value.trim(),
     agree: agree.value,

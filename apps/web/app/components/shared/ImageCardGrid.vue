@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import type { ImageCardItem } from '#shared/types/entity'
-import type { Component } from 'vue'
 
-interface CardGridProps {
-  items: ImageCardItem[]
-  cardComponent?: Component
-}
-
-const props = defineProps<CardGridProps>()
+const props = withDefaults(defineProps<{ items?: ImageCardItem[] }>(), { items: () => [] })
 </script>
 
 <template>

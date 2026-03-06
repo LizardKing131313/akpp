@@ -1,11 +1,36 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-defineProps<{
-  brandTitle: string
-  problemTitle: string
-  symptomTitle: string
-}>()
+withDefaults(
+  defineProps<{
+    readonly brandTitle: string
+    readonly problemTitle: string
+    readonly symptomTitle: string
+
+    readonly title?: string
+    readonly description?: string
+
+    readonly autoLabel?: string
+    readonly problemLabel?: string
+
+    readonly nameLabel?: string
+    readonly namePlaceholder?: string
+
+    readonly submitLabel?: string
+  }>(),
+  {
+    title: 'Готово! Получите расчет',
+    description: 'Оставьте телефон, мастер уже делает смету.',
+
+    autoLabel: 'Авто:',
+    problemLabel: 'Проблема:',
+
+    nameLabel: 'Имя',
+    namePlaceholder: 'Как вас зовут?',
+
+    submitLabel: 'Узнать стоимость',
+  }
+)
 
 const emit = defineEmits<{
   (event: 'edit'): void
@@ -27,23 +52,33 @@ const handleSubmit = (): void => {
   const phoneValue = customerPhone.value.trim()
   if (nameValue.length === 0 || phoneValue.length === 0) return
   if (!isConsentAccepted.value) return
-  emit('submit', { customerName: nameValue, customerPhone: phoneValue })
+
+  emit('submit', {
+    customerName: nameValue,
+    customerPhone: phoneValue,
+  })
 }
 </script>
 
 <template>
   <div class="w-full">
-    <QuizStepTitle title="Готово! Получите расчет">
-      Оставьте телефон, мастер уже делает смету.
+    <QuizStepTitle :title="title">
+      {{ description }}
     </QuizStepTitle>
 
     <div class="text-brand-dark mt-5 space-y-2 text-sm font-bold">
       <div>
-        Авто: <span class="font-medium">{{ brandTitle }}</span>
+        {{ autoLabel }}
+        <span class="font-medium">
+          {{ brandTitle }}
+        </span>
       </div>
 
       <div>
-        Проблема: <span class="font-medium">{{ problemTitle }}</span>
+        {{ problemLabel }}
+        <span class="font-medium">
+          {{ problemTitle }}
+        </span>
       </div>
 
       <div class="text-brand-grey-light">
@@ -57,8 +92,8 @@ const handleSubmit = (): void => {
       @enter="handleSubmit">
       <FormInput
         v-model="customerName"
-        label="Имя"
-        placeholder="Как вас зовут?"
+        :label="nameLabel"
+        :placeholder="namePlaceholder"
         autocomplete="name" />
     </LeadFields>
 
@@ -66,7 +101,8 @@ const handleSubmit = (): void => {
       :disabled="isSubmitDisabled"
       @click="handleSubmit"
       class="mt-8 flex items-center justify-center gap-3">
-      Узнать стоимость <Arrow direction="right" class="text-brand-white" />
+      {{ submitLabel }}
+      <Arrow direction="right" class="text-brand-white" />
     </MainButton>
   </div>
 </template>

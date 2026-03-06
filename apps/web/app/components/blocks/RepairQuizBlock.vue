@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
 
-import { getBrands } from '#server/api/brands/index.get'
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
-import { cn } from '#shared/lib/cn'
 
 withDefaults(
   defineProps<{
     brands?: readonly BrandItem[]
   }>(),
   {
-    brands: getBrands,
+    brands: () => [],
   }
 )
 
@@ -34,17 +32,7 @@ const handleQuizSubmit = (payload: {
 
 <template>
   <section class="relative">
-    <div
-      :class="
-        cn(
-          `
-            pointer-events-none absolute inset-y-0
-            left-1/2 w-screen -translate-x-1/2
-            bg-[radial-gradient(ellipse_80%_100%_at_center,#3C3C3C_0%,#222222_100%)]
-            md:bg-[radial-gradient(ellipse_40%_100%_at_center,#3C3C3C_0%,#222222_100%)]
-          `
-        )
-      " />
+    <div class="brand-gradient left-1/2 w-screen -translate-x-1/2" />
 
     <TwoColumns class="relative mx-auto grid max-w-6xl gap-2 lg:grid-cols-2">
       <CalculateBanner />
