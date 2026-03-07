@@ -6,11 +6,10 @@ import { computed } from 'vue'
 definePageMeta({
   pageHeader: {
     kind: 'breadcrumbs',
-    title: 'Примеры работ',
-    backgroundSrc: '/images/breadcrumbs.jpg',
-    items: [
-      { label: 'Главная', to: '/' },
-      { label: 'Примеры работ', to: '/work' },
+    breadcrumb: 'Примеры работ',
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: 'Примеры работ', slug: '/work' },
     ],
   },
 })

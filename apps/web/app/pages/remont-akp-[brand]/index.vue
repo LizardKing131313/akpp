@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import type { WhySettings } from '#shared/types/why'
+
+definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    breadcrumb: 'Ремонт АКПП',
+    breadcrumbs: [{ name: 'Главная', slug: '/' }, { name: 'Ремонт АКПП' }],
+  },
+})
+
 const value = {} as WhySettings
 </script>
 

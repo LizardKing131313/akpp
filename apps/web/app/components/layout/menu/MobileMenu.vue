@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
+import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
+
 type MenuScreen = {
-  title: string
+  title?: string
   entries: MenuItem[]
   showLogo: boolean
 }
@@ -11,23 +13,8 @@ const props = withDefaults(
   defineProps<{
     open: boolean
     items: MenuItem[]
-    logoSource?: string
-    logoAlt?: string
-    rootTitle?: string
-    menuAriaLabel?: string
-    backAriaLabel?: string
-    openSectionAriaPrefix?: string
-    selectItemAriaPrefix?: string
   }>(),
-  {
-    logoSource: '',
-    logoAlt: '',
-    rootTitle: '',
-    menuAriaLabel: 'Меню',
-    backAriaLabel: 'Назад',
-    openSectionAriaPrefix: 'Открыть раздел',
-    selectItemAriaPrefix: 'Выбрать пункт',
-  }
+  {}
 )
 
 const emit = defineEmits<{
@@ -36,13 +23,11 @@ const emit = defineEmits<{
 }>()
 
 const screenStack = ref<MenuScreen[]>([])
-
-const rootTitle = computed<string>(() => props.rootTitle ?? '')
+const settings = useHeaderUiSettings()
 
 const ensureRootScreen = (): void => {
   screenStack.value = [
     {
-      title: rootTitle.value,
       entries: props.items,
       showLogo: true,
     },
@@ -60,7 +45,7 @@ const activeScreen = computed<MenuScreen | null>(() => {
   return lastIndex >= 0 ? (screenStack.value[lastIndex] ?? null) : null
 })
 
-const activeTitle = computed<string>(() => activeScreen.value?.title ?? rootTitle.value)
+const activeTitle = computed<string>(() => activeScreen.value?.title ?? '')
 const activeEntries = computed<MenuItem[]>(() => activeScreen.value?.entries ?? [])
 const showLogo = computed<boolean>(() => activeScreen.value?.showLogo ?? true)
 
@@ -148,7 +133,7 @@ onBeforeUnmount(() => {
         v-if="open"
         id="mobile-menu"
         ref="drawerRef"
-        :aria-label="props.menuAriaLabel"
+        :aria-label="settings.mobile_menu_aria_label"
         aria-modal="true"
         class="bg-brand-white text-brand-dark fixed top-0 left-0 z-200 flex h-dvh w-65 flex-col"
         role="dialog"
@@ -162,7 +147,7 @@ onBeforeUnmount(() => {
               v-if="canGoBack"
               class="bg-brand-dark text-brand-white flex h-14 w-14 items-center justify-center"
               type="button"
-              :aria-label="props.backAriaLabel"
+              :aria-label="settings.mobile_menu_back_aria_label"
               @click="goBack">
               <Arrow direction="left" class="text-brand-white" />
             </button>
@@ -171,8 +156,8 @@ onBeforeUnmount(() => {
           <div class="flex h-14 items-center justify-center">
             <NuxtImg
               v-if="showLogo"
-              :src="logoSource"
-              :alt="logoAlt"
+              :src="settings.menu_mobile_logo_source"
+              :alt="settings.menu_mobile_logo_alt"
               width="220"
               height="40"
               class="h-8 w-auto" />
@@ -189,8 +174,6 @@ onBeforeUnmount(() => {
             v-for="entry in activeEntries"
             :key="entry.id"
             :entry
-            :openSectionAriaPrefix="props.openSectionAriaPrefix"
-            :selectItemAriaPrefix="props.selectItemAriaPrefix"
             @navigate="openChildren"
             @select="handleSelect" />
         </nav>

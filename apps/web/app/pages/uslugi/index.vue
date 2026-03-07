@@ -1,3 +1,16 @@
+<script setup lang="ts">
+definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    breadcrumb: 'Услуги',
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: 'Услуги', slug: '/uslugi' },
+    ],
+  },
+})
+</script>
+
 <template>
   <BrandsGrid />
   <RepairQuizBlock />

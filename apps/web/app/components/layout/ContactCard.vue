@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
 
-type LinkType = 'tel' | 'email' | 'url'
+export type LinkType = 'tel' | 'email' | 'url'
 
 interface ContactCardProps {
-  iconSource: string
-  iconAlt?: string
-  title: string
-  subtitle?: string
-  href?: string
+  iconSource?: string | undefined
+  iconAlt?: string | undefined
+  title?: string | undefined
+  subtitle?: string | undefined
+  href?: string | undefined
   linkType?: LinkType
-  iconClass?: string
-  titleClass?: string
-  subtitleClass?: string
+  iconClass?: string | undefined
+  titleClass?: string | undefined
+  subtitleClass?: string | undefined
 }
 
 const props = withDefaults(defineProps<ContactCardProps>(), {
+  iconSource: '',
   iconAlt: '',
+  title: '',
   subtitle: '',
   href: '',
   linkType: 'url',

@@ -1,3 +1,17 @@
+<script setup lang="ts">
+definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    breadcrumb: 'Определение АКПП',
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: 'Определить АКПП', slug: '/opredelit-akpp' },
+      { name: 'Определение АКПП' },
+    ],
+  },
+})
+</script>
+
 <template>
   <Article>
     adfskfdas';f';sdla 'jasdflk'j dskl kdsjflksdajfsd;kjflksda jflkdsjflk sdjf;lksdjflksdajf

@@ -1,39 +1,25 @@
 <script setup lang="ts">
-interface LogoProps {
-  iconSource?: string
-  iconSourceMobile?: string
-  iconAlt?: string
-  href?: string
-  iconClass?: string
-  iconMobileClass?: string
-}
+import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
 
-withDefaults(defineProps<LogoProps>(), {
-  iconSource: '/images/logo/logo.svg',
-  iconSourceMobile: '/images/logo/logo_mobile.svg',
-  iconAlt: 'АКПЦЕНТР+',
-  href: '/',
-  iconClass: '',
-  iconMobileClass: '',
-})
+const settings = useHeaderUiSettings()
 </script>
 
 <template>
   <div>
-    <NuxtLink :to="href">
+    <NuxtLink :to="settings.logo_href">
       <NuxtImg
-        :src="iconSource"
-        :alt="iconAlt"
+        :src="settings.logo_source"
+        :alt="settings.logo_alt"
         width="260"
         height="40"
-        :class="['hidden lg:block', iconClass]" />
+        class="hidden lg:block" />
 
       <NuxtImg
-        :src="iconSourceMobile"
-        :alt="iconAlt"
+        :src="settings.logo_source_mobile"
+        :alt="settings.logo_alt"
         width="95"
         height="40"
-        :class="['lg:hidden', iconMobileClass]" />
+        class="lg:hidden" />
     </NuxtLink>
   </div>
 </template>

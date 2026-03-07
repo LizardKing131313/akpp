@@ -7,31 +7,21 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { computed } from 'vue'
 
 import { useSignupModal } from '~/composables/modal/useSignupModal'
+import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
+import { useHeroes } from '~/composables/useRepoApi'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-const props = withDefaults(
-  defineProps<{
-    slides: HeroItem[]
-    buttonLabel?: string
-    buttonAriaLabel?: string
-    prevSlideAriaLabel?: string
-    nextSlideAriaLabel?: string
-  }>(),
-  {
-    buttonLabel: 'Записаться',
-    buttonAriaLabel: 'Записаться',
-    prevSlideAriaLabel: 'Previous slide',
-    nextSlideAriaLabel: 'Next slide',
-  }
-)
-
 const swiperModules = computed(() => [Autoplay, Navigation])
+const settings = useHeaderUiSettings()
 
 const handleClick = (): void => {
   useSignupModal().openModal()
 }
+
+const { data: heroesData } = useHeroes()
+const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
 </script>
 
 <template>
@@ -44,7 +34,7 @@ const handleClick = (): void => {
         :autoplay="{ delay: 6000, disableOnInteraction: false }"
         :navigation="{ prevEl: '.hero-slider-prev', nextEl: '.hero-slider-next' }"
         class="relative h-100 w-full sm:h-110 lg:h-120">
-        <SwiperSlide v-for="slide in props.slides" :key="slide.id" class="relative h-full w-full">
+        <SwiperSlide v-for="slide in slides" :key="slide.id" class="relative h-full w-full">
           <NuxtImg
             :src="slide.image_source"
             :alt="slide.image_alt"
@@ -90,9 +80,9 @@ const handleClick = (): void => {
 
               <MainButton
                 @click="handleClick"
-                :aria-label="buttonAriaLabel"
+                :aria-label="settings.hero_button_aria_label"
                 class="z-20 mt-7 w-auto px-10 tracking-wide uppercase">
-                {{ buttonLabel }}
+                {{ settings.hero_button_label }}
               </MainButton>
             </div>
           </div>
@@ -103,7 +93,7 @@ const handleClick = (): void => {
         <div class="relative mx-auto h-full max-w-6xl px-4">
           <button
             type="button"
-            :aria-label="prevSlideAriaLabel"
+            :aria-label="settings.hero_prev_slide_aria_label"
             :class="
               cn(`
                 hero-slider-prev bg-brand-soft/25 text-brand-soft
@@ -117,7 +107,7 @@ const handleClick = (): void => {
 
           <button
             type="button"
-            :aria-label="nextSlideAriaLabel"
+            :aria-label="settings.hero_next_slide_aria_label"
             :class="
               cn(`
                 hero-slider-next bg-brand-soft/25 text-brand-soft

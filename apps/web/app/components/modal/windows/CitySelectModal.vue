@@ -4,54 +4,87 @@ import type { CityItem } from '#shared/types/city'
 import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
 
-const props = withDefaults(
-  defineProps<{
-    cities?: CityItem[]
-    selectedCityId?: string
-    title?: string
-    searchPlaceholder?: string
-    emptyText?: string
-  }>(),
-  {
-    title: 'Выбрать город',
-    searchPlaceholder: 'Поиск по городу',
-    emptyText: 'Ничего не найдено',
-    cities: () => [],
-    selectedCityId: 'msk',
-  }
-)
+import { useActiveCity } from '~/composables/useActiveCity'
+import { useCities } from '~/composables/useRepoApi'
 
 const emit = defineEmits<{
   (event: 'close'): void
-  (event: 'select', cityId: string): void
 }>()
+
+const title = 'Выбрать город'
+const searchPlaceholder = 'Поиск по городу'
+const emptyText = 'Ничего не найдено'
+
+const { data: citiesData } = useCities()
+const activeCity = useActiveCity()
+
+const cities = computed<readonly CityItem[]>(() => citiesData.value ?? [])
+const selectedCityId = computed<string>(() => activeCity.value?.id ?? '')
 
 const searchValue = ref<string>('')
 const debouncedSearchValue = useDebouncedRef(searchValue, { delayMs: 300 })
 
-const normalizedSearch = computed<string>(() => {
-  return debouncedSearchValue.value.trim().toLowerCase()
-})
+const normalizedSearch = computed<string>(() => debouncedSearchValue.value.trim().toLowerCase())
 
 const filteredCities = computed<readonly CityItem[]>(() => {
   const queryValue = normalizedSearch.value
-
   if (queryValue.length === 0) {
-    return props.cities
+    return cities.value
   }
 
-  return props.cities.filter((cityItem) => {
-    return cityItem.name?.toLowerCase().includes(queryValue)
-  })
+  return cities.value.filter((cityItem) => cityItem.name.toLowerCase().includes(queryValue))
 })
 
 const emitClose = (): void => {
   emit('close')
 }
 
+const resolveBaseDomain = (hostname: string): string => {
+  const hostParts = hostname.split('.').filter((part) => part.length > 0)
+
+  if (hostname === 'localhost') {
+    return 'localhost'
+  }
+
+  if (hostParts.length >= 3 && hostParts[0] !== 'www') {
+    return hostParts.slice(1).join('.')
+  }
+
+  if (hostParts.length >= 3 && hostParts[0] === 'www') {
+    return hostParts.slice(1).join('.')
+  }
+
+  return hostname
+}
+
+const buildCityUrl = (citySlug: string, currentUrl: URL): URL => {
+  const targetUrl = new URL(currentUrl.toString())
+  const baseDomain = resolveBaseDomain(currentUrl.hostname)
+  targetUrl.hostname = `${citySlug}.${baseDomain}`
+  return targetUrl
+}
+
 const handleSelect = (cityId: string): void => {
-  emit('select', cityId)
-  emitClose()
+  const selectedCity = cities.value.find((cityItem) => cityItem.id === cityId)
+  if (!selectedCity) {
+    emitClose()
+    return
+  }
+
+  if (!import.meta.client) {
+    emitClose()
+    return
+  }
+
+  const currentUrl = new URL(window.location.href)
+  const targetUrl = buildCityUrl(selectedCity.slug, currentUrl)
+
+  if (targetUrl.toString() === currentUrl.toString()) {
+    emitClose()
+    return
+  }
+
+  window.location.assign(targetUrl.toString())
 }
 </script>
 
@@ -63,7 +96,7 @@ const handleSelect = (cityId: string): void => {
       class="max-h-[85svh] overflow-y-auto px-5 pt-7 pb-6 sm:max-h-none sm:px-8 sm:pt-10 sm:pb-8">
       <div class="pr-10">
         <div class="text-brand-dark text-2xl font-extrabold tracking-wide uppercase sm:text-4xl">
-          {{ props.title }}
+          {{ title }}
         </div>
       </div>
 
@@ -71,7 +104,7 @@ const handleSelect = (cityId: string): void => {
         <input
           v-model="searchValue"
           type="text"
-          :placeholder="props.searchPlaceholder"
+          :placeholder="searchPlaceholder"
           :class="
             cn(`
               bg-brand-white text-brand-dark placeholder:text-brand-grey-light
@@ -92,7 +125,7 @@ const handleSelect = (cityId: string): void => {
                   cn(
                     `text-brand-dark hover:text-brand-red flex w-full
                     items-start gap-3 text-left text-lg leading-6 transition-colors`,
-                    city.id === props.selectedCityId ? 'text-brand-red font-semibold' : ''
+                    city.id === selectedCityId ? 'text-brand-red font-semibold' : ''
                   )
                 "
                 @click="handleSelect(city.id)">
@@ -106,7 +139,7 @@ const handleSelect = (cityId: string): void => {
           </ul>
 
           <div v-else class="text-brand-grey py-6 text-sm">
-            {{ props.emptyText }}
+            {{ emptyText }}
           </div>
         </div>
       </div>

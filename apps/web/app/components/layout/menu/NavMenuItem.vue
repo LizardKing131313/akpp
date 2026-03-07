@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { cn } from '#shared/lib/cn'
+
 defineProps<{ menuNode: MenuItem }>()
 
-const buttonClass =
-  'flex-1 py-4 text-center uppercase ' +
-  'text-sm cursor-pointer text-brand-white hover:text-brand-red'
+const buttonClass = cn(`
+    text-brand-white hover:text-brand-red flex-1
+    cursor-pointer py-4 text-center text-sm uppercase
+  `)
 </script>
 
 <template>

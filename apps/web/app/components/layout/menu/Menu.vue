@@ -1,30 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { MenuItem } from '#shared/types/menu'
+
+import { computed, ref } from 'vue'
+
+import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
+import { useMenus } from '~/composables/useRepoApi'
 
 const isMobileMenuOpen = ref<boolean>(false)
+const { data: menusData } = useMenus()
+const menuItems = computed<MenuItem[]>(() => menusData.value ?? [])
 
-withDefaults(
-  defineProps<{
-    menuItems?: MenuItem[]
-    menuOpenAriaLabel?: string
-    mobileMenuAriaLabel?: string
-    mobileMenuBackAriaLabel?: string
-    mobileMenuOpenSectionAriaPrefix?: string
-    mobileMenuSelectItemAriaPrefix?: string
-    menuMobileLogoSource?: string
-    menuMobileLogoAlt?: string
-  }>(),
-  {
-    menuItems: () => [],
-    menuOpenAriaLabel: 'Открыть меню',
-    mobileMenuAriaLabel: 'Меню',
-    mobileMenuBackAriaLabel: 'Назад',
-    mobileMenuOpenSectionAriaPrefix: 'Открыть раздел',
-    mobileMenuSelectItemAriaPrefix: 'Выбрать пункт',
-    menuMobileLogoSource: '/images/logo/logo_menu.svg',
-    menuMobileLogoAlt: 'menu logo',
-  }
-)
+const settings = useHeaderUiSettings()
 </script>
 
 <template>
@@ -36,21 +22,13 @@ withDefaults(
         class="px-5"
         type="button"
         aria-controls="mobile-menu"
-        :aria-label="menuOpenAriaLabel"
+        :aria-label="settings.menu_open_aria_label"
         :aria-expanded="isMobileMenuOpen"
         @click="isMobileMenuOpen = true">
         <Burger />
       </button>
     </div>
 
-    <MobileMenu
-      v-model:open="isMobileMenuOpen"
-      :items="menuItems"
-      :logoSource="menuMobileLogoSource"
-      :logoAlt="menuMobileLogoAlt"
-      :menuAriaLabel="mobileMenuAriaLabel"
-      :backAriaLabel="mobileMenuBackAriaLabel"
-      :openSectionAriaPrefix="mobileMenuOpenSectionAriaPrefix"
-      :selectItemAriaPrefix="mobileMenuSelectItemAriaPrefix" />
+    <MobileMenu v-model:open="isMobileMenuOpen" :items="menuItems" />
   </nav>
 </template>

@@ -1,22 +1,32 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+const { data: policyData } = await usePolicySettings()
+
+const defaultTitle = 'Политика конфиденциальности'
+
+const policyTitle = computed<string>(() => {
+  return policyData.value?.title ?? defaultTitle
+})
+
 definePageMeta({
   pageHeader: {
     kind: 'breadcrumbs',
-    title: 'Политика конфиденциальности',
-    backgroundSrc: '/images/breadcrumbs.jpg',
+    breadcrumb: defaultTitle,
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: defaultTitle, slug: '/policy' },
+    ],
   },
-})
-
-const { data: policyData } = await usePolicySettings()
-
-const policyTitle = computed<string>(() => {
-  return policyData.value?.title ?? 'Политика конфиденциальности'
 })
 
 const policyArticle = computed<string>(() => {
   return policyData.value?.article ?? ''
+})
+
+useDynamicBreadcrumbs({
+  title: policyTitle,
+  baseItems: [{ name: 'Главная', slug: '/' }],
 })
 </script>
 

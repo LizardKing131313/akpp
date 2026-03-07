@@ -6,6 +6,14 @@ import type { LocationItem } from '#shared/types/location'
 import { computed, ref, watch } from 'vue'
 
 definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    breadcrumb: 'Контакты',
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: 'Контакты', slug: '/kontaktyi' },
+    ],
+  },
   footer: {
     hideContacts: true,
   },

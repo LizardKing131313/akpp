@@ -1,6 +1,39 @@
 <script setup lang="ts">
 import type { WhySettings } from '#shared/types/why'
+
+import { computed } from 'vue'
+
+definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    breadcrumb: 'Услуга',
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: 'Услуги', slug: '/uslugi' },
+      { name: 'Услуга' },
+    ],
+  },
+})
+
 const value = {} as WhySettings
+const route = useRoute()
+
+const serviceTitle = computed<string>(() => {
+  const rawSlug = String(route.params.id ?? '').trim()
+  if (rawSlug.length === 0) {
+    return 'Услуга'
+  }
+
+  return rawSlug.replace(/-/g, ' ')
+})
+
+useDynamicBreadcrumbs({
+  title: serviceTitle,
+  baseItems: [
+    { name: 'Главная', slug: '/' },
+    { name: 'Услуги', slug: '/uslugi' },
+  ],
+})
 </script>
 
 <template>

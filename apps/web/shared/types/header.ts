@@ -1,5 +1,4 @@
-import type { RouteBreadcrumbItem } from '#shared/types/breadcrumb'
-import type { HeroItem } from '#shared/types/hero'
+import type { BreadcrumbItem } from '#shared/types/breadcrumb'
 
 export type HeaderSettings = {
   readonly logo_source: string
@@ -32,16 +31,10 @@ export type HeaderSettings = {
   readonly menu_mobile_logo_alt: string
 }
 
-export type PageHeaderMeta =
-  | {
-      kind: 'hero'
-      slides: HeroItem[]
-    }
-  | {
-      kind: 'breadcrumbs'
-      title: string
-      items?: RouteBreadcrumbItem[]
-    }
-  | {
-      kind: 'none'
-    }
+export type HeaderSectionMode = 'none' | 'hero' | 'breadcrumbs'
+
+export type PageHeaderMeta = {
+  readonly kind?: HeaderSectionMode
+  readonly breadcrumb?: string
+  readonly breadcrumbs?: BreadcrumbItem[]
+}

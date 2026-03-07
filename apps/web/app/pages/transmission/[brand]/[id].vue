@@ -1,6 +1,46 @@
 <script setup lang="ts">
 import type { WhySettings } from '#shared/types/why'
+
+import { computed } from 'vue'
+
+definePageMeta({
+  pageHeader: {
+    kind: 'breadcrumbs',
+    breadcrumb: 'Трансмиссия',
+    breadcrumbs: [
+      { name: 'Главная', slug: '/' },
+      { name: 'Трансмиссии', slug: '/transmission' },
+      { name: 'Трансмиссия' },
+    ],
+  },
+})
+
 const value = {} as WhySettings
+const route = useRoute()
+
+const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())
+const transmissionTitle = computed<string>(() => {
+  const rawSlug = String(route.params.id ?? '').trim()
+  if (rawSlug.length === 0) {
+    return 'Трансмиссия'
+  }
+
+  return rawSlug.replace(/-/g, ' ')
+})
+
+useDynamicBreadcrumbs({
+  title: transmissionTitle,
+  baseItems: computed(() => {
+    const brandPath =
+      brandSlug.value.length > 0 ? `/transmission/${brandSlug.value}` : '/transmission'
+
+    return [
+      { name: 'Главная', slug: '/' },
+      { name: 'Трансмиссии', slug: '/transmission' },
+      { name: 'Марка', slug: brandPath },
+    ]
+  }),
+})
 </script>
 
 <template>

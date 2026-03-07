@@ -2,7 +2,6 @@
 definePageMeta({
   pageHeader: {
     kind: 'hero',
-    slides: [],
   },
 })
 </script>

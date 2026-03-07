@@ -1,51 +1,31 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from '#shared/types/breadcrumb'
-import type { ImageItem } from '#shared/types/entity'
-
-import { useHead, useRoute, useRuntimeConfig } from '#imports'
+import { useHead, useHeaderUiSettings, useRequestURL, useRoute } from '#imports'
 import { cn } from '#shared/lib/cn'
 import { computed } from 'vue'
 
-const props = withDefaults(
-  defineProps<
-    {
-      title: string
-      items: BreadcrumbItem[]
-      currentUrl?: string
-    } & ImageItem
-  >(),
-  {
-    currentUrl: '',
-    image_source: '/images/breadcrumbs.jpg',
-    image_alt: 'breadcrumbs background',
-  }
-)
+import { usePageHeaderMeta } from '~/composables/usePageHeaderMeta'
 
 const route = useRoute()
-const runtimeConfig = useRuntimeConfig()
+const requestUrl = useRequestURL()
+const { breadcrumbTitle, breadcrumbItems } = usePageHeaderMeta()
 
-const siteUrl = computed<string>(() => {
-  const configuredUrl = runtimeConfig.public?.siteUrl
-  if (typeof configuredUrl === 'string' && configuredUrl.length > 0) return configuredUrl
-  return ''
+const currentOrigin = computed<string>(() => {
+  if (import.meta.client) {
+    return window.location.origin
+  }
+
+  return requestUrl.origin
 })
 
-const normalizedItems = computed<BreadcrumbItem[]>(() =>
-  props.items.filter((item) => {
+const normalizedItems = computed(() =>
+  breadcrumbItems.value.filter((item) => {
     if (!item.name) return false
     return item.name.trim().length > 0
   })
 )
 
 const resolvedCurrentAbsoluteUrl = computed<string>(() => {
-  if (props.currentUrl.length > 0) {
-    if (props.currentUrl.startsWith('http')) return props.currentUrl
-    if (siteUrl.value.length > 0) return new URL(props.currentUrl, siteUrl.value).toString()
-    return props.currentUrl
-  }
-
-  if (siteUrl.value.length > 0) return new URL(route.fullPath, siteUrl.value).toString()
-  return route.fullPath
+  return new URL(route.fullPath, currentOrigin.value).toString()
 })
 
 const jsonLd = computed<Record<string, unknown> | null>(() => {
@@ -60,8 +40,8 @@ const jsonLd = computed<Record<string, unknown> | null>(() => {
       position: index + 1,
       name: item.name,
       item:
-        item.slug && siteUrl.value
-          ? new URL(item.slug, siteUrl.value).toString()
+        item.slug && item.slug.length > 0
+          ? new URL(item.slug, currentOrigin.value).toString()
           : resolvedCurrentAbsoluteUrl.value,
     })),
   }
@@ -80,13 +60,15 @@ useHead(() => {
 })
 
 const isLastIndex = (index: number): boolean => index === normalizedItems.value.length - 1
+
+const setting = useHeaderUiSettings()
 </script>
 
 <template>
   <section class="group relative w-full overflow-hidden">
     <NuxtImg
-      :src="image_source"
-      :alt="image_alt"
+      :src="setting.breadcrumbs_background_source"
+      :alt="setting.breadcrumbs_background_alt"
       class="absolute inset-0 h-full w-full object-cover" />
 
     <div class="bg-brand-dark/80 absolute inset-0"></div>
@@ -105,7 +87,7 @@ const isLastIndex = (index: number): boolean => index === normalizedItems.value.
             uppercase sm:text-4xl sm:font-extrabold
           `)
         ">
-        {{ title }}
+        {{ breadcrumbTitle }}
       </h1>
 
       <nav aria-label="Breadcrumbs" class="mt-4">
