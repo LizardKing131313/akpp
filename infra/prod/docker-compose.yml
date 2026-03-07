@@ -68,6 +68,29 @@ services:
       "
     restart: 'no'
 
+  directus-schema-snapshot:
+    image: directus/directus:11
+    depends_on:
+      directus:
+        condition: service_started
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./schema.json:/schema/schema.json
+    entrypoint: >
+      sh -c "
+        echo 'Waiting for Directus to be ready...' &&
+        sleep 10 &&
+        npx directus schema snapshot /schema/schema.json --format json --yes &&
+        node -e \"const fs=require('node:fs');const p='/schema/schema.json';const raw=fs.readFileSync(p,'utf8');const parsed=JSON.parse(raw);fs.writeFileSync(p,JSON.stringify(parsed,null,2)+'\\n');\"
+      "
+    restart: 'no'
+
   web:
     build:
       context: ../..
