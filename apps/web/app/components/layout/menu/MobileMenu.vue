@@ -7,13 +7,28 @@ type MenuScreen = {
   showLogo: boolean
 }
 
-const props = defineProps<{
-  open: boolean
-  items: MenuItem[]
-  logoSource?: string
-  logoAlt?: string
-  rootTitle?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    open: boolean
+    items: MenuItem[]
+    logoSource?: string
+    logoAlt?: string
+    rootTitle?: string
+    menuAriaLabel?: string
+    backAriaLabel?: string
+    openSectionAriaPrefix?: string
+    selectItemAriaPrefix?: string
+  }>(),
+  {
+    logoSource: '',
+    logoAlt: '',
+    rootTitle: '',
+    menuAriaLabel: 'Меню',
+    backAriaLabel: 'Назад',
+    openSectionAriaPrefix: 'Открыть раздел',
+    selectItemAriaPrefix: 'Выбрать пункт',
+  }
+)
 
 const emit = defineEmits<{
   (event: 'update:open', value: boolean): void
@@ -133,7 +148,7 @@ onBeforeUnmount(() => {
         v-if="open"
         id="mobile-menu"
         ref="drawerRef"
-        aria-label="Меню"
+        :aria-label="props.menuAriaLabel"
         aria-modal="true"
         class="bg-brand-white text-brand-dark fixed top-0 left-0 z-200 flex h-dvh w-65 flex-col"
         role="dialog"
@@ -147,7 +162,7 @@ onBeforeUnmount(() => {
               v-if="canGoBack"
               class="bg-brand-dark text-brand-white flex h-14 w-14 items-center justify-center"
               type="button"
-              aria-label="Назад"
+              :aria-label="props.backAriaLabel"
               @click="goBack">
               <Arrow direction="left" class="text-brand-white" />
             </button>
@@ -174,6 +189,8 @@ onBeforeUnmount(() => {
             v-for="entry in activeEntries"
             :key="entry.id"
             :entry
+            :openSectionAriaPrefix="props.openSectionAriaPrefix"
+            :selectItemAriaPrefix="props.selectItemAriaPrefix"
             @navigate="openChildren"
             @select="handleSelect" />
         </nav>

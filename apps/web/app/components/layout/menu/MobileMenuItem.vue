@@ -7,7 +7,17 @@ const buttonClass = cn(`
   text-left text-sm font-semibold tracking-wide uppercase
 `)
 
-const props = defineProps<{ entry: MenuItem }>()
+const props = withDefaults(
+  defineProps<{
+    entry: MenuItem
+    openSectionAriaPrefix?: string
+    selectItemAriaPrefix?: string
+  }>(),
+  {
+    openSectionAriaPrefix: 'Открыть раздел',
+    selectItemAriaPrefix: 'Выбрать пункт',
+  }
+)
 
 const emit = defineEmits<{
   (event: 'navigate', entry: MenuItem): void
@@ -31,7 +41,7 @@ const select = (): void => {
       v-if="hasChildren"
       :class="buttonClass"
       type="button"
-      :aria-label="`Открыть раздел ${entry.name}`"
+      :aria-label="`${openSectionAriaPrefix} ${entry.name}`"
       @click="navigate">
       <span>{{ entry.name }}</span>
       <Arrow direction="down" />
@@ -45,7 +55,7 @@ const select = (): void => {
       v-else
       :class="buttonClass"
       type="button"
-      :aria-label="`Выбрать пункт ${entry.name}`"
+      :aria-label="`${selectItemAriaPrefix} ${entry.name}`"
       @click="select">
       <span>{{ entry.name }}</span>
     </button>

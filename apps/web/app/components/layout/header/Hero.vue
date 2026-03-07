@@ -11,9 +11,21 @@ import { useSignupModal } from '~/composables/modal/useSignupModal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-const props = withDefaults(defineProps<{ slides: HeroItem[]; buttonLabel?: string }>(), {
-  buttonLabel: 'Записаться',
-})
+const props = withDefaults(
+  defineProps<{
+    slides: HeroItem[]
+    buttonLabel?: string
+    buttonAriaLabel?: string
+    prevSlideAriaLabel?: string
+    nextSlideAriaLabel?: string
+  }>(),
+  {
+    buttonLabel: 'Записаться',
+    buttonAriaLabel: 'Записаться',
+    prevSlideAriaLabel: 'Previous slide',
+    nextSlideAriaLabel: 'Next slide',
+  }
+)
 
 const swiperModules = computed(() => [Autoplay, Navigation])
 
@@ -78,6 +90,7 @@ const handleClick = (): void => {
 
               <MainButton
                 @click="handleClick"
+                :aria-label="buttonAriaLabel"
                 class="z-20 mt-7 w-auto px-10 tracking-wide uppercase">
                 {{ buttonLabel }}
               </MainButton>
@@ -90,7 +103,7 @@ const handleClick = (): void => {
         <div class="relative mx-auto h-full max-w-6xl px-4">
           <button
             type="button"
-            aria-label="Previous slide"
+            :aria-label="prevSlideAriaLabel"
             :class="
               cn(`
                 hero-slider-prev bg-brand-soft/25 text-brand-soft
@@ -104,7 +117,7 @@ const handleClick = (): void => {
 
           <button
             type="button"
-            aria-label="Next slide"
+            :aria-label="nextSlideAriaLabel"
             :class="
               cn(`
                 hero-slider-next bg-brand-soft/25 text-brand-soft

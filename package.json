@@ -43,5 +43,10 @@
     "*.{json,css,md,yml,yaml}": [
       "prettier --write"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "source-map": "0.6.1"
+    }
   }
 }

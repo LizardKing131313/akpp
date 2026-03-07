@@ -8,9 +8,12 @@ interface TopBarProps {
   iconAlt?: string
   iconClass?: string
   city: string
+  cityButtonAriaLabel?: string
   searchIconSource: string
+  searchIconAlt?: string
   searchIconClass?: string
   searchPlaceholder?: string
+  searchInputAriaLabel?: string
 }
 
 withDefaults(defineProps<TopBarProps>(), {
@@ -18,9 +21,12 @@ withDefaults(defineProps<TopBarProps>(), {
   iconAlt: '',
   iconClass: '',
   city: '',
+  cityButtonAriaLabel: '',
   searchIconSource: '',
+  searchIconAlt: '',
   searchIconClass: '',
   searchPlaceholder: '',
+  searchInputAriaLabel: '',
 })
 
 const handleClick = (): void => {
@@ -40,7 +46,7 @@ const handleClick = (): void => {
       <button
         class="group hover:text-brand-red flex items-center gap-2 transition-colors duration-200"
         type="button"
-        aria-label="Выбрать город"
+        :aria-label="cityButtonAriaLabel"
         @click="handleClick">
         <NuxtImg
           :src="iconSource"
@@ -57,7 +63,7 @@ const handleClick = (): void => {
       <div class="relative hidden w-64 md:block">
         <NuxtImg
           :src="searchIconSource"
-          alt=""
+          :alt="searchIconAlt"
           aria-hidden="true"
           width="16px"
           height="16px"
@@ -69,7 +75,7 @@ const handleClick = (): void => {
         <input
           type="text"
           :placeholder="searchPlaceholder"
-          aria-label="Поиск по сайту"
+          :aria-label="searchInputAriaLabel"
           :class="
             cn(`
               bg-brand-grey text-brand-white placeholder-brand-grey-light

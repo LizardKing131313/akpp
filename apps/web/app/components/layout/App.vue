@@ -84,7 +84,14 @@ const breadcrumbsItems = computed<BreadcrumbItem[]>(() => {
 })
 const breadcrumbsImageSource = computed<string>(() => {
   const imageSource = pageHeaderMeta.value.backgroundSrc?.trim() ?? ''
-  return imageSource.length > 0 ? imageSource : '/images/breadcrumbs.jpg'
+  if (imageSource.length > 0) {
+    return imageSource
+  }
+
+  return headerSettingsData.value?.breadcrumbs_background_source ?? '/images/breadcrumbs.jpg'
+})
+const breadcrumbsImageAlt = computed<string>(() => {
+  return headerSettingsData.value?.breadcrumbs_background_alt ?? 'breadcrumbs background'
 })
 
 const menuItems = computed(() => menusData.value ?? [])
@@ -94,10 +101,6 @@ const footerLocations = computed(() => locationsData.value ?? [])
 const footerArticles = computed(() => {
   const articles = articlesData.value ?? []
   return articles.slice(0, 3)
-})
-
-const searchPlaceholder = computed<string>(() => {
-  return headerSettingsData.value?.search ?? 'Поиск'
 })
 </script>
 
@@ -110,8 +113,9 @@ const searchPlaceholder = computed<string>(() => {
       :breadcrumbsTitle="breadcrumbsTitle"
       :breadcrumbsItems="breadcrumbsItems"
       :breadcrumbsImageSource="breadcrumbsImageSource"
+      :breadcrumbsImageAlt="breadcrumbsImageAlt"
       :menuItems="menuItems"
-      :searchPlaceholder="searchPlaceholder" />
+      :settings="headerSettingsData" />
 
     <Section>
       <slot />

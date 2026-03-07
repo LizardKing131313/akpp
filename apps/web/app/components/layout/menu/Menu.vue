@@ -3,7 +3,28 @@ import { ref } from 'vue'
 
 const isMobileMenuOpen = ref<boolean>(false)
 
-withDefaults(defineProps<{ menuItems?: MenuItem[] }>(), { menuItems: () => [] })
+withDefaults(
+  defineProps<{
+    menuItems?: MenuItem[]
+    menuOpenAriaLabel?: string
+    mobileMenuAriaLabel?: string
+    mobileMenuBackAriaLabel?: string
+    mobileMenuOpenSectionAriaPrefix?: string
+    mobileMenuSelectItemAriaPrefix?: string
+    menuMobileLogoSource?: string
+    menuMobileLogoAlt?: string
+  }>(),
+  {
+    menuItems: () => [],
+    menuOpenAriaLabel: 'Открыть меню',
+    mobileMenuAriaLabel: 'Меню',
+    mobileMenuBackAriaLabel: 'Назад',
+    mobileMenuOpenSectionAriaPrefix: 'Открыть раздел',
+    mobileMenuSelectItemAriaPrefix: 'Выбрать пункт',
+    menuMobileLogoSource: '/images/logo/logo_menu.svg',
+    menuMobileLogoAlt: 'menu logo',
+  }
+)
 </script>
 
 <template>
@@ -15,7 +36,7 @@ withDefaults(defineProps<{ menuItems?: MenuItem[] }>(), { menuItems: () => [] })
         class="px-5"
         type="button"
         aria-controls="mobile-menu"
-        aria-label="Открыть меню"
+        :aria-label="menuOpenAriaLabel"
         :aria-expanded="isMobileMenuOpen"
         @click="isMobileMenuOpen = true">
         <Burger />
@@ -25,6 +46,11 @@ withDefaults(defineProps<{ menuItems?: MenuItem[] }>(), { menuItems: () => [] })
     <MobileMenu
       v-model:open="isMobileMenuOpen"
       :items="menuItems"
-      logoSource="/images/logo/logo_menu.svg" />
+      :logoSource="menuMobileLogoSource"
+      :logoAlt="menuMobileLogoAlt"
+      :menuAriaLabel="mobileMenuAriaLabel"
+      :backAriaLabel="mobileMenuBackAriaLabel"
+      :openSectionAriaPrefix="mobileMenuOpenSectionAriaPrefix"
+      :selectItemAriaPrefix="mobileMenuSelectItemAriaPrefix" />
   </nav>
 </template>

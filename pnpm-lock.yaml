@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  source-map: 0.6.1
+
 importers:
   .:
     devDependencies:
@@ -7246,13 +7249,6 @@ packages:
       }
     engines: { node: '>=0.10.0' }
 
-  source-map@0.7.6:
-    resolution:
-      {
-        integrity: sha512-i5uvt8C3ikiWeNZSVZNWcfZPItFQOsYTUAOkcUPGd8DqDy1uOUikjt5dG+uRlwyvR108Fb9DOd4GvXfT0N2/uQ==,
-      }
-    engines: { node: '>= 12' }
-
   spark-md5@3.0.2:
     resolution:
       {
@@ -11954,7 +11950,7 @@ snapshots:
       semver: 7.7.4
       serve-placeholder: 2.0.2
       serve-static: 2.2.1
-      source-map: 0.7.6
+      source-map: 0.6.1
       std-env: 3.10.0
       ufo: 1.6.3
       ultrahtml: 1.6.0
@@ -12783,7 +12779,7 @@ snapshots:
     dependencies:
       open: 8.4.2
       picomatch: 4.0.3
-      source-map: 0.7.6
+      source-map: 0.6.1
       yargs: 17.7.2
     optionalDependencies:
       rollup: 4.57.1
@@ -13030,8 +13026,6 @@ snapshots:
       source-map: 0.6.1
 
   source-map@0.6.1: {}
-
-  source-map@0.7.6: {}
 
   spark-md5@3.0.2: {}
 
