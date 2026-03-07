@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ArticleItem } from '#shared/types/article'
 import type { CityItem } from '#shared/types/city'
 import type { YandexMapPoint } from '#shared/types/entity'
 import type { FooterSettings } from '#shared/types/footer'
@@ -10,9 +11,10 @@ import { computed } from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    settings?: FooterSettings
-    city?: CityItem | null
-    locations?: LocationItem[]
+    settings?: FooterSettings | undefined
+    city?: CityItem | null | undefined
+    locations?: LocationItem[] | undefined
+    articles?: ArticleItem[] | undefined
   }>(),
   {
     settings: () => ({
@@ -32,6 +34,7 @@ const props = withDefaults(
     }),
     city: null,
     locations: () => [],
+    articles: () => [],
   }
 )
 
@@ -180,7 +183,10 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           </div>
         </TwoColumns>
 
-        <FooterArticles />
+        <FooterArticles
+          :title="props.settings.articles"
+          :articles="props.articles"
+          :showAllText="props.settings.show_all_articles" />
       </TwoColumns>
 
       <TwoColumns class="relative mx-auto max-w-6xl">

@@ -11,15 +11,30 @@ definePageMeta({
   },
 })
 
-const cities: CityItem[] = []
+const { data: citiesData } = await useCities()
+const { data: allLocationsData } = await useLocations()
 
-const allLocations: LocationItem[] = []
+const cities = computed<CityItem[]>(() => citiesData.value ?? [])
+const allLocations = computed<LocationItem[]>(() => allLocationsData.value ?? [])
 
-const selectedCityId = ref<string>(cities[0]?.id ?? '')
+const selectedCityId = ref<string>('')
 const selectedLocationId = ref<string | null>(null)
 
+watch(
+  () => cities.value,
+  (cityList) => {
+    if (selectedCityId.value.length > 0) {
+      return
+    }
+
+    const defaultCity = cityList.find((cityItem) => cityItem.is_default)
+    selectedCityId.value = defaultCity?.id ?? cityList[0]?.id ?? ''
+  },
+  { immediate: true }
+)
+
 const filteredLocations = computed<LocationItem[]>(() => {
-  return allLocations.filter((locationItem) => locationItem.city_id === selectedCityId.value)
+  return allLocations.value.filter((locationItem) => locationItem.city_id === selectedCityId.value)
 })
 
 const selectedLocation = computed<LocationItem | null>(() => {
@@ -42,7 +57,7 @@ const mapPoints = computed<YandexMapPoint[]>(() => {
     return [
       {
         id: selectedLocation.value.id,
-        title: selectedLocation.value.name,
+        title: selectedLocation.value.name ?? selectedLocation.value.address,
         lng: selectedLocation.value.lng,
         lat: selectedLocation.value.lat,
       },
@@ -51,7 +66,7 @@ const mapPoints = computed<YandexMapPoint[]>(() => {
 
   return filteredLocations.value.map((locationItem) => ({
     id: locationItem.id,
-    title: locationItem.name,
+    title: locationItem.name ?? locationItem.address,
     lng: locationItem.lng,
     lat: locationItem.lat,
   }))

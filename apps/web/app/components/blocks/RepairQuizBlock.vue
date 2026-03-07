@@ -2,8 +2,9 @@
 import type { BrandItem } from '#shared/types/brand'
 
 import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
+import { computed } from 'vue'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     brands?: readonly BrandItem[]
   }>(),
@@ -11,6 +12,16 @@ withDefaults(
     brands: () => [],
   }
 )
+
+const { data: brandsData } = await useBrands()
+
+const resolvedBrands = computed<readonly BrandItem[]>(() => {
+  if (props.brands.length > 0) {
+    return props.brands
+  }
+
+  return brandsData.value ?? []
+})
 
 const quizProblems = getProblems()
 
@@ -39,7 +50,7 @@ const handleQuizSubmit = (payload: {
 
       <RepairQuiz
         class="w-full px-4 py-12"
-        :brands="brands"
+        :brands="resolvedBrands"
         :problems="quizProblems"
         :symptoms="quizSymptoms"
         @submit="handleQuizSubmit" />

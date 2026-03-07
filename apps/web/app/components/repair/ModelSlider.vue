@@ -3,13 +3,24 @@ import type { ModelItem } from '#shared/types/model'
 
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { computed } from 'vue'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 
 const swiperModules = [Navigation]
 
-withDefaults(defineProps<{ items?: ModelItem[] }>(), { items: () => [] })
+const props = withDefaults(defineProps<{ items?: ModelItem[] }>(), { items: () => [] })
+
+const { data: modelsData } = await useModels()
+
+const resolvedItems = computed<ModelItem[]>(() => {
+  if (props.items.length > 0) {
+    return props.items
+  }
+
+  return modelsData.value ?? []
+})
 </script>
 
 <template>
@@ -29,7 +40,7 @@ withDefaults(defineProps<{ items?: ModelItem[] }>(), { items: () => [] })
         1280: { slidesPerView: 5, spaceBetween: 16 },
       }"
       class="model-slider relative">
-      <SwiperSlide v-for="model in items" :key="model.id">
+      <SwiperSlide v-for="model in resolvedItems" :key="model.id">
         <SliderItem v-bind="model" sizes="200px" class="h-50 w-50" />
       </SwiperSlide>
     </Swiper>

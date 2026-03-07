@@ -2,33 +2,35 @@
 import type { BreadcrumbItem } from '#shared/types/breadcrumb'
 import type { CityItem } from '#shared/types/city'
 import type { HeroItem } from '#shared/types/hero'
+import type { MenuItem } from '#shared/types/menu'
 
 import { computed } from 'vue'
 
 type HeaderSectionMode = 'none' | 'hero' | 'breadcrumbs'
 
 type HeaderSectionProps = {
-  readonly city?: CityItem
+  readonly city?: CityItem | undefined
 
-  readonly mode?: HeaderSectionMode
+  readonly mode?: HeaderSectionMode | undefined
 
-  readonly heroSlides?: HeroItem[]
+  readonly heroSlides?: HeroItem[] | undefined
+  readonly menuItems?: MenuItem[] | undefined
 
-  readonly breadcrumbsTitle?: string
-  readonly breadcrumbsImageSource?: string
-  readonly breadcrumbsItems?: BreadcrumbItem[]
+  readonly breadcrumbsTitle?: string | undefined
+  readonly breadcrumbsImageSource?: string | undefined
+  readonly breadcrumbsItems?: BreadcrumbItem[] | undefined
 
-  readonly locationIconSource?: string
-  readonly locationIconAlt?: string
+  readonly locationIconSource?: string | undefined
+  readonly locationIconAlt?: string | undefined
 
-  readonly searchIconSource?: string
-  readonly searchPlaceholder?: string
+  readonly searchIconSource?: string | undefined
+  readonly searchPlaceholder?: string | undefined
 
-  readonly timeIconSource?: string
-  readonly timeIconAlt?: string
+  readonly timeIconSource?: string | undefined
+  readonly timeIconAlt?: string | undefined
 
-  readonly phoneIconSource?: string
-  readonly phoneIconAlt?: string
+  readonly phoneIconSource?: string | undefined
+  readonly phoneIconAlt?: string | undefined
 }
 
 const props = withDefaults(defineProps<HeaderSectionProps>(), {
@@ -46,6 +48,7 @@ const props = withDefaults(defineProps<HeaderSectionProps>(), {
   }),
   mode: 'none',
   heroSlides: () => [],
+  menuItems: () => [],
   breadcrumbsTitle: '',
   breadcrumbsImageSource: '',
   breadcrumbsItems: () => [],
@@ -103,7 +106,7 @@ const isBreadcrumbs = computed<boolean>(() => props.mode === 'breadcrumbs')
       </div>
     </div>
 
-    <Menu />
+    <Menu :menuItems="menuItems" />
   </header>
 
   <Hero v-if="isHero" :slides="heroSlides" />

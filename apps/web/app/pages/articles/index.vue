@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { data: articlesData } = await useArticles()
+</script>
+
 <template>
-  <ImageCardGrid />
+  <ImageCardGrid :items="articlesData ?? []" />
 </template>

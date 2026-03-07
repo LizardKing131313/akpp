@@ -67,13 +67,23 @@ const props = withDefaults(defineProps<GearboxTableProps>(), {
   pageOfLabel: 'of',
 })
 
+const { data: transmissionRangesData } = await useTransmissionRangesWithVariants()
+
+const resolvedRows = computed<TransmissionRangeWithVariants[]>(() => {
+  if (props.rows.length > 0) {
+    return props.rows
+  }
+
+  return transmissionRangesData.value ?? []
+})
+
 type TableRow = ModelVariantItem & {
   readonly akpp: string
   readonly href: string
 }
 
 const tableRows = computed<TableRow[]>(() => {
-  return props.rows.flatMap((rangeItem) => {
+  return resolvedRows.value.flatMap((rangeItem) => {
     const rangeHref = `${props.baseHref}/${rangeItem.slug}`
     const akppTitle = rangeItem.name ?? rangeItem.slug
 

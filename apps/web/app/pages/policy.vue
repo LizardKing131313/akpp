@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 definePageMeta({
   pageHeader: {
     kind: 'breadcrumbs',
@@ -7,23 +9,21 @@ definePageMeta({
   },
 })
 
-withDefaults(defineProps<{ title?: string; policy?: string; agreement?: string }>(), {
-  title: 'Политика конфиденциальности',
-  policy:
-    'Настоящая политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта.',
-  agreement:
-    'Пользователь соглашается с обработкой персональных данных при отправке форм на сайте.',
+const { data: policyData } = await usePolicySettings()
+
+const policyTitle = computed<string>(() => {
+  return policyData.value?.title ?? 'Политика конфиденциальности'
+})
+
+const policyArticle = computed<string>(() => {
+  return policyData.value?.article ?? ''
 })
 </script>
 
 <template>
   <div class="space-y-6">
-    <CenteredTitle>{{ title }}</CenteredTitle>
+    <CenteredTitle>{{ policyTitle }}</CenteredTitle>
 
-    <div class="text-brand-grey space-y-4 text-base leading-relaxed">
-      <p>{{ policy }}</p>
-
-      <p>{{ agreement }}</p>
-    </div>
+    <div class="text-brand-grey prose prose-sm max-w-none" v-html="policyArticle" />
   </div>
 </template>

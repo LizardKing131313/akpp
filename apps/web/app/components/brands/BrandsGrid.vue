@@ -17,18 +17,28 @@ const props = withDefaults(defineProps<BrandsGridProps>(), {
   collapse: 'Свернуть',
 })
 
+const { data: brandsData } = await useBrands()
+
 const isExpanded = ref<boolean>(false)
 const initialMobileCount = 9
 
 const sectionRef = ref<HTMLElement | null>(null)
 
+const resolvedBrands = computed<BrandItem[]>(() => {
+  if (props.brands.length > 0) {
+    return props.brands
+  }
+
+  return brandsData.value ?? []
+})
+
 const mobileBrands = computed<BrandItem[]>(() => {
-  if (isExpanded.value) return props.brands
-  return props.brands.slice(0, initialMobileCount)
+  if (isExpanded.value) return resolvedBrands.value
+  return resolvedBrands.value.slice(0, initialMobileCount)
 })
 
 const shouldShowToggleButton = computed<boolean>(() => {
-  return props.brands.length > initialMobileCount
+  return resolvedBrands.value.length > initialMobileCount
 })
 
 const toggle = async (): Promise<void> => {
@@ -62,7 +72,7 @@ const toggle = async (): Promise<void> => {
       </div>
 
       <div class="hidden grid-cols-4 gap-4 sm:grid md:grid-cols-6 xl:grid-cols-8">
-        <SliderItem v-for="brand in brands" :key="brand.id" v-bind="brand" />
+        <SliderItem v-for="brand in resolvedBrands" :key="brand.id" v-bind="brand" />
       </div>
     </div>
   </section>
