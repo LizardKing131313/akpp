@@ -6,6 +6,7 @@ import { computed, ref } from 'vue'
 
 import ModalClose from '~/components/modal/components/ModalClose.vue'
 import { useLeadSubmit } from '~/composables/useLeadSubmit'
+import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
 
 const emit = defineEmits<{
   (event: 'close'): void
@@ -16,6 +17,8 @@ const emitClose = (): void => {
 }
 
 const isSubmitting = ref<boolean>(false)
+const modalSettings = useModalWindowsUiSettings()
+const settings = computed(() => modalSettings.value.quiz)
 
 const { submitLead } = useLeadSubmit()
 
@@ -89,7 +92,9 @@ const resolvedPayload = computed<QuizModalPayload | null>(() => {
         :symptoms="resolvedPayload.symptoms"
         @submit="handleQuizSubmit" />
 
-      <div v-else class="text-brand-grey-light py-10 text-center text-sm">Нет данных для квиза</div>
+      <div v-else class="text-brand-grey-light py-10 text-center text-sm">
+        {{ settings.empty_text }}
+      </div>
     </div>
   </div>
 </template>

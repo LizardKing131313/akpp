@@ -3,6 +3,7 @@ import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
 import { useLeadSubmit } from '~/composables/useLeadSubmit'
+import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
 
 const emit = defineEmits<{
   (eventName: 'close'): void
@@ -13,6 +14,8 @@ const vin = ref<string>('')
 const phone = ref<string>('')
 const consent = ref<boolean>(false)
 const isSubmitting = ref<boolean>(false)
+const modalSettings = useModalWindowsUiSettings()
+const settings = computed(() => modalSettings.value.shop)
 
 const { submitLead } = useLeadSubmit()
 
@@ -81,27 +84,29 @@ onMounted(() => {
     <div class="px-5 pt-6 pb-6 sm:px-8 sm:pt-8 sm:pb-8">
       <div class="text-left">
         <div class="text-brand-dark text-2xl font-extrabold tracking-wide uppercase sm:text-3xl">
-          Продажа АКПП
+          {{ settings.title }}
         </div>
       </div>
 
-      <form class="mt-5 space-y-4" aria-label="Продажа АКПП" @submit.prevent="submit">
+      <form class="mt-5 space-y-4" :aria-label="settings.form_aria_label" @submit.prevent="submit">
         <LeadFields v-model:phone="phone" v-model:consent="consent" @enter="submit">
           <FormInput
             ref="carInputRef"
             v-model="car"
-            label="Автомобиль"
-            placeholder="Автомобиль: марка, модель и год выпуска?"
+            :label="settings.car_label"
+            :placeholder="settings.car_placeholder"
             autocomplete="off" />
 
           <FormInput
             v-model="vin"
-            label="VIN"
-            placeholder="VIN номер автомобиля"
+            :label="settings.vin_label"
+            :placeholder="settings.vin_placeholder"
             autocomplete="off" />
         </LeadFields>
 
-        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">Узнать цену</SubmitButton>
+        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">
+          {{ settings.submit_label }}
+        </SubmitButton>
       </form>
     </div>
   </div>

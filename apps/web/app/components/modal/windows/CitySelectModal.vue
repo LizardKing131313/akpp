@@ -5,15 +5,15 @@ import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
+import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
 import { useCities } from '~/composables/useRepoApi'
 
 const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
-const title = 'Выбрать город'
-const searchPlaceholder = 'Поиск по городу'
-const emptyText = 'Ничего не найдено'
+const modalSettings = useModalWindowsUiSettings()
+const settings = computed(() => modalSettings.value.city_select)
 
 const { data: citiesData } = useCities()
 const activeCity = useActiveCity()
@@ -96,7 +96,7 @@ const handleSelect = (cityId: string): void => {
       class="max-h-[85svh] overflow-y-auto px-5 pt-7 pb-6 sm:max-h-none sm:px-8 sm:pt-10 sm:pb-8">
       <div class="pr-10">
         <div class="text-brand-dark text-2xl font-extrabold tracking-wide uppercase sm:text-4xl">
-          {{ title }}
+          {{ settings.title }}
         </div>
       </div>
 
@@ -104,7 +104,7 @@ const handleSelect = (cityId: string): void => {
         <input
           v-model="searchValue"
           type="text"
-          :placeholder="searchPlaceholder"
+          :placeholder="settings.search_placeholder"
           :class="
             cn(`
               bg-brand-white text-brand-dark placeholder:text-brand-grey-light
@@ -139,7 +139,7 @@ const handleSelect = (cityId: string): void => {
           </ul>
 
           <div v-else class="text-brand-grey py-6 text-sm">
-            {{ emptyText }}
+            {{ settings.empty_text }}
           </div>
         </div>
       </div>

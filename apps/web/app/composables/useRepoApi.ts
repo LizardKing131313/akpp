@@ -10,6 +10,12 @@ import type { HeaderSettings } from '#shared/types/header'
 import type { HeroItem } from '#shared/types/hero'
 import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
+import type {
+  CitySelectModalUiSettings,
+  QuizModalUiSettings,
+  ShopModalUiSettings,
+  SignupModalUiSettings,
+} from '#shared/types/modal'
 import type { ModelItem } from '#shared/types/model'
 import type { PolicySettings } from '#shared/types/policy'
 import type { QuizData } from '#shared/types/quiz'
@@ -93,6 +99,25 @@ export const useHeaderSettings = () => {
 
 export const usePolicySettings = () => {
   return useStaticApiData<PolicySettings>('policy:settings', '/api/policy')
+}
+
+export const useCitySelectModalSettings = () => {
+  return useStaticApiData<CitySelectModalUiSettings>(
+    'city-select-modal:settings',
+    '/api/city_select_modal'
+  )
+}
+
+export const useQuizModalSettings = () => {
+  return useStaticApiData<QuizModalUiSettings>('quiz-modal:settings', '/api/quiz_modal')
+}
+
+export const useShopModalSettings = () => {
+  return useStaticApiData<ShopModalUiSettings>('shop-modal:settings', '/api/shop_modal')
+}
+
+export const useSignupModalSettings = () => {
+  return useStaticApiData<SignupModalUiSettings>('signup-modal:settings', '/api/signup_modal')
 }
 
 export const useWhySettings = () => {

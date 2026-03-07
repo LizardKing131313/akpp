@@ -3,6 +3,7 @@ import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
 import { useLeadSubmit } from '~/composables/useLeadSubmit'
+import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
 
 const emit = defineEmits<{
   (event: 'close'): void
@@ -18,6 +19,8 @@ const name = ref<string>('')
 const phone = ref<string>('')
 const agree = ref<boolean>(false)
 const isSubmitting = ref<boolean>(false)
+const modalSettings = useModalWindowsUiSettings()
+const settings = computed(() => modalSettings.value.signup)
 
 const { submitLead } = useLeadSubmit()
 
@@ -71,7 +74,7 @@ onMounted(() => {
       class="max-h-[85svh] overflow-y-auto px-5 pt-7 pb-6 sm:max-h-none sm:px-8 sm:pt-10 sm:pb-8">
       <div class="text-center">
         <div class="text-brand-red text-2xl font-extrabold tracking-wide uppercase sm:text-4xl">
-          Записаться
+          {{ settings.title }}
         </div>
 
         <div
@@ -81,33 +84,34 @@ onMounted(() => {
               text-xs leading-relaxed sm:mt-4 sm:text-sm
             `)
           ">
-          Оставьте заявку на бесплатную консультацию и наши специалисты свяжутся с Вами в самое
-          ближайшее время
+          {{ settings.description }}
         </div>
       </div>
 
       <div class="mt-4 flex justify-center sm:mt-6">
         <NuxtImg
-          src="/images/transmission.png"
-          alt="akpp"
+          :src="settings.image_source"
+          :alt="settings.image_alt"
           class="h-24 w-auto object-contain select-none sm:h-40"
           draggable="false" />
       </div>
 
       <form
         class="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
-        aria-label="Записаться"
+        :aria-label="settings.form_aria_label"
         @submit.prevent="submit">
         <LeadFields v-model:phone="phone" v-model:consent="agree" @enter="submit">
           <FormInput
             ref="nameInputRef"
             v-model="name"
-            label="Имя"
-            placeholder="Как вас зовут?"
+            :label="settings.name_label"
+            :placeholder="settings.name_placeholder"
             autocomplete="name" />
         </LeadFields>
 
-        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">Оставить заявку</SubmitButton>
+        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">
+          {{ settings.submit_label }}
+        </SubmitButton>
       </form>
     </div>
   </ModalWindow>
