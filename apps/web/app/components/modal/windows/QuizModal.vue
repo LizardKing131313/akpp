@@ -2,9 +2,10 @@
 import type { QuizModalPayload, QuizSubmitPayload } from '#shared/types/quiz'
 
 import { cn } from '#shared/lib/cn'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import ModalClose from '~/components/modal/components/ModalClose.vue'
+import { useLeadSubmit } from '~/composables/useLeadSubmit'
 
 const emit = defineEmits<{
   (event: 'close'): void
@@ -14,8 +15,33 @@ const emitClose = (): void => {
   emit('close')
 }
 
-const handleQuizSubmit = (_payload: QuizSubmitPayload): void => {
-  emitClose()
+const isSubmitting = ref<boolean>(false)
+
+const { submitLead } = useLeadSubmit()
+
+const handleQuizSubmit = (payload: QuizSubmitPayload): void => {
+  if (isSubmitting.value) return
+
+  void (async () => {
+    isSubmitting.value = true
+
+    try {
+      await submitLead({
+        source: 'quiz',
+        name: payload.customerName,
+        phone: payload.customerPhone,
+        problem: payload.problemTitle,
+        symptoms: payload.symptomTitle,
+        comment: `Марка: ${payload.brandTitle}`,
+      })
+
+      emitClose()
+    } catch {
+      console.error('[lead] quiz submit failed')
+    } finally {
+      isSubmitting.value = false
+    }
+  })()
 }
 
 const props = defineProps<{

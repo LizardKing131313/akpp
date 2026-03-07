@@ -1,13 +1,9 @@
 import type { ErrorSettings } from '#shared/types/error'
 
-import { createDirectusClient } from '#server/services/directus'
+import { SingletonRepository } from '#server/services/repo/singletonRepo'
 
-export class ErrorRepository {
-  public async get(): Promise<ErrorSettings> {
-    const directus = createDirectusClient()
+export class ErrorRepository extends SingletonRepository<ErrorSettings> {
+  protected readonly collection = 'error_settings'
 
-    return await directus.getSingleton<ErrorSettings>('error_settings', {
-      fields: 'title,description,buttonText',
-    })
-  }
+  protected readonly fields = 'title,description,buttonText'
 }

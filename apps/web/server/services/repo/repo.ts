@@ -48,8 +48,12 @@ export abstract class Repository<ItemType extends EntityItem> {
     return entity
   }
 
+  protected getDirectus() {
+    return createDirectusClient()
+  }
+
   protected async getAll(query?: DirectusQuery): Promise<readonly ItemType[]> {
-    const directus = createDirectusClient()
+    const directus = this.getDirectus()
 
     return await directus.getItems<ItemType>(this.collection, {
       fields: this.fields,
@@ -62,7 +66,7 @@ export abstract class Repository<ItemType extends EntityItem> {
     field: string,
     value: string | number | boolean
   ): Promise<ItemType | null> {
-    const directus = createDirectusClient()
+    const directus = this.getDirectus()
 
     const items = await directus.getItems<ItemType>(this.collection, {
       limit: 1,
@@ -77,7 +81,7 @@ export abstract class Repository<ItemType extends EntityItem> {
     field: string,
     value: string | number | boolean
   ): Promise<readonly ItemType[]> {
-    const directus = createDirectusClient()
+    const directus = this.getDirectus()
 
     return await directus.getItems<ItemType>(this.collection, {
       fields: this.fields,

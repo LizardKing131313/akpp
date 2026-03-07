@@ -2,6 +2,8 @@
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
+import { useLeadSubmit } from '~/composables/useLeadSubmit'
+
 const emit = defineEmits<{
   (eventName: 'close'): void
 }>()
@@ -10,6 +12,9 @@ const car = ref<string>('')
 const vin = ref<string>('')
 const phone = ref<string>('')
 const consent = ref<boolean>(false)
+const isSubmitting = ref<boolean>(false)
+
+const { submitLead } = useLeadSubmit()
 
 const isSubmitDisabled = computed<boolean>(() => {
   const hasCar = car.value.trim().length > 0
@@ -22,18 +27,28 @@ const emitClose = (): void => {
 }
 
 const submit = (): void => {
-  const leadPayload = {
-    car: car.value.trim(),
-    vin: vin.value.trim(),
-    phone: phone.value.trim(),
-    consent: consent.value,
-    createdAtIso: new Date().toISOString(),
-  }
+  if (isSubmitting.value) return
 
-  // eslint-disable-next-line no-console
-  console.log('[lead]', leadPayload)
+  const carValue = car.value.trim()
+  const vinValue = vin.value.trim()
 
-  emitClose()
+  void (async () => {
+    isSubmitting.value = true
+
+    try {
+      await submitLead({
+        source: 'shop',
+        phone: phone.value.trim(),
+        comment: vinValue.length > 0 ? `Авто: ${carValue}\nVIN: ${vinValue}` : `Авто: ${carValue}`,
+      })
+
+      emitClose()
+    } catch {
+      console.error('[lead] shop submit failed')
+    } finally {
+      isSubmitting.value = false
+    }
+  })()
 }
 
 type FormInputExposed = {
@@ -86,7 +101,7 @@ onMounted(() => {
             autocomplete="off" />
         </LeadFields>
 
-        <SubmitButton :disabled="isSubmitDisabled">Узнать цену</SubmitButton>
+        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">Узнать цену</SubmitButton>
       </form>
     </div>
   </div>

@@ -1,13 +1,9 @@
 import type { CalculateSettings } from '#shared/types/calculate'
 
-import { createDirectusClient } from '#server/services/directus'
+import { SingletonRepository } from '#server/services/repo/singletonRepo'
 
-export class CalculateRepository {
-  public async get(): Promise<CalculateSettings> {
-    const directus = createDirectusClient()
+export class CalculateRepository extends SingletonRepository<CalculateSettings> {
+  protected readonly collection = 'calculate_settings'
 
-    return await directus.getSingleton<CalculateSettings>('calculate_settings', {
-      fields: 'title_main,title_accent,description,perks',
-    })
-  }
+  protected readonly fields = 'title_main,title_accent,description,perks'
 }

@@ -1,13 +1,9 @@
 import type { PolicySettings } from '#shared/types/policy'
 
-import { createDirectusClient } from '#server/services/directus'
+import { SingletonRepository } from '#server/services/repo/singletonRepo'
 
-export class PolicyRepository {
-  public async get(): Promise<PolicySettings> {
-    const directus = createDirectusClient()
+export class PolicyRepository extends SingletonRepository<PolicySettings> {
+  protected readonly collection = 'policy_settings'
 
-    return await directus.getSingleton<PolicySettings>('policy_settings', {
-      fields: 'title,article',
-    })
-  }
+  protected readonly fields = 'title,article'
 }

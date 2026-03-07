@@ -1,13 +1,9 @@
 import type { HeaderSettings } from '#shared/types/header'
 
-import { createDirectusClient } from '#server/services/directus'
+import { SingletonRepository } from '#server/services/repo/singletonRepo'
 
-export class HeaderRepository {
-  public async get(): Promise<HeaderSettings> {
-    const directus = createDirectusClient()
+export class HeaderRepository extends SingletonRepository<HeaderSettings> {
+  protected readonly collection = 'header_settings'
 
-    return await directus.getSingleton<HeaderSettings>('header_settings', {
-      fields: 'search',
-    })
-  }
+  protected readonly fields = 'search'
 }

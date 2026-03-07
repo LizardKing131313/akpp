@@ -24,124 +24,124 @@ const fetchFromApi = <ResponseType>(path: string): Promise<ResponseType> => {
   return $fetch(path) as Promise<ResponseType>
 }
 
-const normalizeParamValue = (rawValue: string): string => {
-  return rawValue.trim()
-}
-
-const ensureParamValue = (value: string, paramName: string): string => {
-  if (value.length > 0) {
-    return value
+const normalizeParamValue = (rawValue: unknown): string => {
+  if (typeof rawValue === 'string') {
+    return rawValue.trim()
   }
 
-  throw createError({
-    statusCode: 400,
-    statusMessage: `${paramName} is required`,
-  })
+  if (Array.isArray(rawValue)) {
+    const firstValue = rawValue[0]
+    return normalizeParamValue(firstValue)
+  }
+
+  if (rawValue === null || rawValue === undefined) {
+    return ''
+  }
+
+  return String(rawValue).trim()
+}
+
+const ensureParamValue = (value: string, paramName: string): string =>
+  value.length > 0
+    ? value
+    : (() => {
+        throw createError({
+          statusCode: 400,
+          statusMessage: `${paramName} is required`,
+        })
+      })()
+
+const useStaticApiData = <ResponseType>(key: string, path: string) => {
+  return useAsyncData<ResponseType>(key, () => fetchFromApi<ResponseType>(path))
+}
+
+const useByParamApiData = <ResponseType>(
+  keyPrefix: string,
+  paramName: string,
+  paramInput: MaybeRefOrGetter<string>,
+  buildPath: (value: string) => string
+) => {
+  const normalizedParamValue = computed<string>(() => normalizeParamValue(toValue(paramInput)))
+
+  return useAsyncData<ResponseType>(
+    () => `${keyPrefix}:${normalizedParamValue.value}`,
+    () => {
+      const paramValue = ensureParamValue(normalizedParamValue.value, paramName)
+      return fetchFromApi<ResponseType>(buildPath(paramValue))
+    },
+    {
+      watch: [normalizedParamValue],
+    }
+  )
 }
 
 export const useCalculateSettings = () => {
-  return useAsyncData<CalculateSettings>('calculate:settings', () =>
-    fetchFromApi<CalculateSettings>('/api/calculate')
-  )
+  return useStaticApiData<CalculateSettings>('calculate:settings', '/api/calculate')
 }
 
 export const useErrorSettings = () => {
-  return useAsyncData<ErrorSettings>('error:settings', () =>
-    fetchFromApi<ErrorSettings>('/api/error')
-  )
+  return useStaticApiData<ErrorSettings>('error:settings', '/api/error')
 }
 
 export const useFooterSettings = () => {
-  return useAsyncData<FooterSettings>('footer:settings', () =>
-    fetchFromApi<FooterSettings>('/api/footer')
-  )
+  return useStaticApiData<FooterSettings>('footer:settings', '/api/footer')
 }
 
 export const useHeaderSettings = () => {
-  return useAsyncData<HeaderSettings>('header:settings', () =>
-    fetchFromApi<HeaderSettings>('/api/header')
-  )
+  return useStaticApiData<HeaderSettings>('header:settings', '/api/header')
 }
 
 export const usePolicySettings = () => {
-  return useAsyncData<PolicySettings>('policy:settings', () =>
-    fetchFromApi<PolicySettings>('/api/policy')
-  )
+  return useStaticApiData<PolicySettings>('policy:settings', '/api/policy')
 }
 
 export const useWhySettings = () => {
-  return useAsyncData<WhySettings>('why:settings', () => fetchFromApi<WhySettings>('/api/why'))
+  return useStaticApiData<WhySettings>('why:settings', '/api/why')
 }
 
 export const useArticles = () => {
-  return useAsyncData<ArticleItem[]>('articles:list', () =>
-    fetchFromApi<ArticleItem[]>('/api/articles')
-  )
+  return useStaticApiData<ArticleItem[]>('articles:list', '/api/articles')
 }
 
 export const useArticleBySlug = (slugInput: MaybeRefOrGetter<string>) => {
-  const slugValue = computed<string>(() => normalizeParamValue(toValue(slugInput)))
-
-  return useAsyncData<ArticleItem>(
-    () => `articles:slug:${slugValue.value}`,
-    () => {
-      const slug = ensureParamValue(slugValue.value, 'article slug')
-      return fetchFromApi<ArticleItem>(`/api/articles/${encodeURIComponent(slug)}`)
-    },
-    {
-      watch: [slugValue],
-    }
+  return useByParamApiData<ArticleItem>(
+    'articles:slug',
+    'article slug',
+    slugInput,
+    (slug: string) => `/api/articles/${encodeURIComponent(slug)}`
   )
 }
 
 export const useBrands = () => {
-  return useAsyncData<BrandItem[]>('brands:list', () => fetchFromApi<BrandItem[]>('/api/brands'))
+  return useStaticApiData<BrandItem[]>('brands:list', '/api/brands')
 }
 
 export const useCases = () => {
-  return useAsyncData<CaseItem[]>('cases:list', () => fetchFromApi<CaseItem[]>('/api/cases'))
+  return useStaticApiData<CaseItem[]>('cases:list', '/api/cases')
 }
 
 export const useCaseBySlug = (slugInput: MaybeRefOrGetter<string>) => {
-  const slugValue = computed<string>(() => normalizeParamValue(toValue(slugInput)))
-
-  return useAsyncData<CaseItem>(
-    () => `cases:slug:${slugValue.value}`,
-    () => {
-      const slug = ensureParamValue(slugValue.value, 'case slug')
-      return fetchFromApi<CaseItem>(`/api/cases/${encodeURIComponent(slug)}`)
-    },
-    {
-      watch: [slugValue],
-    }
-  )
+  return useByParamApiData<CaseItem>('cases:slug', 'case slug', slugInput, (slug: string) => {
+    return `/api/cases/${encodeURIComponent(slug)}`
+  })
 }
 
 export const useCities = () => {
-  return useAsyncData<CityItem[]>('cities:list', () => fetchFromApi<CityItem[]>('/api/cities'))
+  return useStaticApiData<CityItem[]>('cities:list', '/api/cities')
 }
 
 export const useCityBySlug = (slugInput: MaybeRefOrGetter<string>) => {
-  const slugValue = computed<string>(() => normalizeParamValue(toValue(slugInput)))
-
-  return useAsyncData<CityItem>(
-    () => `cities:slug:${slugValue.value}`,
-    () => {
-      const slug = ensureParamValue(slugValue.value, 'city slug')
-      return fetchFromApi<CityItem>(`/api/cities/${encodeURIComponent(slug)}`)
-    },
-    {
-      watch: [slugValue],
-    }
-  )
+  return useByParamApiData<CityItem>('cities:slug', 'city slug', slugInput, (slug: string) => {
+    return `/api/cities/${encodeURIComponent(slug)}`
+  })
 }
 
 export const useFaqs = () => {
-  return useAsyncData<FaqItem[]>('faqs:list', () => fetchFromApi<FaqItem[]>('/api/faqs'))
+  return useStaticApiData<FaqItem[]>('faqs:list', '/api/faqs')
 }
 
 export const useHeroes = () => {
-  return useAsyncData<HeroItem[]>('heroes:list', () => fetchFromApi<HeroItem[]>('/api/heroes'))
+  return useStaticApiData<HeroItem[]>('heroes:list', '/api/heroes')
 }
 
 export const useLocations = (cityIdInput?: MaybeRefOrGetter<string | undefined>) => {
@@ -150,7 +150,7 @@ export const useLocations = (cityIdInput?: MaybeRefOrGetter<string | undefined>)
       return undefined
     }
 
-    const normalizedValue = normalizeParamValue(toValue(cityIdInput) ?? '')
+    const normalizedValue = normalizeParamValue(toValue(cityIdInput))
     return normalizedValue.length > 0 ? normalizedValue : undefined
   })
 
@@ -172,86 +172,59 @@ export const useLocations = (cityIdInput?: MaybeRefOrGetter<string | undefined>)
 }
 
 export const useLocationById = (idInput: MaybeRefOrGetter<string>) => {
-  const idValue = computed<string>(() => normalizeParamValue(toValue(idInput)))
-
-  return useAsyncData<LocationItem>(
-    () => `locations:id:${idValue.value}`,
-    () => {
-      const id = ensureParamValue(idValue.value, 'location id')
-      return fetchFromApi<LocationItem>(`/api/locations/${encodeURIComponent(id)}`)
-    },
-    {
-      watch: [idValue],
-    }
+  return useByParamApiData<LocationItem>(
+    'locations:id',
+    'location id',
+    idInput,
+    (id: string) => `/api/locations/${encodeURIComponent(id)}`
   )
 }
 
 export const useMenus = () => {
-  return useAsyncData<MenuItem[]>('menus:list', () => fetchFromApi<MenuItem[]>('/api/menus'))
+  return useStaticApiData<MenuItem[]>('menus:list', '/api/menus')
 }
 
 export const useModels = () => {
-  return useAsyncData<ModelItem[]>('models:list', () =>
-    fetchFromApi<ModelItem[]>('/api/models/models')
-  )
+  return useStaticApiData<ModelItem[]>('models:list', '/api/models/models')
 }
 
 export const useServices = () => {
-  return useAsyncData<ServiceItem[]>('services:list', () =>
-    fetchFromApi<ServiceItem[]>('/api/services')
-  )
+  return useStaticApiData<ServiceItem[]>('services:list', '/api/services')
 }
 
 export const useServiceBySlug = (slugInput: MaybeRefOrGetter<string>) => {
-  const slugValue = computed<string>(() => normalizeParamValue(toValue(slugInput)))
-
-  return useAsyncData<ServiceItem>(
-    () => `services:slug:${slugValue.value}`,
-    () => {
-      const slug = ensureParamValue(slugValue.value, 'service slug')
-      return fetchFromApi<ServiceItem>(`/api/services/${encodeURIComponent(slug)}`)
-    },
-    {
-      watch: [slugValue],
-    }
+  return useByParamApiData<ServiceItem>(
+    'services:slug',
+    'service slug',
+    slugInput,
+    (slug: string) => `/api/services/${encodeURIComponent(slug)}`
   )
 }
 
 export const useServicePrices = () => {
-  return useAsyncData<ServicePriceItem[]>('service-prices:list', () =>
-    fetchFromApi<ServicePriceItem[]>('/api/service_prices')
-  )
+  return useStaticApiData<ServicePriceItem[]>('service-prices:list', '/api/service_prices')
 }
 
 export const useQuizData = () => {
-  return useAsyncData<QuizData>('quiz:data', () => fetchFromApi<QuizData>('/api/quiz/quiz'))
+  return useStaticApiData<QuizData>('quiz:data', '/api/quiz/quiz')
 }
 
 export const useTransmissions = () => {
-  return useAsyncData<TransmissionItem[]>('transmissions:list', () =>
-    fetchFromApi<TransmissionItem[]>('/api/transmissions')
-  )
+  return useStaticApiData<TransmissionItem[]>('transmissions:list', '/api/transmissions')
 }
 
 export const useTransmissionRangesWithVariants = () => {
-  return useAsyncData<TransmissionRangeWithVariants[]>('transmission-ranges:list', () =>
-    fetchFromApi<TransmissionRangeWithVariants[]>('/api/transmission_range_model_variants')
+  return useStaticApiData<TransmissionRangeWithVariants[]>(
+    'transmission-ranges:list',
+    '/api/transmission_range_model_variants'
   )
 }
 
 export const useTransmissionRangeWithVariantsBySlug = (slugInput: MaybeRefOrGetter<string>) => {
-  const slugValue = computed<string>(() => normalizeParamValue(toValue(slugInput)))
-
-  return useAsyncData<TransmissionRangeWithVariants>(
-    () => `transmission-ranges:slug:${slugValue.value}`,
-    () => {
-      const slug = ensureParamValue(slugValue.value, 'transmission range slug')
-      return fetchFromApi<TransmissionRangeWithVariants>(
-        `/api/transmission_range_model_variants/${encodeURIComponent(slug)}`
-      )
-    },
-    {
-      watch: [slugValue],
-    }
+  return useByParamApiData<TransmissionRangeWithVariants>(
+    'transmission-ranges:slug',
+    'transmission range slug',
+    slugInput,
+    (slug: string) => `/api/transmission_range_model_variants/${encodeURIComponent(slug)}`
   )
 }

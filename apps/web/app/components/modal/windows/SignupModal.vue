@@ -2,6 +2,8 @@
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
+import { useLeadSubmit } from '~/composables/useLeadSubmit'
+
 const emit = defineEmits<{
   (event: 'close'): void
 }>()
@@ -15,6 +17,9 @@ const nameInputRef = ref<FormInputExposed | null>(null)
 const name = ref<string>('')
 const phone = ref<string>('')
 const agree = ref<boolean>(false)
+const isSubmitting = ref<boolean>(false)
+
+const { submitLead } = useLeadSubmit()
 
 const isSubmitDisabled = computed<boolean>(() => {
   const hasPhone = phone.value.trim().length > 0
@@ -26,17 +31,25 @@ const emitClose = (): void => {
 }
 
 const submit = (): void => {
-  const payload = {
-    name: name.value.trim(),
-    phone: phone.value.trim(),
-    agree: agree.value,
-    createdAtIso: new Date().toISOString(),
-  }
+  if (isSubmitting.value) return
 
-  // eslint-disable-next-line no-console
-  console.log('[lead]', payload)
+  void (async () => {
+    isSubmitting.value = true
 
-  emitClose()
+    try {
+      await submitLead({
+        source: 'signup',
+        name: name.value.trim(),
+        phone: phone.value.trim(),
+      })
+
+      emitClose()
+    } catch {
+      console.error('[lead] signup submit failed')
+    } finally {
+      isSubmitting.value = false
+    }
+  })()
 }
 
 const isDesktop = (): boolean => {
@@ -94,7 +107,7 @@ onMounted(() => {
             autocomplete="name" />
         </LeadFields>
 
-        <SubmitButton :disabled="isSubmitDisabled">Оставить заявку</SubmitButton>
+        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">Оставить заявку</SubmitButton>
       </form>
     </div>
   </ModalWindow>
