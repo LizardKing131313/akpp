@@ -1,29 +1,28 @@
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    title?: string
-    articles?: ArticleItem[]
-    showAllHref?: string
-    showAllText?: string
-  }>(),
-  {
-    title: 'Полезные статьи',
-    articles: () => [],
-    showAllHref: '/articles',
-    showAllText: 'показать все статьи',
-  }
-)
+import type { ArticleItem } from '#shared/types/article'
+
+import { computed } from 'vue'
+
+import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
+import { useArticles } from '~/composables/useRepoApi'
+
+const settings = useFooterUiSettings()
+const { data: articlesData } = useArticles()
+const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
 </script>
 
 <template>
   <div class="text-brand-grey-light space-y-12">
-    <FooterTitle>{{ title }}</FooterTitle>
+    <FooterTitle>{{ settings.articles }}</FooterTitle>
     <div>
       <div
         v-for="article in articles"
         :key="article.id"
         class="border-b-brand-grey-light flex items-start border-b">
-        <NuxtLink :to="article.slug" class="group hover:text-brand-white block w-full py-4">
+        <NuxtLink
+          :to="article.slug"
+          :aria-label="`${settings.article_link_aria_label_prefix} ${article.name}`"
+          class="group hover:text-brand-white block w-full py-4">
           <div class="flex items-start gap-4">
             <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl">
               <NuxtImg
@@ -51,7 +50,12 @@ withDefaults(
         </NuxtLink>
       </div>
 
-      <GoToLink :href="showAllHref" class="mt-8">{{ showAllText }}</GoToLink>
+      <GoToLink
+        :href="settings.show_all_articles_href"
+        :ariaLabel="settings.show_all_articles_aria_label"
+        class="mt-8">
+        {{ settings.show_all_articles }}
+      </GoToLink>
     </div>
   </div>
 </template>

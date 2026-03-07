@@ -2,10 +2,13 @@
 import { cn } from '#shared/lib/cn'
 
 import { useSignupModal } from '~/composables/modal/useSignupModal'
+import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
 
 defineProps<{
   pulse?: boolean
 }>()
+
+const settings = useFooterUiSettings()
 
 const handleClick = (): void => {
   useSignupModal().openModal()
@@ -21,6 +24,7 @@ const handleClick = (): void => {
         duration-200 hover:scale-105 active:scale-95 lg:flex
       `)
     "
+    :aria-label="settings.contact_button_aria_label"
     @click="handleClick">
     <span
       v-if="pulse"
@@ -30,8 +34,8 @@ const handleClick = (): void => {
       class="bg-brand-red absolute inset-0 scale-110 animate-ping rounded-full opacity-20"></span>
 
     <NuxtImg
-      src="/images/icons/telephone.svg"
-      alt="Позвонить"
+      :src="settings.contact_button_icon_source"
+      :alt="settings.contact_button_icon_alt"
       width="28"
       height="28"
       class="relative h-7 w-7 shrink-0"

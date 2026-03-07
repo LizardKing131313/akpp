@@ -1,42 +1,21 @@
 <script setup lang="ts">
-import type { ArticleItem } from '#shared/types/article'
 import type { CityItem } from '#shared/types/city'
 import type { YandexMapPoint } from '#shared/types/entity'
-import type { FooterSettings } from '#shared/types/footer'
 import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 
 import { cn } from '#shared/lib/cn'
 import { computed } from 'vue'
 
-const props = withDefaults(
-  defineProps<{
-    settings?: FooterSettings | undefined
-    city?: CityItem | null | undefined
-    locations?: LocationItem[] | undefined
-    articles?: ArticleItem[] | undefined
-  }>(),
-  {
-    settings: () => ({
-      description:
-        'АКППЦЕНТР - профильный сервис по ремонту коробок автомат. Недорого, быстро и с гарантией мы ремонтируем автоматические коробки передач уже более 10 лет.',
-      offer:
-        'Обратите внимание: представленная на данной странице информация, включая стоимость услуг, сроки ремонта и условия гарантии, носит информационный характер и не является публичной офертой.',
-      copyright: 'Ремонт коробок передач АКППЦЕНТР+ | Все права защищены © 2026',
-      policy: 'Политика обработки персональных данных',
-      policy_href: '/policy',
-      title_main: 'АКПП',
-      title_accent: 'ЦЕНТР+',
-      menu: 'Меню',
-      articles: 'Статьи',
-      show_all_articles: 'Все статьи',
-      menus: [],
-    }),
-    city: null,
-    locations: () => [],
-    articles: () => [],
-  }
-)
+import { useActiveCity } from '~/composables/useActiveCity'
+import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
+import { useLocations } from '~/composables/useRepoApi'
+
+const activeCity = useActiveCity()
+const cityId = computed<string | undefined>(() => activeCity.value?.id)
+
+const { data: locationsData } = useLocations(cityId)
+const settings = useFooterUiSettings()
 
 const route = useRoute()
 
@@ -53,12 +32,14 @@ const hideContacts = computed<boolean>(() => {
   return meta.footer?.hideContacts === true
 })
 
+const city = computed<CityItem | null>(() => activeCity.value ?? null)
+
 const menuItems = computed<readonly MenuItem[]>(() => {
-  return props.settings.menus
+  return settings.value.menus
 })
 
 const locations = computed<readonly LocationItem[]>(() => {
-  return props.locations
+  return locationsData.value ?? []
 })
 
 const mapPoints = computed<YandexMapPoint[]>(() => {
@@ -88,12 +69,12 @@ const mapZoom = computed<number>(() => {
 })
 
 const emailHref = computed<string>(() => {
-  const emailValue = props.city?.email_value?.trim() ?? ''
+  const emailValue = city.value?.email_value?.trim() ?? ''
   return emailValue.length > 0 ? `mailto:${emailValue}` : ''
 })
 
 const phoneHref = computed<string>(() => {
-  const phoneValue = props.city?.phone_number?.replaceAll(/[^\d+]/g, '') ?? ''
+  const phoneValue = city.value?.phone_number?.replaceAll(/[^\d+]/g, '') ?? ''
   return phoneValue.length > 0 ? `tel:${phoneValue}` : ''
 })
 
@@ -113,7 +94,11 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
     <div v-if="!hideContacts" class="relative w-full space-y-12">
       <div class="relative h-75 w-full overflow-hidden">
         <ClientOnly>
-          <YandexMap :locations="mapPoints" :center="mapCenter" :zoom="mapZoom" :height-px="300" />
+          <YandexMap
+            :locations="mapPoints"
+            :center="mapCenter"
+            :zoom="mapZoom"
+            :height-px="settings.map_height_px" />
         </ClientOnly>
       </div>
 
@@ -122,32 +107,32 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           <div class="bg-brand-white rounded-full px-4 py-4 shadow-xl lg:px-8 lg:py-4">
             <div class="text-brand-grey flex items-center justify-center text-sm">
               <ContactCard
-                :title="props.city?.email_value ?? ''"
+                :title="city?.email_value ?? ''"
                 :href="emailHref"
-                icon-source="/images/icons/location.svg"
-                icon-alt="email"
-                :subtitle="props.city?.email_text ?? 'Написать письмо'"
+                :icon-source="settings.contact_email_icon_source"
+                :icon-alt="settings.contact_email_icon_alt"
+                :subtitle="city?.email_text"
                 link-type="email"
                 class="hidden lg:flex" />
 
               <VerticalDivider />
 
               <ContactCard
-                :title="props.city?.phone_number ?? ''"
+                :title="city?.phone_number ?? ''"
                 :href="phoneHref"
-                icon-source="/images/icons/phone.svg"
-                icon-alt="phone"
-                :subtitle="props.city?.phone_text ?? 'Бесплатная консультация'"
+                :icon-source="settings.contact_phone_icon_source"
+                :icon-alt="settings.contact_phone_icon_alt"
+                :subtitle="city?.phone_text"
                 link-type="tel"
                 class="flex" />
 
               <VerticalDivider />
 
               <ContactCard
-                :title="props.city?.work_hours_text ?? ''"
-                :subtitle="props.city?.work_hours_subtext ?? ''"
-                icon-source="/images/icons/time.svg"
-                icon-alt="time"
+                :title="city?.work_hours_text ?? ''"
+                :subtitle="city?.work_hours_subtext ?? ''"
+                :icon-source="settings.contact_time_icon_source"
+                :icon-alt="settings.contact_time_icon_alt"
                 class="hidden lg:flex" />
             </div>
           </div>
@@ -163,19 +148,22 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
         <TwoColumns>
           <div class="space-y-12">
             <FooterTitle>
-              {{ props.settings.title_main
-              }}<span class="text-brand-red">{{ props.settings.title_accent }}</span>
+              {{ settings.title_main
+              }}<span class="text-brand-red">{{ settings.title_accent }}</span>
             </FooterTitle>
 
-            <p>{{ props.settings.description }}</p>
+            <p>{{ settings.description }}</p>
           </div>
 
           <div class="space-y-12">
-            <FooterTitle>{{ props.settings.menu }}</FooterTitle>
+            <FooterTitle>{{ settings.menu }}</FooterTitle>
 
             <ul class="space-y-1">
               <li v-for="menuItem in menuItems" :key="menuItem.id">
-                <NuxtLink :to="menuHrefByItem(menuItem)" class="hover:text-brand-soft transition">
+                <NuxtLink
+                  :to="menuHrefByItem(menuItem)"
+                  :aria-label="`${settings.menu_link_aria_label_prefix} ${menuItem.name ?? ''}`"
+                  class="hover:text-brand-soft transition">
                   {{ menuItem.name ?? '' }}
                 </NuxtLink>
               </li>
@@ -183,22 +171,20 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           </div>
         </TwoColumns>
 
-        <FooterArticles
-          :title="props.settings.articles"
-          :articles="props.articles"
-          :showAllText="props.settings.show_all_articles" />
+        <FooterArticles />
       </TwoColumns>
 
       <TwoColumns class="relative mx-auto max-w-6xl">
-        <p>{{ props.settings.offer }}</p>
+        <p>{{ settings.offer }}</p>
 
         <div>
-          <p>{{ props.settings.copyright }}</p>
+          <p>{{ settings.copyright }}</p>
 
           <NuxtLink
-            :to="props.settings.policy_href"
+            :to="settings.policy_href"
+            :aria-label="settings.policy_aria_label"
             class="hover:text-brand-white inline-block underline transition">
-            {{ props.settings.policy }}
+            {{ settings.policy }}
           </NuxtLink>
         </div>
       </TwoColumns>
