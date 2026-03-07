@@ -74,11 +74,11 @@ export const createDirectusClient = () => {
     })
   }
 
-  const directusSecret = runtimeConfig.directusSecret as string | undefined
+  const directusToken = runtimeConfig.directusToken as string | undefined
 
   const getAuthHeader = (): Record<string, string> => {
-    if (!directusSecret) return {}
-    return { Authorization: `Bearer ${directusSecret}` }
+    if (!directusToken) return {}
+    return { Authorization: `Bearer ${directusToken}` }
   }
 
   const collectionUrl = (collection: string) =>

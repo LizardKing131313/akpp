@@ -10,7 +10,7 @@ export const useCitySubdomain = () => {
       return ''
     }
 
-    const hostParts = host.split('.').filter((part) => part.length > 0)
+    const hostParts = host.split('.').filter((part: string) => part.length > 0)
 
     if (hostParts.length >= 3) {
       const firstHostPart = hostParts[0] ?? ''

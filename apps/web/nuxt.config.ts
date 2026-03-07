@@ -52,7 +52,7 @@ export default defineNuxtConfig({
       yandexMapApiKey: process.env.YANDEX_MAP_API_KEY ?? '',
       yandexOrgId: process.env.YANDEX_ORG_ID ?? '',
     },
-    directusSecret: process.env.DIRECTUS_SECRET ?? 'secret',
+    directusToken: process.env.DIRECTUS_TOKEN ?? 'token',
     directusCacheTtlSeconds: Number(process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300),
   },
 

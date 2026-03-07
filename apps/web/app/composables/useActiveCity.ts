@@ -14,7 +14,7 @@ export const useActiveCity = () => {
     const normalizedSubdomain = citySubdomain.value
 
     if (normalizedSubdomain.length > 0) {
-      const matchedBySubdomain = cityItems.find((cityItem) => {
+      const matchedBySubdomain = cityItems.find((cityItem: CityItem) => {
         return cityItem.slug.trim().toLowerCase() === normalizedSubdomain
       })
 
@@ -23,7 +23,7 @@ export const useActiveCity = () => {
       }
     }
 
-    const defaultCity = cityItems.find((cityItem) => cityItem.is_default)
+    const defaultCity = cityItems.find((cityItem: CityItem) => cityItem.is_default)
     return defaultCity ?? undefined
   })
 }

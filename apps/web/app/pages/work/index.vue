@@ -19,7 +19,7 @@ const { data: casesData } = await useCases()
 const caseCards = computed<ImageCardItem[]>(() => {
   const cases = casesData.value ?? []
 
-  return cases.map((caseItem) => ({
+  return cases.map((caseItem: CaseItem) => ({
     id: caseItem.id,
     name: caseItem.name ?? '',
     slug: `/work/${caseItem.slug}`,
