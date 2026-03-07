@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { WhySettings } from '#shared/types/why'
-
 import { computed } from 'vue'
 
 definePageMeta({
@@ -15,7 +13,6 @@ definePageMeta({
   },
 })
 
-const value = {} as WhySettings
 const route = useRoute()
 
 const serviceTitle = computed<string>(() => {
@@ -37,7 +34,7 @@ usePageEntityBreadcrumbs({
 </script>
 
 <template>
-  <Why v-bind="value" />
+  <Why />
   <ModelSlider />
   <RepairQuizBlock />
   <ServiceAndCaseSection />

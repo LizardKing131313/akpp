@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { WhySettings } from '#shared/types/why'
-
 definePageMeta({
   pageHeader: {
     kind: 'breadcrumbs',
@@ -8,12 +6,10 @@ definePageMeta({
     breadcrumbs: [{ name: 'Главная', slug: '/' }, { name: 'Ремонт АКПП' }],
   },
 })
-
-const value = {} as WhySettings
 </script>
 
 <template>
-  <Why v-bind="value" />
+  <Why />
   <ModelSlider />
   <RepairQuizBlock />
   <ServiceAndCaseSection />
