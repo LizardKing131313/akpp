@@ -23,7 +23,7 @@ const modelTitle = computed<string>(() => {
   return rawSlug.replace(/-/g, ' ')
 })
 
-useDynamicBreadcrumbs({
+usePageEntityBreadcrumbs({
   title: modelTitle,
   baseItems: [{ name: 'Главная', slug: '/' }, { name: 'Ремонт АКПП' }],
 })

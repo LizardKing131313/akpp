@@ -8,8 +8,9 @@ type UseDynamicBreadcrumbsOptions = {
   readonly baseItems: MaybeRefOrGetter<readonly BreadcrumbItem[]>
 }
 
-export const useDynamicBreadcrumbs = (options: UseDynamicBreadcrumbsOptions): void => {
+export const usePageEntityBreadcrumbs = (options: UseDynamicBreadcrumbsOptions): void => {
   const { setPageHeaderState, clearPageHeaderState } = usePageHeaderState()
+  const route = useRoute()
 
   const normalizedTitle = computed<string>(() => {
     return String(toValue(options.title) ?? '').trim()
@@ -22,7 +23,7 @@ export const useDynamicBreadcrumbs = (options: UseDynamicBreadcrumbsOptions): vo
     }
 
     const baseItems = toValue(options.baseItems)
-    const breadcrumbs: BreadcrumbItem[] = [...baseItems, { name: title }]
+    const breadcrumbs: BreadcrumbItem[] = [...baseItems, { name: title, slug: route.path }]
 
     setPageHeaderState({
       breadcrumb: title,
@@ -34,3 +35,5 @@ export const useDynamicBreadcrumbs = (options: UseDynamicBreadcrumbsOptions): vo
     clearPageHeaderState()
   })
 }
+
+export const useDynamicBreadcrumbs = usePageEntityBreadcrumbs

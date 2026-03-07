@@ -22,7 +22,7 @@ const articleContent = computed<string>(() => {
   return articleData.value?.content ?? ''
 })
 
-useDynamicBreadcrumbs({
+usePageEntityBreadcrumbs({
   title: computed(() => articleData.value?.name ?? ''),
   baseItems: [
     { name: 'Главная', slug: '/' },

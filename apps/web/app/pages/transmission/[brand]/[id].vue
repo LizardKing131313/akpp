@@ -28,7 +28,7 @@ const transmissionTitle = computed<string>(() => {
   return rawSlug.replace(/-/g, ' ')
 })
 
-useDynamicBreadcrumbs({
+usePageEntityBreadcrumbs({
   title: transmissionTitle,
   baseItems: computed(() => {
     const brandPath =

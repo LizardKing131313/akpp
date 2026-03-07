@@ -18,7 +18,7 @@ const caseSlug = computed<string>(() => String(route.params.id ?? '').trim())
 
 const { data: caseData } = await useCaseBySlug(caseSlug)
 
-useDynamicBreadcrumbs({
+usePageEntityBreadcrumbs({
   title: computed(() => caseData.value?.name ?? ''),
   baseItems: [
     { name: 'Главная', slug: '/' },

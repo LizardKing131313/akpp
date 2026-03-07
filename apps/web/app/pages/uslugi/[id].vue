@@ -27,7 +27,7 @@ const serviceTitle = computed<string>(() => {
   return rawSlug.replace(/-/g, ' ')
 })
 
-useDynamicBreadcrumbs({
+usePageEntityBreadcrumbs({
   title: serviceTitle,
   baseItems: [
     { name: 'Главная', slug: '/' },

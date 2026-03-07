@@ -24,7 +24,7 @@ const policyArticle = computed<string>(() => {
   return policyData.value?.article ?? ''
 })
 
-useDynamicBreadcrumbs({
+usePageEntityBreadcrumbs({
   title: policyTitle,
   baseItems: [{ name: 'Главная', slug: '/' }],
 })
