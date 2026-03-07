@@ -106,7 +106,7 @@ const onTouchEnd = (): void => {
               <component
                 :is="activeComponent"
                 v-if="activeComponent !== null"
-                :payload="modalState.payload ?? {}"
+                :payload="modalState.payload ?? null"
                 @close="close" />
             </div>
           </Transition>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
+import type { QuizSubmitPayload, QuizSymptomsMap } from '#shared/types/quiz'
 
-import { getProblems, getSymptoms } from '#server/api/quiz/quiz.get'
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -14,6 +14,7 @@ const props = withDefaults(
 )
 
 const { data: brandsData } = await useBrands()
+const { data: quizData } = await useQuizData()
 
 const resolvedBrands = computed<readonly BrandItem[]>(() => {
   if (props.brands.length > 0) {
@@ -23,17 +24,15 @@ const resolvedBrands = computed<readonly BrandItem[]>(() => {
   return brandsData.value ?? []
 })
 
-const quizProblems = getProblems()
+const quizProblems = computed<readonly string[]>(() => {
+  return quizData.value?.problems ?? []
+})
 
-const quizSymptoms: Readonly<Record<string, readonly string[]>> = getSymptoms()
+const quizSymptoms = computed<QuizSymptomsMap>(() => {
+  return quizData.value?.symptoms ?? {}
+})
 
-const handleQuizSubmit = (payload: {
-  brandTitle: string
-  problemTitle: string
-  symptomTitle: string
-  customerName: string
-  customerPhone: string
-}): void => {
+const handleQuizSubmit = (payload: QuizSubmitPayload): void => {
   // eslint-disable-next-line no-console
   console.log('Quiz submit payload:', payload)
 

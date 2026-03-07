@@ -1,27 +1,8 @@
-export const getProblems = () => [
-  'Автомобиль не едет',
-  'Пинается при переключении',
-  'Пробуксовка передач',
-  'Появился шум или гул',
-  'Ошибка на панели приборов',
-]
+import type { QuizApiResponse } from '#shared/types/api/quiz'
 
-export const getSymptoms = (): Readonly<Record<string, readonly string[]>> => ({
-  'Автомобиль не едет': ['Не едет вперед', 'Не едет назад', 'Не едет ни вперед ни назад'],
-  'Пинается при переключении': [
-    'Рывок при включении D',
-    'Пинок со 2 на 3 передачу',
-    'Пинок при торможении',
-  ],
-  'Пробуксовка передач': [
-    'Обороты растут, машина не разгоняется',
-    'Пробуксовка на холодную',
-    'Пробуксовка после прогрева',
-  ],
-  'Появился шум или гул': ['Гул на скорости', 'Шум при разгоне', 'Странный металлический звук'],
-  'Ошибка на панели приборов': [
-    'Горит check',
-    'Горит индикатор коробки',
-    'Машина ушла в аварийный режим',
-  ],
+import { QuizRepository } from '#server/services/repo/entity/quiz.repo'
+
+export default defineEventHandler<Promise<QuizApiResponse>>(async () => {
+  const repo = new QuizRepository()
+  return await repo.get()
 })

@@ -12,6 +12,7 @@ import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 import type { ModelItem } from '#shared/types/model'
 import type { PolicySettings } from '#shared/types/policy'
+import type { QuizData } from '#shared/types/quiz'
 import type { ServiceItem, ServicePriceItem } from '#shared/types/service'
 import type { TransmissionItem, TransmissionRangeWithVariants } from '#shared/types/transmission'
 import type { WhySettings } from '#shared/types/why'
@@ -20,7 +21,7 @@ import type { MaybeRefOrGetter } from 'vue'
 import { computed, toValue } from 'vue'
 
 const fetchFromApi = <ResponseType>(path: string): Promise<ResponseType> => {
-  return $fetch<ResponseType>(path)
+  return $fetch(path) as Promise<ResponseType>
 }
 
 const normalizeParamValue = (rawValue: string): string => {
@@ -220,6 +221,10 @@ export const useServicePrices = () => {
   return useAsyncData<ServicePriceItem[]>('service-prices:list', () =>
     fetchFromApi<ServicePriceItem[]>('/api/service_prices')
   )
+}
+
+export const useQuizData = () => {
+  return useAsyncData<QuizData>('quiz:data', () => fetchFromApi<QuizData>('/api/quiz/quiz'))
 }
 
 export const useTransmissions = () => {

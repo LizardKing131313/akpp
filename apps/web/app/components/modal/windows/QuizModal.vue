@@ -1,17 +1,10 @@
 <script setup lang="ts">
+import type { QuizModalPayload, QuizSubmitPayload } from '#shared/types/quiz'
+
 import { cn } from '#shared/lib/cn'
+import { computed } from 'vue'
 
 import ModalClose from '~/components/modal/components/ModalClose.vue'
-
-type QuizModalPayload = {
-  brands: readonly BrandItem[]
-  problems: readonly string[]
-  symptoms: Readonly<Record<string, readonly string[]>>
-} | null
-
-defineProps<{
-  payload: QuizModalPayload
-}>()
 
 const emit = defineEmits<{
   (event: 'close'): void
@@ -21,9 +14,35 @@ const emitClose = (): void => {
   emit('close')
 }
 
-const handleQuizSubmit = (): void => {
+const handleQuizSubmit = (_payload: QuizSubmitPayload): void => {
   emitClose()
 }
+
+const props = defineProps<{
+  payload: QuizModalPayload | null
+}>()
+
+const { data: brandsData } = await useBrands()
+const { data: quizData } = await useQuizData()
+
+const resolvedPayload = computed<QuizModalPayload | null>(() => {
+  if (props.payload !== null) {
+    return props.payload
+  }
+
+  const problems = quizData.value?.problems ?? []
+  const symptoms = quizData.value?.symptoms ?? {}
+
+  if (problems.length === 0) {
+    return null
+  }
+
+  return {
+    brands: brandsData.value ?? [],
+    problems,
+    symptoms,
+  }
+})
 </script>
 
 <template>
@@ -38,10 +57,10 @@ const handleQuizSubmit = (): void => {
 
     <div class="mt-12 max-h-[85svh] overflow-y-auto sm:max-h-none">
       <RepairQuiz
-        v-if="payload !== null"
-        :brands="payload.brands"
-        :problems="payload.problems"
-        :symptoms="payload.symptoms"
+        v-if="resolvedPayload !== null"
+        :brands="resolvedPayload.brands"
+        :problems="resolvedPayload.problems"
+        :symptoms="resolvedPayload.symptoms"
         @submit="handleQuizSubmit" />
 
       <div v-else class="text-brand-grey-light py-10 text-center text-sm">Нет данных для квиза</div>

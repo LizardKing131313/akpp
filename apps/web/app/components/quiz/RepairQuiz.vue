@@ -1,22 +1,17 @@
 <script setup lang="ts">
+import type { BrandItem } from '#shared/types/brand'
+import type { QuizSubmitPayload, QuizSymptomsMap } from '#shared/types/quiz'
+
 import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
 
 type QuizStep = 'brand' | 'problem' | 'symptom' | 'contact' | 'success'
 
-type QuizSubmitPayload = {
-  brandTitle: string
-  problemTitle: string
-  symptomTitle: string
-  customerName: string
-  customerPhone: string
-}
-
 const props = withDefaults(
   defineProps<{
     brands: readonly BrandItem[]
     problems: readonly string[]
-    symptoms: Readonly<Record<string, readonly string[]>>
+    symptoms: QuizSymptomsMap
     initialStep?: QuizStep
   }>(),
   {
