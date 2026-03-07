@@ -1,3 +1,5 @@
+import type { MenuItem } from '#shared/types/menu'
+
 export type FooterSettings = {
   readonly description: string
   readonly offer: string

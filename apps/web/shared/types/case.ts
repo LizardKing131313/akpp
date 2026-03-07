@@ -1,4 +1,5 @@
-import type { SlugEntityItem } from '#shared/types/entity'
+import type { BrandItem } from '#shared/types/brand'
+import type { ImageItem, SlugEntityItem } from '#shared/types/entity'
 
 export type CaseItem = SlugEntityItem &
   ImageItem & {

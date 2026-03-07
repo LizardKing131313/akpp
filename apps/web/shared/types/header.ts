@@ -1,4 +1,4 @@
-import type { BreadcrumbItem } from '#shared/types/breadcrumb'
+import type { RouteBreadcrumbItem } from '#shared/types/breadcrumb'
 import type { HeroItem } from '#shared/types/hero'
 
 export type HeaderSettings = {
@@ -13,7 +13,7 @@ export type PageHeaderMeta =
   | {
       kind: 'breadcrumbs'
       title: string
-      items: BreadcrumbItem[]
+      items?: RouteBreadcrumbItem[]
     }
   | {
       kind: 'none'

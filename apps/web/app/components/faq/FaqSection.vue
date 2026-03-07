@@ -23,7 +23,7 @@ const resolvedItems = computed<FaqItem[]>(() => {
     <AccordionItem
       v-for="item in resolvedItems"
       :key="item.id"
-      :title="item.name ?? ''"
-      :content="item.content" />
+      :title="item.question"
+      :content="item.answer" />
   </div>
 </template>

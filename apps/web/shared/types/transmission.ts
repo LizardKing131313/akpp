@@ -1,6 +1,7 @@
-import type { EntityItem, ImageItem } from '#shared/types/entity'
+import type { ImageItem, NamedEntityItem, SlugEntityItem } from '#shared/types/entity'
+import type { ModelVariantItem } from '#shared/types/model'
 
-export type TransmissionItem = EntityItem &
+export type TransmissionItem = NamedEntityItem &
   ImageItem & {
     readonly description: string
     readonly price: number

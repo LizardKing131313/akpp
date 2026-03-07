@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from '#shared/types/breadcrumb'
+import type { BreadcrumbItem, RouteBreadcrumbItem } from '#shared/types/breadcrumb'
 import type { CityItem } from '#shared/types/city'
 import type { HeroItem } from '#shared/types/hero'
 
@@ -9,7 +9,7 @@ type PageHeaderMetaValue = {
   readonly kind?: 'hero' | 'breadcrumbs' | 'none'
   readonly slides?: HeroItem[]
   readonly title?: string
-  readonly items?: BreadcrumbItem[]
+  readonly items?: RouteBreadcrumbItem[]
   readonly backgroundSrc?: string
 }
 
@@ -63,7 +63,25 @@ const heroSlides = computed<HeroItem[]>(() => {
 })
 
 const breadcrumbsTitle = computed<string>(() => pageHeaderMeta.value.title ?? '')
-const breadcrumbsItems = computed<BreadcrumbItem[]>(() => pageHeaderMeta.value.items ?? [])
+const breadcrumbsItems = computed<BreadcrumbItem[]>(() => {
+  const routeBreadcrumbItems = pageHeaderMeta.value.items ?? []
+
+  return routeBreadcrumbItems
+    .map((routeBreadcrumbItem) => {
+      const breadcrumbName = routeBreadcrumbItem.label.trim()
+      const breadcrumbSlug = routeBreadcrumbItem.to?.trim() ?? ''
+
+      if (breadcrumbSlug.length === 0) {
+        return { name: breadcrumbName }
+      }
+
+      return {
+        name: breadcrumbName,
+        slug: breadcrumbSlug,
+      }
+    })
+    .filter((breadcrumbItem) => breadcrumbItem.name.length > 0)
+})
 const breadcrumbsImageSource = computed<string>(() => {
   const imageSource = pageHeaderMeta.value.backgroundSrc?.trim() ?? ''
   return imageSource.length > 0 ? imageSource : '/images/breadcrumbs.jpg'

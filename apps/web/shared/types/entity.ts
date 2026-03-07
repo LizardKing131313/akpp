@@ -3,7 +3,11 @@ export interface EntityItem {
   readonly name?: string
 }
 
-export interface SlugEntityItem extends EntityItem {
+export interface NamedEntityItem extends EntityItem {
+  readonly name: string
+}
+
+export interface SlugEntityItem extends NamedEntityItem {
   readonly slug: string
 }
 

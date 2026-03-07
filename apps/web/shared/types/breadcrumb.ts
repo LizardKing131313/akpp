@@ -1,3 +1,9 @@
-import type { SlugEntityItem } from '#shared/types/entity'
+export type BreadcrumbItem = {
+  readonly name: string
+  readonly slug?: string
+}
 
-export type BreadcrumbItem = SlugEntityItem
+export type RouteBreadcrumbItem = {
+  readonly label: string
+  readonly to?: string
+}

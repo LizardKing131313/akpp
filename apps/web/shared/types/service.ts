@@ -9,7 +9,3 @@ export type ServicePriceItem = EntityItem & {
   readonly isFrom: boolean
   readonly price: number
 }
-
-export type ServiceBrandItem = SlugEntityItem & {
-  readonly article: string
-}
