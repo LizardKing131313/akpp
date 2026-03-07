@@ -58,12 +58,23 @@ services:
     volumes:
       - akpp_dev_directus_uploads:/directus/uploads
       - akpp_dev_directus_extensions:/directus/extensions
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'node -e "fetch(''http://127.0.0.1:8055/server/health'').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"',
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 10s
 
   directus-schema-apply:
     image: directus/directus:11
+    profiles: ['manual']
     depends_on:
       directus:
-        condition: service_started
+        condition: service_healthy
     environment:
       DB_CLIENT: pg
       DB_HOST: postgres
@@ -75,17 +86,17 @@ services:
       - ./schema.json:/schema/schema.json:ro
     entrypoint: >
       sh -c "
-        echo 'Waiting for Directus to be ready...' &&
-        sleep 10 &&
+        echo 'Directus is healthy. Applying schema...' &&
         npx directus schema apply /schema/schema.json --yes
       "
     restart: 'no'
 
   directus-schema-snapshot:
     image: directus/directus:11
+    profiles: ['manual']
     depends_on:
       directus:
-        condition: service_started
+        condition: service_healthy
     environment:
       DB_CLIENT: pg
       DB_HOST: postgres
@@ -97,8 +108,7 @@ services:
       - ./schema.json:/schema/schema.json
     entrypoint: >
       sh -c "
-        echo 'Waiting for Directus to be ready...' &&
-        sleep 10 &&
+        echo 'Directus is healthy. Creating schema snapshot...' &&
         npx directus schema snapshot /schema/schema.json --format json --yes &&
         node -e \"const fs=require('node:fs');const p='/schema/schema.json';const raw=fs.readFileSync(p,'utf8');const parsed=JSON.parse(raw);fs.writeFileSync(p,JSON.stringify(parsed,null,2)+'\\n');\"
       "
