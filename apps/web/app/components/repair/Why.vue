@@ -7,6 +7,17 @@ import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
 import { useSignupModal } from '~/composables/modal/useSignupModal'
 import { useWhyUiSettings } from '~/composables/useWhyUiSettings'
 
+withDefaults(
+  defineProps<{
+    image_source?: string
+    image_alt?: string
+  }>(),
+  {
+    image_source: '/images/transmission.png',
+    image_alt: 'transmission',
+  }
+)
+
 const settings = useWhyUiSettings()
 
 const perks = computed<PerkItem[]>(() => [
@@ -44,10 +55,7 @@ const handleSignupClick = (): void => {
 
 <template>
   <TwoColumns inverse class="gap-1 lg:gap-20">
-    <NuxtImg
-      :src="settings.image_source"
-      :alt="settings.image_alt"
-      class="h-85 w-full object-contain" />
+    <NuxtImg :src="image_source" :alt="image_alt" class="h-85 w-full object-contain" />
 
     <div class="space-y-10">
       <div class="hidden space-y-4 lg:block">

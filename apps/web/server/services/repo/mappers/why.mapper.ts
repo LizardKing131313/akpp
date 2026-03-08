@@ -15,8 +15,6 @@ export const mapWhyApiSettingsToWhySettings = (apiSettings: WhyApiSettings): Why
   const guaranteeAlt = apiSettings.guarantee_alt
 
   return {
-    image_source: '/images/transmission.png',
-    image_alt: 'transmission',
     ...(title ? { title } : {}),
     ...(description ? { description } : {}),
     ...(diagnostic ? { diagnostic } : {}),

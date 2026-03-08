@@ -9,8 +9,6 @@ type ResolvedWhySettings = Required<WhySettings>
 const defaultWhySettings: ResolvedWhySettings = {
   title: 'Почему клиенты выбирают нас',
   description: 'даже рассмотрев все предложения на рынке',
-  image_source: '/images/transmission.png',
-  image_alt: 'transmission',
   diagnostic: 'Диагностика за 15 минут!',
   diagnostic_image: '/images/perks/car.svg',
   diagnostic_alt: 'diagnostic',

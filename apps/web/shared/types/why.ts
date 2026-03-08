@@ -1,6 +1,4 @@
-import type { ImageItem } from '#shared/types/entity'
-
-export type WhySettings = ImageItem & {
+export type WhySettings = {
   readonly title?: string
   readonly description?: string
 
