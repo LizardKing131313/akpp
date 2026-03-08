@@ -31,6 +31,15 @@ const normalizeText = (rawValue: string | null | undefined): string => {
   return rawValue?.trim() ?? ''
 }
 
+const normalizeBrandId = (rawBrandId: string | null | undefined): string | undefined => {
+  const normalizedBrandId = rawBrandId?.trim()
+  if (!normalizedBrandId) {
+    return undefined
+  }
+
+  return normalizedBrandId
+}
+
 const normalizeProblemId = (
   rawProblemId: QuizSymptomDirectusItem['problem_id']
 ): string | undefined => {
@@ -114,14 +123,22 @@ const applySymptomItems = (
 }
 
 export class QuizRepository {
-  public async get(): Promise<QuizData> {
+  public async get(brandIdInput?: string): Promise<QuizData> {
     const directus = createDirectusClient()
+    const brandId = normalizeBrandId(brandIdInput)
+
+    const problemsQuery: Record<string, string | number | boolean | undefined> = {
+      fields: 'id,name,symptoms.quiz_symptoms_id.id,symptoms.quiz_symptoms_id.name',
+      sort: 'sort',
+    }
+
+    if (brandId) {
+      problemsQuery['filter[_or][0][brand_id][_eq]'] = brandId
+      problemsQuery['filter[_or][1][brand_id][_null]'] = true
+    }
 
     const [problemItems, symptomItems] = await Promise.all([
-      directus.getItems<QuizProblemDirectusItem>(PROBLEMS_COLLECTION, {
-        fields: 'id,name,symptoms.quiz_symptoms_id.id,symptoms.quiz_symptoms_id.name',
-        sort: 'sort',
-      }),
+      directus.getItems<QuizProblemDirectusItem>(PROBLEMS_COLLECTION, problemsQuery),
       directus.getItems<QuizSymptomDirectusItem>(SYMPTOMS_COLLECTION, {
         fields: 'id,name,problem_id.id',
         sort: 'sort',

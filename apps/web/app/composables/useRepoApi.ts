@@ -230,8 +230,31 @@ export const useServicePrices = () => {
   return useStaticApiData<ServicePriceItem[]>('service-prices:list', '/api/service_prices')
 }
 
-export const useQuizData = () => {
-  return useStaticApiData<QuizData>('quiz:data', '/api/quiz/quiz')
+export const useQuizData = (brandIdInput?: MaybeRefOrGetter<string | undefined>) => {
+  const brandIdValue = computed<string | undefined>(() => {
+    if (!brandIdInput) {
+      return undefined
+    }
+
+    const normalizedValue = normalizeParamValue(toValue(brandIdInput))
+    return normalizedValue.length > 0 ? normalizedValue : undefined
+  })
+
+  return useAsyncData<QuizData>(
+    () => `quiz:data:${brandIdValue.value ?? 'all'}`,
+    () => {
+      if (!brandIdValue.value) {
+        return fetchFromApi<QuizData>('/api/quiz/quiz')
+      }
+
+      return fetchFromApi<QuizData>(
+        `/api/quiz/quiz?brandId=${encodeURIComponent(brandIdValue.value)}`
+      )
+    },
+    {
+      watch: [brandIdValue],
+    }
+  )
 }
 
 export const useTransmissions = () => {
