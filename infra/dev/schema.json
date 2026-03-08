@@ -986,6 +986,39 @@
       }
     },
     {
+      "collection": "calculate_settings_perks",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "calculate_settings_perks",
+        "color": "#26A69A",
+        "display_template": "{{text}}",
+        "group": "settings",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Список преимуществ для баннера расчета стоимости.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 46,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Преимущества баннера расчёта"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "calculate_settings_perks"
+      }
+    },
+    {
       "collection": "why_settings",
       "meta": {
         "accountability": "all",
@@ -16707,7 +16740,7 @@
     {
       "collection": "calculate_settings",
       "field": "perks",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "calculate_settings",
         "conditions": null,
@@ -16716,17 +16749,14 @@
         "field": "perks",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "list-o2m",
         "note": "Поле «Преимущества».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 23,
-        "special": null,
+        "special": ["o2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -16737,15 +16767,194 @@
         "validation_message": null,
         "width": "full"
       },
+      "schema": null
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
       "schema": {
-        "name": "perks",
-        "table": "calculate_settings",
-        "data_type": "json",
+        "name": "id",
+        "table": "calculate_settings_perks",
+        "data_type": "integer",
+        "default_value": "nextval('calculate_settings_perks_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "calculate_settings_perks",
+        "data_type": "integer",
         "default_value": null,
         "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "calculate_settings_id",
+      "type": "integer",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "calculate_settings_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Настройки баннера расчёта».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Настройки баннера расчёта"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "calculate_settings_id",
+        "table": "calculate_settings_perks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "calculate_settings",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "text",
+      "type": "string",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "text",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Текст преимущества».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Текст преимущества"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "text",
+        "table": "calculate_settings_perks",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": true,
+        "is_nullable": false,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
@@ -20418,6 +20627,31 @@
         "constraint_name": "calculate_settings_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "calculate_settings_id",
+      "related_collection": "calculate_settings",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "calculate_settings_perks",
+        "many_field": "calculate_settings_id",
+        "one_allowed_collections": null,
+        "one_collection": "calculate_settings",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "perks",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "calculate_settings_perks",
+        "column": "calculate_settings_id",
+        "foreign_key_table": "calculate_settings",
+        "foreign_key_column": "id",
+        "constraint_name": "calculate_settings_perks_calculate_settings_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     },
     {
