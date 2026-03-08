@@ -8510,8 +8510,57 @@
     },
     {
       "collection": "menus",
+      "field": "parent_id",
+      "type": "integer",
+      "meta": {
+        "collection": "menus",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "parent_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Родительский пункт меню».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 22,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Родительский пункт меню"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "parent_id",
+        "table": "menus",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "menus",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "menus",
       "field": "children",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "menus",
         "conditions": null,
@@ -8520,17 +8569,14 @@
         "field": "children",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "list-o2m",
         "note": "Поле «Дочерние пункты».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
-        "sort": 22,
-        "special": null,
+        "searchable": false,
+        "sort": 23,
+        "special": ["o2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -8541,24 +8587,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "children",
-        "table": "menus",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "service_prices",
@@ -19977,6 +20006,31 @@
         "constraint_name": "menus_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "menus",
+      "field": "parent_id",
+      "related_collection": "menus",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "menus",
+        "many_field": "parent_id",
+        "one_allowed_collections": null,
+        "one_collection": "menus",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "children",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "menus",
+        "column": "parent_id",
+        "foreign_key_table": "menus",
+        "foreign_key_column": "id",
+        "constraint_name": "menus_parent_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     },
     {
