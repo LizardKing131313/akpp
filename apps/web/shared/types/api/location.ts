@@ -14,6 +14,11 @@ export type LocationApiItem = {
   readonly metro?: string | null
   readonly metro_color?: string | null
 
-  readonly images?: string[] | null
+  readonly images?:
+    | readonly string[]
+    | readonly {
+        readonly directus_files_id?: string | null
+      }[]
+    | null
   readonly city_id?: string | null
 }

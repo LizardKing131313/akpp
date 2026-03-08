@@ -8,7 +8,7 @@ export class LocationsRepository extends ListRepository<LocationItem> {
   protected readonly collection = 'locations'
 
   protected readonly fields =
-    'id,name,latitude,longitude,address,worktime,phone,metro,metro_color,images,city_id,sort'
+    'id,name,latitude,longitude,address,worktime,phone,metro,metro_color,images.directus_files_id,city_id,sort'
 
   private async fetchLocationApiItems(cityId?: string): Promise<readonly LocationApiItem[]> {
     const directus = this.getDirectus()

@@ -9,6 +9,30 @@ const normalizeCoordinate = (value: number | null | undefined): number | undefin
   return value
 }
 
+const normalizeImages = (
+  rawImages:
+    | readonly string[]
+    | readonly {
+        readonly directus_files_id?: string | null
+      }[]
+    | null
+    | undefined
+): string[] => {
+  if (!Array.isArray(rawImages)) {
+    return []
+  }
+
+  return rawImages
+    .map((rawImage) => {
+      if (typeof rawImage === 'string') {
+        return rawImage.trim()
+      }
+
+      return rawImage.directus_files_id?.trim() ?? ''
+    })
+    .filter((imageId) => imageId.length > 0)
+}
+
 export const mapLocationApiItemToLocationItem = (apiItem: LocationApiItem): LocationItem => {
   const latValue = normalizeCoordinate(apiItem.lat) ?? normalizeCoordinate(apiItem.latitude) ?? 0
   const lngValue = normalizeCoordinate(apiItem.lng) ?? normalizeCoordinate(apiItem.longitude) ?? 0
@@ -28,7 +52,7 @@ export const mapLocationApiItemToLocationItem = (apiItem: LocationApiItem): Loca
     phone,
     metro,
     metro_color: metroColor,
-    images: apiItem.images ?? [],
+    images: normalizeImages(apiItem.images),
     lat: latValue,
     lng: lngValue,
   }
