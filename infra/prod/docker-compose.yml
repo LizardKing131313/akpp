@@ -104,6 +104,107 @@ services:
       "
     restart: 'no'
 
+  directus-settings-apply:
+    image: directus/directus:11
+    depends_on:
+      directus-restart-after-apply:
+        condition: service_completed_successfully
+    environment:
+      DIRECTUS_URL: ${DIRECTUS_INTERNAL_URL}
+      DIRECTUS_ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      DIRECTUS_ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+    volumes:
+      - ./:/schema:ro
+    entrypoint: >
+      sh -c "
+        echo 'Directus is ready. Applying settings...' &&
+        node -e '
+          const fs = require(\"node:fs\");
+          const baseUrl = process.env.DIRECTUS_URL;
+          const email = process.env.DIRECTUS_ADMIN_EMAIL;
+          const password = process.env.DIRECTUS_ADMIN_PASSWORD;
+          const settings = fs.readFileSync(\"/schema/directus.settings.json\", \"utf8\");
+          (async () => {
+            const login = await fetch(baseUrl + \"/auth/login\", {
+              method: \"POST\",
+              headers: { \"Content-Type\": \"application/json\" },
+              body: JSON.stringify({ email, password }),
+            });
+            if (!login.ok) throw new Error(\"Login failed: \" + login.status);
+            const loginJson = await login.json();
+            const token = loginJson?.data?.access_token;
+            if (!token) throw new Error(\"No access token in login response\");
+
+            const patch = await fetch(baseUrl + \"/settings\", {
+              method: \"PATCH\",
+              headers: {
+                \"Authorization\": \"Bearer \" + token,
+                \"Content-Type\": \"application/json\",
+              },
+              body: settings,
+            });
+            if (!patch.ok) {
+              const body = await patch.text();
+              throw new Error(\"PATCH /settings failed: \" + patch.status + \" \" + body);
+            }
+            console.log(\"Settings applied successfully.\");
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+        '
+      "
+    restart: 'no'
+
+  directus-settings-export:
+    image: directus/directus:11
+    depends_on:
+      directus:
+        condition: service_healthy
+    environment:
+      DIRECTUS_URL: ${DIRECTUS_INTERNAL_URL}
+      DIRECTUS_ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      DIRECTUS_ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+    volumes:
+      - ./:/schema
+    entrypoint: >
+      sh -c "
+        echo 'Directus is ready. Exporting settings...' &&
+        node -e '
+          const fs = require(\"node:fs\");
+          const baseUrl = process.env.DIRECTUS_URL;
+          const email = process.env.DIRECTUS_ADMIN_EMAIL;
+          const password = process.env.DIRECTUS_ADMIN_PASSWORD;
+          (async () => {
+            const login = await fetch(baseUrl + \"/auth/login\", {
+              method: \"POST\",
+              headers: { \"Content-Type\": \"application/json\" },
+              body: JSON.stringify({ email, password }),
+            });
+            if (!login.ok) throw new Error(\"Login failed: \" + login.status);
+            const loginJson = await login.json();
+            const token = loginJson?.data?.access_token;
+            if (!token) throw new Error(\"No access token in login response\");
+
+            const res = await fetch(baseUrl + \"/settings\", {
+              headers: { \"Authorization\": \"Bearer \" + token },
+            });
+            if (!res.ok) {
+              const body = await res.text();
+              throw new Error(\"GET /settings failed: \" + res.status + \" \" + body);
+            }
+            const json = await res.json();
+            const data = json?.data ?? json;
+            fs.writeFileSync(\"/schema/directus.settings.json\", JSON.stringify(data, null, 2) + \"\\n\");
+            console.log(\"Settings exported successfully.\");
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+        '
+      "
+    restart: 'no'
+
   directus-schema-snapshot:
     image: directus/directus:11
     profiles: ['manual']
@@ -133,7 +234,7 @@ services:
       dockerfile: infra/prod/web.Dockerfile
     restart: unless-stopped
     depends_on:
-      directus-restart-after-apply:
+      directus-settings-apply:
         condition: service_completed_successfully
     environment:
       NODE_ENV: production

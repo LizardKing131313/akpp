@@ -293,6 +293,72 @@
       }
     },
     {
+      "collection": "cases_works",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "cases_works",
+        "color": "#8E24AA",
+        "display_template": "{{text}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Связующая таблица кейсов и выполненных работ.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 34,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Связи кейсов и работ"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "cases_works"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "cases_images",
+        "color": "#8E24AA",
+        "display_template": "{{directus_files_id}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Связующая таблица кейсов и изображений галереи.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 35,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Связи кейсов и изображений"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "cases_images"
+      }
+    },
+    {
       "collection": "heroes",
       "meta": {
         "accountability": "all",
@@ -455,6 +521,39 @@
       },
       "schema": {
         "name": "locations"
+      }
+    },
+    {
+      "collection": "locations_images",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "locations_images",
+        "color": "#00897B",
+        "display_template": "{{directus_files_id}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Связующая таблица локаций и изображений галереи.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 20,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Связи локаций и изображений"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "locations_images"
       }
     },
     {
@@ -825,8 +924,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "header_settings",
         "color": "#3949AB",
@@ -846,7 +945,7 @@
             "translation": "Настройки хедера"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -858,8 +957,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "footer_settings",
         "color": "#5C6BC0",
@@ -879,7 +978,7 @@
             "translation": "Настройки футера"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -891,8 +990,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "policy_settings",
         "color": "#546E7A",
@@ -912,7 +1011,7 @@
             "translation": "Политика"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -924,8 +1023,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "error_settings",
         "color": "#EF5350",
@@ -945,7 +1044,7 @@
             "translation": "404 страница"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -957,8 +1056,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "calculate_settings",
         "color": "#26A69A",
@@ -978,7 +1077,7 @@
             "translation": "Баннер расчёта"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -986,12 +1085,45 @@
       }
     },
     {
+      "collection": "calculate_settings_perks",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "calculate_settings_perks",
+        "color": "#26A69A",
+        "display_template": "{{text}}",
+        "group": "settings",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Список преимуществ для баннера расчета стоимости.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 46,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Преимущества баннера расчёта"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "calculate_settings_perks"
+      }
+    },
+    {
       "collection": "why_settings",
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "why_settings",
         "color": "#8E24AA",
@@ -1011,7 +1143,7 @@
             "translation": "Почему выбирают нас"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -1023,8 +1155,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "city_select_modal_settings",
         "color": "#1E88E5",
@@ -1044,7 +1176,7 @@
             "translation": "Модалка выбора города"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -1056,8 +1188,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "quiz_modal_settings",
         "color": "#7CB342",
@@ -1077,7 +1209,7 @@
             "translation": "Модалка квиза"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -1089,8 +1221,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "shop_modal_settings",
         "color": "#FB8C00",
@@ -1110,7 +1242,7 @@
             "translation": "Модалка продажи АКПП"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -1122,8 +1254,8 @@
       "meta": {
         "accountability": "all",
         "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
+        "archive_field": null,
+        "archive_value": null,
         "collapse": "open",
         "collection": "signup_modal_settings",
         "color": "#43A047",
@@ -1143,7 +1275,7 @@
             "translation": "Модалка записи"
           }
         ],
-        "unarchive_value": "draft",
+        "unarchive_value": null,
         "versioning": true
       },
       "schema": {
@@ -1276,7 +1408,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -1624,7 +1756,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -1932,7 +2064,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -2280,7 +2412,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -2490,7 +2622,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -2838,7 +2970,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -3097,7 +3229,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -3445,7 +3577,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -3655,7 +3787,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -4003,7 +4135,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -4386,7 +4518,7 @@
     {
       "collection": "cases",
       "field": "works",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "cases",
         "conditions": null,
@@ -4395,17 +4527,14 @@
         "field": "works",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "list-o2m",
         "note": "Поле «Выполненные работы».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 30,
-        "special": null,
+        "special": ["o2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -4416,24 +4545,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "works",
-        "table": "cases",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "cases",
@@ -4536,7 +4648,7 @@
     {
       "collection": "cases",
       "field": "images",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "cases",
         "conditions": null,
@@ -4545,17 +4657,14 @@
         "field": "images",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "files",
         "note": "Поле «Изображения».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 33,
-        "special": null,
+        "special": ["m2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -4566,24 +4675,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "images",
-        "table": "cases",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "cases",
@@ -4631,6 +4723,398 @@
         "generation_expression": null,
         "has_auto_increment": false,
         "foreign_key_table": "brands",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "cases_works",
+        "data_type": "integer",
+        "default_value": "nextval('cases_works_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "cases_works",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "cases_id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "cases_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Кейс».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кейс"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "cases_id",
+        "table": "cases_works",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "text",
+      "type": "string",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "text",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Работа».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Работа"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "text",
+        "table": "cases_works",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "cases_images",
+        "data_type": "integer",
+        "default_value": "nextval('cases_images_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "cases_images",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "cases_id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "cases_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Кейс».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кейс"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "cases_id",
+        "table": "cases_images",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "directus_files_id",
+      "type": "uuid",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "directus_files_id",
+        "group": null,
+        "hidden": false,
+        "interface": "file",
+        "note": "Поле «Изображение».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Изображение"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "directus_files_id",
+        "table": "cases_images",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_files",
         "foreign_key_column": "id"
       }
     },
@@ -4758,7 +5242,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -5057,7 +5541,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -5414,7 +5898,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -5713,7 +6197,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -5972,7 +6456,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -6481,7 +6965,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -7284,7 +7768,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -7917,7 +8401,7 @@
     {
       "collection": "locations",
       "field": "images",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "locations",
         "conditions": null,
@@ -7926,17 +8410,14 @@
         "field": "images",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "files",
         "note": "Поле «Изображения».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 28,
-        "special": null,
+        "special": ["m2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -7947,24 +8428,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "images",
-        "table": "locations",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "locations",
@@ -8012,6 +8476,202 @@
         "generation_expression": null,
         "has_auto_increment": false,
         "foreign_key_table": "cities",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "locations_images",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "locations_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "locations_images",
+        "data_type": "integer",
+        "default_value": "nextval('locations_images_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "locations_images",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "locations_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "locations_images",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "locations_images",
+      "field": "locations_id",
+      "type": "integer",
+      "meta": {
+        "collection": "locations_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "locations_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Локация».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Локация"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "locations_id",
+        "table": "locations_images",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "locations",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "locations_images",
+      "field": "directus_files_id",
+      "type": "uuid",
+      "meta": {
+        "collection": "locations_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "directus_files_id",
+        "group": null,
+        "hidden": false,
+        "interface": "file",
+        "note": "Поле «Изображение».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Изображение"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "directus_files_id",
+        "table": "locations_images",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_files",
         "foreign_key_column": "id"
       }
     },
@@ -8139,7 +8799,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -8477,8 +9137,57 @@
     },
     {
       "collection": "menus",
+      "field": "parent_id",
+      "type": "integer",
+      "meta": {
+        "collection": "menus",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "parent_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Родительский пункт меню».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 22,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Родительский пункт меню"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "parent_id",
+        "table": "menus",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "menus",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "menus",
       "field": "children",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "menus",
         "conditions": null,
@@ -8487,17 +9196,14 @@
         "field": "children",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "list-o2m",
         "note": "Поле «Дочерние пункты».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
-        "sort": 22,
-        "special": null,
+        "searchable": false,
+        "sort": 23,
+        "special": ["o2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -8508,24 +9214,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "children",
-        "table": "menus",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "service_prices",
@@ -8651,7 +9340,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -8951,7 +9640,7 @@
         "group": null,
         "hidden": false,
         "interface": "boolean",
-        "note": "Поле «Исходная модель».",
+        "note": "Поле «Показывать „от“ перед ценой».",
         "options": null,
         "readonly": false,
         "required": false,
@@ -8961,7 +9650,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Исходная модель"
+            "translation": "Цена от"
           }
         ],
         "validation": null,
@@ -9160,7 +9849,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -9557,7 +10246,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -9767,7 +10456,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -10374,7 +11063,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -10851,7 +11540,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -11111,7 +11800,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -11554,7 +12243,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -11950,7 +12639,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -12210,7 +12899,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -12793,121 +13482,6 @@
     },
     {
       "collection": "header_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "header_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "header_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "header_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "header_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "header_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "header_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -12955,55 +13529,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "header_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "header_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "header_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -13067,7 +13592,7 @@
         "field": "logo_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Логотип (десктоп)».",
         "options": null,
         "readonly": false,
@@ -13116,7 +13641,7 @@
         "field": "logo_source_mobile",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Логотип (мобильный)».",
         "options": null,
         "readonly": false,
@@ -13263,7 +13788,7 @@
         "field": "location_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка локации».",
         "options": null,
         "readonly": false,
@@ -13410,7 +13935,7 @@
         "field": "search_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка поиска».",
         "options": null,
         "readonly": false,
@@ -13606,7 +14131,7 @@
         "field": "time_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка времени».",
         "options": null,
         "readonly": false,
@@ -13704,7 +14229,7 @@
         "field": "phone_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка телефона».",
         "options": null,
         "readonly": false,
@@ -13998,7 +14523,7 @@
         "field": "breadcrumbs_background_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Фон хлебных крошек».",
         "options": null,
         "readonly": false,
@@ -14341,7 +14866,7 @@
         "field": "menu_mobile_logo_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Логотип мобильного меню».",
         "options": null,
         "readonly": false,
@@ -14478,121 +15003,6 @@
     },
     {
       "collection": "footer_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "footer_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "footer_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "footer_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "footer_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "footer_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "footer_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -14640,55 +15050,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "footer_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "footer_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "footer_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -15536,7 +15897,7 @@
         "field": "contact_email_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка email».",
         "options": null,
         "readonly": false,
@@ -15634,7 +15995,7 @@
         "field": "contact_phone_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка телефона контактов».",
         "options": null,
         "readonly": false,
@@ -15732,7 +16093,7 @@
         "field": "contact_time_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка времени контактов».",
         "options": null,
         "readonly": false,
@@ -15830,7 +16191,7 @@
         "field": "contact_button_icon_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка кнопки контактов».",
         "options": null,
         "readonly": false,
@@ -16057,7 +16418,7 @@
         "display_options": null,
         "field": "sort",
         "group": null,
-        "hidden": false,
+        "hidden": true,
         "interface": "input",
         "note": "Порядок сортировки в списке.",
         "options": null,
@@ -16244,121 +16605,6 @@
     },
     {
       "collection": "policy_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "policy_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "policy_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "policy_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "policy_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "policy_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "policy_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -16406,55 +16652,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "policy_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "policy_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "policy_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -16655,121 +16852,6 @@
     },
     {
       "collection": "error_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "error_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "error_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "error_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "error_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "error_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "error_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -16817,55 +16899,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "error_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "error_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "error_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -17115,121 +17148,6 @@
     },
     {
       "collection": "calculate_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "calculate_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "calculate_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "calculate_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "calculate_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "calculate_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "calculate_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -17277,55 +17195,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "calculate_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "calculate_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "calculate_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -17527,7 +17396,7 @@
     {
       "collection": "calculate_settings",
       "field": "perks",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "calculate_settings",
         "conditions": null,
@@ -17536,17 +17405,14 @@
         "field": "perks",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "list-o2m",
         "note": "Поле «Преимущества».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 23,
-        "special": null,
+        "special": ["o2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -17557,15 +17423,194 @@
         "validation_message": null,
         "width": "full"
       },
+      "schema": null
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
       "schema": {
-        "name": "perks",
-        "table": "calculate_settings",
-        "data_type": "json",
+        "name": "id",
+        "table": "calculate_settings_perks",
+        "data_type": "integer",
+        "default_value": "nextval('calculate_settings_perks_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "calculate_settings_perks",
+        "data_type": "integer",
         "default_value": null,
         "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "calculate_settings_id",
+      "type": "integer",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "calculate_settings_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Настройки баннера расчёта».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Настройки баннера расчёта"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "calculate_settings_id",
+        "table": "calculate_settings_perks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "calculate_settings",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "calculate_settings_perks",
+      "field": "text",
+      "type": "string",
+      "meta": {
+        "collection": "calculate_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "text",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Текст преимущества».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Текст преимущества"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "text",
+        "table": "calculate_settings_perks",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": true,
+        "is_nullable": false,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
@@ -17627,121 +17672,6 @@
     },
     {
       "collection": "why_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "why_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "why_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "why_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "why_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "why_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "why_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -17789,55 +17719,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "why_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "why_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "why_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -17989,104 +17870,6 @@
     },
     {
       "collection": "why_settings",
-      "field": "image_source",
-      "type": "string",
-      "meta": {
-        "collection": "why_settings",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "image_source",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": "Поле «Изображение».",
-        "options": null,
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 22,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Изображение"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "image_source",
-        "table": "why_settings",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "why_settings",
-      "field": "image_alt",
-      "type": "string",
-      "meta": {
-        "collection": "why_settings",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "image_alt",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": "Поле «Alt-текст изображения».",
-        "options": null,
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 23,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Alt-текст изображения"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "image_alt",
-        "table": "why_settings",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "why_settings",
       "field": "diagnostic",
       "type": "string",
       "meta": {
@@ -18146,7 +17929,7 @@
         "field": "diagnostic_image",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка диагностики».",
         "options": null,
         "readonly": false,
@@ -18293,7 +18076,7 @@
         "field": "tow_image",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка эвакуатора».",
         "options": null,
         "readonly": false,
@@ -18440,7 +18223,7 @@
         "field": "guarantee_image",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Иконка гарантии».",
         "options": null,
         "readonly": false,
@@ -18675,121 +18458,6 @@
     },
     {
       "collection": "city_select_modal_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "city_select_modal_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "city_select_modal_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "city_select_modal_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "city_select_modal_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "city_select_modal_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "city_select_modal_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -18837,55 +18505,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "city_select_modal_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "city_select_modal_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "city_select_modal_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -19135,121 +18754,6 @@
     },
     {
       "collection": "quiz_modal_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "quiz_modal_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "quiz_modal_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_modal_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "quiz_modal_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "quiz_modal_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_modal_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -19297,55 +18801,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_modal_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "quiz_modal_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "quiz_modal_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -19497,121 +18952,6 @@
     },
     {
       "collection": "shop_modal_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "shop_modal_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "shop_modal_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "shop_modal_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "shop_modal_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "shop_modal_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "shop_modal_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -19659,55 +18999,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "shop_modal_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "shop_modal_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "shop_modal_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -20153,121 +19444,6 @@
     },
     {
       "collection": "signup_modal_settings",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "signup_modal_settings",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "signup_modal_settings",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "signup_modal_settings",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "signup_modal_settings",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "signup_modal_settings",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "signup_modal_settings",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
@@ -20315,55 +19491,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "signup_modal_settings",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "signup_modal_settings",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "signup_modal_settings",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -20525,7 +19652,7 @@
         "field": "image_source",
         "group": null,
         "hidden": false,
-        "interface": "input",
+        "interface": "file-image",
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
@@ -20805,6 +19932,55 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_problems",
+      "field": "brand_id",
+      "type": "integer",
+      "meta": {
+        "collection": "quiz_problems",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "brand_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Марка».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 22,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Марка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "brand_id",
+        "table": "quiz_problems",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id"
       }
     }
   ],
@@ -21110,6 +20286,81 @@
       }
     },
     {
+      "collection": "cases_works",
+      "field": "cases_id",
+      "related_collection": "cases",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "cases_works",
+        "many_field": "cases_id",
+        "one_allowed_collections": null,
+        "one_collection": "cases",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "works",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "cases_works",
+        "column": "cases_id",
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_works_cases_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "cases_id",
+      "related_collection": "cases",
+      "meta": {
+        "junction_field": "directus_files_id",
+        "many_collection": "cases_images",
+        "many_field": "cases_id",
+        "one_allowed_collections": null,
+        "one_collection": "cases",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "images",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "cases_images",
+        "column": "cases_id",
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_images_cases_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "directus_files_id",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": "cases_id",
+        "many_collection": "cases_images",
+        "many_field": "directus_files_id",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "cases_images",
+        "column": "directus_files_id",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_images_directus_files_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
       "collection": "heroes",
       "field": "user_created",
       "related_collection": "directus_users",
@@ -21410,6 +20661,56 @@
       }
     },
     {
+      "collection": "locations_images",
+      "field": "locations_id",
+      "related_collection": "locations",
+      "meta": {
+        "junction_field": "directus_files_id",
+        "many_collection": "locations_images",
+        "many_field": "locations_id",
+        "one_allowed_collections": null,
+        "one_collection": "locations",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "images",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "locations_images",
+        "column": "locations_id",
+        "foreign_key_table": "locations",
+        "foreign_key_column": "id",
+        "constraint_name": "locations_images_locations_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "locations_images",
+      "field": "directus_files_id",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": "locations_id",
+        "many_collection": "locations_images",
+        "many_field": "directus_files_id",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "locations_images",
+        "column": "directus_files_id",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "locations_images_directus_files_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
       "collection": "menus",
       "field": "user_created",
       "related_collection": "directus_users",
@@ -21457,6 +20758,31 @@
         "constraint_name": "menus_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "menus",
+      "field": "parent_id",
+      "related_collection": "menus",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "menus",
+        "many_field": "parent_id",
+        "one_allowed_collections": null,
+        "one_collection": "menus",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "children",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "menus",
+        "column": "parent_id",
+        "foreign_key_table": "menus",
+        "foreign_key_column": "id",
+        "constraint_name": "menus_parent_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     },
     {
@@ -21936,31 +21262,6 @@
     },
     {
       "collection": "header_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "header_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "header_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "header_settings_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "header_settings",
       "field": "user_updated",
       "related_collection": "directus_users",
       "meta": {
@@ -21980,31 +21281,6 @@
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id",
         "constraint_name": "header_settings_user_updated_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "footer_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "footer_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "footer_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "footer_settings_user_created_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
       }
@@ -22086,31 +21362,6 @@
     },
     {
       "collection": "policy_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "policy_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "policy_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "policy_settings_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "policy_settings",
       "field": "user_updated",
       "related_collection": "directus_users",
       "meta": {
@@ -22130,31 +21381,6 @@
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id",
         "constraint_name": "policy_settings_user_updated_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "error_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "error_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "error_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "error_settings_user_created_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
       }
@@ -22186,31 +21412,6 @@
     },
     {
       "collection": "calculate_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "calculate_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "calculate_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "calculate_settings_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "calculate_settings",
       "field": "user_updated",
       "related_collection": "directus_users",
       "meta": {
@@ -22235,28 +21436,28 @@
       }
     },
     {
-      "collection": "why_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
+      "collection": "calculate_settings_perks",
+      "field": "calculate_settings_id",
+      "related_collection": "calculate_settings",
       "meta": {
         "junction_field": null,
-        "many_collection": "why_settings",
-        "many_field": "user_created",
+        "many_collection": "calculate_settings_perks",
+        "many_field": "calculate_settings_id",
         "one_allowed_collections": null,
-        "one_collection": "directus_users",
+        "one_collection": "calculate_settings",
         "one_collection_field": null,
         "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
+        "one_field": "perks",
+        "sort_field": "sort"
       },
       "schema": {
-        "table": "why_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
+        "table": "calculate_settings_perks",
+        "column": "calculate_settings_id",
+        "foreign_key_table": "calculate_settings",
         "foreign_key_column": "id",
-        "constraint_name": "why_settings_user_created_foreign",
+        "constraint_name": "calculate_settings_perks_calculate_settings_id_foreign",
         "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
+        "on_delete": "SET NULL"
       }
     },
     {
@@ -22280,31 +21481,6 @@
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id",
         "constraint_name": "why_settings_user_updated_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "city_select_modal_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "city_select_modal_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "city_select_modal_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "city_select_modal_settings_user_created_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
       }
@@ -22336,31 +21512,6 @@
     },
     {
       "collection": "quiz_modal_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "quiz_modal_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "quiz_modal_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "quiz_modal_settings_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "quiz_modal_settings",
       "field": "user_updated",
       "related_collection": "directus_users",
       "meta": {
@@ -22380,31 +21531,6 @@
         "foreign_key_table": "directus_users",
         "foreign_key_column": "id",
         "constraint_name": "quiz_modal_settings_user_updated_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "shop_modal_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "shop_modal_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "shop_modal_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "shop_modal_settings_user_created_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
       }
@@ -22436,31 +21562,6 @@
     },
     {
       "collection": "signup_modal_settings",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "signup_modal_settings",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "signup_modal_settings",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "signup_modal_settings_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "signup_modal_settings",
       "field": "user_updated",
       "related_collection": "directus_users",
       "meta": {
@@ -22482,6 +21583,31 @@
         "constraint_name": "signup_modal_settings_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "quiz_problems",
+      "field": "brand_id",
+      "related_collection": "brands",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "quiz_problems",
+        "many_field": "brand_id",
+        "one_allowed_collections": null,
+        "one_collection": "brands",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "quiz_problems",
+        "column": "brand_id",
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id",
+        "constraint_name": "quiz_problems_brand_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     }
   ]
