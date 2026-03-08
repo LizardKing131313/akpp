@@ -8984,7 +8984,7 @@
         "group": null,
         "hidden": false,
         "interface": "boolean",
-        "note": "Поле «Исходная модель».",
+        "note": "Поле «Показывать „от“ перед ценой».",
         "options": null,
         "readonly": false,
         "required": false,
@@ -8994,7 +8994,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Исходная модель"
+            "translation": "Цена от"
           }
         ],
         "validation": null,
