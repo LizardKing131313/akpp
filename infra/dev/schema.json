@@ -293,6 +293,72 @@
       }
     },
     {
+      "collection": "cases_works",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "cases_works",
+        "color": "#8E24AA",
+        "display_template": "{{text}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Связующая таблица кейсов и выполненных работ.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 34,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Связи кейсов и работ"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "cases_works"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "cases_images",
+        "color": "#8E24AA",
+        "display_template": "{{directus_files_id}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Связующая таблица кейсов и изображений галереи.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 35,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Связи кейсов и изображений"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "cases_images"
+      }
+    },
+    {
       "collection": "heroes",
       "meta": {
         "accountability": "all",
@@ -4452,7 +4518,7 @@
     {
       "collection": "cases",
       "field": "works",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "cases",
         "conditions": null,
@@ -4461,17 +4527,14 @@
         "field": "works",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "list-o2m",
         "note": "Поле «Выполненные работы».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 30,
-        "special": null,
+        "special": ["o2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -4482,24 +4545,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "works",
-        "table": "cases",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "cases",
@@ -4602,7 +4648,7 @@
     {
       "collection": "cases",
       "field": "images",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "collection": "cases",
         "conditions": null,
@@ -4611,17 +4657,14 @@
         "field": "images",
         "group": null,
         "hidden": false,
-        "interface": "input-code",
+        "interface": "files",
         "note": "Поле «Изображения».",
-        "options": {
-          "language": "json",
-          "template": null
-        },
+        "options": null,
         "readonly": false,
         "required": false,
-        "searchable": true,
+        "searchable": false,
         "sort": 33,
-        "special": null,
+        "special": ["m2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -4632,24 +4675,7 @@
         "validation_message": null,
         "width": "full"
       },
-      "schema": {
-        "name": "images",
-        "table": "cases",
-        "data_type": "json",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
+      "schema": null
     },
     {
       "collection": "cases",
@@ -4697,6 +4723,398 @@
         "generation_expression": null,
         "has_auto_increment": false,
         "foreign_key_table": "brands",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "cases_works",
+        "data_type": "integer",
+        "default_value": "nextval('cases_works_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "cases_works",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "cases_id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "cases_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Кейс».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кейс"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "cases_id",
+        "table": "cases_works",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "text",
+      "type": "string",
+      "meta": {
+        "collection": "cases_works",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "text",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Работа».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Работа"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "text",
+        "table": "cases_works",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "cases_images",
+        "data_type": "integer",
+        "default_value": "nextval('cases_images_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "cases_images",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "cases_id",
+      "type": "integer",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "cases_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Поле «Кейс».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кейс"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "cases_id",
+        "table": "cases_images",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "directus_files_id",
+      "type": "uuid",
+      "meta": {
+        "collection": "cases_images",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "directus_files_id",
+        "group": null,
+        "hidden": false,
+        "interface": "file",
+        "note": "Поле «Изображение».",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Изображение"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "directus_files_id",
+        "table": "cases_images",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_files",
         "foreign_key_column": "id"
       }
     },
@@ -19863,6 +20281,81 @@
         "foreign_key_table": "brands",
         "foreign_key_column": "id",
         "constraint_name": "cases_brand_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "cases_works",
+      "field": "cases_id",
+      "related_collection": "cases",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "cases_works",
+        "many_field": "cases_id",
+        "one_allowed_collections": null,
+        "one_collection": "cases",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "works",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "cases_works",
+        "column": "cases_id",
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_works_cases_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "cases_id",
+      "related_collection": "cases",
+      "meta": {
+        "junction_field": "directus_files_id",
+        "many_collection": "cases_images",
+        "many_field": "cases_id",
+        "one_allowed_collections": null,
+        "one_collection": "cases",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "images",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "cases_images",
+        "column": "cases_id",
+        "foreign_key_table": "cases",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_images_cases_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "cases_images",
+      "field": "directus_files_id",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": "cases_id",
+        "many_collection": "cases_images",
+        "many_field": "directus_files_id",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "cases_images",
+        "column": "directus_files_id",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_images_directus_files_id_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
       }
