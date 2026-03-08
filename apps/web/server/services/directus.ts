@@ -88,7 +88,7 @@ export const createDirectusClient = () => {
     collection: string,
     query: DirectusQuery = {}
   ): Promise<Item> => {
-    const url = `${collectionUrl(collection)}/singleton${buildQueryString(query)}`
+    const url = `${collectionUrl(collection)}${buildQueryString(query)}`
     return await get(url)
   }
 
