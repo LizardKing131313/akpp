@@ -20,6 +20,10 @@ import type { ModelItem } from '#shared/types/model'
 import type { ResolvedPageItem } from '#shared/types/page'
 import type { PolicySettings } from '#shared/types/policy'
 import type { QuizData } from '#shared/types/quiz'
+import type {
+  RoutePageOverrideItem,
+  RoutePageOverrideType,
+} from '#shared/types/route-page-override'
 import type { RoutePageSettings } from '#shared/types/route-page-settings'
 import type { ServiceItem, ServicePriceItem } from '#shared/types/service'
 import type { TransmissionItem, TransmissionRangeWithVariants } from '#shared/types/transmission'
@@ -268,6 +272,94 @@ export const usePageBySlugFallback = (slugsInput: MaybeRefOrGetter<readonly stri
     },
     {
       watch: [normalizedSlugs],
+    }
+  )
+}
+
+export const useRoutePageOverride = (
+  routeTypeInput: MaybeRefOrGetter<RoutePageOverrideType>,
+  idsInput?: MaybeRefOrGetter<{
+    readonly serviceId?: string | undefined
+    readonly brandId?: string | undefined
+    readonly modelId?: string | undefined
+  }>
+) => {
+  const normalizedRouteType = computed<RoutePageOverrideType>(() => toValue(routeTypeInput))
+
+  const normalizedIds = computed(() => {
+    const ids = toValue(idsInput)
+
+    return {
+      serviceId: normalizeParamValue(ids?.serviceId),
+      brandId: normalizeParamValue(ids?.brandId),
+      modelId: normalizeParamValue(ids?.modelId),
+    }
+  })
+
+  return useAsyncData<RoutePageOverrideItem | null>(
+    () =>
+      `route-page-overrides:${normalizedRouteType.value}:${normalizedIds.value.serviceId}:${normalizedIds.value.brandId}:${normalizedIds.value.modelId}`,
+    () => {
+      const searchParams = new URLSearchParams()
+      searchParams.set('routeType', normalizedRouteType.value)
+
+      if (normalizedIds.value.serviceId.length > 0) {
+        searchParams.set('serviceId', normalizedIds.value.serviceId)
+      }
+
+      if (normalizedIds.value.brandId.length > 0) {
+        searchParams.set('brandId', normalizedIds.value.brandId)
+      }
+
+      if (normalizedIds.value.modelId.length > 0) {
+        searchParams.set('modelId', normalizedIds.value.modelId)
+      }
+
+      return fetchFromApi<RoutePageOverrideItem | null>(
+        `/api/route_page_overrides/resolve?${searchParams.toString()}`
+      )
+    },
+    {
+      watch: [normalizedRouteType, normalizedIds],
+    }
+  )
+}
+
+export const useServiceBrandExists = (
+  idsInput: MaybeRefOrGetter<{
+    readonly serviceId?: string | undefined
+    readonly brandId?: string | undefined
+  }>
+) => {
+  const normalizedIds = computed(() => {
+    const ids = toValue(idsInput)
+
+    return {
+      serviceId: normalizeParamValue(ids?.serviceId),
+      brandId: normalizeParamValue(ids?.brandId),
+    }
+  })
+
+  return useAsyncData<{ exists: boolean }>(
+    () => `service-brands:exists:${normalizedIds.value.serviceId}:${normalizedIds.value.brandId}`,
+    () => {
+      if (normalizedIds.value.serviceId.length === 0 || normalizedIds.value.brandId.length === 0) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'serviceId and brandId are required',
+        })
+      }
+
+      const searchParams = new URLSearchParams()
+      searchParams.set('serviceId', normalizedIds.value.serviceId)
+      searchParams.set('brandId', normalizedIds.value.brandId)
+
+      return fetchFromApi<{ exists: boolean }>(
+        `/api/service_brands/exists?${searchParams.toString()}`
+      )
+    },
+    {
+      watch: [normalizedIds],
     }
   )
 }

@@ -1292,12 +1292,12 @@
         "collapse": "open",
         "collection": "pages",
         "color": "#1E88E5",
-        "display_template": "{{name}}",
+        "display_template": "{{name}} ({{slug}})",
         "group": "content",
         "hidden": false,
-        "icon": "description",
+        "icon": "article",
         "item_duplication_fields": null,
-        "note": "Контентные страницы для шаблонных и комбинированных URL.",
+        "note": "Ручные страницы и SEO-лендинги. Для массовых динамических URL используйте route_page_overrides и route_page_settings.",
         "preview_url": null,
         "singleton": false,
         "sort": 54,
@@ -1305,7 +1305,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Страницы"
+            "translation": "Ручные страницы и SEO-лендинги"
           }
         ],
         "unarchive_value": "draft",
@@ -1325,12 +1325,12 @@
         "collapse": "open",
         "collection": "route_page_settings",
         "color": "#546E7A",
-        "display_template": "{{breadcrumb_repair_label}}",
+        "display_template": "{{breadcrumb_home_label}} / {{breadcrumb_services_label}}",
         "group": "settings",
         "hidden": false,
-        "icon": "route",
+        "icon": "fact_check",
         "item_duplication_fields": null,
-        "note": "Шаблоны заголовков, SEO и breadcrumbs для маршрутных страниц.",
+        "note": "Глобальные шаблоны H1/SEO/контента и подписи breadcrumbs для динамических маршрутов.",
         "preview_url": null,
         "singleton": true,
         "sort": 55,
@@ -1338,7 +1338,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблоны маршрутных страниц"
+            "translation": "Шаблоны страниц и breadcrumbs"
           }
         ],
         "unarchive_value": null,
@@ -1346,6 +1346,72 @@
       },
       "schema": {
         "name": "route_page_settings"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": "status",
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "service_brands",
+        "color": "#3949AB",
+        "display_template": "{{service_id.name}} + {{brand_id.name}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "rule",
+        "item_duplication_fields": null,
+        "note": "Белый список реальных пар услуга+марка. Используется для допуска URL /uslugi/{service}/{brand} и для sitemap.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 56,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Доступность услуг по маркам"
+          }
+        ],
+        "unarchive_value": "draft",
+        "versioning": true
+      },
+      "schema": {
+        "name": "service_brands"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": "status",
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "route_page_overrides",
+        "color": "#1E88E5",
+        "display_template": "{{route_type}} | {{service_id.name}} | {{brand_id.name}} | {{model_id.name}}",
+        "group": "content",
+        "hidden": false,
+        "icon": "auto_awesome_motion",
+        "item_duplication_fields": null,
+        "note": "Точечные переопределения контента для динамических URL. Заполняются только нужные поля (H1/SEO/контент), без ручного ввода slug.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 57,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Переопределения контента маршрутов"
+          }
+        ],
+        "unarchive_value": "draft",
+        "versioning": true
+      },
+      "schema": {
+        "name": "route_page_overrides"
       }
     }
   ],
@@ -20111,7 +20177,7 @@
         "group": null,
         "hidden": false,
         "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
+        "note": "В sitemap и на сайте участвуют только записи со статусом \"published\".",
         "options": {
           "choices": [
             {
@@ -20136,7 +20202,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Статус"
+            "translation": "Статус публикации"
           }
         ],
         "validation": null,
@@ -20424,7 +20490,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Слаг страницы без ведущего символа /. Пример: uslugi/remont-dsg",
+        "note": "Путь без ведущего /. Пример: policy, articles/diagnostika-akpp, uslugi/remont-dsg/audi.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20434,7 +20500,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Слаг маршрута"
+            "translation": "Слаг URL"
           }
         ],
         "validation": null,
@@ -20473,7 +20539,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Служебное название страницы в админке.",
+        "note": "Название для админки и поиска, не обязательно совпадает с H1.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20483,7 +20549,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Название страницы"
+            "translation": "Внутреннее название страницы"
           }
         ],
         "validation": null,
@@ -20522,7 +20588,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Заголовок страницы H1 (опционально).",
+        "note": "Опционально. Если пусто, заголовок будет сформирован по шаблону или данным сущности.",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20571,7 +20637,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Мета-тег title (опционально).",
+        "note": "Опционально. Если пусто, используется шаблон SEO title.",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20581,7 +20647,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO-заголовок"
+            "translation": "SEO title"
           }
         ],
         "validation": null,
@@ -20620,7 +20686,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Мета-тег description (опционально).",
+        "note": "Опционально. Если пусто, используется шаблон SEO description.",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20630,7 +20696,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO-описание"
+            "translation": "SEO description"
           }
         ],
         "validation": null,
@@ -20669,7 +20735,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Контент страницы. Используется как приоритет над шаблоном.",
+        "note": "Опционально. Если пусто, используется шаблонный текст из route_page_settings.",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20679,7 +20745,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Текст страницы"
+            "translation": "Контент страницы"
           }
         ],
         "validation": null,
@@ -20718,7 +20784,7 @@
         "group": null,
         "hidden": true,
         "interface": "input",
-        "note": "Системный идентификатор записи.",
+        "note": "Служебный идентификатор записи singleton.",
         "options": null,
         "readonly": true,
         "required": false,
@@ -20769,7 +20835,7 @@
         "group": null,
         "hidden": true,
         "interface": "datetime",
-        "note": "Дата и время последнего обновления.",
+        "note": "Дата последнего изменения настроек шаблонов.",
         "options": null,
         "readonly": true,
         "required": false,
@@ -20818,7 +20884,7 @@
         "group": null,
         "hidden": true,
         "interface": "select-dropdown-m2o",
-        "note": "Пользователь, обновивший запись.",
+        "note": "Пользователь, который последним менял настройки.",
         "options": null,
         "readonly": true,
         "required": false,
@@ -20867,7 +20933,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для главной страницы.",
+        "note": "Текст пункта breadcrumbs для главной страницы.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20916,7 +20982,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для раздела ремонта АКПП.",
+        "note": "Текст пункта breadcrumbs для раздела ремонта.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20965,7 +21031,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для раздела услуг.",
+        "note": "Текст пункта breadcrumbs для раздела услуг.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21014,7 +21080,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон заголовка H1 для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21063,7 +21129,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21073,7 +21139,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон title: ремонт по марке"
+            "translation": "Шаблон SEO title: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21112,7 +21178,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21122,7 +21188,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон description: ремонт по марке"
+            "translation": "Шаблон SEO description: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21161,7 +21227,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон текста страницы для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21171,7 +21237,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон текста: ремонт по марке"
+            "translation": "Шаблон контента: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21210,7 +21276,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон заголовка H1 для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21259,7 +21325,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21269,7 +21335,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон title: ремонт по модели"
+            "translation": "Шаблон SEO title: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21308,7 +21374,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21318,7 +21384,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон description: ремонт по модели"
+            "translation": "Шаблон SEO description: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21357,7 +21423,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон текста страницы для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
+        "note": "Используется как fallback. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21367,7 +21433,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон текста: ремонт по модели"
+            "translation": "Шаблон контента: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21406,7 +21472,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон заголовка H1 для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21455,7 +21521,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21465,7 +21531,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон title: услуга"
+            "translation": "Шаблон SEO title: услуга"
           }
         ],
         "validation": null,
@@ -21504,7 +21570,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21514,7 +21580,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон description: услуга"
+            "translation": "Шаблон SEO description: услуга"
           }
         ],
         "validation": null,
@@ -21553,7 +21619,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон текста страницы для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21563,7 +21629,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон текста: услуга"
+            "translation": "Шаблон контента: услуга"
           }
         ],
         "validation": null,
@@ -21602,7 +21668,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон заголовка H1 для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21651,7 +21717,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21661,7 +21727,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон title: услуга по марке"
+            "translation": "Шаблон SEO title: услуга по марке"
           }
         ],
         "validation": null,
@@ -21700,7 +21766,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21710,7 +21776,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон description: услуга по марке"
+            "translation": "Шаблон SEO description: услуга по марке"
           }
         ],
         "validation": null,
@@ -21749,7 +21815,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон текста страницы для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
+        "note": "Используется как fallback. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21759,7 +21825,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Шаблон текста: услуга по марке"
+            "translation": "Шаблон контента: услуга по марке"
           }
         ],
         "validation": null,
@@ -21798,7 +21864,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы услуги.",
+        "note": "Текст пункта breadcrumbs для страницы услуги.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21847,7 +21913,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для уровня модели.",
+        "note": "Текст пункта breadcrumbs для уровня модели.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21896,7 +21962,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для уровня марки.",
+        "note": "Текст пункта breadcrumbs для уровня марки.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21945,7 +22011,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для раздела статей.",
+        "note": "Текст пункта breadcrumbs для раздела статей.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21994,7 +22060,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы статьи.",
+        "note": "Текст пункта breadcrumbs для страницы статьи.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22043,7 +22109,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы контактов.",
+        "note": "Текст пункта breadcrumbs для страницы контактов.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22092,7 +22158,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для раздела определения АКПП.",
+        "note": "Текст пункта breadcrumbs для раздела определения АКПП.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22141,7 +22207,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы политики.",
+        "note": "Текст пункта breadcrumbs для страницы политики.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22151,7 +22217,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Крошки: Политика конфиденциальности"
+            "translation": "Крошки: Политика"
           }
         ],
         "validation": null,
@@ -22190,7 +22256,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы продажи АКПП.",
+        "note": "Текст пункта breadcrumbs для страницы продажи АКПП.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22239,7 +22305,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для раздела трансмиссий.",
+        "note": "Текст пункта breadcrumbs для раздела трансмиссий.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22288,7 +22354,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы конкретной трансмиссии.",
+        "note": "Текст пункта breadcrumbs для страницы трансмиссии.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22337,7 +22403,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для раздела примеров работ.",
+        "note": "Текст пункта breadcrumbs для раздела кейсов.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22386,7 +22452,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Подпись крошки для страницы конкретного кейса.",
+        "note": "Текст пункта breadcrumbs для страницы кейса.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22412,6 +22478,1357 @@
         "numeric_precision": null,
         "numeric_scale": null,
         "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "service_brands",
+        "data_type": "integer",
+        "default_value": "nextval('faqs_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": "labels",
+        "display_options": null,
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": "Только записи со статусом \"published\" участвуют в sitemap и открытии URL /uslugi/{service}/{brand}.",
+        "options": {
+          "choices": [
+            {
+              "text": "Черновик",
+              "value": "draft"
+            },
+            {
+              "text": "Опубликовано",
+              "value": "published"
+            },
+            {
+              "text": "Архив",
+              "value": "archived"
+            }
+          ]
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус публикации"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "status",
+        "table": "service_brands",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "service_brands",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_created",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время создания записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 10,
+        "special": ["date-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата создания"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_created",
+        "table": "service_brands",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время последнего обновления.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 11,
+        "special": ["date-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата обновления"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_updated",
+        "table": "service_brands",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "user_created",
+      "type": "uuid",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_created",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, создавший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 12,
+        "special": ["user-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто создал"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_created",
+        "table": "service_brands",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "user_updated",
+      "type": "uuid",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, обновивший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 13,
+        "special": ["user-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто обновил"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_updated",
+        "table": "service_brands",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "service_id",
+      "type": "integer",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "service_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Выберите услугу для разрешённой пары URL.",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 20,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Услуга"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "service_id",
+        "table": "service_brands",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "services",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "brand_id",
+      "type": "integer",
+      "meta": {
+        "collection": "service_brands",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "brand_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Выберите марку для разрешённой пары URL.",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 21,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Марка автомобиля"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "brand_id",
+        "table": "service_brands",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "route_page_overrides",
+        "data_type": "integer",
+        "default_value": "nextval('articles_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": "labels",
+        "display_options": null,
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": "Только записи со статусом \"published\" применяются как override.",
+        "options": {
+          "choices": [
+            {
+              "text": "Черновик",
+              "value": "draft"
+            },
+            {
+              "text": "Опубликовано",
+              "value": "published"
+            },
+            {
+              "text": "Архив",
+              "value": "archived"
+            }
+          ]
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус публикации"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "status",
+        "table": "route_page_overrides",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "route_page_overrides",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_created",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время создания записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 10,
+        "special": ["date-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата создания"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_created",
+        "table": "route_page_overrides",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время последнего обновления.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 11,
+        "special": ["date-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата обновления"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_updated",
+        "table": "route_page_overrides",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "user_created",
+      "type": "uuid",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_created",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, создавший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 12,
+        "special": ["user-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто создал"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_created",
+        "table": "route_page_overrides",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "user_updated",
+      "type": "uuid",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, обновивший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 13,
+        "special": ["user-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто обновил"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_updated",
+        "table": "route_page_overrides",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "route_type",
+      "type": "string",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "route_type",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": "Определяет, для какого URL применяется override. Примеры: repair_brand => /remont-akpp-{brand}, service_brand => /uslugi/{service}/{brand}.",
+        "options": {
+          "choices": [
+            {
+              "text": "Ремонт по марке (/remont-akpp-{brand})",
+              "value": "repair_brand"
+            },
+            {
+              "text": "Ремонт по модели (/remont-akpp-{brand}/{model})",
+              "value": "repair_model"
+            },
+            {
+              "text": "Услуга (/uslugi/{service})",
+              "value": "service"
+            },
+            {
+              "text": "Услуга по марке (/uslugi/{service}/{brand})",
+              "value": "service_brand"
+            }
+          ]
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 20,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Тип маршрута"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "route_type",
+        "table": "route_page_overrides",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "service_id",
+      "type": "integer",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "service_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Заполняется для route_type = service и service_brand.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 21,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Услуга"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "service_id",
+        "table": "route_page_overrides",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "services",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "brand_id",
+      "type": "integer",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "brand_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Заполняется для route_type = repair_brand, repair_model, service_brand.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 22,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Марка автомобиля"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "brand_id",
+        "table": "route_page_overrides",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "model_id",
+      "type": "integer",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "model_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Заполняется только для route_type = repair_model.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 23,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Модель автомобиля"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "model_id",
+        "table": "route_page_overrides",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "models",
+        "foreign_key_column": "id",
+        "constraint_name": "route_page_overrides_model_id_foreign"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "h1",
+      "type": "string",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "h1",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Опционально. Если пусто, используется шаблон из route_page_settings.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 30,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Индивидуальный H1"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "h1",
+        "table": "route_page_overrides",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "seo_title",
+      "type": "string",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "seo_title",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Опционально. Если пусто, используется шаблон из route_page_settings.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 31,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Индивидуальный SEO title"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "seo_title",
+        "table": "route_page_overrides",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "seo_description",
+      "type": "text",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "seo_description",
+        "group": null,
+        "hidden": false,
+        "interface": "input-multiline",
+        "note": "Опционально. Если пусто, используется шаблон из route_page_settings.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 32,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Индивидуальный SEO description"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "seo_description",
+        "table": "route_page_overrides",
+        "data_type": "text",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "content",
+      "type": "text",
+      "meta": {
+        "collection": "route_page_overrides",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "content",
+        "group": null,
+        "hidden": false,
+        "interface": "input-multiline",
+        "note": "Опционально. Если пусто, используется шаблон из route_page_settings.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 33,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Индивидуальный текст страницы"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "content",
+        "table": "route_page_overrides",
+        "data_type": "text",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "menus",
+      "field": "source_type",
+      "type": "string",
+      "meta": {
+        "collection": "menus",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "source_type",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": "Источник дочерних пунктов: manual, brands, services, brand_models.",
+        "options": {
+          "choices": [
+            {
+              "text": "Ручной (children из меню)",
+              "value": "manual"
+            },
+            {
+              "text": "Список марок (brands)",
+              "value": "brands"
+            },
+            {
+              "text": "Список услуг (services)",
+              "value": "services"
+            },
+            {
+              "text": "Список моделей марки (brand_models)",
+              "value": "brand_models"
+            }
+          ]
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 24,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Источник пунктов"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "source_type",
+        "table": "menus",
+        "data_type": "character varying",
+        "default_value": "manual",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "menus",
+      "field": "source_options",
+      "type": "text",
+      "meta": {
+        "collection": "menus",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "source_options",
+        "group": null,
+        "hidden": false,
+        "interface": "input-multiline",
+        "note": "Опции источника в JSON-строке, например: {\"brand_id\":\"12\"} или {\"brand_slug\":\"audi\"}.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 25,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Опции источника (JSON)"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "source_options",
+        "table": "menus",
+        "data_type": "text",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
@@ -24122,6 +25539,231 @@
         "constraint_name": "route_page_settings_user_updated_foreign",
         "on_update": "NO ACTION",
         "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "user_created",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "service_brands",
+        "many_field": "user_created",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "service_brands",
+        "column": "user_created",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "service_brands_user_created_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "user_updated",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "service_brands",
+        "many_field": "user_updated",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "service_brands",
+        "column": "user_updated",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "service_brands_user_updated_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "service_id",
+      "related_collection": "services",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "service_brands",
+        "many_field": "service_id",
+        "one_allowed_collections": null,
+        "one_collection": "services",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "service_brands",
+        "column": "service_id",
+        "foreign_key_table": "services",
+        "foreign_key_column": "id",
+        "constraint_name": "service_brands_service_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "service_brands",
+      "field": "brand_id",
+      "related_collection": "brands",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "service_brands",
+        "many_field": "brand_id",
+        "one_allowed_collections": null,
+        "one_collection": "brands",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "service_brands",
+        "column": "brand_id",
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id",
+        "constraint_name": "service_brands_brand_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "user_created",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "route_page_overrides",
+        "many_field": "user_created",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "route_page_overrides",
+        "column": "user_created",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "route_page_overrides_user_created_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "user_updated",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "route_page_overrides",
+        "many_field": "user_updated",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "route_page_overrides",
+        "column": "user_updated",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "route_page_overrides_user_updated_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "service_id",
+      "related_collection": "services",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "route_page_overrides",
+        "many_field": "service_id",
+        "one_allowed_collections": null,
+        "one_collection": "services",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "route_page_overrides",
+        "column": "service_id",
+        "foreign_key_table": "services",
+        "foreign_key_column": "id",
+        "constraint_name": "route_page_overrides_service_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "brand_id",
+      "related_collection": "brands",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "route_page_overrides",
+        "many_field": "brand_id",
+        "one_allowed_collections": null,
+        "one_collection": "brands",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "route_page_overrides",
+        "column": "brand_id",
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id",
+        "constraint_name": "route_page_overrides_brand_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "route_page_overrides",
+      "field": "model_id",
+      "related_collection": "models",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "route_page_overrides",
+        "many_field": "model_id",
+        "one_allowed_collections": null,
+        "one_collection": "models",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "route_page_overrides",
+        "column": "model_id",
+        "foreign_key_table": "models",
+        "foreign_key_column": "id",
+        "constraint_name": "route_page_overrides_model_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
       }
     }
   ]

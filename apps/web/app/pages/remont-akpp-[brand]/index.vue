@@ -40,17 +40,9 @@ const modelSliderItems = computed<ModelItem[]>(() => {
     }))
 })
 
-const pageFallbackSlugs = computed<string[]>(() => {
-  const currentBrandSlug = brandSlug.value
-
-  if (currentBrandSlug.length === 0) {
-    return []
-  }
-
-  return [`remont-akpp-${currentBrandSlug}`]
-})
-
-const { data: resolvedPageData } = await usePageBySlugFallback(pageFallbackSlugs)
+const { data: routePageOverrideData } = await useRoutePageOverride('repair_brand', () => ({
+  brandId: brandData.value?.id,
+}))
 
 const templateValues = computed<Record<string, string>>(() => ({
   brand: brandData.value?.name ?? '',
@@ -60,14 +52,14 @@ const templateValues = computed<Record<string, string>>(() => ({
 
 const pageTitle = computed<string>(() => {
   return (
-    resolvedPageData.value?.page?.h1 ??
+    routePageOverrideData.value?.h1 ??
     applyTemplate(routePageSettings.value.repair_brand_h1_template, templateValues.value)
   )
 })
 
 const pageContent = computed<string>(() => {
   return (
-    resolvedPageData.value?.page?.content ??
+    routePageOverrideData.value?.content ??
     applyTemplate(routePageSettings.value.repair_brand_content_template, templateValues.value)
   )
 })
@@ -82,10 +74,10 @@ usePageEntityBreadcrumbs({
 
 useSeoMeta({
   title: () =>
-    resolvedPageData.value?.page?.seo_title ??
+    routePageOverrideData.value?.seo_title ??
     applyTemplate(routePageSettings.value.repair_brand_seo_title_template, templateValues.value),
   description: () =>
-    resolvedPageData.value?.page?.seo_description ??
+    routePageOverrideData.value?.seo_description ??
     applyTemplate(
       routePageSettings.value.repair_brand_seo_description_template,
       templateValues.value

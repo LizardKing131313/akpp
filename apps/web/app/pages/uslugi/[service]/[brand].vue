@@ -26,18 +26,27 @@ if (!serviceData.value || !brandData.value) {
   })
 }
 
-const pageFallbackSlugs = computed<string[]>(() => {
-  const currentServiceSlug = serviceSlug.value
-  const currentBrandSlug = brandSlug.value
+const { data: serviceBrandExistsData, error: serviceBrandExistsError } =
+  await useServiceBrandExists(() => ({
+    serviceId: serviceData.value?.id,
+    brandId: brandData.value?.id,
+  }))
 
-  if (currentServiceSlug.length === 0 || currentBrandSlug.length === 0) {
-    return []
-  }
+if (serviceBrandExistsError.value) {
+  throw serviceBrandExistsError.value
+}
 
-  return [`uslugi/${currentServiceSlug}/${currentBrandSlug}`, `uslugi/${currentServiceSlug}`]
-})
+if (!serviceBrandExistsData.value?.exists) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Service is not available for this brand',
+  })
+}
 
-const { data: resolvedPageData } = await usePageBySlugFallback(pageFallbackSlugs)
+const { data: routePageOverrideData } = await useRoutePageOverride('service_brand', () => ({
+  serviceId: serviceData.value?.id,
+  brandId: brandData.value?.id,
+}))
 
 const templateValues = computed<Record<string, string>>(() => ({
   brand: brandData.value?.name ?? '',
@@ -47,14 +56,14 @@ const templateValues = computed<Record<string, string>>(() => ({
 
 const pageTitle = computed<string>(() => {
   return (
-    resolvedPageData.value?.page?.h1 ??
+    routePageOverrideData.value?.h1 ??
     applyTemplate(routePageSettings.value.service_brand_h1_template, templateValues.value)
   )
 })
 
 const pageContent = computed<string>(() => {
   return (
-    resolvedPageData.value?.page?.content ??
+    routePageOverrideData.value?.content ??
     applyTemplate(routePageSettings.value.service_brand_content_template, templateValues.value)
   )
 })
@@ -73,10 +82,10 @@ usePageEntityBreadcrumbs({
 
 useSeoMeta({
   title: () =>
-    resolvedPageData.value?.page?.seo_title ??
+    routePageOverrideData.value?.seo_title ??
     applyTemplate(routePageSettings.value.service_brand_seo_title_template, templateValues.value),
   description: () =>
-    resolvedPageData.value?.page?.seo_description ??
+    routePageOverrideData.value?.seo_description ??
     applyTemplate(
       routePageSettings.value.service_brand_seo_description_template,
       templateValues.value
