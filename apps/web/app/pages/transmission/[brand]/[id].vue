@@ -1,25 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Трансмиссия',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Трансмиссии', slug: '/transmission' },
-      { name: 'Трансмиссия' },
-    ],
-  },
-})
-
 const route = useRoute()
+const routePageSettings = useRoutePageSettingsUi()
 
 const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())
 const transmissionTitle = computed<string>(() => {
   const rawSlug = String(route.params.id ?? '').trim()
   if (rawSlug.length === 0) {
-    return 'Трансмиссия'
+    return routePageSettings.value.breadcrumb_transmission_item_label
   }
 
   return rawSlug.replace(/-/g, ' ')
@@ -32,9 +21,9 @@ usePageEntityBreadcrumbs({
       brandSlug.value.length > 0 ? `/transmission/${brandSlug.value}` : '/transmission'
 
     return [
-      { name: 'Главная', slug: '/' },
-      { name: 'Трансмиссии', slug: '/transmission' },
-      { name: 'Марка', slug: brandPath },
+      { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
+      { name: routePageSettings.value.breadcrumb_transmission_label, slug: '/transmission' },
+      { name: routePageSettings.value.breadcrumb_brand_label, slug: brandPath },
     ]
   }),
 })

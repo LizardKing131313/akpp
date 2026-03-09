@@ -1,18 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Статья',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Статьи', slug: '/articles' },
-      { name: 'Статья' },
-    ],
-  },
-})
-
+const routePageSettings = useRoutePageSettingsUi()
 const route = useRoute()
 const articleSlug = computed<string>(() => String(route.params.id ?? '').trim())
 
@@ -23,11 +12,13 @@ const articleContent = computed<string>(() => {
 })
 
 usePageEntityBreadcrumbs({
-  title: computed(() => articleData.value?.name ?? ''),
-  baseItems: [
-    { name: 'Главная', slug: '/' },
-    { name: 'Статьи', slug: '/articles' },
-  ],
+  title: computed(
+    () => articleData.value?.name ?? routePageSettings.value.breadcrumb_article_label
+  ),
+  baseItems: computed(() => [
+    { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
+    { name: routePageSettings.value.breadcrumb_articles_label, slug: '/articles' },
+  ]),
 })
 </script>
 

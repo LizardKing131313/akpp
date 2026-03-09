@@ -2,22 +2,10 @@
 import { computed } from 'vue'
 
 const { data: policyData } = await usePolicySettings()
-
-const defaultTitle = 'Политика конфиденциальности'
+const routePageSettings = useRoutePageSettingsUi()
 
 const policyTitle = computed<string>(() => {
-  return policyData.value?.title ?? defaultTitle
-})
-
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: defaultTitle,
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: defaultTitle, slug: '/policy' },
-    ],
-  },
+  return policyData.value?.title ?? routePageSettings.value.breadcrumb_policy_label
 })
 
 const policyArticle = computed<string>(() => {
@@ -26,7 +14,7 @@ const policyArticle = computed<string>(() => {
 
 usePageEntityBreadcrumbs({
   title: policyTitle,
-  baseItems: [{ name: 'Главная', slug: '/' }],
+  baseItems: computed(() => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }]),
 })
 </script>
 

@@ -3,15 +3,11 @@ import type { ImageCardItem } from '#shared/types/entity'
 
 import { computed } from 'vue'
 
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Примеры работ',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Примеры работ', slug: '/work' },
-    ],
-  },
+const routePageSettings = useRoutePageSettingsUi()
+
+usePageEntityBreadcrumbs({
+  title: () => routePageSettings.value.breadcrumb_work_label,
+  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
 })
 
 const { data: casesData } = await useCases()

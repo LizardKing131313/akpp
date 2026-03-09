@@ -1,16 +1,11 @@
 <script setup lang="ts">
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Статьи',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Статьи', slug: '/articles' },
-    ],
-  },
-})
-
+const routePageSettings = useRoutePageSettingsUi()
 const { data: articlesData } = await useArticles()
+
+usePageEntityBreadcrumbs({
+  title: () => routePageSettings.value.breadcrumb_articles_label,
+  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
+})
 </script>
 
 <template>

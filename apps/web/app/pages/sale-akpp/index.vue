@@ -1,13 +1,9 @@
 <script setup lang="ts">
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Продажа АКПП',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Продажа АКПП', slug: '/sale-akpp' },
-    ],
-  },
+const routePageSettings = useRoutePageSettingsUi()
+
+usePageEntityBreadcrumbs({
+  title: () => routePageSettings.value.breadcrumb_sale_label,
+  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
 })
 </script>
 

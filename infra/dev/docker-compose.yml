@@ -164,6 +164,7 @@ services:
 
   directus-settings-export:
     image: directus/directus:11
+    profiles: ['manual']
     depends_on:
       directus:
         condition: service_healthy

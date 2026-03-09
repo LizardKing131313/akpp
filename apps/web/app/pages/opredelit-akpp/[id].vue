@@ -1,14 +1,13 @@
 <script setup lang="ts">
-definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Определение АКПП',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Определить АКПП', slug: '/opredelit-akpp' },
-      { name: 'Определение АКПП' },
-    ],
-  },
+import { computed } from 'vue'
+
+const routePageSettings = useRoutePageSettingsUi()
+
+const pageTitle = computed<string>(() => routePageSettings.value.breadcrumb_determine_label)
+
+usePageEntityBreadcrumbs({
+  title: pageTitle,
+  baseItems: computed(() => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }]),
 })
 </script>
 

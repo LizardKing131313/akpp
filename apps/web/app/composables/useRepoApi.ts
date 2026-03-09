@@ -17,8 +17,10 @@ import type {
   SignupModalUiSettings,
 } from '#shared/types/modal'
 import type { ModelItem } from '#shared/types/model'
+import type { ResolvedPageItem } from '#shared/types/page'
 import type { PolicySettings } from '#shared/types/policy'
 import type { QuizData } from '#shared/types/quiz'
+import type { RoutePageSettings } from '#shared/types/route-page-settings'
 import type { ServiceItem, ServicePriceItem } from '#shared/types/service'
 import type { TransmissionItem, TransmissionRangeWithVariants } from '#shared/types/transmission'
 import type { WhySettings } from '#shared/types/why'
@@ -101,6 +103,10 @@ export const usePolicySettings = () => {
   return useStaticApiData<PolicySettings>('policy:settings', '/api/policy')
 }
 
+export const useRoutePageSettings = () => {
+  return useStaticApiData<RoutePageSettings>('route-page:settings', '/api/route_page_settings')
+}
+
 export const useCitySelectModalSettings = () => {
   return useStaticApiData<CitySelectModalUiSettings>(
     'city-select-modal:settings',
@@ -139,6 +145,12 @@ export const useArticleBySlug = (slugInput: MaybeRefOrGetter<string>) => {
 
 export const useBrands = () => {
   return useStaticApiData<BrandItem[]>('brands:list', '/api/brands')
+}
+
+export const useBrandBySlug = (slugInput: MaybeRefOrGetter<string>) => {
+  return useByParamApiData<BrandItem>('brands:slug', 'brand slug', slugInput, (slug: string) => {
+    return `/api/brands/${encodeURIComponent(slug)}`
+  })
 }
 
 export const useCases = () => {
@@ -213,6 +225,12 @@ export const useModels = () => {
   return useStaticApiData<ModelItem[]>('models:list', '/api/models/models')
 }
 
+export const useModelBySlug = (slugInput: MaybeRefOrGetter<string>) => {
+  return useByParamApiData<ModelItem>('models:slug', 'model slug', slugInput, (slug: string) => {
+    return `/api/models/${encodeURIComponent(slug)}`
+  })
+}
+
 export const useServices = () => {
   return useStaticApiData<ServiceItem[]>('services:list', '/api/services')
 }
@@ -223,6 +241,34 @@ export const useServiceBySlug = (slugInput: MaybeRefOrGetter<string>) => {
     'service slug',
     slugInput,
     (slug: string) => `/api/services/${encodeURIComponent(slug)}`
+  )
+}
+
+export const usePageBySlugFallback = (slugsInput: MaybeRefOrGetter<readonly string[]>) => {
+  const normalizedSlugs = computed<string[]>(() => {
+    const slugs = toValue(slugsInput)
+
+    return [...slugs].map((slug) => normalizeParamValue(slug)).filter((slug) => slug.length > 0)
+  })
+
+  return useAsyncData<ResolvedPageItem>(
+    () => `pages:resolve:${normalizedSlugs.value.join(',')}`,
+    () => {
+      const slugs = normalizedSlugs.value
+
+      if (slugs.length === 0) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'slugs are required',
+        })
+      }
+
+      const encodedSlugs = slugs.map((slug) => encodeURIComponent(slug)).join(',')
+      return fetchFromApi<ResolvedPageItem>(`/api/pages/resolve?slugs=${encodedSlugs}`)
+    },
+    {
+      watch: [normalizedSlugs],
+    }
   )
 }
 

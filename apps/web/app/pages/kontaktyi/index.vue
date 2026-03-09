@@ -6,17 +6,16 @@ import type { LocationItem } from '#shared/types/location'
 import { computed, ref, watch } from 'vue'
 
 definePageMeta({
-  pageHeader: {
-    kind: 'breadcrumbs',
-    breadcrumb: 'Контакты',
-    breadcrumbs: [
-      { name: 'Главная', slug: '/' },
-      { name: 'Контакты', slug: '/kontaktyi' },
-    ],
-  },
   footer: {
     hideContacts: true,
   },
+})
+
+const routePageSettings = useRoutePageSettingsUi()
+
+usePageEntityBreadcrumbs({
+  title: () => routePageSettings.value.breadcrumb_contacts_label,
+  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
 })
 
 const { data: citiesData } = await useCities()
