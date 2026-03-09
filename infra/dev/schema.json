@@ -20424,7 +20424,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Поле «Slug маршрута без ведущего /».",
+        "note": "Слаг страницы без ведущего символа /. Пример: uslugi/remont-dsg",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20434,7 +20434,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Slug"
+            "translation": "Слаг маршрута"
           }
         ],
         "validation": null,
@@ -20473,7 +20473,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Поле «Название страницы».",
+        "note": "Служебное название страницы в админке.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20483,7 +20483,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Название"
+            "translation": "Название страницы"
           }
         ],
         "validation": null,
@@ -20522,7 +20522,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Поле «Заголовок H1».",
+        "note": "Заголовок страницы H1 (опционально).",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20532,7 +20532,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "H1"
+            "translation": "Заголовок H1"
           }
         ],
         "validation": null,
@@ -20571,7 +20571,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Поле «SEO title».",
+        "note": "Мета-тег title (опционально).",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20581,7 +20581,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO title"
+            "translation": "SEO-заголовок"
           }
         ],
         "validation": null,
@@ -20620,7 +20620,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Поле «SEO description».",
+        "note": "Мета-тег description (опционально).",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20630,7 +20630,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO description"
+            "translation": "SEO-описание"
           }
         ],
         "validation": null,
@@ -20669,7 +20669,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Поле «Контент страницы».",
+        "note": "Контент страницы. Используется как приоритет над шаблоном.",
         "options": null,
         "readonly": false,
         "required": false,
@@ -20679,7 +20679,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Контент"
+            "translation": "Текст страницы"
           }
         ],
         "validation": null,
@@ -20867,7 +20867,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки «Главная».",
+        "note": "Подпись крошки для главной страницы.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20916,7 +20916,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки раздела ремонта.",
+        "note": "Подпись крошки для раздела ремонта АКПП.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -20965,7 +20965,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки раздела услуг.",
+        "note": "Подпись крошки для раздела услуг.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21014,7 +21014,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон H1. Плейсхолдеры: {brand}.",
+        "note": "Шаблон заголовка H1 для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21024,7 +21024,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "H1: ремонт бренд"
+            "translation": "Шаблон H1: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21063,7 +21063,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title. Плейсхолдеры: {brand}.",
+        "note": "Шаблон SEO title для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21073,7 +21073,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO title: ремонт бренд"
+            "translation": "Шаблон title: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21112,7 +21112,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description. Плейсхолдеры: {brand}.",
+        "note": "Шаблон SEO description для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21122,7 +21122,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO description: ремонт бренд"
+            "translation": "Шаблон description: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21161,7 +21161,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон контента. Плейсхолдеры: {brand}.",
+        "note": "Шаблон текста страницы для URL вида remont-akpp-{brand}. Плейсхолдеры: {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21171,7 +21171,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Контент: ремонт бренд"
+            "translation": "Шаблон текста: ремонт по марке"
           }
         ],
         "validation": null,
@@ -21210,7 +21210,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон H1. Плейсхолдеры: {brand}, {model}.",
+        "note": "Шаблон заголовка H1 для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21220,7 +21220,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "H1: ремонт модель"
+            "translation": "Шаблон H1: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21259,7 +21259,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title. Плейсхолдеры: {brand}, {model}.",
+        "note": "Шаблон SEO title для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21269,7 +21269,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO title: ремонт модель"
+            "translation": "Шаблон title: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21308,7 +21308,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description. Плейсхолдеры: {brand}, {model}.",
+        "note": "Шаблон SEO description для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21318,7 +21318,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO description: ремонт модель"
+            "translation": "Шаблон description: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21357,7 +21357,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон контента. Плейсхолдеры: {brand}, {model}.",
+        "note": "Шаблон текста страницы для URL вида remont-akpp-{brand}/{model}. Плейсхолдеры: {brand}, {model}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21367,7 +21367,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Контент: ремонт модель"
+            "translation": "Шаблон текста: ремонт по модели"
           }
         ],
         "validation": null,
@@ -21406,7 +21406,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон H1. Плейсхолдеры: {service}.",
+        "note": "Шаблон заголовка H1 для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21416,7 +21416,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "H1: услуга"
+            "translation": "Шаблон H1: услуга"
           }
         ],
         "validation": null,
@@ -21455,7 +21455,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title. Плейсхолдеры: {service}.",
+        "note": "Шаблон SEO title для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21465,7 +21465,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO title: услуга"
+            "translation": "Шаблон title: услуга"
           }
         ],
         "validation": null,
@@ -21504,7 +21504,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description. Плейсхолдеры: {service}.",
+        "note": "Шаблон SEO description для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21514,7 +21514,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO description: услуга"
+            "translation": "Шаблон description: услуга"
           }
         ],
         "validation": null,
@@ -21553,7 +21553,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон контента. Плейсхолдеры: {service}.",
+        "note": "Шаблон текста страницы для URL вида uslugi/{service}. Плейсхолдеры: {service}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21563,7 +21563,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Контент: услуга"
+            "translation": "Шаблон текста: услуга"
           }
         ],
         "validation": null,
@@ -21602,7 +21602,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон H1. Плейсхолдеры: {service}, {brand}.",
+        "note": "Шаблон заголовка H1 для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21612,7 +21612,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "H1: услуга бренд"
+            "translation": "Шаблон H1: услуга по марке"
           }
         ],
         "validation": null,
@@ -21651,7 +21651,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Шаблон SEO title. Плейсхолдеры: {service}, {brand}.",
+        "note": "Шаблон SEO title для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21661,7 +21661,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO title: услуга бренд"
+            "translation": "Шаблон title: услуга по марке"
           }
         ],
         "validation": null,
@@ -21700,7 +21700,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон SEO description. Плейсхолдеры: {service}, {brand}.",
+        "note": "Шаблон SEO description для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21710,7 +21710,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "SEO description: услуга бренд"
+            "translation": "Шаблон description: услуга по марке"
           }
         ],
         "validation": null,
@@ -21749,7 +21749,7 @@
         "group": null,
         "hidden": false,
         "interface": "input-multiline",
-        "note": "Шаблон контента. Плейсхолдеры: {service}, {brand}.",
+        "note": "Шаблон текста страницы для URL вида uslugi/{service}/{brand}. Плейсхолдеры: {service}, {brand}.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21759,7 +21759,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Контент: услуга бренд"
+            "translation": "Шаблон текста: услуга по марке"
           }
         ],
         "validation": null,
@@ -21798,7 +21798,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки сущности услуги.",
+        "note": "Подпись крошки для страницы услуги.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21847,7 +21847,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки сущности модели.",
+        "note": "Подпись крошки для уровня модели.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21896,7 +21896,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки сущности марки.",
+        "note": "Подпись крошки для уровня марки.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21945,7 +21945,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки раздела статей.",
+        "note": "Подпись крошки для раздела статей.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -21994,7 +21994,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки страницы статьи.",
+        "note": "Подпись крошки для страницы статьи.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22043,7 +22043,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки страницы контактов.",
+        "note": "Подпись крошки для страницы контактов.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22092,7 +22092,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки раздела определения АКПП.",
+        "note": "Подпись крошки для раздела определения АКПП.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22141,7 +22141,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки страницы политики.",
+        "note": "Подпись крошки для страницы политики.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22151,7 +22151,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Крошки: Политика"
+            "translation": "Крошки: Политика конфиденциальности"
           }
         ],
         "validation": null,
@@ -22190,7 +22190,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки страницы продажи АКПП.",
+        "note": "Подпись крошки для страницы продажи АКПП.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22239,7 +22239,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки раздела трансмиссий.",
+        "note": "Подпись крошки для раздела трансмиссий.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22288,7 +22288,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки страницы трансмиссии.",
+        "note": "Подпись крошки для страницы конкретной трансмиссии.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22337,7 +22337,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки раздела работ.",
+        "note": "Подпись крошки для раздела примеров работ.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -22386,7 +22386,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Текст крошки страницы кейса.",
+        "note": "Подпись крошки для страницы конкретного кейса.",
         "options": null,
         "readonly": false,
         "required": true,
