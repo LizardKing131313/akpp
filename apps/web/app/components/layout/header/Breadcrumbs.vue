@@ -66,7 +66,7 @@ const setting = useHeaderUiSettings()
 
 <template>
   <section class="group relative w-full overflow-hidden">
-    <NuxtImg
+    <CmsImage
       :src="setting.breadcrumbs_background_source"
       :alt="setting.breadcrumbs_background_alt"
       class="absolute inset-0 h-full w-full object-cover" />

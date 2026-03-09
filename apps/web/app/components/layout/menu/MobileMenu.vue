@@ -154,7 +154,7 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="flex h-14 items-center justify-center">
-            <NuxtImg
+            <CmsImage
               v-if="showLogo"
               :src="settings.menu_mobile_logo_source"
               :alt="settings.menu_mobile_logo_alt"

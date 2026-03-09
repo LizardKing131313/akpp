@@ -35,7 +35,7 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
         :navigation="{ prevEl: '.hero-slider-prev', nextEl: '.hero-slider-next' }"
         class="relative h-100 w-full sm:h-110 lg:h-120">
         <SwiperSlide v-for="slide in slides" :key="slide.id" class="relative h-full w-full">
-          <NuxtImg
+          <CmsImage
             :src="slide.image_source"
             :alt="slide.image_alt"
             class="absolute inset-0 h-full w-full object-cover" />

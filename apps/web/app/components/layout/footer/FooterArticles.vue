@@ -25,7 +25,7 @@ const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
           class="group hover:text-brand-white block w-full py-4">
           <div class="flex items-start gap-4">
             <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl">
-              <NuxtImg
+              <CmsImage
                 :src="article.image_source"
                 :alt="article.image_alt"
                 sizes="80px"

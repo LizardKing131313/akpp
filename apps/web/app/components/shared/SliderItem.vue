@@ -45,7 +45,7 @@ const isLink = computed<boolean>(() => Boolean(props.slug))
           props.class
         )
       ">
-      <NuxtImg
+      <CmsImage
         :src="image_source"
         :alt="image_alt"
         fill

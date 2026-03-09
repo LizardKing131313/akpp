@@ -39,7 +39,7 @@ const computedHref = computed<string>(() => {
 
 <template>
   <div class="flex items-center gap-3 px-4">
-    <NuxtImg
+    <CmsImage
       :src="iconSource"
       :alt="iconAlt"
       sizes="(max-width: 1023px) 28px, 35px"

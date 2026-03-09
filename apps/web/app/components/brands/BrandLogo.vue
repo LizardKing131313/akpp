@@ -6,7 +6,7 @@ defineProps<{ brand: BrandItem }>()
 
 <template>
   <div class="flex items-center gap-2">
-    <NuxtImg
+    <CmsImage
       :src="brand.image_source"
       :alt="brand.image_alt"
       sizes="28px"

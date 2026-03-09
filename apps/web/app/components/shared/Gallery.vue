@@ -30,7 +30,7 @@ const closeLightbox = (): void => {
       class="bg-brand-white aspect-4/3 w-full cursor-pointer overflow-hidden focus:outline-none"
       :disabled="!activeSrc"
       @click="openLightbox(activeIndex)">
-      <NuxtImg v-if="activeSrc" :src="activeSrc" class="h-full w-full object-contain" />
+      <CmsImage v-if="activeSrc" :src="activeSrc" class="h-full w-full object-contain" />
     </button>
 
     <div class="mt-4 grid grid-cols-3 gap-3">
@@ -43,7 +43,7 @@ const closeLightbox = (): void => {
           index === activeIndex ? 'ring-brand-red ring-2' : 'hover:border-brand-grey-light/60'
         "
         @click="activeIndex = index">
-        <NuxtImg :src="imageItem" class="h-16 w-full object-contain sm:h-18" />
+        <CmsImage :src="imageItem" class="h-16 w-full object-contain sm:h-18" />
       </button>
     </div>
 

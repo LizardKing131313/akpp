@@ -33,7 +33,7 @@ const handleClick = (): void => {
       v-if="pulse"
       class="bg-brand-red absolute inset-0 scale-110 animate-ping rounded-full opacity-20"></span>
 
-    <NuxtImg
+    <CmsImage
       :src="settings.contact_button_icon_source"
       :alt="settings.contact_button_icon_alt"
       width="28"

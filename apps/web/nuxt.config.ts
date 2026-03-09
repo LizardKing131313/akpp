@@ -4,13 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 // noinspection JSUnusedGlobalSymbols
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NODE_ENV === 'development' },
 
   css: ['~/assets/css/main.css'],
-
-  vue: {
-    runtimeCompiler: true,
-  },
 
   vite: {
     plugins: [
@@ -28,6 +24,7 @@ export default defineNuxtConfig({
     families: {
       'Open Sans': [400, 600, 700],
     },
+    subsets: ['cyrillic', 'latin'],
     display: 'swap',
     preconnect: true,
     preload: true,
@@ -36,6 +33,34 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx',
+    format: ['avif', 'webp'],
+    quality: 75,
+  },
+
+  nitro: {
+    compressPublicAssets: true,
+    routeRules: {
+      '/_nuxt/**': {
+        headers: {
+          'cache-control': 'public, max-age=31536000, immutable',
+        },
+      },
+      '/images/**': {
+        headers: {
+          'cache-control': 'public, max-age=31536000, immutable',
+        },
+      },
+      '/fonts/**': {
+        headers: {
+          'cache-control': 'public, max-age=31536000, immutable',
+        },
+      },
+      '/favicon.ico': {
+        headers: {
+          'cache-control': 'public, max-age=2592000',
+        },
+      },
+    },
   },
 
   components: [

@@ -16,7 +16,7 @@ withDefaults(
   <NuxtLink :to="caseItem.slug" class="group block transition-colors">
     <template v-if="variant === 'tile'">
       <div class="overflow-hidden rounded-t-xl">
-        <NuxtImg
+        <CmsImage
           :src="caseItem.image_source"
           :alt="caseItem.image_alt"
           sizes="(max-width: 640px) 50vw, 260px"
@@ -29,7 +29,7 @@ withDefaults(
     <template v-else>
       <div class="flex items-center gap-4">
         <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl">
-          <NuxtImg
+          <CmsImage
             :src="caseItem.image_source"
             :alt="caseItem.image_alt"
             sizes="80px"

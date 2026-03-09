@@ -89,7 +89,7 @@ onMounted(() => {
       </div>
 
       <div class="mt-4 flex justify-center sm:mt-6">
-        <NuxtImg
+        <CmsImage
           :src="settings.image_source"
           :alt="settings.image_alt"
           class="h-24 w-auto object-contain select-none sm:h-40"

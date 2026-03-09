@@ -25,7 +25,7 @@ const price = computed<string>(() => {
     class="bg-brand-white flex h-full w-full flex-col text-center shadow-[0_20px_30px_0_#2222220f]">
     <div
       class="mx-auto mb-6 flex h-37.5 w-37.5 items-center justify-center sm:mb-8 sm:h-50 sm:w-50">
-      <NuxtImg
+      <CmsImage
         :src="transmissionItem.image_source"
         :alt="transmissionItem.image_alt"
         sizes="(max-width: 640px) 150px, 200px"

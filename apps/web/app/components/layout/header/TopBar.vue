@@ -88,7 +88,7 @@ const handleClick = (): void => {
         type="button"
         :aria-label="settings.location_button_aria_label"
         @click="handleClick">
-        <NuxtImg
+        <CmsImage
           :src="settings.location_icon_source"
           :alt="settings.location_icon_alt"
           width="24"
@@ -101,7 +101,7 @@ const handleClick = (): void => {
       </button>
 
       <div class="relative hidden w-64 md:block">
-        <NuxtImg
+        <CmsImage
           :src="settings.search_icon_source"
           :alt="settings.search_icon_alt"
           aria-hidden="true"

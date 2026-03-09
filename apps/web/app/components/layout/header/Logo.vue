@@ -7,14 +7,14 @@ const settings = useHeaderUiSettings()
 <template>
   <div>
     <NuxtLink :to="settings.logo_href">
-      <NuxtImg
+      <CmsImage
         :src="settings.logo_source"
         :alt="settings.logo_alt"
         width="260"
         height="40"
         class="hidden lg:block" />
 
-      <NuxtImg
+      <CmsImage
         :src="settings.logo_source_mobile"
         :alt="settings.logo_alt"
         width="95"

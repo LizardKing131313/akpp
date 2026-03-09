@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{ label?: string } & ImageCardItem>(), {
 <template>
   <NuxtLink :to="slug" class="group bg-brand-white flex h-full flex-col overflow-hidden shadow-xl">
     <div class="overflow-hidden">
-      <NuxtImg
+      <CmsImage
         :src="image_source"
         :alt="image_alt"
         width="600"

@@ -6,7 +6,7 @@ defineProps<{ perk: PerkItem }>()
 
 <template>
   <div class="flex flex-col items-center space-y-4 text-center">
-    <NuxtImg
+    <CmsImage
       :src="perk.image_source"
       :alt="perk.image_alt"
       width="48"

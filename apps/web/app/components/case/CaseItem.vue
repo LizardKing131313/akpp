@@ -101,7 +101,7 @@ const handleSignupClick = (): void => {
 
       <div class="grid grid-cols-3 gap-6 py-6">
         <div class="flex flex-col items-center gap-2 text-center">
-          <NuxtImg
+          <CmsImage
             :src="settings.part_price_image"
             :alt="settings.part_price_image_alt"
             sizes="(max-width: 1023px) 28px, 35px"
@@ -112,7 +112,7 @@ const handleSignupClick = (): void => {
         </div>
 
         <div class="flex flex-col items-center gap-2 text-center">
-          <NuxtImg
+          <CmsImage
             :src="settings.work_price_image"
             :alt="settings.work_price_image_alt"
             sizes="(max-width: 1023px) 28px, 35px"
@@ -123,7 +123,7 @@ const handleSignupClick = (): void => {
         </div>
 
         <div class="flex flex-col items-center gap-2 text-center">
-          <NuxtImg
+          <CmsImage
             :src="settings.total_image"
             :alt="settings.total_image_alt"
             sizes="(max-width: 1023px) 28px, 35px"

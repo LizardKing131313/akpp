@@ -18,7 +18,7 @@ const cardClass = computed<string>(() => {
 
 <template>
   <NuxtLink :to="service.slug" :class="cardClass">
-    <NuxtImg
+    <CmsImage
       :src="service.image_source"
       :alt="service.image_alt"
       sizes="lg:20vw md:50vw sm:50vw"

@@ -55,7 +55,7 @@ const handleSignupClick = (): void => {
 
 <template>
   <TwoColumns inverse class="gap-1 lg:gap-20">
-    <NuxtImg :src="image_source" :alt="image_alt" class="h-85 w-full object-contain" />
+    <CmsImage :src="image_source" :alt="image_alt" class="h-85 w-full object-contain" />
 
     <div class="space-y-10">
       <div class="hidden space-y-4 lg:block">
