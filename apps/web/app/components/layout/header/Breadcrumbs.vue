@@ -34,7 +34,7 @@ const jsonLd = computed<Record<string, unknown> | null>(() => {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'Breadcrumbs',
+    '@type': 'BreadcrumbList',
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
