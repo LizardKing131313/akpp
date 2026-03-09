@@ -1,5 +1,31 @@
 import tailwindcss from '@tailwindcss/vite'
 
+const nitroRedisHost = process.env.NITRO_REDIS_HOST?.trim()
+const nitroRedisPortRaw = Number(process.env.NITRO_REDIS_PORT ?? 6379)
+const nitroRedisPort =
+  Number.isFinite(nitroRedisPortRaw) && nitroRedisPortRaw > 0 ? nitroRedisPortRaw : 6379
+const nitroRedisDbRaw = Number(process.env.NITRO_REDIS_DB ?? 0)
+const nitroRedisDb = Number.isFinite(nitroRedisDbRaw) && nitroRedisDbRaw >= 0 ? nitroRedisDbRaw : 0
+const nitroApiCacheTtlRaw = Number(
+  process.env.NITRO_API_CACHE_TTL_SECONDS ?? process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300
+)
+const nitroApiCacheTtl =
+  Number.isFinite(nitroApiCacheTtlRaw) && nitroApiCacheTtlRaw > 0 ? nitroApiCacheTtlRaw : 300
+const nitroSsrSwrRaw = Number(process.env.NITRO_SSR_SWR_SECONDS ?? 300)
+const nitroSsrSwr = Number.isFinite(nitroSsrSwrRaw) && nitroSsrSwrRaw > 0 ? nitroSsrSwrRaw : 300
+
+const nitroCacheStorage = nitroRedisHost
+  ? {
+      driver: 'redis' as const,
+      host: nitroRedisHost,
+      port: nitroRedisPort,
+      db: nitroRedisDb,
+      ...(process.env.NITRO_REDIS_PASSWORD ? { password: process.env.NITRO_REDIS_PASSWORD } : {}),
+    }
+  : {
+      driver: 'memory' as const,
+    }
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // noinspection JSUnusedGlobalSymbols
 export default defineNuxtConfig({
@@ -39,7 +65,61 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
+    storage: {
+      cache: nitroCacheStorage,
+    },
     routeRules: {
+      '/api/**': {
+        cache: {
+          maxAge: nitroApiCacheTtl,
+          staleMaxAge: 60,
+        },
+      },
+      '/api/health/**': {
+        cache: false,
+      },
+      '/api/leads': {
+        cache: false,
+      },
+      '/': {
+        swr: nitroSsrSwr,
+      },
+      '/policy': {
+        swr: nitroSsrSwr,
+      },
+      '/articles': {
+        swr: nitroSsrSwr,
+      },
+      '/articles/**': {
+        swr: nitroSsrSwr,
+      },
+      '/kontaktyi': {
+        swr: nitroSsrSwr,
+      },
+      '/opredelit-akpp': {
+        swr: nitroSsrSwr,
+      },
+      '/remont-akpp-*/**': {
+        swr: nitroSsrSwr,
+      },
+      '/sale-akpp/**': {
+        swr: nitroSsrSwr,
+      },
+      '/uslugi/**': {
+        swr: nitroSsrSwr,
+      },
+      '/work': {
+        swr: nitroSsrSwr,
+      },
+      '/work/**': {
+        swr: nitroSsrSwr,
+      },
+      '/sitemap.xml': {
+        swr: nitroSsrSwr,
+      },
+      '/robots.txt': {
+        swr: nitroSsrSwr,
+      },
       '/_nuxt/**': {
         headers: {
           'cache-control': 'public, max-age=31536000, immutable',
