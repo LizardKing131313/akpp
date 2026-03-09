@@ -26,6 +26,7 @@ export const usePageEntityBreadcrumbs = (options: UseDynamicBreadcrumbsOptions):
     const breadcrumbs: BreadcrumbItem[] = [...baseItems, { name: title, slug: route.path }]
 
     setPageHeaderState({
+      kind: 'breadcrumbs',
       breadcrumb: title,
       breadcrumbs,
     })
