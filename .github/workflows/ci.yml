@@ -45,6 +45,10 @@ jobs:
         shell: bash
         run: pnpm -C apps/web typecheck
 
+      - name: Build web
+        shell: bash
+        run: pnpm -C apps/web build
+
       - name: Format check
         shell: bash
         run: pnpm prettier --check .
