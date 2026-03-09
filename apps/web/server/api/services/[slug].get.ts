@@ -1,5 +1,6 @@
 import { ServicesRepository } from '#server/services/repo/entity/services.repo'
 
+// noinspection JSUnusedGlobalSymbols
 export default defineEventHandler(async (event) => {
   const { slug } = getRouterParams(event)
   const repo = new ServicesRepository()

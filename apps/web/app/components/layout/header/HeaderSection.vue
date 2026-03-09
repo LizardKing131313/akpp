@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
 import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
@@ -10,6 +10,10 @@ const { mode } = usePageHeaderMeta()
 
 const activeCity = useActiveCity()
 const city = computed<CityItem | undefined>(() => activeCity.value)
+const AsyncHero = defineAsyncComponent(() => import('~/components/layout/header/Hero.vue'))
+const AsyncBreadcrumbs = defineAsyncComponent(
+  () => import('~/components/layout/header/Breadcrumbs.vue')
+)
 
 const isHero = computed<boolean>(() => mode.value === 'hero')
 const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
@@ -46,7 +50,7 @@ const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
     <Menu />
   </header>
 
-  <Hero v-if="isHero" />
+  <component :is="AsyncHero" v-if="isHero" />
 
-  <Breadcrumbs v-else-if="isBreadcrumbs" />
+  <component :is="AsyncBreadcrumbs" v-else-if="isBreadcrumbs" />
 </template>

@@ -92,11 +92,11 @@ docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml ps
 - `YANDEX_MAP_API_KEY`
 - `YANDEX_ORG_ID`
 
-Шаблон: [apps/web/.env.example](/C:/Work/akpp/apps/web/.env.example)
+Шаблон: [apps/web/.env.example](/apps/web/.env.example)
 
 ### `infra/dev/.env`
 
-Шаблон: [infra/dev/.env.example](/C:/Work/akpp/infra/dev/.env.example)
+Шаблон: [infra/dev/.env.example](/infra/dev/.env.example)
 
 Важно заполнить:
 
@@ -106,7 +106,7 @@ docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml ps
 
 ### `infra/prod/.env`
 
-Шаблон: [infra/prod/.env.example](/C:/Work/akpp/infra/prod/.env.example)
+Шаблон: [infra/prod/.env.example](/infra/prod/.env.example)
 
 ## Полезные команды
 
@@ -183,7 +183,7 @@ docker compose --env-file infra/prod/.env -f infra/prod/docker-compose.yml logs 
 
 ## CI
 
-Основной workflow: [ci.yml](/C:/Work/akpp/.github/workflows/ci.yml)
+Основной workflow: [ci.yml](.github/workflows/ci.yml)
 
 Проверяет:
 

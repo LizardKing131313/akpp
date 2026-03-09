@@ -17,6 +17,7 @@ const normalizeUuid = (value: string | undefined): string => {
   return normalizedValue
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default defineEventHandler(async (event) => {
   const fileId = normalizeUuid(getRouterParam(event, 'id'))
   const directus = createDirectusClient()

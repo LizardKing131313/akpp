@@ -56,6 +56,7 @@ const toDirectusPayload = (payload: LeadSubmitPayload): LeadDirectusCreatePayloa
   return directusPayload
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default defineEventHandler(async (event) => {
   const payload = await readBody<LeadSubmitPayload>(event)
   const directusPayload = toDirectusPayload(payload)

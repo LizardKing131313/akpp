@@ -7,6 +7,7 @@ export class ModelsRepository extends ListSlugRepository<ModelItem> {
 
   protected readonly fields = 'id,slug,name,image_source,image_alt,brand_id,sort'
 
+  // noinspection JSUnusedGlobalSymbols
   public async getByBrand(brand_id: string): Promise<readonly ModelItem[]> {
     return this.getManyByField('brand_id', brand_id)
   }

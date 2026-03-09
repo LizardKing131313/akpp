@@ -96,13 +96,34 @@ export default defineNuxtConfig({
       '/kontaktyi': {
         swr: nitroSsrSwr,
       },
+      '/kontaktyi/**': {
+        swr: nitroSsrSwr,
+      },
       '/opredelit-akpp': {
+        swr: nitroSsrSwr,
+      },
+      '/opredelit-akpp/**': {
+        swr: nitroSsrSwr,
+      },
+      '/remont-akpp-*': {
         swr: nitroSsrSwr,
       },
       '/remont-akpp-*/**': {
         swr: nitroSsrSwr,
       },
+      '/sale-akpp': {
+        swr: nitroSsrSwr,
+      },
       '/sale-akpp/**': {
+        swr: nitroSsrSwr,
+      },
+      '/transmission': {
+        swr: nitroSsrSwr,
+      },
+      '/transmission/**': {
+        swr: nitroSsrSwr,
+      },
+      '/uslugi': {
         swr: nitroSsrSwr,
       },
       '/uslugi/**': {
@@ -122,6 +143,7 @@ export default defineNuxtConfig({
       },
       '/_nuxt/**': {
         headers: {
+          // eslint-disable-next-line sonarjs/no-duplicate-string
           'cache-control': 'public, max-age=31536000, immutable',
         },
       },

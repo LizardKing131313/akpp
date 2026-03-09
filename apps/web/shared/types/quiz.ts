@@ -1,10 +1,12 @@
 import type { BrandItem } from '#shared/types/brand'
 import type { EntityItem } from '#shared/types/entity'
 
+// noinspection JSUnusedGlobalSymbols
 export type QuizProblemItem = EntityItem & {
   readonly name: string
 }
 
+// noinspection JSUnusedGlobalSymbols
 export type QuizSymptomItem = EntityItem & {
   readonly name: string
   readonly problemId?: string

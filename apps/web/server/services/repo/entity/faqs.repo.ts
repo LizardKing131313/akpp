@@ -25,6 +25,7 @@ export class FaqsRepository extends ListRepository<FaqItem> {
     return apiItems.map(mapFaqApiItemToFaqItem)
   }
 
+  // noinspection JSUnusedGlobalSymbols
   public async getByService(serviceId: string): Promise<readonly FaqItem[]> {
     const apiItems = await this.fetchFaqApiItems(serviceId)
     return apiItems.map(mapFaqApiItemToFaqItem)

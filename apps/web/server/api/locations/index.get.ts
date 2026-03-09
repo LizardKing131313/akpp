@@ -1,5 +1,6 @@
 import { LocationsRepository } from '#server/services/repo/entity/locations.repo'
 
+// noinspection JSUnusedGlobalSymbols
 export default defineEventHandler(async (event) => {
   const repo = new LocationsRepository()
 

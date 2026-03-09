@@ -5,7 +5,7 @@ import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 
 import { cn } from '#shared/lib/cn'
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
 import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
@@ -18,6 +18,10 @@ const { data: locationsData } = useLocations(cityId)
 const settings = useFooterUiSettings()
 
 const route = useRoute()
+const AsyncYandexMap = defineAsyncComponent(
+  () => import('~/components/yandex/YandexMap.client.vue')
+)
+const AsyncBrandSlider = defineAsyncComponent(() => import('~/components/brands/BrandSlider.vue'))
 
 type FooterMeta = {
   hideContacts?: boolean
@@ -94,7 +98,8 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
     <div v-if="!hideContacts" class="relative w-full space-y-12">
       <div class="relative h-75 w-full overflow-hidden">
         <ClientOnly>
-          <YandexMap
+          <component
+            :is="AsyncYandexMap"
             :locations="mapPoints"
             :center="mapCenter"
             :zoom="mapZoom"
@@ -140,7 +145,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
       </div>
     </div>
 
-    <BrandSlider :class="cn(hideContacts ? 'mt-0' : 'mt-36', 'mb-12')" />
+    <component :is="AsyncBrandSlider" :class="cn(hideContacts ? 'mt-0' : 'mt-36', 'mb-12')" />
 
     <div
       class="brand-gradient bg-brand-dark text-brand-grey-light relative space-y-12 px-4 py-12 text-sm">
