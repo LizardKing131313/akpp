@@ -12,14 +12,13 @@ import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 import type {
   CitySelectModalUiSettings,
-  QuizModalUiSettings,
   ShopModalUiSettings,
   SignupModalUiSettings,
 } from '#shared/types/modal'
 import type { ModelItem } from '#shared/types/model'
 import type { ResolvedPageItem } from '#shared/types/page'
 import type { PolicySettings } from '#shared/types/policy'
-import type { QuizData } from '#shared/types/quiz'
+import type { QuizData, QuizSettings } from '#shared/types/quiz'
 import type {
   RoutePageOverrideItem,
   RoutePageOverrideType,
@@ -116,10 +115,6 @@ export const useCitySelectModalSettings = () => {
     'city-select-modal:settings',
     '/api/city_select_modal'
   )
-}
-
-export const useQuizModalSettings = () => {
-  return useStaticApiData<QuizModalUiSettings>('quiz-modal:settings', '/api/quiz_modal')
 }
 
 export const useShopModalSettings = () => {
@@ -393,6 +388,10 @@ export const useQuizData = (brandIdInput?: MaybeRefOrGetter<string | undefined>)
       watch: [brandIdValue],
     }
   )
+}
+
+export const useQuizSettings = () => {
+  return useStaticApiData<QuizSettings>('quiz:settings', '/api/quiz/settings')
 }
 
 export const useTransmissions = () => {

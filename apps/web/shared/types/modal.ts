@@ -11,10 +11,6 @@ export type CitySelectModalUiSettings = {
   readonly empty_text: string
 }
 
-export type QuizModalUiSettings = {
-  readonly empty_text: string
-}
-
 export type ShopModalUiSettings = {
   readonly title: string
   readonly form_aria_label: string
@@ -38,7 +34,6 @@ export type SignupModalUiSettings = {
 
 export type ModalWindowsUiSettings = {
   readonly city_select: CitySelectModalUiSettings
-  readonly quiz: QuizModalUiSettings
   readonly shop: ShopModalUiSettings
   readonly signup: SignupModalUiSettings
 }

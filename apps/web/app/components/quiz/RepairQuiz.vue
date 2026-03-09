@@ -5,6 +5,8 @@ import type { QuizSubmitPayload, QuizSymptomsMap } from '#shared/types/quiz'
 import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
 
+import { useQuizUiSettings } from '~/composables/useQuizUiSettings'
+
 type QuizStep = 'brand' | 'problem' | 'symptom' | 'contact' | 'success'
 
 const props = withDefaults(
@@ -29,7 +31,14 @@ const selectedBrandTitle = ref<string>('')
 const selectedProblemTitle = ref<string>('')
 const selectedSymptomTitle = ref<string>('')
 
-const stepLabels = ['МАРКА', 'ПРОБЛЕМА', 'СИМПТОМЫ', 'РАСЧЕТ'] as const
+const settings = useQuizUiSettings()
+
+const stepLabels = computed<readonly string[]>(() => [
+  settings.value.step_label_brand,
+  settings.value.step_label_problem,
+  settings.value.step_label_symptom,
+  settings.value.step_label_contact,
+])
 
 const activeStepIndex = computed<number>(() => {
   if (currentStep.value === 'brand') return 0
@@ -139,22 +148,37 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
           direction="left"
           class="text-brand-grey-light group-hover:text-brand-dark! h-4 w-4"
           aria-hidden="true" />
-        Назад
+        {{ settings.back_label }}
       </button>
 
       <div class="p-7.5">
-        <QuizBrandStep v-if="currentStep === 'brand'" :brands="brands" @next="handleBrandNext" />
+        <QuizBrandStep
+          v-if="currentStep === 'brand'"
+          :brands="brands"
+          :title="settings.brand_title"
+          :description="settings.brand_description"
+          :input-placeholder="settings.brand_input_placeholder"
+          :next-label="settings.brand_next_label"
+          :popular-label="settings.brand_popular_label"
+          :empty-label="settings.brand_empty_label"
+          @next="handleBrandNext" />
 
         <QuizProblemStep
           v-else-if="currentStep === 'problem'"
           :brand-title="selectedBrandTitle"
           :problems="problems"
+          :title="settings.problem_title"
+          :brand-label="settings.problem_badge_label"
+          :empty-text="settings.options_empty_text"
           @select="handleProblemSelect" />
 
         <QuizSymptomsStep
           v-else-if="currentStep === 'symptom'"
           :problem-title="selectedProblemTitle"
           :symptoms="availableSymptoms"
+          :title="settings.symptom_title"
+          :problem-label="settings.symptom_badge_label"
+          :empty-text="settings.options_empty_text"
           @select="handleSymptomSelect" />
 
         <QuizContactStep
@@ -162,10 +186,21 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
           :brand-title="selectedBrandTitle"
           :problem-title="selectedProblemTitle"
           :symptom-title="selectedSymptomTitle"
+          :title="settings.contact_title"
+          :description="settings.contact_description"
+          :auto-label="settings.contact_auto_label"
+          :problem-label="settings.contact_problem_label"
+          :name-label="settings.contact_name_label"
+          :name-placeholder="settings.contact_name_placeholder"
+          :submit-label="settings.contact_submit_label"
           @edit="goToBrandAndReset"
           @submit="handleContactSubmit" />
 
-        <QuizSuccessStep v-else-if="currentStep === 'success'" />
+        <QuizSuccessStep
+          v-else-if="currentStep === 'success'"
+          :title="settings.success_title"
+          :line1="settings.success_line_1"
+          :line2="settings.success_line_2" />
       </div>
     </div>
   </section>

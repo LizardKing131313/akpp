@@ -4,7 +4,6 @@ import { computed } from 'vue'
 
 import {
   useCitySelectModalSettings,
-  useQuizModalSettings,
   useShopModalSettings,
   useSignupModalSettings,
 } from '~/composables/useRepoApi'
@@ -14,9 +13,6 @@ const defaultModalWindowsUiSettings: ModalWindowsUiSettings = {
     title: 'Выбрать город',
     search_placeholder: 'Поиск по городу',
     empty_text: 'Ничего не найдено',
-  },
-  quiz: {
-    empty_text: 'Нет данных для квиза',
   },
   shop: {
     title: 'Продажа АКПП',
@@ -42,7 +38,6 @@ const defaultModalWindowsUiSettings: ModalWindowsUiSettings = {
 
 export const useModalWindowsUiSettings = () => {
   const { data: citySelectData } = useCitySelectModalSettings()
-  const { data: quizData } = useQuizModalSettings()
   const { data: shopData } = useShopModalSettings()
   const { data: signupData } = useSignupModalSettings()
 
@@ -50,10 +45,6 @@ export const useModalWindowsUiSettings = () => {
     city_select: {
       ...defaultModalWindowsUiSettings.city_select,
       ...(citySelectData.value ?? {}),
-    },
-    quiz: {
-      ...defaultModalWindowsUiSettings.quiz,
-      ...(quizData.value ?? {}),
     },
     shop: {
       ...defaultModalWindowsUiSettings.shop,
