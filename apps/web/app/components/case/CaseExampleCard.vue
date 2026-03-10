@@ -15,7 +15,7 @@ withDefaults(
 </script>
 
 <template>
-  <NuxtLink :to="normalizeAppPath(caseItem.slug)" class="group block transition-colors">
+  <NuxtLink :to="normalizeAppPath(`work/${caseItem.slug}`)" class="group block transition-colors">
     <template v-if="variant === 'tile'">
       <div class="overflow-hidden rounded-t-xl">
         <CmsImage

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
 const props = defineProps<{ service: ServiceItem }>()
@@ -17,7 +18,7 @@ const cardClass = computed<string>(() => {
 </script>
 
 <template>
-  <NuxtLink :to="service.slug" :class="cardClass">
+  <NuxtLink :to="normalizeAppPath(`uslugi/${service.slug}`)" :class="cardClass">
     <CmsImage
       :src="service.image_source"
       :alt="service.image_alt"

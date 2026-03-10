@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { ModelItem } from '#shared/types/model'
 
+import { applyTemplate } from '#shared/lib/template'
 import { computed } from 'vue'
-
-import { applyTemplate } from '~/utils/template'
 
 const route = useRoute()
 const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())

@@ -7,20 +7,18 @@ const props = defineProps<{ images: string[] }>()
 const activeIndex = ref<number>(0)
 const visible = ref<boolean>(false)
 const image = useImage()
-const mimeMap = await useCmsImageMimeMap(() => props.images)
 
-const resolvedImages = computed<string[]>(() =>
+const displayImages = computed<string[]>(() =>
   props.images.map(
     (src) =>
       resolveCmsImageView(src, {
-        mimeType: mimeMap.value[src.trim()] ?? null,
         image,
-      }).resolvedSrc
+      }).ipxSrc
   )
 )
 
 const activeSrc = computed<string | null>(() => {
-  const value = resolvedImages.value[activeIndex.value]
+  const value = displayImages.value[activeIndex.value]
   return value ?? null
 })
 
@@ -42,7 +40,7 @@ const closeLightbox = (): void => {
       class="bg-brand-white aspect-4/3 w-full cursor-pointer overflow-hidden focus:outline-none"
       :disabled="!activeSrc"
       @click="openLightbox(activeIndex)">
-      <CmsImage v-if="activeSrc" :src="activeSrc" class="h-full w-full object-contain" />
+      <img v-if="activeSrc" :src="activeSrc" alt="" class="h-full w-full object-contain" />
     </button>
 
     <div class="mt-4 grid grid-cols-3 gap-3">
@@ -61,7 +59,7 @@ const closeLightbox = (): void => {
 
     <VueEasyLightbox
       :visible="visible"
-      :imgs="resolvedImages"
+      :imgs="displayImages"
       :index="activeIndex"
       teleport="body"
       @hide="closeLightbox" />

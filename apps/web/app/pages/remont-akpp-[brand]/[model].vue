@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import { applyTemplate } from '#shared/lib/template'
 import { computed } from 'vue'
-
-import { applyTemplate } from '~/utils/template'
 
 const route = useRoute()
 const routePageSettings = useRoutePageSettingsUi()
