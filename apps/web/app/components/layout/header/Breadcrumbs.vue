@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useHead, useHeaderUiSettings, useRequestURL, useRoute } from '#imports'
+import type { HeaderSettings } from '#shared/types/header'
+
 import { cn } from '#shared/lib/cn'
 import { computed } from 'vue'
 
 import { usePageHeaderMeta } from '~/composables/usePageHeaderMeta'
+import { useHeaderSettings } from '~/composables/useRepoApi'
 
 const route = useRoute()
 const requestUrl = useRequestURL()
@@ -61,14 +63,15 @@ useHead(() => {
 
 const isLastIndex = (index: number): boolean => index === normalizedItems.value.length - 1
 
-const setting = useHeaderUiSettings()
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
 </script>
 
 <template>
   <section class="group relative w-full overflow-hidden">
     <CmsImage
-      :src="setting.breadcrumbs_background_source"
-      :alt="setting.breadcrumbs_background_alt"
+      :src="settings.breadcrumbs_background_source"
+      :alt="settings.breadcrumbs_background_alt"
       class="absolute inset-0 h-full w-full object-cover" />
 
     <div class="bg-brand-dark/80 absolute inset-0"></div>

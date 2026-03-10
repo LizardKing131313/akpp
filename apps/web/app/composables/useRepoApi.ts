@@ -18,7 +18,7 @@ import type {
 import type { ModelItem } from '#shared/types/model'
 import type { ResolvedPageItem } from '#shared/types/page'
 import type { PolicySettings } from '#shared/types/policy'
-import type { QuizData, QuizSettings } from '#shared/types/quiz'
+import type { QuizProblemItem, QuizSettings, QuizSymptomItem } from '#shared/types/quiz'
 import type {
   RoutePageOverrideItem,
   RoutePageOverrideType,
@@ -88,10 +88,6 @@ const useByParamApiData = <ResponseType>(
 
 export const useCalculateSettings = () => {
   return useStaticApiData<CalculateSettings>('calculate:settings', '/api/calculate')
-}
-
-export const useCaseSettings = () => {
-  return useStaticApiData<CaseSettings>('case:settings', '/api/case_settings')
 }
 
 export const useErrorSettings = () => {
@@ -164,6 +160,10 @@ export const useCaseBySlug = (slugInput: MaybeRefOrGetter<string>) => {
   return useByParamApiData<CaseItem>('cases:slug', 'case slug', slugInput, (slug: string) => {
     return `/api/cases/${encodeURIComponent(slug)}`
   })
+}
+
+export const useCaseSettings = () => {
+  return useStaticApiData<CaseSettings>('cases:settings', '/api/cases/settings')
 }
 
 export const useCities = () => {
@@ -367,7 +367,7 @@ export const useServicePrices = () => {
   return useStaticApiData<ServicePriceItem[]>('service-prices:list', '/api/service_prices')
 }
 
-export const useQuizData = (brandIdInput?: MaybeRefOrGetter<string | undefined>) => {
+export const useQuizProblems = (brandIdInput?: MaybeRefOrGetter<string | undefined>) => {
   const brandIdValue = computed<string | undefined>(() => {
     if (!brandIdInput) {
       return undefined
@@ -377,19 +377,46 @@ export const useQuizData = (brandIdInput?: MaybeRefOrGetter<string | undefined>)
     return normalizedValue.length > 0 ? normalizedValue : undefined
   })
 
-  return useAsyncData<QuizData>(
-    () => `quiz:data:${brandIdValue.value ?? 'all'}`,
+  return useAsyncData<QuizProblemItem[]>(
+    () => `quiz-problems:list:${brandIdValue.value ?? 'all'}`,
     () => {
       if (!brandIdValue.value) {
-        return fetchFromApi<QuizData>('/api/quiz/quiz')
+        return fetchFromApi<QuizProblemItem[]>('/api/quiz/problems')
       }
 
-      return fetchFromApi<QuizData>(
-        `/api/quiz/quiz?brandId=${encodeURIComponent(brandIdValue.value)}`
+      return fetchFromApi<QuizProblemItem[]>(
+        `/api/quiz/problems?brandId=${encodeURIComponent(brandIdValue.value)}`
       )
     },
     {
       watch: [brandIdValue],
+    }
+  )
+}
+
+export const useQuizSymptoms = (problemIdInput?: MaybeRefOrGetter<string | undefined>) => {
+  const problemIdValue = computed<string | undefined>(() => {
+    if (!problemIdInput) {
+      return undefined
+    }
+
+    const normalizedValue = normalizeParamValue(toValue(problemIdInput))
+    return normalizedValue.length > 0 ? normalizedValue : undefined
+  })
+
+  return useAsyncData<QuizSymptomItem[]>(
+    () => `quiz-symptoms:list:${problemIdValue.value ?? 'all'}`,
+    () => {
+      if (!problemIdValue.value) {
+        return fetchFromApi<QuizSymptomItem[]>('/api/quiz/symptoms')
+      }
+
+      return fetchFromApi<QuizSymptomItem[]>(
+        `/api/quiz/symptoms?problemId=${encodeURIComponent(problemIdValue.value)}`
+      )
+    },
+    {
+      watch: [problemIdValue],
     }
   )
 }

@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { computed } from 'vue'
 
 import { useSignupModal } from '~/composables/modal/useSignupModal'
-import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
+import { useFooterSettings } from '~/composables/useRepoApi'
 
 defineProps<{
   pulse?: boolean
 }>()
 
-const settings = useFooterUiSettings()
+const { data: settingsData } = await useFooterSettings()
+const settings = computed<FooterSettings>(() => settingsData.value ?? ({} as FooterSettings))
 
 const handleClick = (): void => {
   useSignupModal().openModal()

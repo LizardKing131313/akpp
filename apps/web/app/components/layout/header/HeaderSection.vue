@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import type { HeaderSettings } from '#shared/types/header'
+
 import { computed, defineAsyncComponent } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
 import { usePageHeaderMeta } from '~/composables/usePageHeaderMeta'
+import { useHeaderSettings } from '~/composables/useRepoApi'
 
-const settings = useHeaderUiSettings()
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
 const { mode } = usePageHeaderMeta()
 
 const activeCity = useActiveCity()

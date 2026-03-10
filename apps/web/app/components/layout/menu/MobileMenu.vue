@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { HeaderSettings } from '#shared/types/header'
+
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
+import { useHeaderSettings } from '~/composables/useRepoApi'
 
 type MenuScreen = {
   title?: string
@@ -23,7 +25,9 @@ const emit = defineEmits<{
 }>()
 
 const screenStack = ref<MenuScreen[]>([])
-const settings = useHeaderUiSettings()
+
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
 
 const ensureRootScreen = (): void => {
   screenStack.value = [

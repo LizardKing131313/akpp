@@ -8,6 +8,6 @@ export class CitySelectModalRepository extends SingletonRepository<CitySelectMod
   protected readonly fields = `
     title,
     search_placeholder,
-    empty_text
+    empty_text,
   `
 }

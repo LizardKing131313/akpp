@@ -11,5 +11,5 @@ export type LocationItem = EntityItem &
     readonly metro: string
     readonly metro_color: string
 
-    readonly images: string[]
+    readonly images: ImageListItem[]
   }

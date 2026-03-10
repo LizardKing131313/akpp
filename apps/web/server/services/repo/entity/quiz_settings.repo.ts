@@ -1,10 +1,8 @@
-import type { QuizApiSettings } from '#shared/types/api/quiz'
 import type { QuizSettings } from '#shared/types/quiz'
 
-import { mapQuizApiSettingsToQuizSettings } from '#server/services/repo/mappers/quiz.mapper'
 import { SingletonRepository } from '#server/services/repo/singletonRepo'
 
-export class QuizSettingsRepository extends SingletonRepository<QuizApiSettings> {
+export class QuizSettingsRepository extends SingletonRepository<QuizSettings> {
   protected readonly collection = 'quiz_settings'
 
   protected readonly fields = `
@@ -36,11 +34,6 @@ export class QuizSettingsRepository extends SingletonRepository<QuizApiSettings>
     success_title,
     success_line_1,
     success_line_2,
-    modal_empty_text
+    modal_empty_text,
   `
-
-  public async getSettings(): Promise<QuizSettings> {
-    const apiSettings = await super.get()
-    return mapQuizApiSettingsToQuizSettings(apiSettings)
-  }
 }

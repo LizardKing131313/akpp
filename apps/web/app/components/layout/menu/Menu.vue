@@ -1,16 +1,17 @@
 <script setup lang="ts">
+import type { HeaderSettings } from '#shared/types/header'
 import type { MenuItem } from '#shared/types/menu'
 
 import { computed, ref } from 'vue'
 
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
-import { useMenus } from '~/composables/useRepoApi'
+import { useHeaderSettings, useMenus } from '~/composables/useRepoApi'
 
 const isMobileMenuOpen = ref<boolean>(false)
 const { data: menusData } = useMenus()
 const menuItems = computed<MenuItem[]>(() => menusData.value ?? [])
 
-const settings = useHeaderUiSettings()
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
 </script>
 
 <template>

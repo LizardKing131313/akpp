@@ -10,6 +10,6 @@ export class PolicyRepository extends SingletonRepository<PolicySettings> {
     article,
     lead_accept,
     lead_policy,
-    lead_agreement
+    lead_agreement,
   `
 }

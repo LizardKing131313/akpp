@@ -14,6 +14,6 @@ export class ShopModalRepository extends SingletonRepository<ShopModalSettings> 
     vin_placeholder,
     phone_label,
     phone_placeholder,
-    submit_label
+    submit_label,
   `
 }

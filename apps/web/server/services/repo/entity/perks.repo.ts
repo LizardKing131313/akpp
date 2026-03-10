@@ -11,6 +11,6 @@ export class PerksRepository extends ListRepository<PerkItem> {
     description,
     image_source,
     image_alt,
-    sort
+    sort,
   `
 }

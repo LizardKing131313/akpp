@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import type { HeaderSettings } from '#shared/types/header'
+
 import { normalizeAppPath } from '#shared/lib/route'
+import { computed } from 'vue'
 
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
+import { useHeaderSettings } from '~/composables/useRepoApi'
 
-const settings = useHeaderUiSettings()
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
 </script>
 
 <template>

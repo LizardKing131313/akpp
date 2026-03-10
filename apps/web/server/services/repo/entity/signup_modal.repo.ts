@@ -15,6 +15,6 @@ export class SignupModalRepository extends SingletonRepository<SignupModalSettin
     name_placeholder,
     phone_label,
     phone_placeholder,
-    submit_label
+    submit_label,
   `
 }

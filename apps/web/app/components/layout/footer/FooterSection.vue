@@ -9,14 +9,15 @@ import { normalizeAppPath } from '#shared/lib/route'
 import { computed, defineAsyncComponent } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
-import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
-import { useLocations } from '~/composables/useRepoApi'
+import { useFooterSettings, useLocations } from '~/composables/useRepoApi'
 
 const activeCity = useActiveCity()
 const cityId = computed<string | undefined>(() => activeCity.value?.id)
 
 const { data: locationsData } = useLocations(cityId)
-const settings = useFooterUiSettings()
+
+const { data: settingsData } = await useFooterSettings()
+const settings = computed<FooterSettings>(() => settingsData.value ?? ({} as FooterSettings))
 
 const route = useRoute()
 const AsyncYandexMap = defineAsyncComponent(
@@ -158,9 +159,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
 
             <ul class="space-y-1">
               <li v-for="menuItem in menuItems" :key="menuItem.id">
-                <NuxtLink
-                  :to="menuHrefByItem(menuItem)"
-                  class="hover:text-brand-soft transition">
+                <NuxtLink :to="menuHrefByItem(menuItem)" class="hover:text-brand-soft transition">
                   {{ menuItem.name ?? '' }}
                 </NuxtLink>
               </li>

@@ -1,42 +1,12 @@
 <script setup lang="ts">
-import type { BrandItem } from '#shared/types/brand'
-import type { QuizSubmitPayload, QuizSymptomsMap } from '#shared/types/quiz'
+import type { QuizSubmitPayload } from '#shared/types/quiz'
 
-import { computed } from 'vue'
+import { useQuizSubmit } from '~/composables/useQuizSubmit'
 
-const props = withDefaults(
-  defineProps<{
-    brands?: readonly BrandItem[]
-  }>(),
-  {
-    brands: () => [],
-  }
-)
-
-const { data: brandsData } = await useBrands()
-const { data: quizData } = await useQuizData()
-
-const resolvedBrands = computed<readonly BrandItem[]>(() => {
-  if (props.brands.length > 0) {
-    return props.brands
-  }
-
-  return brandsData.value ?? []
-})
-
-const quizProblems = computed<readonly string[]>(() => {
-  return quizData.value?.problems ?? []
-})
-
-const quizSymptoms = computed<QuizSymptomsMap>(() => {
-  return quizData.value?.symptoms ?? {}
-})
+const { submitQuiz } = useQuizSubmit()
 
 const handleQuizSubmit = (payload: QuizSubmitPayload): void => {
-  // eslint-disable-next-line no-console
-  console.log('Quiz submit payload:', payload)
-
-  // здесь потом будет твой fetch / axios
+  void submitQuiz(payload)
 }
 </script>
 
@@ -47,12 +17,7 @@ const handleQuizSubmit = (payload: QuizSubmitPayload): void => {
     <TwoColumns class="relative mx-auto grid max-w-6xl gap-2 lg:grid-cols-2">
       <CalculateBanner />
 
-      <RepairQuiz
-        class="w-full px-4 py-12"
-        :brands="resolvedBrands"
-        :problems="quizProblems"
-        :symptoms="quizSymptoms"
-        @submit="handleQuizSubmit" />
+      <RepairQuiz class="w-full px-4 py-12" @submit="handleQuizSubmit" />
     </TwoColumns>
   </section>
 </template>

@@ -15,6 +15,26 @@ type DirectusErrorResponse = {
 
 export type DirectusPayload = Readonly<Record<string, unknown>>
 
+const normalizeDirectusIds = <Value>(value: Value): Value => {
+  if (Array.isArray(value)) {
+    return value.map((arrayItem) => normalizeDirectusIds(arrayItem)) as Value
+  }
+
+  if (typeof value !== 'object' || value === null) {
+    return value
+  }
+
+  const normalizedEntries = Object.entries(value).map(([entryKey, entryValue]) => {
+    if (entryKey === 'id' && entryValue !== null && entryValue !== undefined) {
+      return [entryKey, String(entryValue)]
+    }
+
+    return [entryKey, normalizeDirectusIds(entryValue)]
+  })
+
+  return Object.fromEntries(normalizedEntries) as Value
+}
+
 const isDirectusErrorResponse = (value: unknown): value is DirectusErrorResponse => {
   if (typeof value !== 'object' || value === null) return false
   const maybe = value as { errors?: unknown }
@@ -117,7 +137,7 @@ export const createDirectusClient = () => {
           ...getAuthHeader(),
         },
       })
-      return response.data
+      return normalizeDirectusIds(response.data)
     } catch (unknownError: unknown) {
       return toNuxtError(unknownError)
     }
@@ -135,7 +155,7 @@ export const createDirectusClient = () => {
         },
         body: payload as Record<string, unknown>,
       })
-      return response.data
+      return normalizeDirectusIds(response.data)
     } catch (unknownError: unknown) {
       return toNuxtError(unknownError)
     }
@@ -155,7 +175,7 @@ export const createDirectusClient = () => {
         },
         body: payload as Record<string, unknown>,
       })
-      return response.data
+      return normalizeDirectusIds(response.data)
     } catch (unknownError: unknown) {
       return toNuxtError(unknownError)
     }

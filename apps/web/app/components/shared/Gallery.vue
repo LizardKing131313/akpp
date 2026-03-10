@@ -6,21 +6,12 @@ const props = defineProps<{ images: ImageListItem[] }>()
 
 const activeIndex = ref<number>(0)
 const visible = ref<boolean>(false)
-const image = useImage()
 
-const displayImages = computed<string[]>(() =>
-  props.images.map(
-    (src) =>
-      resolveCmsImageView(src, {
-        image,
-      }).ipxSrc
-  )
+const activeSrc = computed<string | null>(
+  () => props.images[activeIndex.value]?.directus_files_id ?? null
 )
 
-const activeSrc = computed<string | null>(() => {
-  const value = displayImages.value[activeIndex.value]
-  return value ?? null
-})
+const displayImages = computed<string[]>(() => props.images.map((item) => item.directus_files_id))
 
 const openLightbox = (index: number): void => {
   if (props.images.length === 0) return
@@ -45,15 +36,15 @@ const closeLightbox = (): void => {
 
     <div class="mt-4 grid grid-cols-3 gap-3">
       <button
-        v-for="(imageItem, index) in images"
-        :key="imageItem"
+        v-for="(imageItem, itemIndex) in images"
+        :key="imageItem.id"
         type="button"
         class="border-brand-soft bg-brand-white overflow-hidden rounded-lg border transition"
         :class="
-          index === activeIndex ? 'ring-brand-red ring-2' : 'hover:border-brand-grey-light/60'
+          itemIndex === activeIndex ? 'ring-brand-red ring-2' : 'hover:border-brand-grey-light/60'
         "
-        @click="activeIndex = index">
-        <CmsImage :src="imageItem" class="h-16 w-full object-contain sm:h-18" />
+        @click="activeIndex = itemIndex">
+        <CmsImage :src="imageItem.directus_files_id" class="h-16 w-full object-contain sm:h-18" />
       </button>
     </div>
 

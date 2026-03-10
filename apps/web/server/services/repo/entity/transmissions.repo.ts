@@ -12,6 +12,6 @@ export class TransmissionsRepository extends ListRepository<TransmissionItem> {
     price,
     image_source,
     image_alt,
-    sort
+    sort,
   `
 }

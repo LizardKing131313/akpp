@@ -5,4 +5,5 @@ export type HeroItem = EntityItem &
     readonly title_accent: string
     readonly title_main: string
     readonly description: string
+    readonly city_id?: string
   }

@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
-import type { QuizSubmitPayload, QuizSymptomsMap } from '#shared/types/quiz'
+import type { QuizProblemItem, QuizSubmitPayload } from '#shared/types/quiz'
 
 import { cn } from '#shared/lib/cn'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
-import { useQuizUiSettings } from '~/composables/useQuizUiSettings'
+import { useQuizSettings } from '~/composables/useRepoApi'
 
 type QuizStep = 'brand' | 'problem' | 'symptom' | 'contact' | 'success'
 
 const props = withDefaults(
   defineProps<{
-    brands: readonly BrandItem[]
-    problems: readonly string[]
-    symptoms: QuizSymptomsMap
+    activeBrand?: BrandItem | null
     initialStep?: QuizStep
   }>(),
   {
+    activeBrand: null,
     initialStep: 'brand',
   }
 )
@@ -25,13 +24,34 @@ const emit = defineEmits<{
   (event: 'submit', payload: QuizSubmitPayload): void
 }>()
 
-const currentStep = ref<QuizStep>(props.initialStep)
+const currentStep = ref<QuizStep>(props.activeBrand ? 'problem' : props.initialStep)
 
-const selectedBrandTitle = ref<string>('')
+const selectedBrandId = ref<string | undefined>(props.activeBrand?.id)
+const selectedBrandTitle = ref<string>(props.activeBrand?.name ?? '')
+const selectedProblemId = ref<string | undefined>(undefined)
 const selectedProblemTitle = ref<string>('')
 const selectedSymptomTitle = ref<string>('')
 
-const settings = useQuizUiSettings()
+const { data: settingsData } = await useQuizSettings()
+const settings = computed<QuizSettings>(() => settingsData.value ?? ({} as QuizSettings))
+
+const { data: brandsData } = await useBrands()
+const { data: problemItemsData } = await useQuizProblems(selectedBrandId)
+const { data: symptomItemsData } = await useQuizSymptoms(selectedProblemId)
+
+const normalizeTitle = (value: string | undefined): string => {
+  return value?.trim().toLowerCase() ?? ''
+}
+
+const brands = computed<readonly BrandItem[]>(() => {
+  return brandsData.value ?? []
+})
+
+const problems = computed<readonly string[]>(() => {
+  return (problemItemsData.value ?? [])
+    .map((problemItem) => problemItem.name?.trim() ?? '')
+    .filter((problemTitle) => problemTitle.length > 0)
+})
 
 const stepLabels = computed<readonly string[]>(() => [
   settings.value.step_label_brand,
@@ -51,11 +71,30 @@ const canGoBack = computed<boolean>(
   () => currentStep.value !== 'brand' && currentStep.value !== 'success'
 )
 
+watch(
+  () => props.activeBrand,
+  (activeBrand) => {
+    if (!activeBrand) {
+      return
+    }
+
+    selectedBrandId.value = activeBrand.id
+    selectedBrandTitle.value = activeBrand.name
+    selectedProblemId.value = undefined
+    selectedProblemTitle.value = ''
+    selectedSymptomTitle.value = ''
+    currentStep.value = 'problem'
+  }
+)
+
 const goBack = (): void => {
   if (!canGoBack.value) return
 
   if (currentStep.value === 'problem') {
     currentStep.value = 'brand'
+    selectedBrandId.value = undefined
+    selectedBrandTitle.value = ''
+    selectedProblemId.value = undefined
     selectedProblemTitle.value = ''
     selectedSymptomTitle.value = ''
     return
@@ -74,29 +113,49 @@ const goBack = (): void => {
 
 const goToBrandAndReset = (): void => {
   currentStep.value = 'brand'
+  selectedBrandId.value = undefined
   selectedBrandTitle.value = ''
+  selectedProblemId.value = undefined
   selectedProblemTitle.value = ''
   selectedSymptomTitle.value = ''
 }
 
 const handleBrandNext = (payload: { brandTitle: string }): void => {
-  selectedBrandTitle.value = payload.brandTitle
+  const brandTitle = payload.brandTitle.trim()
+  const normalizedBrandTitle = normalizeTitle(brandTitle)
+  const matchedBrand = brands.value.find((brandItem) => {
+    return normalizeTitle(brandItem.name) === normalizedBrandTitle
+  })
+
+  selectedBrandId.value = matchedBrand?.id
+  selectedBrandTitle.value = brandTitle
+  selectedProblemId.value = undefined
+  selectedProblemTitle.value = ''
+  selectedSymptomTitle.value = ''
   currentStep.value = 'problem'
 }
 
 const handleProblemSelect = (payload: { problemTitle: string }): void => {
-  selectedProblemTitle.value = payload.problemTitle
+  const problemTitle = payload.problemTitle.trim()
+  const normalizedProblemTitle = normalizeTitle(problemTitle)
+  const matchedProblem = (problemItemsData.value ?? []).find((problemItem: QuizProblemItem) => {
+    return normalizeTitle(problemItem.name) === normalizedProblemTitle
+  })
+
+  selectedProblemId.value = matchedProblem?.id
+  selectedProblemTitle.value = problemTitle
   selectedSymptomTitle.value = ''
   currentStep.value = 'symptom'
 }
 
 const availableSymptoms = computed<readonly string[]>(() => {
-  const list = props.symptoms[selectedProblemTitle.value]
-  return list ?? []
+  return (symptomItemsData.value ?? [])
+    .map((symptomItem) => symptomItem.name?.trim() ?? '')
+    .filter((symptomTitle) => symptomTitle.length > 0)
 })
 
 const handleSymptomSelect = (payload: { symptomTitle: string }): void => {
-  selectedSymptomTitle.value = payload.symptomTitle
+  selectedSymptomTitle.value = payload.symptomTitle.trim()
   currentStep.value = 'contact'
 }
 

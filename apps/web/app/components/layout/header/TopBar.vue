@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { HeaderSettings } from '#shared/types/header'
+
 import { cn } from '#shared/lib/cn'
 import { computed, ref, watch } from 'vue'
 
 import { useSelectCityModal } from '~/composables/modal/useSelectCityModal'
 import { useActiveCity } from '~/composables/useActiveCity'
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
+import { useHeaderSettings } from '~/composables/useRepoApi'
 
 const activeCity = useActiveCity()
 
@@ -17,7 +19,9 @@ const activeCityName = computed<string>(() => {
   return ''
 })
 
-const settings = useHeaderUiSettings()
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
+
 const route = useRoute()
 const router = useRouter()
 

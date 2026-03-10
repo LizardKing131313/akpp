@@ -3,5 +3,5 @@ import { QuizSettingsRepository } from '#server/services/repo/entity/quiz_settin
 // noinspection JSUnusedGlobalSymbols
 export default defineEventHandler(async () => {
   const repo = new QuizSettingsRepository()
-  return await repo.getSettings()
+  return await repo.get()
 })

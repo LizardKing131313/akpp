@@ -1,22 +1,11 @@
-import type { BrandItem } from '#shared/types/brand'
 import type { EntityItem } from '#shared/types/entity'
 
-// noinspection JSUnusedGlobalSymbols
 export type QuizProblemItem = EntityItem & {
-  readonly name: string
+  readonly brand_id?: string
 }
 
-// noinspection JSUnusedGlobalSymbols
 export type QuizSymptomItem = EntityItem & {
-  readonly name: string
-  readonly problemId?: string
-}
-
-export type QuizSymptomsMap = Readonly<Record<string, readonly string[]>>
-
-export type QuizData = {
-  readonly problems: readonly string[]
-  readonly symptoms: QuizSymptomsMap
+  readonly problem_id?: string
 }
 
 export type QuizSettings = {
@@ -55,10 +44,6 @@ export type QuizSettings = {
   readonly success_line_2: string
 
   readonly modal_empty_text: string
-}
-
-export type QuizModalPayload = QuizData & {
-  readonly brands: readonly BrandItem[]
 }
 
 export type QuizSubmitPayload = {

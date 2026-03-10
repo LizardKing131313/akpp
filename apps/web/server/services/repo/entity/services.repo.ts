@@ -12,6 +12,6 @@ export class ServicesRepository extends ListSlugRepository<ServiceItem> {
     colspan,
     image_source,
     image_alt,
-    sort
+    sort,
   `
 }

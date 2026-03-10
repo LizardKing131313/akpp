@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { HeaderSettings } from '#shared/types/header'
 import type { HeroItem } from '#shared/types/hero'
 
 import { cn } from '#shared/lib/cn'
@@ -7,14 +8,15 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { computed } from 'vue'
 
 import { useSignupModal } from '~/composables/modal/useSignupModal'
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
-import { useHeroes } from '~/composables/useRepoApi'
+import { useHeaderSettings, useHeroes } from '~/composables/useRepoApi'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 
 const swiperModules = computed(() => [Autoplay, Navigation])
-const settings = useHeaderUiSettings()
+
+const { data: settingsData } = await useHeaderSettings()
+const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
 
 const handleClick = (): void => {
   useSignupModal().openModal()

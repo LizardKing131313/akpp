@@ -10,6 +10,6 @@ export class CalculateRepository extends SingletonRepository<CalculateSettings> 
     title_accent,
     description,
     perks.id,
-    perks.name
+    perks.name,
   `
 }

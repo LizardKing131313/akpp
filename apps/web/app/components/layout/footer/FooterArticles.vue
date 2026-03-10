@@ -4,10 +4,11 @@ import type { ArticleItem } from '#shared/types/article'
 import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
-import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
-import { useArticles } from '~/composables/useRepoApi'
+import { useArticles, useFooterSettings } from '~/composables/useRepoApi'
 
-const settings = useFooterUiSettings()
+const { data: settingsData } = await useFooterSettings()
+const settings = computed<FooterSettings>(() => settingsData.value ?? ({} as FooterSettings))
+
 const { data: articlesData } = useArticles()
 const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
 </script>
