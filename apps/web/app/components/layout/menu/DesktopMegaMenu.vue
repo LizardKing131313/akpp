@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { normalizeAppPath } from '#shared/lib/route'
 import { computed, ref, useAttrs } from 'vue'
 
 defineOptions({ inheritAttrs: false })
@@ -120,7 +121,7 @@ const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
           <NuxtLink
             v-for="node in leftItems"
             :key="node.id"
-            :to="node.slug ?? '#'"
+            :to="node.slug ? normalizeAppPath(node.slug) : '#'"
             :class="[
               `group/menu-item flex w-full cursor-pointer items-center justify-between
               px-6 py-4 text-left text-sm font-semibold tracking-wide uppercase transition-colors`,
@@ -149,7 +150,7 @@ const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
           <NuxtLink
             v-for="node in rightItems"
             :key="node.id"
-            :to="node.slug ?? '#'"
+            :to="node.slug ? normalizeAppPath(node.slug) : '#'"
             :class="
               cn(`
                 text-brand-dark hover:bg-brand-red hover:text-brand-white

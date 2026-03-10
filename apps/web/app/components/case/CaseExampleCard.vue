@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { CaseItem } from '#shared/types/case'
 
+import { normalizeAppPath } from '#shared/lib/route'
+
 withDefaults(
   defineProps<{
     caseItem: CaseItem
@@ -13,7 +15,7 @@ withDefaults(
 </script>
 
 <template>
-  <NuxtLink :to="caseItem.slug" class="group block transition-colors">
+  <NuxtLink :to="normalizeAppPath(caseItem.slug)" class="group block transition-colors">
     <template v-if="variant === 'tile'">
       <div class="overflow-hidden rounded-t-xl">
         <CmsImage

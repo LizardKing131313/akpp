@@ -2,6 +2,7 @@
 import type { ImageItem, SlugEntityItem } from '#shared/types/entity'
 
 import { cn } from '#shared/lib/cn'
+import { normalizeAppPath } from '#shared/lib/route'
 
 const emit = defineEmits<{
   (event: 'click'): void
@@ -22,12 +23,13 @@ const props = withDefaults(
 )
 
 const isLink = computed<boolean>(() => Boolean(props.slug))
+const linkHref = computed<string>(() => normalizeAppPath(props.slug))
 </script>
 
 <template>
   <component
     :is="isLink ? 'NuxtLink' : 'button'"
-    :to="isLink ? slug : undefined"
+    :to="isLink ? linkHref : undefined"
     type="button"
     @click="!isLink && emit('click')"
     :class="

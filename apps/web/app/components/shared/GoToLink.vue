@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { normalizeAppPath } from '#shared/lib/route'
+
 withDefaults(
   defineProps<{
     href: string
@@ -12,7 +14,7 @@ withDefaults(
 
 <template>
   <NuxtLink
-    :to="href"
+    :to="normalizeAppPath(href)"
     :aria-label="ariaLabel || undefined"
     class="text-brand-grey-light hover:text-brand-white group block w-full text-sm transition-colors">
     <div class="flex items-center font-bold uppercase">

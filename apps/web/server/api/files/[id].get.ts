@@ -35,7 +35,16 @@ export default defineEventHandler(async (event) => {
           },
         }
       : undefined
-  const upstreamResponse = await fetch(assetUrl, requestOptions)
+  let upstreamResponse: Response
+
+  try {
+    upstreamResponse = await fetch(assetUrl, requestOptions)
+  } catch {
+    throw createError({
+      statusCode: 502,
+      statusMessage: 'Failed to fetch Directus asset',
+    })
+  }
 
   if (!upstreamResponse.ok) {
     throw createError({

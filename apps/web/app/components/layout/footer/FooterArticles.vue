@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ArticleItem } from '#shared/types/article'
 
+import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
 import { useFooterUiSettings } from '~/composables/useFooterUiSettings'
@@ -20,7 +21,7 @@ const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
         :key="article.id"
         class="border-b-brand-grey-light flex items-start border-b">
         <NuxtLink
-          :to="article.slug"
+          :to="normalizeAppPath(article.slug)"
           :aria-label="`${settings.article_link_aria_label_prefix} ${article.name}`"
           class="group hover:text-brand-white block w-full py-4">
           <div class="flex items-start gap-4">

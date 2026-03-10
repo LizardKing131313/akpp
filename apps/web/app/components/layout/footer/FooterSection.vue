@@ -5,6 +5,7 @@ import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 
 import { cn } from '#shared/lib/cn'
+import { normalizeAppPath } from '#shared/lib/route'
 import { computed, defineAsyncComponent } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
@@ -83,13 +84,7 @@ const phoneHref = computed<string>(() => {
 })
 
 const menuHrefByItem = (menuItem: MenuItem): string => {
-  const slugValue = menuItem.slug.trim()
-
-  if (slugValue.length === 0 || slugValue === '/') {
-    return '/'
-  }
-
-  return slugValue.startsWith('/') ? slugValue : `/${slugValue}`
+  return normalizeAppPath(menuItem.slug)
 }
 </script>
 
@@ -186,7 +181,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           <p>{{ settings.copyright }}</p>
 
           <NuxtLink
-            :to="settings.policy_href"
+            :to="normalizeAppPath(settings.policy_href)"
             :aria-label="settings.policy_aria_label"
             class="hover:text-brand-white inline-block underline transition">
             {{ settings.policy }}

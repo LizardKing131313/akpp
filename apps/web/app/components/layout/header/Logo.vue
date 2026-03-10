@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { normalizeAppPath } from '#shared/lib/route'
+
 import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
 
 const settings = useHeaderUiSettings()
@@ -6,7 +8,7 @@ const settings = useHeaderUiSettings()
 
 <template>
   <div>
-    <NuxtLink :to="settings.logo_href">
+    <NuxtLink :to="normalizeAppPath(settings.logo_href)">
       <CmsImage
         :src="settings.logo_source"
         :alt="settings.logo_alt"

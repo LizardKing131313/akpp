@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import type { ImageCardItem } from '#shared/types/entity'
 
+import { normalizeAppPath } from '#shared/lib/route'
+
 const props = withDefaults(defineProps<{ label?: string } & ImageCardItem>(), {
   label: 'Подробнее',
 })
 </script>
 
 <template>
-  <NuxtLink :to="slug" class="group bg-brand-white flex h-full flex-col overflow-hidden shadow-xl">
+  <NuxtLink
+    :to="normalizeAppPath(slug)"
+    class="group bg-brand-white flex h-full flex-col overflow-hidden shadow-xl">
     <div class="overflow-hidden">
       <CmsImage
         :src="image_source"

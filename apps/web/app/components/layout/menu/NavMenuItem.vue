@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { normalizeAppPath } from '#shared/lib/route'
 
 defineProps<{ menuNode: MenuItem }>()
 
@@ -10,7 +11,7 @@ const buttonClass = cn(`
 </script>
 
 <template>
-  <NuxtLink v-if="menuNode.slug" :to="menuNode.slug" :class="buttonClass">
+  <NuxtLink v-if="menuNode.slug" :to="normalizeAppPath(menuNode.slug)" :class="buttonClass">
     {{ menuNode.name }}
   </NuxtLink>
 

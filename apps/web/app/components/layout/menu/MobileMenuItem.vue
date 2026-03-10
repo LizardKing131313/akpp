@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
 import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
@@ -40,7 +41,11 @@ const select = (): void => {
       <Arrow direction="down" />
     </button>
 
-    <NuxtLink v-else-if="entry.slug" :to="entry.slug" :class="buttonClass" @click="select">
+    <NuxtLink
+      v-else-if="entry.slug"
+      :to="normalizeAppPath(entry.slug)"
+      :class="buttonClass"
+      @click="select">
       <span>{{ entry.name }}</span>
     </NuxtLink>
 
