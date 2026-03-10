@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import type { BrandItem } from '#shared/types/brand'
+
 import { Autoplay, FreeMode, Mousewheel } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { computed } from 'vue'
 
 import 'swiper/css'
 import 'swiper/css/free-mode'
 
 const swiperModules = [Autoplay, FreeMode, Mousewheel]
 
-const brands = [] as BrandItem[]
+const { data: brandsData } = await useBrands()
+
+const brands = computed<BrandItem[]>(() => brandsData.value ?? [])
 </script>
 
 <template>

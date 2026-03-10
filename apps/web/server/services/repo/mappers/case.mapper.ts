@@ -2,7 +2,17 @@ import type { CaseApiItem } from '#shared/types/api/case'
 import type { BrandItem } from '#shared/types/brand'
 import type { CaseItem } from '#shared/types/case'
 
-const normalizeText = (value: string | null | undefined): string => value?.trim() ?? ''
+const normalizeText = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value.trim()
+  }
+
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return String(value).trim()
+  }
+
+  return ''
+}
 
 const normalizeNumber = (value: number | null | undefined): number =>
   typeof value === 'number' && Number.isFinite(value) ? value : 0
@@ -63,8 +73,8 @@ const normalizeBrand = (brand: CaseApiItem['brand']): BrandItem => ({
 })
 
 export const mapCaseApiItemToCaseItem = (apiItem: CaseApiItem): CaseItem => ({
-  id: apiItem.id,
-  slug: apiItem.slug,
+  id: normalizeText(apiItem.id),
+  slug: normalizeText(apiItem.slug),
   name: normalizeText(apiItem.name),
   image_source: normalizeText(apiItem.image_source),
   image_alt: normalizeText(apiItem.image_alt),
