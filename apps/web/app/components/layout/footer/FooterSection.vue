@@ -160,7 +160,6 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
               <li v-for="menuItem in menuItems" :key="menuItem.id">
                 <NuxtLink
                   :to="menuHrefByItem(menuItem)"
-                  :aria-label="`${settings.menu_link_aria_label_prefix} ${menuItem.name ?? ''}`"
                   class="hover:text-brand-soft transition">
                   {{ menuItem.name ?? '' }}
                 </NuxtLink>
@@ -180,7 +179,6 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
 
           <NuxtLink
             :to="normalizeAppPath(settings.policy_href)"
-            :aria-label="settings.policy_aria_label"
             class="hover:text-brand-white inline-block underline transition">
             {{ settings.policy }}
           </NuxtLink>

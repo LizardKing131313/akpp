@@ -263,6 +263,7 @@ const sortIndicator = (columnId: string): string => {
         <span class="select-none">{{ showEntriesLabel }}</span>
         <select
           class="border-brand-soft bg-brand-white text-brand-dark focus:border-brand-red focus:ring-brand-red/30 cursor-pointer rounded-md border px-2 py-1 outline-none focus:ring-2"
+          :aria-label="`${showEntriesLabel} ${entriesLabel}`"
           :value="pageSize"
           @change="handlePageSizeChange">
           <option v-for="sizeOption in pageSizeOptions" :key="sizeOption" :value="sizeOption">

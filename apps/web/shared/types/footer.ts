@@ -4,13 +4,10 @@ export type FooterSettings = {
   readonly copyright: string
   readonly policy: string
   readonly policy_href: string
-  readonly policy_aria_label: string
   readonly title_main: string
   readonly title_accent: string
   readonly menu: string
-  readonly menu_link_aria_label_prefix: string
   readonly articles: string
-  readonly article_link_aria_label_prefix: string
   readonly show_all_articles: string
   readonly show_all_articles_href: string
   readonly show_all_articles_aria_label: string

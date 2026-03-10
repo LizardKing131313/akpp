@@ -3,15 +3,12 @@ import { cn } from '#shared/lib/cn'
 import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
-import { useHeaderUiSettings } from '~/composables/useHeaderUiSettings'
-
 const buttonClass = cn(`
   text-brand-dark flex w-full items-center justify-between py-4
   text-left text-sm font-semibold tracking-wide uppercase
 `)
 
 const props = defineProps<{ entry: MenuItem }>()
-const settings = useHeaderUiSettings()
 
 const emit = defineEmits<{
   (event: 'navigate', entry: MenuItem): void
@@ -35,7 +32,6 @@ const select = (): void => {
       v-if="hasChildren"
       :class="buttonClass"
       type="button"
-      :aria-label="`${settings.mobile_menu_open_section_aria_prefix} ${entry.name}`"
       @click="navigate">
       <span>{{ entry.name }}</span>
       <Arrow direction="down" />
@@ -53,7 +49,6 @@ const select = (): void => {
       v-else
       :class="buttonClass"
       type="button"
-      :aria-label="`${settings.mobile_menu_select_item_aria_prefix} ${entry.name}`"
       @click="select">
       <span>{{ entry.name }}</span>
     </button>

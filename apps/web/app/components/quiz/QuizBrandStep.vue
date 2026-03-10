@@ -89,6 +89,7 @@ watch(
         v-model.trim="inputValue"
         type="text"
         class="bg-brand-white text-brand-dark focus:border-brand-red h-11.5 w-full rounded-xl px-5 text-lg outline-none"
+        :aria-label="props.title"
         :placeholder="props.inputPlaceholder"
         autocomplete="off"
         @keydown.enter.prevent="handleNext" />

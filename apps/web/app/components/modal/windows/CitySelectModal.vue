@@ -111,6 +111,7 @@ const handleSelect = (cityId: string): void => {
         <input
           v-model="searchValue"
           type="text"
+          :aria-label="settings.search_placeholder"
           :placeholder="settings.search_placeholder"
           :class="
             cn(`

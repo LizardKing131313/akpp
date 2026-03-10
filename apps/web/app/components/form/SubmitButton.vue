@@ -1,5 +1,5 @@
 <template>
-  <MainButton type="submit" aria-label="submit">
+  <MainButton type="submit">
     <slot />
   </MainButton>
 </template>

@@ -22,7 +22,6 @@ const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
         class="border-b-brand-grey-light flex items-start border-b">
         <NuxtLink
           :to="normalizeAppPath(`articles/${article.slug}`)"
-          :aria-label="`${settings.article_link_aria_label_prefix} ${article.name}`"
           class="group hover:text-brand-white block w-full py-4">
           <div class="flex items-start gap-4">
             <div class="h-16 w-20 shrink-0 overflow-hidden rounded-xl">

@@ -22,7 +22,6 @@ export class HeaderRepository extends SingletonRepository<HeaderSettings> {
     phone_icon_source,
     phone_icon_alt,
     hero_button_label,
-    hero_button_aria_label,
     hero_prev_slide_aria_label,
     hero_next_slide_aria_label,
     breadcrumbs_background_source,
@@ -30,8 +29,6 @@ export class HeaderRepository extends SingletonRepository<HeaderSettings> {
     menu_open_aria_label,
     mobile_menu_aria_label,
     mobile_menu_back_aria_label,
-    mobile_menu_open_section_aria_prefix,
-    mobile_menu_select_item_aria_prefix,
     menu_mobile_logo_source,
     menu_mobile_logo_alt
   `

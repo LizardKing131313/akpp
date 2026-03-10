@@ -53,7 +53,6 @@ const handleKeydown = (event: KeyboardEvent): void => {
       :type="type"
       :inputmode="inputmode"
       :placeholder="placeholder || label"
-      :aria-label="label"
       :autocomplete="autocomplete"
       :class="
         cn(

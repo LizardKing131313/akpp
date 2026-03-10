@@ -80,7 +80,6 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
 
               <MainButton
                 @click="handleClick"
-                :aria-label="settings.hero_button_aria_label"
                 class="z-20 mt-7 w-auto px-10 tracking-wide uppercase">
                 {{ settings.hero_button_label }}
               </MainButton>

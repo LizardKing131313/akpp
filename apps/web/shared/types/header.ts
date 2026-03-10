@@ -17,7 +17,6 @@ export type HeaderSettings = {
   readonly phone_icon_source: string
   readonly phone_icon_alt: string
   readonly hero_button_label: string
-  readonly hero_button_aria_label: string
   readonly hero_prev_slide_aria_label: string
   readonly hero_next_slide_aria_label: string
   readonly breadcrumbs_background_source: string
@@ -25,8 +24,6 @@ export type HeaderSettings = {
   readonly menu_open_aria_label: string
   readonly mobile_menu_aria_label: string
   readonly mobile_menu_back_aria_label: string
-  readonly mobile_menu_open_section_aria_prefix: string
-  readonly mobile_menu_select_item_aria_prefix: string
   readonly menu_mobile_logo_source: string
   readonly menu_mobile_logo_alt: string
 }

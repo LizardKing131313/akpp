@@ -18,6 +18,7 @@ const leftColumnWidthPx = 180
 const rightColumnWidthPx = 180
 
 const leftItems = computed<MenuItem[]>(() => props.menuNode.children ?? [])
+const panelId = computed<string>(() => `desktop-mega-menu-${props.menuNode.id}`)
 
 const activeLeftItem = computed<MenuItem | null>(() => {
   if (activeLeftId.value === null) return null
@@ -92,7 +93,9 @@ const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
   <div :class="[attrs.class, 'group relative']" @mouseenter="openNow" @mouseleave="scheduleClose">
     <button
       type="button"
-      aria-haspopup="menu"
+      :aria-controls="hasChildren(menuNode) ? panelId : undefined"
+      :aria-expanded="hasChildren(menuNode) ? isOpen : undefined"
+      aria-haspopup="true"
       :class="
         cn(`
           text-brand-white hover:text-brand-red flex w-full cursor-pointer!
@@ -107,6 +110,7 @@ const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
 
     <div
       v-if="isOpen && hasChildren(menuNode)"
+      :id="panelId"
       :class="
         cn(`
           border-brand-grey-light/10 bg-brand-white text-brand-dark absolute

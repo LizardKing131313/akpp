@@ -19,7 +19,6 @@ const defaultHeaderSettings: HeaderSettings = {
   phone_icon_source: '/images/icons/phone.svg',
   phone_icon_alt: 'phone',
   hero_button_label: 'Записаться',
-  hero_button_aria_label: 'Записаться',
   hero_prev_slide_aria_label: 'Previous slide',
   hero_next_slide_aria_label: 'Next slide',
   breadcrumbs_background_source: '/images/breadcrumbs.jpg',
@@ -27,8 +26,6 @@ const defaultHeaderSettings: HeaderSettings = {
   menu_open_aria_label: 'Открыть меню',
   mobile_menu_aria_label: 'Меню',
   mobile_menu_back_aria_label: 'Назад',
-  mobile_menu_open_section_aria_prefix: 'Открыть раздел',
-  mobile_menu_select_item_aria_prefix: 'Выбрать пункт',
   menu_mobile_logo_source: '/images/logo/logo_menu.svg',
   menu_mobile_logo_alt: 'menu logo',
 }
