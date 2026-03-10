@@ -1879,7 +1879,7 @@
     {
       "collection": "articles",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "articles",
         "conditions": null,
@@ -1892,7 +1892,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 22,
         "special": null,
@@ -1909,20 +1909,20 @@
       "schema": {
         "name": "image_source",
         "table": "articles",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -2535,7 +2535,7 @@
     {
       "collection": "brands",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "brands",
         "conditions": null,
@@ -2548,7 +2548,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 22,
         "special": null,
@@ -2565,20 +2565,20 @@
       "schema": {
         "name": "image_source",
         "table": "brands",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -3093,7 +3093,7 @@
     {
       "collection": "models",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "models",
         "conditions": null,
@@ -3106,7 +3106,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 22,
         "special": null,
@@ -3123,20 +3123,20 @@
       "schema": {
         "name": "image_source",
         "table": "models",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -3700,7 +3700,7 @@
     {
       "collection": "services",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "services",
         "conditions": null,
@@ -3713,7 +3713,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 22,
         "special": null,
@@ -3730,20 +3730,20 @@
       "schema": {
         "name": "image_source",
         "table": "services",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -4258,7 +4258,7 @@
     {
       "collection": "cases",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "cases",
         "conditions": null,
@@ -4271,7 +4271,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 22,
         "special": null,
@@ -4288,20 +4288,20 @@
       "schema": {
         "name": "image_source",
         "table": "cases",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -5664,7 +5664,7 @@
     {
       "collection": "heroes",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "heroes",
         "conditions": null,
@@ -5677,7 +5677,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 21,
         "special": null,
@@ -5694,20 +5694,20 @@
       "schema": {
         "name": "image_source",
         "table": "heroes",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -6320,7 +6320,7 @@
     {
       "collection": "perks",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "perks",
         "conditions": null,
@@ -6333,7 +6333,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 21,
         "special": null,
@@ -6350,20 +6350,20 @@
       "schema": {
         "name": "image_source",
         "table": "perks",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -10369,7 +10369,7 @@
     {
       "collection": "transmissions",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "transmissions",
         "conditions": null,
@@ -10382,7 +10382,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 23,
         "special": null,
@@ -10399,20 +10399,20 @@
       "schema": {
         "name": "image_source",
         "table": "transmissions",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -13715,7 +13715,7 @@
     {
       "collection": "header_settings",
       "field": "logo_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -13728,7 +13728,7 @@
         "note": "Поле «Логотип (десктоп)».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 20,
         "special": null,
@@ -13745,26 +13745,26 @@
       "schema": {
         "name": "logo_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
       "collection": "header_settings",
       "field": "logo_source_mobile",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -13777,7 +13777,7 @@
         "note": "Поле «Логотип (мобильный)».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 21,
         "special": null,
@@ -13794,20 +13794,20 @@
       "schema": {
         "name": "logo_source_mobile",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -13911,7 +13911,7 @@
     {
       "collection": "header_settings",
       "field": "location_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -13924,7 +13924,7 @@
         "note": "Поле «Иконка локации».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 24,
         "special": null,
@@ -13941,20 +13941,20 @@
       "schema": {
         "name": "location_icon_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -14058,7 +14058,7 @@
     {
       "collection": "header_settings",
       "field": "search_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -14071,7 +14071,7 @@
         "note": "Поле «Иконка поиска».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 27,
         "special": null,
@@ -14088,20 +14088,20 @@
       "schema": {
         "name": "search_icon_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -14254,7 +14254,7 @@
     {
       "collection": "header_settings",
       "field": "time_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -14267,7 +14267,7 @@
         "note": "Поле «Иконка времени».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 31,
         "special": null,
@@ -14284,20 +14284,20 @@
       "schema": {
         "name": "time_icon_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -14352,7 +14352,7 @@
     {
       "collection": "header_settings",
       "field": "phone_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -14365,7 +14365,7 @@
         "note": "Поле «Иконка телефона».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 33,
         "special": null,
@@ -14382,20 +14382,20 @@
       "schema": {
         "name": "phone_icon_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -14646,7 +14646,7 @@
     {
       "collection": "header_settings",
       "field": "breadcrumbs_background_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -14659,7 +14659,7 @@
         "note": "Поле «Фон хлебных крошек».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 39,
         "special": null,
@@ -14676,20 +14676,20 @@
       "schema": {
         "name": "breadcrumbs_background_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -14989,7 +14989,7 @@
     {
       "collection": "header_settings",
       "field": "menu_mobile_logo_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "header_settings",
         "conditions": null,
@@ -15002,7 +15002,7 @@
         "note": "Поле «Логотип мобильного меню».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 46,
         "special": null,
@@ -15019,20 +15019,20 @@
       "schema": {
         "name": "menu_mobile_logo_source",
         "table": "header_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -16020,7 +16020,7 @@
     {
       "collection": "footer_settings",
       "field": "contact_email_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "footer_settings",
         "conditions": null,
@@ -16033,7 +16033,7 @@
         "note": "Поле «Иконка email».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 36,
         "special": null,
@@ -16050,20 +16050,20 @@
       "schema": {
         "name": "contact_email_icon_source",
         "table": "footer_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -16118,7 +16118,7 @@
     {
       "collection": "footer_settings",
       "field": "contact_phone_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "footer_settings",
         "conditions": null,
@@ -16131,7 +16131,7 @@
         "note": "Поле «Иконка телефона контактов».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 38,
         "special": null,
@@ -16148,20 +16148,20 @@
       "schema": {
         "name": "contact_phone_icon_source",
         "table": "footer_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -16216,7 +16216,7 @@
     {
       "collection": "footer_settings",
       "field": "contact_time_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "footer_settings",
         "conditions": null,
@@ -16229,7 +16229,7 @@
         "note": "Поле «Иконка времени контактов».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 40,
         "special": null,
@@ -16246,20 +16246,20 @@
       "schema": {
         "name": "contact_time_icon_source",
         "table": "footer_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -16314,7 +16314,7 @@
     {
       "collection": "footer_settings",
       "field": "contact_button_icon_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "footer_settings",
         "conditions": null,
@@ -16327,7 +16327,7 @@
         "note": "Поле «Иконка кнопки контактов».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 42,
         "special": null,
@@ -16344,20 +16344,20 @@
       "schema": {
         "name": "contact_button_icon_source",
         "table": "footer_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -18052,7 +18052,7 @@
     {
       "collection": "why_settings",
       "field": "diagnostic_image",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "why_settings",
         "conditions": null,
@@ -18065,7 +18065,7 @@
         "note": "Поле «Иконка диагностики».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 25,
         "special": null,
@@ -18082,20 +18082,20 @@
       "schema": {
         "name": "diagnostic_image",
         "table": "why_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -18199,7 +18199,7 @@
     {
       "collection": "why_settings",
       "field": "tow_image",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "why_settings",
         "conditions": null,
@@ -18212,7 +18212,7 @@
         "note": "Поле «Иконка эвакуатора».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 28,
         "special": null,
@@ -18229,20 +18229,20 @@
       "schema": {
         "name": "tow_image",
         "table": "why_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -18346,7 +18346,7 @@
     {
       "collection": "why_settings",
       "field": "guarantee_image",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "why_settings",
         "conditions": null,
@@ -18359,7 +18359,7 @@
         "note": "Поле «Иконка гарантии».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 31,
         "special": null,
@@ -18376,20 +18376,20 @@
       "schema": {
         "name": "guarantee_image",
         "table": "why_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -19034,6 +19034,498 @@
       }
     },
     {
+      "collection": "shop_modal_settings",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "shop_modal_settings",
+        "data_type": "integer",
+        "default_value": "nextval('shop_modal_settings_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время последнего обновления.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 11,
+        "special": ["date-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата обновления"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_updated",
+        "table": "shop_modal_settings",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "user_updated",
+      "type": "uuid",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, обновивший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 13,
+        "special": ["user-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто обновил"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_updated",
+        "table": "shop_modal_settings",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "title",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "title",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Заголовок».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 20,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Заголовок"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "title",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "form_aria_label",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "form_aria_label",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «ARIA-лейбл формы».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 21,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ARIA-лейбл формы"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "form_aria_label",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "car_label",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "car_label",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Подпись поля автомобиля».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 22,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Подпись поля автомобиля"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "car_label",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "car_placeholder",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "car_placeholder",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Подсказка поля автомобиля».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 23,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Подсказка поля автомобиля"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "car_placeholder",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "vin_label",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "vin_label",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Подпись поля VIN».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 24,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Подпись поля VIN"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "vin_label",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "vin_placeholder",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "vin_placeholder",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Подсказка поля VIN».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 25,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Подсказка поля VIN"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "vin_placeholder",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "submit_label",
+      "type": "string",
+      "meta": {
+        "collection": "shop_modal_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "submit_label",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Поле «Текст кнопки отправки».",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 26,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Текст кнопки отправки"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "submit_label",
+        "table": "shop_modal_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
       "collection": "signup_modal_settings",
       "field": "id",
       "type": "integer",
@@ -19283,7 +19775,7 @@
     {
       "collection": "signup_modal_settings",
       "field": "image_source",
-      "type": "string",
+      "type": "uuid",
       "meta": {
         "collection": "signup_modal_settings",
         "conditions": null,
@@ -19296,7 +19788,7 @@
         "note": "Поле «Изображение».",
         "options": null,
         "readonly": false,
-        "required": true,
+        "required": false,
         "searchable": true,
         "sort": 22,
         "special": null,
@@ -19313,20 +19805,20 @@
       "schema": {
         "name": "image_source",
         "table": "signup_modal_settings",
-        "data_type": "character varying",
+        "data_type": "uuid",
         "default_value": null,
-        "max_length": 255,
+        "max_length": null,
         "numeric_precision": null,
         "numeric_scale": null,
-        "is_nullable": false,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -26521,6 +27013,631 @@
         "constraint_name": "route_page_overrides_model_id_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "articles",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "articles",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "articles",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "articles_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "brands",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "brands",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "brands",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "brands_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "cases",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "cases",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "cases",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "cases_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "footer_settings",
+      "field": "contact_button_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "footer_settings",
+        "many_field": "contact_button_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "footer_settings",
+        "column": "contact_button_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "footer_settings_contact_button_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "footer_settings",
+      "field": "contact_email_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "footer_settings",
+        "many_field": "contact_email_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "footer_settings",
+        "column": "contact_email_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "footer_settings_contact_email_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "footer_settings",
+      "field": "contact_phone_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "footer_settings",
+        "many_field": "contact_phone_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "footer_settings",
+        "column": "contact_phone_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "footer_settings_contact_phone_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "footer_settings",
+      "field": "contact_time_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "footer_settings",
+        "many_field": "contact_time_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "footer_settings",
+        "column": "contact_time_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "footer_settings_contact_time_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "breadcrumbs_background_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "breadcrumbs_background_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "breadcrumbs_background_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_breadcrumbs_background_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "location_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "location_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "location_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_location_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "logo_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "logo_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "logo_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_logo_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "logo_source_mobile",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "logo_source_mobile",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "logo_source_mobile",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_logo_source_mobile_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "menu_mobile_logo_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "menu_mobile_logo_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "menu_mobile_logo_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_menu_mobile_logo_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "phone_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "phone_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "phone_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_phone_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "search_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "search_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "search_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_search_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "header_settings",
+      "field": "time_icon_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "header_settings",
+        "many_field": "time_icon_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "header_settings",
+        "column": "time_icon_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "header_settings_time_icon_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "heroes",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "heroes",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "heroes",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "heroes_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "models",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "models",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "models",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "models_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "perks",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "perks",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "perks",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "perks_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "services",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "services",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "services",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "services_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "signup_modal_settings",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "signup_modal_settings",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "signup_modal_settings",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "signup_modal_settings_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "transmissions",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "transmissions",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "transmissions",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "transmissions_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "why_settings",
+      "field": "diagnostic_image",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "why_settings",
+        "many_field": "diagnostic_image",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "why_settings",
+        "column": "diagnostic_image",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "why_settings_diagnostic_image_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "why_settings",
+      "field": "guarantee_image",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "why_settings",
+        "many_field": "guarantee_image",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "why_settings",
+        "column": "guarantee_image",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "why_settings_guarantee_image_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "why_settings",
+      "field": "tow_image",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "why_settings",
+        "many_field": "tow_image",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "why_settings",
+        "column": "tow_image",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "why_settings_tow_image_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "shop_modal_settings",
+      "field": "user_updated",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "shop_modal_settings",
+        "many_field": "user_updated",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "shop_modal_settings",
+        "column": "user_updated",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "shop_modal_settings_user_updated_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
       }
     }
   ]
