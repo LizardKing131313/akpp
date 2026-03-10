@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { computed } from 'vue'
 
-const pageTitle = computed<string>(() => 'Определить АКПП')
+import { useSimplePagePresentation } from '~/composables/useSimplePagePresentation'
 
-usePageEntityBreadcrumbs({
+const pageTitle = computed<string>(() => PAGE_LABELS.determineTransmission)
+
+useSimplePagePresentation({
   title: pageTitle,
+  description: pageTitle,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>

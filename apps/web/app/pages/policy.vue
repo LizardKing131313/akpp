@@ -1,26 +1,18 @@
 <script setup lang="ts">
+import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { computed } from 'vue'
 
 const { data: policyData } = await usePolicySettings()
 
 const policyTitle = computed<string>(() => {
-  return policyData.value?.title ?? 'Политика конфиденциальности'
+  return policyData.value?.title ?? PAGE_LABELS.policy
 })
 
 const policyArticle = computed<string>(() => {
   return policyData.value?.article ?? ''
 })
-
-usePageEntityBreadcrumbs({
-  title: policyTitle,
-  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
-})
 </script>
 
 <template>
-  <div class="space-y-6">
-    <CenteredTitle>{{ policyTitle }}</CenteredTitle>
-
-    <div class="text-brand-grey prose prose-sm max-w-none" v-html="policyArticle" />
-  </div>
+  <SimpleContentPage :title="policyTitle" :content="policyArticle" />
 </template>

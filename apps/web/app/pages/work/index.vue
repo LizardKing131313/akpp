@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { ImageCardItem } from '#shared/types/entity'
 
+import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { computed } from 'vue'
+
+import { useSimplePagePresentation } from '~/composables/useSimplePagePresentation'
 
 const { data: casesData } = await useCases()
 
@@ -18,10 +21,11 @@ const caseCards = computed<ImageCardItem[]>(() => {
   }))
 })
 
-const pageTitle = computed<string>(() => 'Наши работы')
+const pageTitle = computed<string>(() => PAGE_LABELS.cases)
 
-usePageEntityBreadcrumbs({
+useSimplePagePresentation({
   title: pageTitle,
+  description: pageTitle,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>

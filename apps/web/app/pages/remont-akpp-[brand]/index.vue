@@ -5,6 +5,7 @@ import type { RouteLandingItem } from '#shared/types/route-landing'
 import { computed } from 'vue'
 
 import { useResolvedRouteLanding, useRouteLandings } from '~/composables/useRepoApi'
+import { useRouteLandingPagePresentation } from '~/composables/useRouteLandingPagePresentation'
 
 const route = useRoute()
 const activeCity = useActiveCity()
@@ -46,17 +47,9 @@ const modelSliderItems = computed<ModelItem[]>(() => {
     }))
 })
 
-const pageTitle = computed<string>(() => landingData.value?.resolved_h1 ?? '')
-const pageContent = computed<string>(() => landingData.value?.resolved_content ?? '')
-
-usePageEntityBreadcrumbs({
-  title: pageTitle,
+const { pageContent } = useRouteLandingPagePresentation({
+  landing: landingData,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }, { name: 'Ремонт АКПП' }]),
-})
-
-useSeoMeta({
-  title: () => landingData.value?.resolved_seo_title ?? pageTitle.value,
-  description: () => landingData.value?.resolved_seo_description ?? pageContent.value,
 })
 </script>
 

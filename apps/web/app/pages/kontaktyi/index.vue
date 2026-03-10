@@ -3,6 +3,10 @@ import type { CityItem } from '#shared/types/city'
 import type { YandexMapPoint } from '#shared/types/entity'
 import type { LocationItem } from '#shared/types/location'
 
+import { PAGE_LABELS } from '#shared/constants/page-labels'
+
+import { useSimplePagePresentation } from '~/composables/useSimplePagePresentation'
+
 const { data: citiesData } = await useCities()
 const { data: allLocationsData } = await useLocations()
 
@@ -90,10 +94,11 @@ const goBack = (): void => {
   selectedLocationId.value = null
 }
 
-const pageTitle = computed<string>(() => 'Контакты')
+const pageTitle = computed<string>(() => PAGE_LABELS.contacts)
 
-usePageEntityBreadcrumbs({
+useSimplePagePresentation({
   title: pageTitle,
+  description: pageTitle,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 import { useResolvedRouteLanding } from '~/composables/useRepoApi'
+import { useRouteLandingPagePresentation } from '~/composables/useRouteLandingPagePresentation'
 
 const route = useRoute()
 const activeCity = useActiveCity()
@@ -29,11 +30,8 @@ if (!landingData.value) {
   })
 }
 
-const pageTitle = computed<string>(() => landingData.value?.resolved_h1 ?? '')
-const pageContent = computed<string>(() => landingData.value?.resolved_content ?? '')
-
-usePageEntityBreadcrumbs({
-  title: pageTitle,
+const { pageContent } = useRouteLandingPagePresentation({
+  landing: landingData,
   baseItems: computed(() => {
     const items = [
       { name: 'Главная', slug: '/' },
@@ -51,11 +49,6 @@ usePageEntityBreadcrumbs({
 
     return items
   }),
-})
-
-useSeoMeta({
-  title: () => landingData.value?.resolved_seo_title ?? pageTitle.value,
-  description: () => landingData.value?.resolved_seo_description ?? pageContent.value,
 })
 </script>
 

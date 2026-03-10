@@ -28,11 +28,7 @@ const select = (): void => {
 
 <template>
   <div class="px-4">
-    <button
-      v-if="hasChildren"
-      :class="buttonClass"
-      type="button"
-      @click="navigate">
+    <button v-if="hasChildren" :class="buttonClass" type="button" @click="navigate">
       <span>{{ entry.name }}</span>
       <Arrow direction="down" />
     </button>
@@ -45,11 +41,7 @@ const select = (): void => {
       <span>{{ entry.name }}</span>
     </NuxtLink>
 
-    <button
-      v-else
-      :class="buttonClass"
-      type="button"
-      @click="select">
+    <button v-else :class="buttonClass" type="button" @click="select">
       <span>{{ entry.name }}</span>
     </button>
   </div>

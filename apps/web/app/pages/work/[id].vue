@@ -1,17 +1,21 @@
 <script setup lang="ts">
+import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { computed } from 'vue'
+
+import { useSimplePagePresentation } from '~/composables/useSimplePagePresentation'
 
 const route = useRoute()
 const caseSlug = computed<string>(() => String(route.params.id ?? '').trim())
 
 const { data: caseData } = await useCaseBySlug(caseSlug)
-const pageTitle = computed<string>(() => caseData.value?.name ?? 'Работа')
+const pageTitle = computed<string>(() => caseData.value?.name ?? PAGE_LABELS.case)
 
-usePageEntityBreadcrumbs({
+useSimplePagePresentation({
   title: pageTitle,
+  description: pageTitle,
   baseItems: computed(() => [
     { name: 'Главная', slug: '/' },
-    { name: 'Наши работы', slug: '/work' },
+    { name: PAGE_LABELS.cases, slug: '/work' },
   ]),
 })
 </script>
