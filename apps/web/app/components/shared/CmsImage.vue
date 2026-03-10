@@ -12,41 +12,22 @@ const props = defineProps<{
 }>()
 
 const attrs = useAttrs()
+const image = useImage()
 
-const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-
-const isDirectusFileId = computed<boolean>(() => UUID_PATTERN.test(props.src.trim()))
-
-const { data: resolvedMimeType } = await useAsyncData<string | null>(
-  () => `file-mime:${props.src}`,
-  async () => {
-    if (props.mimeType || !isDirectusFileId.value) {
-      return null
-    }
-
-    try {
-      const response = await $fetch<{ mimeType: string | null }>(
-        `/api/files/mime/${encodeURIComponent(props.src)}`
-      )
-      return response.mimeType
-    } catch {
-      return null
-    }
-  },
-  {
-    watch: [() => props.src, () => props.mimeType],
-  }
+const mimeMap = await useCmsImageMimeMap(() => [props.src])
+const resolvedImage = computed(() =>
+  resolveCmsImageView(props.src, {
+    mimeType: props.mimeType ?? mimeMap.value[props.src.trim()] ?? null,
+    image,
+  })
 )
-
-const effectiveMimeType = computed<string | null>(
-  () => props.mimeType ?? resolvedMimeType.value ?? null
-)
-const isGifBySource = computed<boolean>(() => /\.gif($|[?#])/i.test(props.src))
-const isGifByMimeType = computed<boolean>(() => effectiveMimeType.value === 'image/gif')
-const shouldBypassIpx = computed<boolean>(() => isGifBySource.value || isGifByMimeType.value)
 </script>
 
 <template>
-  <img v-if="shouldBypassIpx" :src="src" :alt="alt ?? ''" v-bind="attrs" />
-  <NuxtImg v-else :src="src" :alt="alt ?? ''" v-bind="attrs" />
+  <img
+    v-if="resolvedImage.shouldBypassIpx"
+    :src="resolvedImage.directSrc"
+    :alt="alt ?? ''"
+    v-bind="attrs" />
+  <NuxtImg v-else :src="resolvedImage.ipxSrc" :alt="alt ?? ''" v-bind="attrs" />
 </template>

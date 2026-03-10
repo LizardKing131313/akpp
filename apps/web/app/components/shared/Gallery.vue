@@ -6,9 +6,21 @@ const props = defineProps<{ images: string[] }>()
 
 const activeIndex = ref<number>(0)
 const visible = ref<boolean>(false)
+const image = useImage()
+const mimeMap = await useCmsImageMimeMap(() => props.images)
+
+const resolvedImages = computed<string[]>(() =>
+  props.images.map(
+    (src) =>
+      resolveCmsImageView(src, {
+        mimeType: mimeMap.value[src.trim()] ?? null,
+        image,
+      }).resolvedSrc
+  )
+)
 
 const activeSrc = computed<string | null>(() => {
-  const value = props.images[activeIndex.value]
+  const value = resolvedImages.value[activeIndex.value]
   return value ?? null
 })
 
@@ -49,7 +61,7 @@ const closeLightbox = (): void => {
 
     <VueEasyLightbox
       :visible="visible"
-      :imgs="images"
+      :imgs="resolvedImages"
       :index="activeIndex"
       teleport="body"
       @hide="closeLightbox" />
