@@ -29,15 +29,11 @@ const settings = computed<CaseSettings>(() => settingsData.value ?? ({} as CaseS
     </div>
 
     <div class="hidden space-y-8 lg:block">
-      <CaseExampleCard
-        v-for="caseItem in resolvedCases"
-        :key="caseItem.id"
-        :caseItem
-        variant="list" />
+      <CaseExampleCard v-for="caseItem in cases" :key="caseItem.id" :caseItem variant="list" />
     </div>
 
     <div>
-      <NuxtLink :to="props.href" class="group w-full transition-colors lg:hidden">
+      <NuxtLink :to="href" class="group w-full transition-colors lg:hidden">
         <div
           :class="
             cn(`
@@ -50,7 +46,7 @@ const settings = computed<CaseSettings>(() => settingsData.value ?? ({} as CaseS
         </div>
       </NuxtLink>
 
-      <GoToLink :href="props.href" class="hover:text-brand-dark! hidden lg:block">
+      <GoToLink :href="href" class="hover:text-brand-dark! hidden lg:block">
         {{ settings.show_all_link }}
       </GoToLink>
     </div>
