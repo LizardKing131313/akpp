@@ -3,14 +3,15 @@ import type { ImageCardItem } from '#shared/types/entity'
 
 import { normalizeAppPath } from '#shared/lib/route'
 
-const props = withDefaults(defineProps<{ label?: string } & ImageCardItem>(), {
+const props = withDefaults(defineProps<{ label?: string; baseHref?: string } & ImageCardItem>(), {
   label: 'Подробнее',
+  baseHref: '',
 })
 </script>
 
 <template>
   <NuxtLink
-    :to="normalizeAppPath(slug)"
+    :to="normalizeAppPath(`${baseHref}/${slug}`)"
     class="group bg-brand-white flex h-full flex-col overflow-hidden shadow-xl">
     <div class="overflow-hidden">
       <CmsImage

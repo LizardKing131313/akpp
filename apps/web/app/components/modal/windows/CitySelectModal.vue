@@ -46,6 +46,10 @@ const resolveBaseDomain = (hostname: string): string => {
     return 'localhost'
   }
 
+  if (hostParts.length >= 2 && hostParts[hostParts.length - 1] === 'localhost') {
+    return 'localhost'
+  }
+
   if (hostParts.length >= 3 && hostParts[0] !== 'www') {
     return hostParts.slice(1).join('.')
   }

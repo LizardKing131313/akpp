@@ -9,5 +9,5 @@ usePageEntityBreadcrumbs({
 </script>
 
 <template>
-  <ImageCardGrid :items="articlesData ?? []" />
+  <ImageCardGrid :items="articlesData ?? []" baseHref="/articles" />
 </template>

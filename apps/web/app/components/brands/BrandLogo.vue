@@ -7,6 +7,7 @@ defineProps<{ brand: BrandItem }>()
 <template>
   <div class="flex items-center gap-2">
     <CmsImage
+      v-if="brand && brand.image_source"
       :src="brand.image_source"
       :alt="brand.image_alt"
       sizes="28px"

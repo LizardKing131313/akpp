@@ -3,6 +3,29 @@ const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3
 const normalizeCmsImageSrc = (src: string): string => src.trim()
 const directusAssetPathPattern = /^\/assets\/([0-9a-f-]{36})(?:\/.*)?$/i
 
+const buildAbsoluteAppUrl = (path: string): string => {
+  if (import.meta.client && window.location.origin.length > 0) {
+    return new URL(path, window.location.origin).toString()
+  }
+
+  const requestUrl = useRequestURL()
+
+  if (requestUrl.origin !== 'null' && requestUrl.host.length > 0) {
+    return new URL(path, requestUrl.origin).toString()
+  }
+
+  const runtimeConfig = useRuntimeConfig()
+  const siteUrl = String(runtimeConfig.public.siteUrl ?? '')
+    .trim()
+    .replace(/\/+$/, '')
+
+  if (siteUrl.length > 0) {
+    return new URL(path, `${siteUrl}/`).toString()
+  }
+
+  return path
+}
+
 const extractDirectusFileId = (src: string): string | null => {
   const normalizedSrc = normalizeCmsImageSrc(src)
 
@@ -55,13 +78,16 @@ export const resolveCmsImageView = (
   }
 ): {
   directSrc: string
+  nuxtSrc: string
   ipxSrc: string
 } => {
   const directSrc = resolveCmsImageUrl(src)
-  const ipxSrc = options?.image ? options.image(directSrc, { quality: 75 }) : directSrc
+  const nuxtSrc = isCmsImageDirectusFileId(src) ? buildAbsoluteAppUrl(directSrc) : directSrc
+  const ipxSrc = options?.image ? options.image(nuxtSrc, { quality: 75 }) : nuxtSrc
 
   return {
     directSrc,
+    nuxtSrc,
     ipxSrc,
   }
 }

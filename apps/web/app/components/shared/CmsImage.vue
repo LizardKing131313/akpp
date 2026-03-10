@@ -15,5 +15,5 @@ const resolvedImage = computed(() => resolveCmsImageView(props.src))
 </script>
 
 <template>
-  <NuxtImg :src="resolvedImage.directSrc" :alt="alt ?? ''" quality="75" v-bind="attrs" />
+  <NuxtImg :src="resolvedImage.nuxtSrc" :alt="alt ?? ''" quality="75" v-bind="attrs" />
 </template>
