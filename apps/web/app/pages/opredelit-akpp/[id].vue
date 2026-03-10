@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const routePageSettings = useRoutePageSettingsUi()
-
-const pageTitle = computed<string>(() => routePageSettings.value.breadcrumb_determine_label)
+const pageTitle = computed<string>(() => 'Определить АКПП')
 
 usePageEntityBreadcrumbs({
   title: pageTitle,
-  baseItems: computed(() => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }]),
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>
 

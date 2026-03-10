@@ -1,4 +1,5 @@
 import { createDirectusClient } from '#server/services/directus'
+import { RouteLandingsRepository } from '#server/services/repo/entity/route_landings.repo'
 import { xmlDoc, xmlRawTag, xmlTag } from '#server/utils/xml'
 
 type SitemapPageItem = {
@@ -9,28 +10,6 @@ type SitemapPageItem = {
 type SitemapEntityItem = {
   slug: string | null
   date_updated?: string | null
-}
-
-type SitemapModelItem = {
-  slug: string | null
-  date_updated?: string | null
-  brand_id: string | number | null
-}
-
-type SitemapBrandItem = {
-  id: string | number
-  slug: string | null
-  date_updated?: string | null
-}
-
-type SitemapServiceBrandItem = {
-  date_updated?: string | null
-  service_id?: {
-    slug?: string | null
-  } | null
-  brand_id?: {
-    slug?: string | null
-  } | null
 }
 
 type SitemapUrlItem = {
@@ -136,74 +115,15 @@ const addCaseRoutes = (
   }
 }
 
-const buildBrandsById = (brands: readonly SitemapBrandItem[]): Map<string, SitemapBrandItem> => {
-  const brandsById = new Map<string, SitemapBrandItem>()
+const addRouteLandingRoutes = async (paths: Map<string, string | null>): Promise<void> => {
+  const routeLandings = await new RouteLandingsRepository().listPublished()
 
-  for (const brand of brands) {
-    brandsById.set(String(brand.id), brand)
-  }
-
-  return brandsById
-}
-
-const addBrandRoutes = (
-  paths: Map<string, string | null>,
-  brands: readonly SitemapBrandItem[]
-): void => {
-  for (const brand of brands) {
-    const brandSlug = normalizeSlug(brand.slug)
-    if (brandSlug.length === 0) {
+  for (const landing of routeLandings) {
+    if (landing.path === '/') {
       continue
     }
 
-    addUrlItem(paths, `/remont-akpp-${brandSlug}`, brand.date_updated)
-    addUrlItem(paths, `/transmission/${brandSlug}`, brand.date_updated)
-  }
-}
-
-const addModelRoutes = (
-  paths: Map<string, string | null>,
-  models: readonly SitemapModelItem[],
-  brandsById: ReadonlyMap<string, SitemapBrandItem>
-): void => {
-  for (const model of models) {
-    const modelSlug = normalizeSlug(model.slug)
-    if (modelSlug.length === 0 || model.brand_id === null) {
-      continue
-    }
-
-    const brand = brandsById.get(String(model.brand_id))
-    const brandSlug = normalizeSlug(brand?.slug)
-    if (brandSlug.length === 0) {
-      continue
-    }
-
-    addUrlItem(paths, `/remont-akpp-${brandSlug}/${modelSlug}`, model.date_updated)
-  }
-}
-
-const addServiceRoutes = (
-  paths: Map<string, string | null>,
-  services: readonly SitemapEntityItem[],
-  serviceBrands: readonly SitemapServiceBrandItem[]
-): void => {
-  for (const service of services) {
-    const serviceSlug = normalizeSlug(service.slug)
-    if (serviceSlug.length === 0) {
-      continue
-    }
-
-    addUrlItem(paths, `/uslugi/${serviceSlug}`, service.date_updated)
-  }
-
-  for (const serviceBrand of serviceBrands) {
-    const serviceSlug = normalizeSlug(serviceBrand.service_id?.slug)
-    const brandSlug = normalizeSlug(serviceBrand.brand_id?.slug)
-    if (serviceSlug.length === 0 || brandSlug.length === 0) {
-      continue
-    }
-
-    addUrlItem(paths, `/uslugi/${serviceSlug}/${brandSlug}`, serviceBrand.date_updated)
+    addUrlItem(paths, landing.path, landing.date_updated)
   }
 }
 
@@ -237,7 +157,7 @@ export const buildSitemapXml = async (): Promise<string> => {
     [`filter[${statusField}][_eq]`]: publishedValue,
   }
 
-  const [pages, articles, cases, brands, models, services, serviceBrands] = await Promise.all([
+  const [pages, articles, cases] = await Promise.all([
     directusClient.getItems<SitemapPageItem>(pagesCollection, pagesQuery),
     directusClient.getItems<SitemapEntityItem>('articles', {
       fields: SLUG_AND_UPDATED_FIELDS,
@@ -249,41 +169,15 @@ export const buildSitemapXml = async (): Promise<string> => {
       limit: '5000',
       [PUBLISHED_FILTER_KEY]: publishedValue,
     }),
-    directusClient.getItems<SitemapBrandItem>('brands', {
-      fields: 'id,slug,date_updated',
-      limit: '5000',
-      [PUBLISHED_FILTER_KEY]: publishedValue,
-    }),
-    directusClient.getItems<SitemapModelItem>('models', {
-      fields: 'slug,brand_id,date_updated',
-      limit: '10000',
-      [PUBLISHED_FILTER_KEY]: publishedValue,
-      'filter[brand_id][_nnull]': true,
-    }),
-    directusClient.getItems<SitemapEntityItem>('services', {
-      fields: SLUG_AND_UPDATED_FIELDS,
-      limit: '5000',
-      [PUBLISHED_FILTER_KEY]: publishedValue,
-    }),
-    directusClient.getItems<SitemapServiceBrandItem>('service_brands', {
-      fields: 'service_id.slug,brand_id.slug,date_updated',
-      limit: '10000',
-      [PUBLISHED_FILTER_KEY]: publishedValue,
-      'filter[service_id][_nnull]': true,
-      'filter[brand_id][_nnull]': true,
-    }),
   ])
 
   const paths = new Map<string, string | null>()
-  const brandsById = buildBrandsById(brands)
 
   addStaticRoutes(paths)
   addPageRoutes(paths, pages)
   addArticleRoutes(paths, articles)
   addCaseRoutes(paths, cases)
-  addBrandRoutes(paths, brands)
-  addModelRoutes(paths, models, brandsById)
-  addServiceRoutes(paths, services, serviceBrands)
+  await addRouteLandingRoutes(paths)
 
   const urlItems: SitemapUrlItem[] = [...paths.entries()]
     .map(([path, lastmod]) => ({ path, lastmod }))

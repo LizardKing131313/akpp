@@ -1,91 +1,69 @@
 <script setup lang="ts">
 import type { ModelItem } from '#shared/types/model'
+import type { RouteLandingItem } from '#shared/types/route-landing'
 
-import { applyTemplate } from '#shared/lib/template'
 import { computed } from 'vue'
 
-const route = useRoute()
-const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())
-const routePageSettings = useRoutePageSettingsUi()
+import { useResolvedRouteLanding, useRouteLandings } from '~/composables/useRepoApi'
 
-const { data: brandData, error: brandError } = await useBrandBySlug(brandSlug)
-if (brandError.value) {
-  throw brandError.value
+const route = useRoute()
+const activeCity = useActiveCity()
+const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())
+
+const { data: landingData, error: landingError } = await useResolvedRouteLanding('brand', () => ({
+  brand_slug: brandSlug.value,
+  city_id: activeCity.value?.id,
+}))
+
+if (landingError.value) {
+  throw landingError.value
 }
 
-if (!brandData.value) {
+if (!landingData.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Brand not found',
+    statusMessage: 'Brand landing not found',
   })
 }
 
-const { data: modelsData } = await useModels()
+const { data: brandModelLandingsData } = await useRouteLandings(() => ({
+  page_type: 'brand_model',
+  brand_slug: brandSlug.value,
+}))
 
 const modelSliderItems = computed<ModelItem[]>(() => {
-  const brandId = brandData.value?.id
-  const brandRouteSlug = brandSlug.value
-  const items = modelsData.value ?? []
-
-  if (!brandId || brandRouteSlug.length === 0) {
-    return []
-  }
+  const items = brandModelLandingsData.value ?? []
 
   return items
-    .filter((model) => model.brand_id === brandId)
-    .map((model) => ({
-      ...model,
-      slug: `/remont-akpp-${brandRouteSlug}/${model.slug}`,
+    .filter((landing: RouteLandingItem) => landing.model !== null)
+    .map((landing: RouteLandingItem) => ({
+      id: landing.model?.id ?? '',
+      name: landing.model?.name ?? '',
+      slug: landing.path,
+      image_source: landing.model?.image_source ?? '',
+      brand_id: landing.brand?.id ?? '',
+      ...(landing.model?.image_alt ? { image_alt: landing.model.image_alt } : {}),
     }))
 })
 
-const { data: routePageOverrideData } = await useRoutePageOverride('repair_brand', () => ({
-  brandId: brandData.value?.id,
-}))
-
-const templateValues = computed<Record<string, string>>(() => ({
-  brand: brandData.value?.name ?? '',
-  model: '',
-  service: '',
-}))
-
-const pageTitle = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.h1 ??
-    applyTemplate(routePageSettings.value.repair_brand_h1_template, templateValues.value)
-  )
-})
-
-const pageContent = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.content ??
-    applyTemplate(routePageSettings.value.repair_brand_content_template, templateValues.value)
-  )
-})
+const pageTitle = computed<string>(() => landingData.value?.resolved_h1 ?? '')
+const pageContent = computed<string>(() => landingData.value?.resolved_content ?? '')
 
 usePageEntityBreadcrumbs({
   title: pageTitle,
-  baseItems: computed(() => [
-    { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
-    { name: routePageSettings.value.breadcrumb_repair_label },
-  ]),
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }, { name: 'Ремонт АКПП' }]),
 })
 
 useSeoMeta({
-  title: () =>
-    routePageOverrideData.value?.seo_title ??
-    applyTemplate(routePageSettings.value.repair_brand_seo_title_template, templateValues.value),
-  description: () =>
-    routePageOverrideData.value?.seo_description ??
-    applyTemplate(
-      routePageSettings.value.repair_brand_seo_description_template,
-      templateValues.value
-    ),
+  title: () => landingData.value?.resolved_seo_title ?? pageTitle.value,
+  description: () => landingData.value?.resolved_seo_description ?? pageContent.value,
 })
 </script>
 
 <template>
-  <Why />
+  <Why
+    :image_source="landingData?.brand?.image_source ?? ''"
+    :image_alt="landingData?.brand?.image_alt ?? landingData?.brand?.name ?? ''" />
   <ModelSlider :items="modelSliderItems" />
   <RepairQuizBlock />
   <ServiceAndCaseSection />

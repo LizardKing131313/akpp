@@ -1,89 +1,65 @@
 <script setup lang="ts">
-import { applyTemplate } from '#shared/lib/template'
 import { computed } from 'vue'
 
+import { useResolvedRouteLanding } from '~/composables/useRepoApi'
+
 const route = useRoute()
-const routePageSettings = useRoutePageSettingsUi()
+const activeCity = useActiveCity()
 
 const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())
 const modelSlug = computed<string>(() => String(route.params.model ?? '').trim())
 
-const { data: brandData, error: brandError } = await useBrandBySlug(brandSlug)
-if (brandError.value) {
-  throw brandError.value
+const { data: landingData, error: landingError } = await useResolvedRouteLanding(
+  'brand_model',
+  () => ({
+    brand_slug: brandSlug.value,
+    model_slug: modelSlug.value,
+    city_id: activeCity.value?.id,
+  })
+)
+
+if (landingError.value) {
+  throw landingError.value
 }
 
-const { data: modelData, error: modelError } = await useModelBySlug(modelSlug)
-if (modelError.value) {
-  throw modelError.value
-}
-
-if (!brandData.value || !modelData.value) {
+if (!landingData.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Page not found',
+    statusMessage: 'Brand model landing not found',
   })
 }
 
-if (modelData.value.brand_id !== brandData.value.id) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Model does not belong to brand',
-  })
-}
-
-const { data: routePageOverrideData } = await useRoutePageOverride('repair_model', () => ({
-  brandId: brandData.value?.id,
-  modelId: modelData.value?.id,
-}))
-
-const templateValues = computed<Record<string, string>>(() => ({
-  brand: brandData.value?.name ?? '',
-  model: modelData.value?.name ?? '',
-  service: '',
-}))
-
-const pageTitle = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.h1 ??
-    applyTemplate(routePageSettings.value.repair_model_h1_template, templateValues.value)
-  )
-})
-
-const pageContent = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.content ??
-    applyTemplate(routePageSettings.value.repair_model_content_template, templateValues.value)
-  )
-})
+const pageTitle = computed<string>(() => landingData.value?.resolved_h1 ?? '')
+const pageContent = computed<string>(() => landingData.value?.resolved_content ?? '')
 
 usePageEntityBreadcrumbs({
   title: pageTitle,
-  baseItems: computed(() => [
-    { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
-    { name: routePageSettings.value.breadcrumb_repair_label },
-    {
-      name: brandData.value?.name ?? '',
-      slug: `/remont-akpp-${brandSlug.value}`,
-    },
-  ]),
+  baseItems: computed(() => {
+    const items = [{ name: 'Главная', slug: '/' }, { name: 'Ремонт АКПП' }]
+    const brandName = landingData.value?.brand?.name ?? ''
+    const brandSlugValue = landingData.value?.brand?.slug ?? ''
+
+    if (brandName.length > 0 && brandSlugValue.length > 0) {
+      items.push({
+        name: brandName,
+        slug: `/remont-akpp-${brandSlugValue}`,
+      })
+    }
+
+    return items
+  }),
 })
 
 useSeoMeta({
-  title: () =>
-    routePageOverrideData.value?.seo_title ??
-    applyTemplate(routePageSettings.value.repair_model_seo_title_template, templateValues.value),
-  description: () =>
-    routePageOverrideData.value?.seo_description ??
-    applyTemplate(
-      routePageSettings.value.repair_model_seo_description_template,
-      templateValues.value
-    ),
+  title: () => landingData.value?.resolved_seo_title ?? pageTitle.value,
+  description: () => landingData.value?.resolved_seo_description ?? pageContent.value,
 })
 </script>
 
 <template>
-  <Why />
+  <Why
+    :image_source="landingData?.model?.image_source ?? ''"
+    :image_alt="landingData?.model?.image_alt ?? ''" />
   <RepairQuizBlock />
   <ServiceAndCaseSection />
   <Article>

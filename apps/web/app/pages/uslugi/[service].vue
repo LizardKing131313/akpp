@@ -1,85 +1,72 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
+import type { RouteLandingItem } from '#shared/types/route-landing'
 
-import { applyTemplate } from '#shared/lib/template'
 import { computed } from 'vue'
 
-const route = useRoute()
-const serviceSlug = computed<string>(() => String(route.params.service ?? '').trim())
-const routePageSettings = useRoutePageSettingsUi()
+import { useResolvedRouteLanding, useRouteLandings } from '~/composables/useRepoApi'
 
-const { data: serviceData, error: serviceError } = await useServiceBySlug(serviceSlug)
-if (serviceError.value) {
-  throw serviceError.value
+const route = useRoute()
+const activeCity = useActiveCity()
+const serviceSlug = computed<string>(() => String(route.params.service ?? '').trim())
+
+const { data: landingData, error: landingError } = await useResolvedRouteLanding('service', () => ({
+  service_slug: serviceSlug.value,
+  city_id: activeCity.value?.id,
+}))
+
+if (landingError.value) {
+  throw landingError.value
 }
 
-if (!serviceData.value) {
+if (!landingData.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Service not found',
+    statusMessage: 'Service landing not found',
   })
 }
 
-const { data: brandsData } = await useBrands()
+const { data: serviceBrandLandingsData } = await useRouteLandings(() => ({
+  page_type: 'service_brand',
+  service_slug: serviceSlug.value,
+}))
 
 const brandsForService = computed<BrandItem[]>(() => {
-  const currentServiceSlug = serviceSlug.value
-  const items = brandsData.value ?? []
+  const items = serviceBrandLandingsData.value ?? []
 
-  if (currentServiceSlug.length === 0) {
-    return []
-  }
-
-  return items.map((brand) => ({
-    ...brand,
-    slug: `/uslugi/${currentServiceSlug}/${brand.slug}`,
-  }))
+  return items
+    .filter((landing: RouteLandingItem) => landing.brand !== null)
+    .map((landing: RouteLandingItem) => ({
+      id: landing.brand?.id ?? '',
+      name: landing.brand?.name ?? '',
+      slug: landing.path,
+      image_source: landing.brand?.image_source ?? '',
+      ...(landing.brand?.image_alt ? { image_alt: landing.brand.image_alt } : {}),
+    }))
 })
 
-const { data: routePageOverrideData } = await useRoutePageOverride('service', () => ({
-  serviceId: serviceData.value?.id,
-}))
-
-const templateValues = computed<Record<string, string>>(() => ({
-  brand: '',
-  model: '',
-  service: serviceData.value?.name ?? '',
-}))
-
-const pageTitle = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.h1 ??
-    applyTemplate(routePageSettings.value.service_h1_template, templateValues.value)
-  )
-})
-
-const pageContent = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.content ??
-    applyTemplate(routePageSettings.value.service_content_template, templateValues.value)
-  )
-})
+const pageTitle = computed<string>(() => landingData.value?.resolved_h1 ?? '')
+const pageContent = computed<string>(() => landingData.value?.resolved_content ?? '')
 
 usePageEntityBreadcrumbs({
   title: pageTitle,
   baseItems: computed(() => [
-    { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
-    { name: routePageSettings.value.breadcrumb_services_label },
+    { name: 'Главная', slug: '/' },
+    { name: 'Услуги', slug: '/uslugi' },
   ]),
 })
 
 useSeoMeta({
-  title: () =>
-    routePageOverrideData.value?.seo_title ??
-    applyTemplate(routePageSettings.value.service_seo_title_template, templateValues.value),
-  description: () =>
-    routePageOverrideData.value?.seo_description ??
-    applyTemplate(routePageSettings.value.service_seo_description_template, templateValues.value),
+  title: () => landingData.value?.resolved_seo_title ?? pageTitle.value,
+  description: () => landingData.value?.resolved_seo_description ?? pageContent.value,
 })
 </script>
 
 <template>
   <BrandsGrid :brands="brandsForService" />
+  <Why
+    :image_source="landingData?.service?.image_source ?? ''"
+    :image_alt="landingData?.service?.image_alt ?? landingData?.service?.name ?? ''" />
   <RepairQuizBlock />
   <ServiceAndCaseSection />
   <Article>

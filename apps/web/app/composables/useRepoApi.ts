@@ -16,14 +16,14 @@ import type {
   SignupModalSettings,
 } from '#shared/types/modal'
 import type { ModelItem } from '#shared/types/model'
-import type { ResolvedPageItem } from '#shared/types/page'
 import type { PolicySettings } from '#shared/types/policy'
 import type { QuizProblemItem, QuizSettings, QuizSymptomItem } from '#shared/types/quiz'
 import type {
-  RoutePageOverrideItem,
-  RoutePageOverrideType,
-} from '#shared/types/route-page-override'
-import type { RoutePageSettings } from '#shared/types/route-page-settings'
+  ResolvedRouteLandingItem,
+  RouteLandingItem,
+  RouteLandingListFilters,
+  RouteLandingPageType,
+} from '#shared/types/route-landing'
 import type { ServiceItem, ServicePriceItem } from '#shared/types/service'
 import type { TransmissionItem, TransmissionRangeWithVariants } from '#shared/types/transmission'
 import type { WhySettings } from '#shared/types/why'
@@ -104,10 +104,6 @@ export const useHeaderSettings = () => {
 
 export const usePolicySettings = () => {
   return useStaticApiData<PolicySettings>('policy:settings', '/api/policy')
-}
-
-export const useRoutePageSettings = () => {
-  return useStaticApiData<RoutePageSettings>('route-page:settings', '/api/route_page_settings')
 }
 
 export const useCitySelectModalSettings = () => {
@@ -247,118 +243,104 @@ export const useServiceBySlug = (slugInput: MaybeRefOrGetter<string>) => {
   )
 }
 
-export const usePageBySlugFallback = (slugsInput: MaybeRefOrGetter<readonly string[]>) => {
-  const normalizedSlugs = computed<string[]>(() => {
-    const slugs = toValue(slugsInput)
-
-    return [...slugs].map((slug) => normalizeParamValue(slug)).filter((slug) => slug.length > 0)
-  })
-
-  return useAsyncData<ResolvedPageItem>(
-    () => `pages:resolve:${normalizedSlugs.value.join(',')}`,
-    () => {
-      const slugs = normalizedSlugs.value
-
-      if (slugs.length === 0) {
-        throw createError({
-          statusCode: 400,
-          statusMessage: 'slugs are required',
-        })
-      }
-
-      const encodedSlugs = slugs.map((slug) => encodeURIComponent(slug)).join(',')
-      return fetchFromApi<ResolvedPageItem>(`/api/pages/resolve?slugs=${encodedSlugs}`)
-    },
-    {
-      watch: [normalizedSlugs],
-    }
-  )
-}
-
-export const useRoutePageOverride = (
-  routeTypeInput: MaybeRefOrGetter<RoutePageOverrideType>,
-  idsInput?: MaybeRefOrGetter<{
-    readonly serviceId?: string | undefined
-    readonly brandId?: string | undefined
-    readonly modelId?: string | undefined
-  }>
+export const useRouteLandings = (
+  filtersInput: MaybeRefOrGetter<RouteLandingListFilters | undefined>
 ) => {
-  const normalizedRouteType = computed<RoutePageOverrideType>(() => toValue(routeTypeInput))
-
-  const normalizedIds = computed(() => {
-    const ids = toValue(idsInput)
+  const normalizedFilters = computed<RouteLandingListFilters>(() => {
+    const filters = toValue(filtersInput)
 
     return {
-      serviceId: normalizeParamValue(ids?.serviceId),
-      brandId: normalizeParamValue(ids?.brandId),
-      modelId: normalizeParamValue(ids?.modelId),
+      page_type: filters?.page_type,
+      brand_slug: normalizeParamValue(filters?.brand_slug),
+      model_slug: normalizeParamValue(filters?.model_slug),
+      service_slug: normalizeParamValue(filters?.service_slug),
     }
   })
 
-  return useAsyncData<RoutePageOverrideItem | null>(
+  return useAsyncData<RouteLandingItem[]>(
     () =>
-      `route-page-overrides:${normalizedRouteType.value}:${normalizedIds.value.serviceId}:${normalizedIds.value.brandId}:${normalizedIds.value.modelId}`,
+      `route-landings:list:${normalizedFilters.value.page_type ?? ''}:${normalizedFilters.value.brand_slug ?? ''}:${normalizedFilters.value.model_slug ?? ''}:${normalizedFilters.value.service_slug ?? ''}`,
     () => {
       const searchParams = new URLSearchParams()
-      searchParams.set('routeType', normalizedRouteType.value)
 
-      if (normalizedIds.value.serviceId.length > 0) {
-        searchParams.set('serviceId', normalizedIds.value.serviceId)
+      if (normalizedFilters.value.page_type) {
+        searchParams.set('pageType', normalizedFilters.value.page_type)
       }
 
-      if (normalizedIds.value.brandId.length > 0) {
-        searchParams.set('brandId', normalizedIds.value.brandId)
+      if (normalizedFilters.value.brand_slug && normalizedFilters.value.brand_slug.length > 0) {
+        searchParams.set('brandSlug', normalizedFilters.value.brand_slug)
       }
 
-      if (normalizedIds.value.modelId.length > 0) {
-        searchParams.set('modelId', normalizedIds.value.modelId)
+      if (normalizedFilters.value.model_slug && normalizedFilters.value.model_slug.length > 0) {
+        searchParams.set('modelSlug', normalizedFilters.value.model_slug)
       }
 
-      return fetchFromApi<RoutePageOverrideItem | null>(
-        `/api/route_page_overrides/resolve?${searchParams.toString()}`
-      )
+      if (normalizedFilters.value.service_slug && normalizedFilters.value.service_slug.length > 0) {
+        searchParams.set('serviceSlug', normalizedFilters.value.service_slug)
+      }
+
+      const queryString = searchParams.toString()
+      const path =
+        queryString.length > 0 ? `/api/route_landings?${queryString}` : '/api/route_landings'
+
+      return fetchFromApi<RouteLandingItem[]>(path)
     },
     {
-      watch: [normalizedRouteType, normalizedIds],
+      watch: [normalizedFilters],
     }
   )
 }
 
-export const useServiceBrandExists = (
-  idsInput: MaybeRefOrGetter<{
-    readonly serviceId?: string | undefined
-    readonly brandId?: string | undefined
+export const useResolvedRouteLanding = (
+  pageTypeInput: MaybeRefOrGetter<RouteLandingPageType>,
+  paramsInput: MaybeRefOrGetter<{
+    readonly brand_slug?: string | undefined
+    readonly model_slug?: string | undefined
+    readonly service_slug?: string | undefined
+    readonly city_id?: string | undefined
   }>
 ) => {
-  const normalizedIds = computed(() => {
-    const ids = toValue(idsInput)
+  const normalizedPageType = computed<RouteLandingPageType>(() => toValue(pageTypeInput))
+  const normalizedParams = computed(() => {
+    const params = toValue(paramsInput)
 
     return {
-      serviceId: normalizeParamValue(ids?.serviceId),
-      brandId: normalizeParamValue(ids?.brandId),
+      brand_slug: normalizeParamValue(params?.brand_slug),
+      model_slug: normalizeParamValue(params?.model_slug),
+      service_slug: normalizeParamValue(params?.service_slug),
+      city_id: normalizeParamValue(params?.city_id),
     }
   })
 
-  return useAsyncData<{ exists: boolean }>(
-    () => `service-brands:exists:${normalizedIds.value.serviceId}:${normalizedIds.value.brandId}`,
+  return useAsyncData<ResolvedRouteLandingItem>(
+    () =>
+      `route-landings:resolve:${normalizedPageType.value}:${normalizedParams.value.brand_slug}:${normalizedParams.value.model_slug}:${normalizedParams.value.service_slug}:${normalizedParams.value.city_id}`,
     () => {
-      if (normalizedIds.value.serviceId.length === 0 || normalizedIds.value.brandId.length === 0) {
-        throw createError({
-          statusCode: 400,
-          statusMessage: 'serviceId and brandId are required',
-        })
+      const searchParams = new URLSearchParams()
+      searchParams.set('pageType', normalizedPageType.value)
+
+      if (normalizedParams.value.brand_slug.length > 0) {
+        searchParams.set('brandSlug', normalizedParams.value.brand_slug)
       }
 
-      const searchParams = new URLSearchParams()
-      searchParams.set('serviceId', normalizedIds.value.serviceId)
-      searchParams.set('brandId', normalizedIds.value.brandId)
+      if (normalizedParams.value.model_slug.length > 0) {
+        searchParams.set('modelSlug', normalizedParams.value.model_slug)
+      }
 
-      return fetchFromApi<{ exists: boolean }>(
-        `/api/service_brands/exists?${searchParams.toString()}`
+      if (normalizedParams.value.service_slug.length > 0) {
+        searchParams.set('serviceSlug', normalizedParams.value.service_slug)
+      }
+
+      if (normalizedParams.value.city_id.length > 0) {
+        searchParams.set('cityId', normalizedParams.value.city_id)
+      }
+
+      return fetchFromApi<ResolvedRouteLandingItem>(
+        `/api/route_landings/resolve?${searchParams.toString()}`
       )
     },
     {
-      watch: [normalizedIds],
+      watch: [normalizedPageType, normalizedParams],
     }
   )
 }

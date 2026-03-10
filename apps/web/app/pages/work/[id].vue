@@ -2,16 +2,16 @@
 import { computed } from 'vue'
 
 const route = useRoute()
-const routePageSettings = useRoutePageSettingsUi()
 const caseSlug = computed<string>(() => String(route.params.id ?? '').trim())
 
 const { data: caseData } = await useCaseBySlug(caseSlug)
+const pageTitle = computed<string>(() => caseData.value?.name ?? 'Работа')
 
 usePageEntityBreadcrumbs({
-  title: computed(() => caseData.value?.name ?? routePageSettings.value.breadcrumb_case_label),
+  title: pageTitle,
   baseItems: computed(() => [
-    { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
-    { name: routePageSettings.value.breadcrumb_work_label, slug: '/work' },
+    { name: 'Главная', slug: '/' },
+    { name: 'Наши работы', slug: '/work' },
   ]),
 })
 </script>

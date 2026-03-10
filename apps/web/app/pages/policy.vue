@@ -2,10 +2,9 @@
 import { computed } from 'vue'
 
 const { data: policyData } = await usePolicySettings()
-const routePageSettings = useRoutePageSettingsUi()
 
 const policyTitle = computed<string>(() => {
-  return policyData.value?.title ?? routePageSettings.value.breadcrumb_policy_label
+  return policyData.value?.title ?? 'Политика конфиденциальности'
 })
 
 const policyArticle = computed<string>(() => {
@@ -14,7 +13,7 @@ const policyArticle = computed<string>(() => {
 
 usePageEntityBreadcrumbs({
   title: policyTitle,
-  baseItems: computed(() => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }]),
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>
 

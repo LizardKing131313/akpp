@@ -3,13 +3,6 @@ import type { ImageCardItem } from '#shared/types/entity'
 
 import { computed } from 'vue'
 
-const routePageSettings = useRoutePageSettingsUi()
-
-usePageEntityBreadcrumbs({
-  title: () => routePageSettings.value.breadcrumb_work_label,
-  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
-})
-
 const { data: casesData } = await useCases()
 
 const caseCards = computed<ImageCardItem[]>(() => {
@@ -23,6 +16,13 @@ const caseCards = computed<ImageCardItem[]>(() => {
     image_alt: caseItem.image_alt ?? '',
     date: caseItem.case_date,
   }))
+})
+
+const pageTitle = computed<string>(() => 'Наши работы')
+
+usePageEntityBreadcrumbs({
+  title: pageTitle,
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>
 

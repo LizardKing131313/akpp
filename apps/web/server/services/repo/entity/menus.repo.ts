@@ -1,12 +1,9 @@
-import type { BrandItem } from '#shared/types/brand'
 import type { MenuItem } from '#shared/types/menu'
-import type { ModelItem } from '#shared/types/model'
-import type { ServiceItem } from '#shared/types/service'
+import type { RouteLandingItem } from '#shared/types/route-landing'
 
-import { BrandsRepository } from '#server/services/repo/entity/brands.repo'
-import { ModelsRepository } from '#server/services/repo/entity/models.repo'
-import { ServicesRepository } from '#server/services/repo/entity/services.repo'
+import { RouteLandingsRepository } from '#server/services/repo/entity/route_landings.repo'
 import { ListSlugRepository } from '#server/services/repo/listSlugRepo'
+import { getRouteLandingMenuTitle } from '#shared/lib/route-landing'
 
 type MenuSourceType = 'manual' | 'brands' | 'services' | 'brand_models'
 
@@ -25,9 +22,7 @@ type RawMenuItem = {
 }
 
 type DynamicMenuContext = {
-  readonly brands: readonly BrandItem[]
-  readonly models: readonly ModelItem[]
-  readonly services: readonly ServiceItem[]
+  readonly routeLandings: readonly RouteLandingItem[]
 }
 
 export class MenusRepository extends ListSlugRepository<MenuItem> {
@@ -38,16 +33,14 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
   private readonly DEFAULT_SOURCE_TYPE: MenuSourceType = 'manual'
 
   public override async list(): Promise<readonly MenuItem[]> {
-    const [rawMenus, brands, models, services] = await Promise.all([
+    const [rawMenus, routeLandings] = await Promise.all([
       this.getAll({
         'filter[status][_eq]': 'published',
       }) as Promise<readonly RawMenuItem[]>,
-      new BrandsRepository().list(),
-      new ModelsRepository().list(),
-      new ServicesRepository().list(),
+      new RouteLandingsRepository().listPublished(),
     ])
 
-    const dynamicContext: DynamicMenuContext = { brands, models, services }
+    const dynamicContext: DynamicMenuContext = { routeLandings }
 
     const itemsByParentId = new Map<string, RawMenuItem[]>()
     const rootItems: RawMenuItem[] = []
@@ -106,46 +99,57 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
     }
 
     if (sourceType === 'services') {
-      return dynamicContext.services.map((serviceItem) => ({
-        id: `service:${serviceItem.id}`,
-        slug: `/uslugi/${serviceItem.slug}`,
-        name: serviceItem.name,
-        children: null,
-      }))
+      return dynamicContext.routeLandings
+        .filter((landing) => landing.page_type === 'service')
+        .map((landing) => ({
+          id: `service:${landing.id}`,
+          slug: landing.path,
+          name: getRouteLandingMenuTitle(landing),
+          children: null,
+        }))
     }
 
     if (sourceType === 'brands') {
-      return dynamicContext.brands.map((brandItem) => {
-        const brandModels = dynamicContext.models
-          .filter((modelItem) => modelItem.brand_id === brandItem.id)
-          .map((modelItem) => ({
-            id: `model:${brandItem.id}:${modelItem.id}`,
-            slug: `/remont-akpp-${brandItem.slug}/${modelItem.slug}`,
-            name: modelItem.name,
-            children: null,
-          }))
+      return dynamicContext.routeLandings
+        .filter((landing) => landing.page_type === 'brand')
+        .map((landing) => {
+          const brandSlug = landing.brand?.slug
+          const children = dynamicContext.routeLandings
+            .filter((childLanding) => {
+              return (
+                childLanding.page_type === 'brand_model' && childLanding.brand?.slug === brandSlug
+              )
+            })
+            .map((childLanding) => ({
+              id: `brand-model:${childLanding.id}`,
+              slug: childLanding.path,
+              name: getRouteLandingMenuTitle(childLanding),
+              children: null,
+            }))
 
-        return {
-          id: `brand:${brandItem.id}`,
-          slug: `/remont-akpp-${brandItem.slug}`,
-          name: brandItem.name,
-          children: brandModels.length > 0 ? brandModels : null,
-        }
-      })
+          return {
+            id: `brand:${landing.id}`,
+            slug: landing.path,
+            name: getRouteLandingMenuTitle(landing),
+            children: children.length > 0 ? children : null,
+          }
+        })
     }
 
     if (sourceType === 'brand_models') {
-      const brandItem = this.resolveBrandFromOptions(dynamicContext.brands, sourceOptions)
-      if (!brandItem) {
+      const brandSlug = this.resolveBrandSlug(sourceOptions, dynamicContext.routeLandings)
+      if (!brandSlug) {
         return []
       }
 
-      return dynamicContext.models
-        .filter((modelItem) => modelItem.brand_id === brandItem.id)
-        .map((modelItem) => ({
-          id: `model:${brandItem.id}:${modelItem.id}`,
-          slug: `/remont-akpp-${brandItem.slug}/${modelItem.slug}`,
-          name: modelItem.name,
+      return dynamicContext.routeLandings
+        .filter(
+          (landing) => landing.page_type === 'brand_model' && landing.brand?.slug === brandSlug
+        )
+        .map((landing) => ({
+          id: `brand-model:${landing.id}`,
+          slug: landing.path,
+          name: getRouteLandingMenuTitle(landing),
           children: null,
         }))
     }
@@ -153,18 +157,22 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
     return manualChildren
   }
 
-  private resolveBrandFromOptions(
-    brands: readonly BrandItem[],
-    sourceOptions: MenuSourceOptions
-  ): BrandItem | null {
-    const brandId = sourceOptions.brand_id?.trim()
-    if (brandId && brandId.length > 0) {
-      return brands.find((brandItem) => brandItem.id === brandId) ?? null
-    }
-
+  private resolveBrandSlug(
+    sourceOptions: MenuSourceOptions,
+    routeLandings: readonly RouteLandingItem[]
+  ): string | null {
     const brandSlug = sourceOptions.brand_slug?.trim()
     if (brandSlug && brandSlug.length > 0) {
-      return brands.find((brandItem) => brandItem.slug === brandSlug) ?? null
+      return brandSlug
+    }
+
+    const brandId = sourceOptions.brand_id?.trim()
+    if (brandId && brandId.length > 0) {
+      return (
+        routeLandings.find((landing) => {
+          return landing.page_type === 'brand' && landing.brand?.id === brandId
+        })?.brand?.slug ?? null
+      )
     }
 
     return null

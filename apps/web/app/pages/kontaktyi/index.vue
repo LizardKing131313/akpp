@@ -3,21 +3,6 @@ import type { CityItem } from '#shared/types/city'
 import type { YandexMapPoint } from '#shared/types/entity'
 import type { LocationItem } from '#shared/types/location'
 
-import { computed, ref, watch } from 'vue'
-
-definePageMeta({
-  footer: {
-    hideContacts: true,
-  },
-})
-
-const routePageSettings = useRoutePageSettingsUi()
-
-usePageEntityBreadcrumbs({
-  title: () => routePageSettings.value.breadcrumb_contacts_label,
-  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
-})
-
 const { data: citiesData } = await useCities()
 const { data: allLocationsData } = await useLocations()
 
@@ -104,6 +89,13 @@ const openLocation = (location: LocationItem): void => {
 const goBack = (): void => {
   selectedLocationId.value = null
 }
+
+const pageTitle = computed<string>(() => 'Контакты')
+
+usePageEntityBreadcrumbs({
+  title: pageTitle,
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
+})
 </script>
 
 <template>

@@ -1,99 +1,68 @@
 <script setup lang="ts">
-import { applyTemplate } from '#shared/lib/template'
 import { computed } from 'vue'
 
+import { useResolvedRouteLanding } from '~/composables/useRepoApi'
+
 const route = useRoute()
-const routePageSettings = useRoutePageSettingsUi()
+const activeCity = useActiveCity()
 
 const serviceSlug = computed<string>(() => String(route.params.service ?? '').trim())
 const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())
 
-const { data: serviceData, error: serviceError } = await useServiceBySlug(serviceSlug)
-if (serviceError.value) {
-  throw serviceError.value
+const { data: landingData, error: landingError } = await useResolvedRouteLanding(
+  'service_brand',
+  () => ({
+    service_slug: serviceSlug.value,
+    brand_slug: brandSlug.value,
+    city_id: activeCity.value?.id,
+  })
+)
+
+if (landingError.value) {
+  throw landingError.value
 }
 
-const { data: brandData, error: brandError } = await useBrandBySlug(brandSlug)
-if (brandError.value) {
-  throw brandError.value
-}
-
-if (!serviceData.value || !brandData.value) {
+if (!landingData.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found',
   })
 }
 
-const { data: serviceBrandExistsData, error: serviceBrandExistsError } =
-  await useServiceBrandExists(() => ({
-    serviceId: serviceData.value?.id,
-    brandId: brandData.value?.id,
-  }))
-
-if (serviceBrandExistsError.value) {
-  throw serviceBrandExistsError.value
-}
-
-if (!serviceBrandExistsData.value?.exists) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Service is not available for this brand',
-  })
-}
-
-const { data: routePageOverrideData } = await useRoutePageOverride('service_brand', () => ({
-  serviceId: serviceData.value?.id,
-  brandId: brandData.value?.id,
-}))
-
-const templateValues = computed<Record<string, string>>(() => ({
-  brand: brandData.value?.name ?? '',
-  model: '',
-  service: serviceData.value?.name ?? '',
-}))
-
-const pageTitle = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.h1 ??
-    applyTemplate(routePageSettings.value.service_brand_h1_template, templateValues.value)
-  )
-})
-
-const pageContent = computed<string>(() => {
-  return (
-    routePageOverrideData.value?.content ??
-    applyTemplate(routePageSettings.value.service_brand_content_template, templateValues.value)
-  )
-})
+const pageTitle = computed<string>(() => landingData.value?.resolved_h1 ?? '')
+const pageContent = computed<string>(() => landingData.value?.resolved_content ?? '')
 
 usePageEntityBreadcrumbs({
   title: pageTitle,
-  baseItems: computed(() => [
-    { name: routePageSettings.value.breadcrumb_home_label, slug: '/' },
-    { name: routePageSettings.value.breadcrumb_services_label },
-    {
-      name: serviceData.value?.name ?? '',
-      slug: `/uslugi/${serviceSlug.value}`,
-    },
-  ]),
+  baseItems: computed(() => {
+    const items = [
+      { name: 'Главная', slug: '/' },
+      { name: 'Услуги', slug: '/uslugi' },
+    ]
+    const serviceName = landingData.value?.service?.name ?? ''
+    const serviceSlugValue = landingData.value?.service?.slug ?? ''
+
+    if (serviceName.length > 0 && serviceSlugValue.length > 0) {
+      items.push({
+        name: serviceName,
+        slug: `/uslugi/${serviceSlugValue}`,
+      })
+    }
+
+    return items
+  }),
 })
 
 useSeoMeta({
-  title: () =>
-    routePageOverrideData.value?.seo_title ??
-    applyTemplate(routePageSettings.value.service_brand_seo_title_template, templateValues.value),
-  description: () =>
-    routePageOverrideData.value?.seo_description ??
-    applyTemplate(
-      routePageSettings.value.service_brand_seo_description_template,
-      templateValues.value
-    ),
+  title: () => landingData.value?.resolved_seo_title ?? pageTitle.value,
+  description: () => landingData.value?.resolved_seo_description ?? pageContent.value,
 })
 </script>
 
 <template>
-  <Why />
+  <Why
+    :image_source="landingData?.brand?.image_source ?? ''"
+    :image_alt="landingData?.brand?.image_alt ?? landingData?.brand?.name ?? ''" />
   <RepairQuizBlock />
   <ServiceAndCaseSection />
   <Article>

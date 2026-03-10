@@ -1,10 +1,13 @@
 <script setup lang="ts">
-const routePageSettings = useRoutePageSettingsUi()
+import { computed } from 'vue'
+
 const { data: articlesData } = await useArticles()
 
+const pageTitle = computed<string>(() => 'Статьи')
+
 usePageEntityBreadcrumbs({
-  title: () => routePageSettings.value.breadcrumb_articles_label,
-  baseItems: () => [{ name: routePageSettings.value.breadcrumb_home_label, slug: '/' }],
+  title: pageTitle,
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>
 
