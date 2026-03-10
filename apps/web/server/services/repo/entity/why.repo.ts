@@ -1,10 +1,8 @@
-import type { WhyApiSettings } from '#shared/types/api/why'
 import type { WhySettings } from '#shared/types/why'
 
-import { mapWhyApiSettingsToWhySettings } from '#server/services/repo/mappers/why.mapper'
 import { SingletonRepository } from '#server/services/repo/singletonRepo'
 
-export class WhyRepository extends SingletonRepository<WhyApiSettings> {
+export class WhyRepository extends SingletonRepository<WhySettings> {
   protected readonly collection = 'why_settings'
 
   protected readonly fields = `
@@ -19,10 +17,7 @@ export class WhyRepository extends SingletonRepository<WhyApiSettings> {
     guarantee,
     guarantee_image,
     guarantee_alt,
+    calculate_label,
+    signup_label,
   `
-
-  public override async get(): Promise<WhySettings> {
-    const apiSettings = await super.get()
-    return mapWhyApiSettingsToWhySettings(apiSettings)
-  }
 }

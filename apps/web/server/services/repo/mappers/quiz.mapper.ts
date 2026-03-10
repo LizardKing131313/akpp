@@ -1,7 +1,7 @@
 import type { QuizApiSettings } from '#shared/types/api/quiz'
 import type { QuizSettings } from '#shared/types/quiz'
 
-const normalizeText = (value: string | null | undefined): string => value?.trim() ?? ''
+import { normalizeText } from '#server/services/repo/mappers/mapper.utils'
 
 export const mapQuizApiSettingsToQuizSettings = (apiSettings: QuizApiSettings): QuizSettings => {
   return {
@@ -31,6 +31,8 @@ export const mapQuizApiSettingsToQuizSettings = (apiSettings: QuizApiSettings): 
     contact_problem_label: normalizeText(apiSettings.contact_problem_label),
     contact_name_label: normalizeText(apiSettings.contact_name_label),
     contact_name_placeholder: normalizeText(apiSettings.contact_name_placeholder),
+    contact_phone_label: normalizeText(apiSettings.contact_phone_label),
+    contact_phone_placeholder: normalizeText(apiSettings.contact_phone_placeholder),
     contact_submit_label: normalizeText(apiSettings.contact_submit_label),
 
     success_title: normalizeText(apiSettings.success_title),

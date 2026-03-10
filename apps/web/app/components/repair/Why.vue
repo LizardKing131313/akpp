@@ -5,20 +5,16 @@ import { computed } from 'vue'
 
 import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
 import { useSignupModal } from '~/composables/modal/useSignupModal'
-import { useWhyUiSettings } from '~/composables/useWhyUiSettings'
+import { useWhySettings } from '~/composables/useRepoApi'
 
-withDefaults(
-  defineProps<{
-    image_source?: string
-    image_alt?: string
-  }>(),
-  {
-    image_source: '/images/transmission.png',
-    image_alt: 'transmission',
-  }
-)
+defineProps<{
+  image_source: string
+  image_alt: string
+}>()
 
-const settings = useWhyUiSettings()
+const { data: settingsData } = await useWhySettings()
+
+const settings = computed<WhySettings>(() => settingsData.value ?? ({} as WhySettings))
 
 const perks = computed<PerkItem[]>(() => [
   {
@@ -70,8 +66,8 @@ const handleSignupClick = (): void => {
       </div>
 
       <ActionButtons
-        :calculateLabel="settings.calculateLabel"
-        :signupLabel="settings.signupLabel"
+        :calculateLabel="settings.calculate_label"
+        :signupLabel="settings.signup_label"
         @calculate="handleCalculateClick"
         @signup="handleSignupClick" />
     </div>

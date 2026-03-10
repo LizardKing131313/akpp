@@ -1,5 +1,5 @@
 import type { BrandItem } from '#shared/types/brand'
-import type { ImageItem, SlugEntityItem } from '#shared/types/entity'
+import type { ImageItem, ImageListItem, SlugEntityItem } from '#shared/types/entity'
 
 export type CaseItem = SlugEntityItem &
   ImageItem & {
@@ -9,18 +9,18 @@ export type CaseItem = SlugEntityItem &
     readonly model_date: string
     readonly engine: string
     readonly mileage: string
+    readonly part_price: number
+    readonly work_price: number
+    readonly problems: string
 
     readonly brand: BrandItem
 
-    readonly works: string[]
+    readonly works: EntityItem[]
 
-    readonly part_price: number
-    readonly work_price: number
-
-    readonly images: string[]
+    readonly images: ImageListItem[]
   }
 
-export type CaseItemSetting = {
+export type CaseSettings = {
   readonly reason_label: string
   readonly transmission_label: string
   readonly model_date_label: string
@@ -42,4 +42,8 @@ export type CaseItemSetting = {
 
   readonly calculate_label: string
   readonly signup_label: string
+
+  readonly page_title: string
+  readonly show_all_button: string
+  readonly show_all_link: string
 }

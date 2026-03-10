@@ -46,6 +46,8 @@ export type QuizSettings = {
   readonly contact_problem_label: string
   readonly contact_name_label: string
   readonly contact_name_placeholder: string
+  readonly contact_phone_label: string
+  readonly contact_phone_placeholder: string
   readonly contact_submit_label: string
 
   readonly success_title: string

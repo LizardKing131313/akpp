@@ -5,5 +5,13 @@ import { ListSlugRepository } from '#server/services/repo/listSlugRepo'
 export class ServicesRepository extends ListSlugRepository<ServiceItem> {
   protected readonly collection = 'services'
 
-  protected readonly fields = 'id,slug,name,image_source,image_alt,sort'
+  protected readonly fields = `
+    id,
+    slug,
+    name,
+    colspan,
+    image_source,
+    image_alt,
+    sort
+  `
 }

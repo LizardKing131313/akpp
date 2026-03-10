@@ -6,6 +6,7 @@
     "dev:web": "pnpm -C apps/web dev",
     "build:web": "pnpm -C apps/web build",
     "preview:web": "pnpm -C apps/web preview",
+    "analyze:web": "pnpm -C apps/web exec nuxt analyze",
     "schema:apply:dev": "docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml run --rm directus-schema-apply",
     "schema:snapshot:dev": "docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml run --rm directus-schema-snapshot",
     "settings:export:dev": "docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml run --rm directus-settings-export",

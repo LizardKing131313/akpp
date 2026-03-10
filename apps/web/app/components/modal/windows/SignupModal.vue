@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { SignupModalSettings } from '#shared/types/modal'
+
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
 import { useLeadSubmit } from '~/composables/useLeadSubmit'
-import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
+import { useSignupModalSettings } from '~/composables/useRepoApi'
 
 const emit = defineEmits<{
   (event: 'close'): void
@@ -19,8 +21,12 @@ const name = ref<string>('')
 const phone = ref<string>('')
 const agree = ref<boolean>(false)
 const isSubmitting = ref<boolean>(false)
-const modalSettings = useModalWindowsUiSettings()
-const settings = computed(() => modalSettings.value.signup)
+
+const { data: settingsData } = await useSignupModalSettings()
+
+const settings = computed<SignupModalSettings>(
+  () => settingsData.value ?? ({} as SignupModalSettings)
+)
 
 const { submitLead } = useLeadSubmit()
 
@@ -100,7 +106,12 @@ onMounted(() => {
         class="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
         :aria-label="settings.form_aria_label"
         @submit.prevent="submit">
-        <LeadFields v-model:phone="phone" v-model:consent="agree" @enter="submit">
+        <LeadFields
+          :phoneLabel="settings.phone_label"
+          :phonePlaceholder="settings.phone_placeholder"
+          v-model:phone="phone"
+          v-model:consent="agree"
+          @enter="submit">
           <FormInput
             ref="nameInputRef"
             v-model="name"

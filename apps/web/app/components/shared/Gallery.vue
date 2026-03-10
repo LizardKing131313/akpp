@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
-const props = defineProps<{ images: string[] }>()
+const props = defineProps<{ images: ImageListItem[] }>()
 
 const activeIndex = ref<number>(0)
 const visible = ref<boolean>(false)

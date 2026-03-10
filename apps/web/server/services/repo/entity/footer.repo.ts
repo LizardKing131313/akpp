@@ -31,6 +31,5 @@ export class FooterRepository extends SingletonRepository<FooterSettings> {
     contact_button_icon_source,
     contact_button_icon_alt,
     contact_button_aria_label,
-    menus.*
   `
 }

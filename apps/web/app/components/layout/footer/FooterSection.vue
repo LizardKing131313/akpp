@@ -39,9 +39,7 @@ const hideContacts = computed<boolean>(() => {
 
 const city = computed<CityItem | null>(() => activeCity.value ?? null)
 
-const menuItems = computed<readonly MenuItem[]>(() => {
-  return settings.value.menus
-})
+const menuItems: MenuItem[] = []
 
 const locations = computed<readonly LocationItem[]>(() => {
   return locationsData.value ?? []

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CaseItem, CaseItemSetting } from '#shared/types/case'
+import type { CaseItem, CaseSettings } from '#shared/types/case'
 
 import { getMoneyView } from '#shared/lib/money'
 import { computed } from 'vue'
@@ -7,38 +7,13 @@ import { computed } from 'vue'
 import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
 import { useSignupModal } from '~/composables/modal/useSignupModal'
 
-const defaultSettings: CaseItemSetting = {
-  reason_label: 'Причина обращения:',
-  transmission_label: 'АКПП:',
-  model_date_label: 'Год выпуска:',
-  engine_label: 'Объем двигателя:',
-  mileage_label: 'Пробег:',
-  works_label: 'Проведенные работы:',
-
-  part_price_image: '/images/icons/cog.svg',
-  part_price_image_alt: 'Детали',
-  work_price_image: '/images/icons/wrench.svg',
-  work_price_image_alt: 'Работы',
-  total_image: '/images/icons/calc.svg',
-  total_image_alt: 'Итог',
-
-  part_price_label: 'Запчасти',
-  work_price_label: 'Работа',
-  total_label: 'Общая сумма',
-
-  calculate_label: 'Рассчитать стоимость',
-  signup_label: 'Записаться',
-}
-
 const props = defineProps<{
   caseItem: CaseItem
-  settings?: Partial<CaseItemSetting>
 }>()
 
-const settings = computed<CaseItemSetting>(() => ({
-  ...defaultSettings,
-  ...(props.settings ?? {}),
-}))
+const { data: settingsData } = await useCaseSettings()
+
+const settings = computed<CaseSettings>(() => settingsData.value ?? ({} as CaseSettings))
 
 const partMoney = computed<string>(() => {
   return getMoneyView(props.caseItem.part_price).value
@@ -93,8 +68,8 @@ const handleSignupClick = (): void => {
         <p class="text-brand-dark text-base font-bold">{{ settings.works_label }}</p>
 
         <ul class="text-brand-grey list-disc space-y-2 pl-5 text-base">
-          <li v-for="workTitle in caseItem.works" :key="workTitle">
-            {{ workTitle }}
+          <li v-for="work in caseItem.works" :key="work.id">
+            {{ work.name }}
           </li>
         </ul>
       </div>

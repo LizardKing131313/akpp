@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import type { CityItem } from '#shared/types/city'
+import type { CitySelectModalSettings } from '#shared/types/modal'
 
 import { cn } from '#shared/lib/cn'
 import { computed, ref } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
-import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
-import { useCities } from '~/composables/useRepoApi'
+import { useCities, useCitySelectModalSettings } from '~/composables/useRepoApi'
 
 const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
-const modalSettings = useModalWindowsUiSettings()
-const settings = computed(() => modalSettings.value.city_select)
+const { data: settingsData } = await useCitySelectModalSettings()
+
+const settings = computed<CitySelectModalSettings>(
+  () => settingsData.value ?? ({} as CitySelectModalSettings)
+)
 
 const { data: citiesData } = useCities()
 const activeCity = useActiveCity()

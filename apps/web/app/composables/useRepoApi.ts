@@ -11,9 +11,9 @@ import type { HeroItem } from '#shared/types/hero'
 import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 import type {
-  CitySelectModalUiSettings,
-  ShopModalUiSettings,
-  SignupModalUiSettings,
+  CitySelectModalSettings,
+  ShopModalSettings,
+  SignupModalSettings,
 } from '#shared/types/modal'
 import type { ModelItem } from '#shared/types/model'
 import type { ResolvedPageItem } from '#shared/types/page'
@@ -90,6 +90,10 @@ export const useCalculateSettings = () => {
   return useStaticApiData<CalculateSettings>('calculate:settings', '/api/calculate')
 }
 
+export const useCaseSettings = () => {
+  return useStaticApiData<CaseSettings>('case:settings', '/api/case_settings')
+}
+
 export const useErrorSettings = () => {
   return useStaticApiData<ErrorSettings>('error:settings', '/api/error')
 }
@@ -111,18 +115,18 @@ export const useRoutePageSettings = () => {
 }
 
 export const useCitySelectModalSettings = () => {
-  return useStaticApiData<CitySelectModalUiSettings>(
+  return useStaticApiData<CitySelectModalSettings>(
     'city-select-modal:settings',
     '/api/city_select_modal'
   )
 }
 
 export const useShopModalSettings = () => {
-  return useStaticApiData<ShopModalUiSettings>('shop-modal:settings', '/api/shop_modal')
+  return useStaticApiData<ShopModalSettings>('shop-modal:settings', '/api/shop_modal')
 }
 
 export const useSignupModalSettings = () => {
-  return useStaticApiData<SignupModalUiSettings>('signup-modal:settings', '/api/signup_modal')
+  return useStaticApiData<SignupModalSettings>('signup-modal:settings', '/api/signup_modal')
 }
 
 export const useWhySettings = () => {

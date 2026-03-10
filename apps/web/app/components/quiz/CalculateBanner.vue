@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import type { CalculatePerkItem, CalculateSettings } from '#shared/types/calculate'
+
 import { computed } from 'vue'
 
-import { useCalculateUiSettings } from '~/composables/useCalculateUiSettings'
+import { useCalculateSettings } from '~/composables/useRepoApi'
 
-const settings = useCalculateUiSettings()
+const { data: settingsData } = await useCalculateSettings()
 
-const perks = computed<readonly string[]>(() => settings.value.perks)
+const settings = computed<CalculateSettings>(() => settingsData.value ?? ({} as CalculateSettings))
+
+const perks = computed<readonly CalculatePerkItem[]>(() => settings.value.perks)
 </script>
 
 <template>
@@ -20,12 +24,9 @@ const perks = computed<readonly string[]>(() => settings.value.perks)
     </p>
 
     <div class="hidden space-y-4 lg:block">
-      <div
-        v-for="(perkText, perkIndex) in perks"
-        :key="`${perkIndex}:${perkText}`"
-        class="flex items-center gap-4">
+      <div v-for="perk in perks" :key="perk.id" class="flex items-center gap-4">
         <Check />
-        <span class="text-brand-white sm:text-xl">{{ perkText }}</span>
+        <span class="text-brand-white sm:text-xl">{{ perk.name }}</span>
       </div>
     </div>
   </div>

@@ -5,23 +5,25 @@ export type UseModalReturnType = {
   isModalOpen: () => boolean
 }
 
-export type CitySelectModalUiSettings = {
+export type CitySelectModalSettings = {
   readonly title: string
   readonly search_placeholder: string
   readonly empty_text: string
 }
 
-export type ShopModalUiSettings = {
+export type ShopModalSettings = {
   readonly title: string
   readonly form_aria_label: string
   readonly car_label: string
   readonly car_placeholder: string
   readonly vin_label: string
   readonly vin_placeholder: string
+  readonly phone_label: string
+  readonly phone_placeholder: string
   readonly submit_label: string
 }
 
-export type SignupModalUiSettings = {
+export type SignupModalSettings = {
   readonly title: string
   readonly description: string
   readonly image_source: string
@@ -29,11 +31,7 @@ export type SignupModalUiSettings = {
   readonly form_aria_label: string
   readonly name_label: string
   readonly name_placeholder: string
+  readonly phone_label: string
+  readonly phone_placeholder: string
   readonly submit_label: string
-}
-
-export type ModalWindowsUiSettings = {
-  readonly city_select: CitySelectModalUiSettings
-  readonly shop: ShopModalUiSettings
-  readonly signup: SignupModalUiSettings
 }

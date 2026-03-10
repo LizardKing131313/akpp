@@ -32,7 +32,6 @@ const defaultFooterSettings: FooterSettings = {
   contact_button_icon_source: '/images/icons/telephone.svg',
   contact_button_icon_alt: 'Позвонить',
   contact_button_aria_label: 'Открыть форму записи',
-  menus: [],
 }
 
 export const useFooterUiSettings = () => {

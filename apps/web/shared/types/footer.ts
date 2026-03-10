@@ -1,5 +1,3 @@
-import type { MenuItem } from '#shared/types/menu'
-
 export type FooterSettings = {
   readonly description: string
   readonly offer: string
@@ -26,5 +24,4 @@ export type FooterSettings = {
   readonly contact_button_icon_source: string
   readonly contact_button_icon_alt: string
   readonly contact_button_aria_label: string
-  readonly menus: MenuItem[]
 }

@@ -30,6 +30,8 @@ export type QuizApiSettings = {
   readonly contact_problem_label?: string | null
   readonly contact_name_label?: string | null
   readonly contact_name_placeholder?: string | null
+  readonly contact_phone_label?: string | null
+  readonly contact_phone_placeholder?: string | null
   readonly contact_submit_label?: string | null
 
   readonly success_title?: string | null

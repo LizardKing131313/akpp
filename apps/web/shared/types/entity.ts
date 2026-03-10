@@ -16,6 +16,11 @@ export interface ImageItem {
   readonly image_alt?: string
 }
 
+export interface ImageListItem {
+  readonly id: string
+  readonly directus_files_id: string
+}
+
 export type ImageCardItem = SlugEntityItem &
   ImageItem & {
     readonly date: string

@@ -99,7 +99,7 @@ const tableRows = computed<TableRow[]>(() => {
 
 const columns: Array<ColumnDef<TableRow>> = [
   {
-    accessorKey: 'model',
+    accessorKey: 'name',
     header: 'МОДЕЛЬ',
     cell: (info) => info.getValue(),
   },

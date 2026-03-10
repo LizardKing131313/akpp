@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { ShopModalSettings } from '#shared/types/modal'
+
 import { cn } from '#shared/lib/cn'
 import { computed, onMounted, ref } from 'vue'
 
 import { useLeadSubmit } from '~/composables/useLeadSubmit'
-import { useModalWindowsUiSettings } from '~/composables/useModalWindowsUiSettings'
+import { useShopModalSettings } from '~/composables/useRepoApi'
 
 const emit = defineEmits<{
   (eventName: 'close'): void
@@ -14,8 +16,10 @@ const vin = ref<string>('')
 const phone = ref<string>('')
 const consent = ref<boolean>(false)
 const isSubmitting = ref<boolean>(false)
-const modalSettings = useModalWindowsUiSettings()
-const settings = computed(() => modalSettings.value.shop)
+
+const { data: settingsData } = await useShopModalSettings()
+
+const settings = computed<ShopModalSettings>(() => settingsData.value ?? ({} as ShopModalSettings))
 
 const { submitLead } = useLeadSubmit()
 
@@ -89,7 +93,12 @@ onMounted(() => {
       </div>
 
       <form class="mt-5 space-y-4" :aria-label="settings.form_aria_label" @submit.prevent="submit">
-        <LeadFields v-model:phone="phone" v-model:consent="consent" @enter="submit">
+        <LeadFields
+          :phoneLabel="settings.phone_label"
+          :phonePlaceholder="settings.phone_placeholder"
+          v-model:phone="phone"
+          v-model:consent="consent"
+          @enter="submit">
           <FormInput
             ref="carInputRef"
             v-model="car"

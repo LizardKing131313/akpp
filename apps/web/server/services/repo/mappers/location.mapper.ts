@@ -1,63 +1,32 @@
 import type { LocationApiItem } from '#shared/types/api/location'
 import type { LocationItem } from '#shared/types/location'
 
-const normalizeCoordinate = (value: number | null | undefined): number | undefined => {
-  if (typeof value !== 'number' || Number.isNaN(value)) {
-    return undefined
-  }
-
-  return value
-}
-
-const normalizeImages = (
-  rawImages:
-    | readonly string[]
-    | readonly {
-        readonly directus_files_id?: string | null
-      }[]
-    | null
-    | undefined
-): string[] => {
-  if (!Array.isArray(rawImages)) {
-    return []
-  }
-
-  return rawImages
-    .map((rawImage) => {
-      if (typeof rawImage === 'string') {
-        return rawImage.trim()
-      }
-
-      return rawImage.directus_files_id?.trim() ?? ''
-    })
-    .filter((imageId) => imageId.length > 0)
-}
+import {
+  mapDirectusFileIds,
+  normalizeCoordinate,
+  normalizeOptionalText,
+  normalizeText,
+} from '#server/services/repo/mappers/mapper.utils'
 
 export const mapLocationApiItemToLocationItem = (apiItem: LocationApiItem): LocationItem => {
   const latValue = normalizeCoordinate(apiItem.lat) ?? normalizeCoordinate(apiItem.latitude) ?? 0
   const lngValue = normalizeCoordinate(apiItem.lng) ?? normalizeCoordinate(apiItem.longitude) ?? 0
-  const locationName = apiItem.name
-  const cityId = apiItem.city_id ?? ''
-  const address = apiItem.address ?? ''
-  const worktime = apiItem.worktime ?? ''
-  const phone = apiItem.phone ?? ''
-  const metro = apiItem.metro ?? ''
-  const metroColor = apiItem.metro_color ?? ''
+  const locationName = normalizeOptionalText(apiItem.name)
 
   const mappedLocation: LocationItem = {
     id: apiItem.id,
-    city_id: cityId,
-    address,
-    worktime,
-    phone,
-    metro,
-    metro_color: metroColor,
-    images: normalizeImages(apiItem.images),
+    city_id: normalizeText(apiItem.city_id),
+    address: normalizeText(apiItem.address),
+    worktime: normalizeText(apiItem.worktime),
+    phone: normalizeText(apiItem.phone),
+    metro: normalizeText(apiItem.metro),
+    metro_color: normalizeText(apiItem.metro_color),
+    images: mapDirectusFileIds(apiItem.images),
     lat: latValue,
     lng: lngValue,
   }
 
-  if (locationName === null || locationName === undefined) {
+  if (!locationName) {
     return mappedLocation
   }
 

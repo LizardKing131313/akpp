@@ -6,7 +6,6 @@ export type ModelItem = SlugEntityItem &
   }
 
 export type ModelVariantItem = EntityItem & {
-  readonly model: string
   readonly from: string
   readonly to: string
   readonly engine: string

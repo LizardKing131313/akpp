@@ -16,6 +16,9 @@ withDefaults(
     readonly nameLabel?: string
     readonly namePlaceholder?: string
 
+    readonly phoneLabel?: string
+    readonly phonePlaceholder?: string
+
     readonly submitLabel?: string
   }>(),
   {
@@ -27,6 +30,9 @@ withDefaults(
 
     nameLabel: 'Имя',
     namePlaceholder: 'Как вас зовут?',
+
+    phoneLabel: 'Телефон',
+    phonePlaceholder: '+7 (___) ___-__-__',
 
     submitLabel: 'Узнать стоимость',
   }
@@ -87,6 +93,8 @@ const handleSubmit = (): void => {
     </div>
 
     <LeadFields
+      :phoneLabel="phoneLabel"
+      :phonePlaceholder="phonePlaceholder"
       v-model:phone="customerPhone"
       v-model:consent="isConsentAccepted"
       @enter="handleSubmit">

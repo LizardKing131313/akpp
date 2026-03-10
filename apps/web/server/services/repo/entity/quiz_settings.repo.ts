@@ -30,6 +30,8 @@ export class QuizSettingsRepository extends SingletonRepository<QuizApiSettings>
     contact_problem_label,
     contact_name_label,
     contact_name_placeholder,
+    contact_phone_label,
+    contact_phone_placeholder,
     contact_submit_label,
     success_title,
     success_line_1,

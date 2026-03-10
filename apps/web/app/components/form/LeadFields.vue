@@ -3,11 +3,11 @@ import { ref } from 'vue'
 
 withDefaults(
   defineProps<{
-    label?: string
+    phoneLabel?: string
     phonePlaceholder?: string
   }>(),
   {
-    label: 'Телефон',
+    phoneLabel: 'Телефон',
     phonePlaceholder: '+7 (___) ___-__-__',
   }
 )
@@ -42,7 +42,7 @@ const handlePhoneEnter = (): void => {
       <FormInput
         ref="phoneInputRef"
         v-model="phoneModel"
-        :label="label"
+        :label="phoneLabel"
         :placeholder="phonePlaceholder"
         type="tel"
         inputmode="tel"
