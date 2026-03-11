@@ -7,7 +7,7 @@ definePageMeta({
 </script>
 
 <template>
-  <BrandsGrid />
+  <BrandsGrid baseHref="remont-akpp-" />
   <ServicesSection />
   <LazyRepairQuizBlock hydrate-on-visible />
   <ServiceAndCaseSection />

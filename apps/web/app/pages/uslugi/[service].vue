@@ -56,7 +56,7 @@ const { pageContent } = useRouteLandingPagePresentation({
 </script>
 
 <template>
-  <BrandsGrid :brands="brandsForService" />
+  <BrandsGrid :brands="brandsForService" :baseHref="`uslugi/${serviceSlug}/`" />
   <Why
     :image_source="landingData?.service?.image_source ?? ''"
     :image_alt="landingData?.service?.image_alt ?? landingData?.service?.name ?? ''" />

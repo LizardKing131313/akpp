@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ModelItem } from '#shared/types/model'
 
+import { normalizeAppPath } from '#shared/lib/route'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { computed } from 'vue'
@@ -41,7 +42,11 @@ const resolvedItems = computed<ModelItem[]>(() => {
       }"
       class="model-slider relative">
       <SwiperSlide v-for="model in resolvedItems" :key="model.id">
-        <SliderItem v-bind="model" sizes="200px" class="h-50 w-50" />
+        <SliderItem
+          v-bind="model"
+          :to="normalizeAppPath(model.slug)"
+          sizes="200px"
+          class="h-50 w-50" />
       </SwiperSlide>
     </Swiper>
   </div>

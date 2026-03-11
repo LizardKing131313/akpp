@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
 
+import { normalizeAppPath } from '#shared/lib/route'
 import { Autoplay, FreeMode, Mousewheel } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { computed } from 'vue'
@@ -33,7 +34,7 @@ const brands = computed<BrandItem[]>(() => brandsData.value ?? [])
         :mousewheel="{ forceToAxis: true }"
         class="brands-marquee w-full">
         <SwiperSlide v-for="brand in brands" :key="brand.id" class="w-auto!">
-          <SliderItem v-bind="brand" />
+          <SliderItem v-bind="brand" :to="normalizeAppPath('/remont-akpp-' + brand.slug)" />
         </SwiperSlide>
       </Swiper>
     </div>

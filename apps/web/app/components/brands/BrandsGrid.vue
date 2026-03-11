@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
 
+import { normalizeAppPath } from '#shared/lib/route'
 import { computed, ref } from 'vue'
 
 interface BrandsGridProps {
+  baseHref?: string
   title?: string
   brands?: BrandItem[]
   show?: string
@@ -11,6 +13,7 @@ interface BrandsGridProps {
 }
 
 const props = withDefaults(defineProps<BrandsGridProps>(), {
+  baseHref: '',
   title: 'Выберите марку автомобиля',
   brands: () => [],
   show: 'Показать еще',
@@ -32,9 +35,16 @@ const resolvedBrands = computed<BrandItem[]>(() => {
   return brandsData.value ?? []
 })
 
-const mobileBrands = computed<BrandItem[]>(() => {
-  if (isExpanded.value) return resolvedBrands.value
-  return resolvedBrands.value.slice(0, initialMobileCount)
+const brandsWithTo = computed(() => {
+  return resolvedBrands.value.map((brand) => ({
+    ...brand,
+    to: normalizeAppPath(`${props.baseHref}${brand.slug}`),
+  }))
+})
+
+const mobileBrands = computed(() => {
+  if (isExpanded.value) return brandsWithTo.value
+  return brandsWithTo.value.slice(0, initialMobileCount)
 })
 
 const shouldShowToggleButton = computed<boolean>(() => {
@@ -72,7 +82,7 @@ const toggle = async (): Promise<void> => {
       </div>
 
       <div class="hidden grid-cols-4 gap-4 sm:grid md:grid-cols-6 xl:grid-cols-8">
-        <SliderItem v-for="brand in resolvedBrands" :key="brand.id" v-bind="brand" />
+        <SliderItem v-for="brand in brandsWithTo" :key="brand.id" v-bind="brand" />
       </div>
     </div>
   </section>
