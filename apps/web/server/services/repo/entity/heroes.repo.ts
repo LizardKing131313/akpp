@@ -19,6 +19,19 @@ export class HeroesRepository extends ListRepository<HeroItem> {
 
   // noinspection JSUnusedGlobalSymbols
   public async getByCity(city_id: string): Promise<readonly HeroItem[]> {
-    return this.getManyByField('city_id', city_id)
+    const normalizedCityId = city_id.trim()
+
+    if (normalizedCityId.length === 0) {
+      return []
+    }
+
+    const directus = this.getDirectus()
+
+    return await directus.getItems<HeroItem>(this.collection, {
+      fields: this.fields,
+      sort: this.SORT_FIELD,
+      'filter[_or][0][city_id][_eq]': normalizedCityId,
+      'filter[_or][1][city_id][_null]': true,
+    })
   }
 }

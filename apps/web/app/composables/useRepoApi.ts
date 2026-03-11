@@ -180,8 +180,29 @@ export const usePerks = () => {
   return useStaticApiData<PerkItem[]>('perks:list', '/api/perks')
 }
 
-export const useHeroes = () => {
-  return useStaticApiData<HeroItem[]>('heroes:list', '/api/heroes')
+export const useHeroes = (cityIdInput?: MaybeRefOrGetter<string | undefined>) => {
+  const cityIdValue = computed<string | undefined>(() => {
+    if (!cityIdInput) {
+      return undefined
+    }
+
+    const normalizedValue = normalizeParamValue(toValue(cityIdInput))
+    return normalizedValue.length > 0 ? normalizedValue : undefined
+  })
+
+  return useAsyncData<HeroItem[]>(
+    () => `heroes:list:${cityIdValue.value ?? 'all'}`,
+    () => {
+      if (!cityIdValue.value) {
+        return fetchFromApi<HeroItem[]>('/api/heroes')
+      }
+
+      return fetchFromApi<HeroItem[]>(`/api/heroes?cityId=${encodeURIComponent(cityIdValue.value)}`)
+    },
+    {
+      watch: [cityIdValue],
+    }
+  )
 }
 
 export const useLocations = (cityIdInput?: MaybeRefOrGetter<string | undefined>) => {
