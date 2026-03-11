@@ -176,6 +176,10 @@ export const useFaqs = () => {
   return useStaticApiData<FaqItem[]>('faqs:list', '/api/faqs')
 }
 
+export const usePerks = () => {
+  return useStaticApiData<PerkItem[]>('perks:list', '/api/perks')
+}
+
 export const useHeroes = () => {
   return useStaticApiData<HeroItem[]>('heroes:list', '/api/heroes')
 }

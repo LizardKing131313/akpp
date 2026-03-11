@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import type { PerkItem } from '#shared/types/perk'
 
-withDefaults(defineProps<{ title?: string; perks?: PerkItem[] }>(), {
+import { computed } from 'vue'
+
+import { usePerks } from '~/composables/useRepoApi'
+
+withDefaults(defineProps<{ title?: string }>(), {
   title: 'Почему клиенты выбирают нас',
-  perks: () => [],
 })
+
+const { data: perksData } = await usePerks()
+
+const perks = computed<PerkItem[]>(() => perksData.value ?? [])
 </script>
 
 <template>
