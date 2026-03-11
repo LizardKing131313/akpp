@@ -7,6 +7,7 @@ type LeadDirectusItem = {
 export type LeadDirectusCreatePayload = {
   name?: string
   readonly phone: string
+  readonly source: string
   problem?: string
   symptoms?: string
   comment?: string

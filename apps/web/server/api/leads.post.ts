@@ -29,6 +29,7 @@ const normalizeRequiredText = (value: unknown, fieldName: string): string => {
 const toDirectusPayload = (payload: LeadSubmitPayload): LeadDirectusCreatePayload => {
   const directusPayload: LeadDirectusCreatePayload = {
     phone: normalizeRequiredText(payload.phone, 'phone'),
+    source: normalizeRequiredText(payload.source, 'source'),
   }
 
   const normalizedName = normalizeText(payload.name)
