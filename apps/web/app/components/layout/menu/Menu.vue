@@ -10,7 +10,7 @@ const isMobileMenuOpen = ref<boolean>(false)
 const AsyncMobileMenu = defineAsyncComponent(
   () => import('~/components/layout/menu/MobileMenu.vue')
 )
-const { data: menusData } = useMenus()
+const { data: menusData } = useMenus('header')
 const menuItems = computed<MenuItem[]>(() => menusData.value ?? [])
 
 const { data: settingsData } = await useHeaderSettings()

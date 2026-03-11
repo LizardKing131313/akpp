@@ -9,7 +9,7 @@ import { normalizeAppPath } from '#shared/lib/route'
 import { computed, defineAsyncComponent } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
-import { useFooterSettings, useLocations } from '~/composables/useRepoApi'
+import { useFooterSettings, useLocations, useMenus } from '~/composables/useRepoApi'
 
 const activeCity = useActiveCity()
 const cityId = computed<string | undefined>(() => activeCity.value?.id)
@@ -40,7 +40,8 @@ const hideContacts = computed<boolean>(() => {
 
 const city = computed<CityItem | null>(() => activeCity.value ?? null)
 
-const menuItems: MenuItem[] = []
+const { data: menusData } = useMenus('footer')
+const menuItems = computed<MenuItem[]>(() => menusData.value ?? [])
 
 const locations = computed<readonly LocationItem[]>(() => {
   return locationsData.value ?? []

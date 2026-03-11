@@ -16,9 +16,9 @@
         "display_template": null,
         "group": null,
         "hidden": false,
-        "icon": "dashboard",
+        "icon": "article",
         "item_duplication_fields": null,
-        "note": "Группа контентных коллекций сайта.",
+        "note": "Основной контент сайта: страницы, статьи, кейсы, услуги и справочные сущности сайта.",
         "preview_url": null,
         "singleton": false,
         "sort": 1,
@@ -47,48 +47,17 @@
         "display_template": null,
         "group": null,
         "hidden": false,
-        "icon": "settings",
+        "icon": "tune",
         "item_duplication_fields": null,
-        "note": "Группа коллекций с глобальными настройками интерфейса сайта.",
+        "note": "Глобальные настройки блоков, шапки, футера и других частей сайта.",
         "preview_url": null,
         "singleton": false,
-        "sort": 2,
+        "sort": 6,
         "sort_field": null,
         "translations": [
           {
             "language": "ru-RU",
             "translation": "Настройки"
-          }
-        ],
-        "unarchive_value": "draft",
-        "versioning": false
-      },
-      "schema": null
-    },
-    {
-      "collection": "taxonomy",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "taxonomy",
-        "color": "#26A69A",
-        "display_template": null,
-        "group": null,
-        "hidden": false,
-        "icon": "folder",
-        "item_duplication_fields": null,
-        "note": "Справочные коллекции для выбора значений в карточках и формах.",
-        "preview_url": null,
-        "singleton": false,
-        "sort": 3,
-        "sort_field": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Справочники"
           }
         ],
         "unarchive_value": "draft",
@@ -111,10 +80,10 @@
         "hidden": false,
         "icon": "web_asset",
         "item_duplication_fields": null,
-        "note": "Коллекции с настройками модальных окон сайта.",
+        "note": "Настройки модальных окон сайта.",
         "preview_url": null,
         "singleton": false,
-        "sort": 4,
+        "sort": 7,
         "sort_field": null,
         "translations": [
           {
@@ -145,7 +114,7 @@
         "note": "Статьи для разделов сайта и блока в футере.",
         "preview_url": null,
         "singleton": false,
-        "sort": 10,
+        "sort": 11,
         "sort_field": "sort",
         "translations": [
           {
@@ -178,7 +147,7 @@
         "note": "Список марок автомобилей.",
         "preview_url": null,
         "singleton": false,
-        "sort": 11,
+        "sort": 17,
         "sort_field": "sort",
         "translations": [
           {
@@ -211,7 +180,7 @@
         "note": "Список моделей автомобилей.",
         "preview_url": null,
         "singleton": false,
-        "sort": 12,
+        "sort": 18,
         "sort_field": "sort",
         "translations": [
           {
@@ -244,7 +213,7 @@
         "note": "Справочник услуг сервиса.",
         "preview_url": null,
         "singleton": false,
-        "sort": 13,
+        "sort": 19,
         "sort_field": "sort",
         "translations": [
           {
@@ -277,7 +246,7 @@
         "note": "Кейсы и истории выполненных работ.",
         "preview_url": null,
         "singleton": false,
-        "sort": 14,
+        "sort": 12,
         "sort_field": "sort",
         "translations": [
           {
@@ -303,14 +272,14 @@
         "collection": "cases_works",
         "color": "#8E24AA",
         "display_template": "{{cases_id.name}} | {{text}}",
-        "group": "content",
-        "hidden": false,
+        "group": "system_links",
+        "hidden": true,
         "icon": "link",
         "item_duplication_fields": null,
-        "note": "Связующая таблица кейсов и выполненных работ.",
+        "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 34,
+        "sort": 10,
         "sort_field": "sort",
         "translations": [
           {
@@ -336,14 +305,14 @@
         "collection": "cases_images",
         "color": "#8E24AA",
         "display_template": "{{cases_id.name}} | {{directus_files_id}}",
-        "group": "content",
-        "hidden": false,
+        "group": "system_links",
+        "hidden": true,
         "icon": "link",
         "item_duplication_fields": null,
-        "note": "Связующая таблица кейсов и изображений галереи.",
+        "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 35,
+        "sort": 11,
         "sort_field": "sort",
         "translations": [
           {
@@ -376,7 +345,7 @@
         "note": "Слайды первого экрана сайта.",
         "preview_url": null,
         "singleton": false,
-        "sort": 15,
+        "sort": 13,
         "sort_field": "sort",
         "translations": [
           {
@@ -409,7 +378,7 @@
         "note": "Преимущества компании.",
         "preview_url": null,
         "singleton": false,
-        "sort": 16,
+        "sort": 14,
         "sort_field": "sort",
         "translations": [
           {
@@ -437,12 +406,12 @@
         "display_template": "{{question}}",
         "group": "content",
         "hidden": false,
-        "icon": "quiz",
+        "icon": "help",
         "item_duplication_fields": null,
         "note": "Вопросы и ответы (FAQ).",
         "preview_url": null,
         "singleton": false,
-        "sort": 17,
+        "sort": 15,
         "sort_field": "sort",
         "translations": [
           {
@@ -468,14 +437,14 @@
         "collection": "cities",
         "color": "#039BE5",
         "display_template": "{{name}} | {{slug}}",
-        "group": "content",
+        "group": "geo",
         "hidden": false,
         "icon": "location_city",
         "item_duplication_fields": null,
         "note": "Города присутствия и обслуживания.",
         "preview_url": null,
         "singleton": false,
-        "sort": 18,
+        "sort": 10,
         "sort_field": "sort",
         "translations": [
           {
@@ -501,14 +470,14 @@
         "collection": "locations",
         "color": "#00897B",
         "display_template": "{{city_id.name}} | {{name}}",
-        "group": "content",
+        "group": "geo",
         "hidden": false,
         "icon": "place",
         "item_duplication_fields": null,
         "note": "Филиалы и адреса в городах.",
         "preview_url": null,
         "singleton": false,
-        "sort": 19,
+        "sort": 11,
         "sort_field": "sort",
         "translations": [
           {
@@ -534,14 +503,14 @@
         "collection": "locations_images",
         "color": "#00897B",
         "display_template": "{{locations_id.name}} | {{directus_files_id}}",
-        "group": "content",
-        "hidden": false,
+        "group": "system_links",
+        "hidden": true,
         "icon": "link",
         "item_duplication_fields": null,
-        "note": "Связующая таблица локаций и изображений галереи.",
+        "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 20,
+        "sort": 12,
         "sort_field": "sort",
         "translations": [
           {
@@ -574,7 +543,7 @@
         "note": "Пункты навигационного меню.",
         "preview_url": null,
         "singleton": false,
-        "sort": 20,
+        "sort": 16,
         "sort_field": "sort",
         "translations": [
           {
@@ -607,7 +576,7 @@
         "note": "Цены услуг для карточек и списков.",
         "preview_url": null,
         "singleton": false,
-        "sort": 21,
+        "sort": 20,
         "sort_field": "sort",
         "translations": [
           {
@@ -640,7 +609,7 @@
         "note": "Типы трансмиссий для справочников и фильтров.",
         "preview_url": null,
         "singleton": false,
-        "sort": 22,
+        "sort": 21,
         "sort_field": "sort",
         "translations": [
           {
@@ -673,7 +642,7 @@
         "note": "Диапазоны трансмиссий и связанные варианты моделей.",
         "preview_url": null,
         "singleton": false,
-        "sort": 23,
+        "sort": 22,
         "sort_field": "sort",
         "translations": [
           {
@@ -706,7 +675,7 @@
         "note": "Варианты моделей авто по периоду и характеристикам.",
         "preview_url": null,
         "singleton": false,
-        "sort": 24,
+        "sort": 23,
         "sort_field": "sort",
         "translations": [
           {
@@ -732,14 +701,14 @@
         "collection": "quiz_problems",
         "color": "#EF6C00",
         "display_template": "{{name}} | {{brand_id.name}}",
-        "group": "taxonomy",
+        "group": "quiz",
         "hidden": false,
         "icon": "report_problem",
         "item_duplication_fields": null,
         "note": "Проблемы для квиза подбора услуги.",
         "preview_url": null,
         "singleton": false,
-        "sort": 30,
+        "sort": 10,
         "sort_field": "sort",
         "translations": [
           {
@@ -765,14 +734,14 @@
         "collection": "quiz_symptoms",
         "color": "#F9A825",
         "display_template": "{{name}} | {{problem_id.name}}",
-        "group": "taxonomy",
+        "group": "quiz",
         "hidden": false,
         "icon": "healing",
         "item_duplication_fields": null,
         "note": "Симптомы для квиза подбора услуги.",
         "preview_url": null,
         "singleton": false,
-        "sort": 31,
+        "sort": 11,
         "sort_field": "sort",
         "translations": [
           {
@@ -798,14 +767,14 @@
         "collection": "transmission_range_model_variants_items",
         "color": "#7B1FA2",
         "display_template": "{{transmission_range_model_variants_id.name}} | {{model_variants_id.model}}",
-        "group": "content",
-        "hidden": false,
+        "group": "system_links",
+        "hidden": true,
         "icon": "link",
         "item_duplication_fields": null,
-        "note": "Связующая таблица диапазонов трансмиссий и вариантов моделей.",
+        "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 34,
+        "sort": 13,
         "sort_field": "sort",
         "translations": [
           {
@@ -831,14 +800,14 @@
         "collection": "leads",
         "color": "#2E7D32",
         "display_template": "{{name}} | {{phone}} | {{source}}",
-        "group": "content",
+        "group": "crm",
         "hidden": false,
         "icon": "assignment_ind",
         "item_duplication_fields": null,
         "note": "Входящие заявки с форм сайта.",
         "preview_url": null,
         "singleton": false,
-        "sort": 35,
+        "sort": 10,
         "sort_field": "sort",
         "translations": [
           {
@@ -871,7 +840,7 @@
         "note": "Глобальные настройки хедера.",
         "preview_url": null,
         "singleton": true,
-        "sort": 40,
+        "sort": 10,
         "sort_field": null,
         "translations": [
           {
@@ -904,7 +873,7 @@
         "note": "Глобальные настройки футера.",
         "preview_url": null,
         "singleton": true,
-        "sort": 41,
+        "sort": 11,
         "sort_field": null,
         "translations": [
           {
@@ -937,7 +906,7 @@
         "note": "Тексты и ссылки политики обработки данных.",
         "preview_url": null,
         "singleton": true,
-        "sort": 42,
+        "sort": 12,
         "sort_field": null,
         "translations": [
           {
@@ -970,7 +939,7 @@
         "note": "Настройки страницы 404.",
         "preview_url": null,
         "singleton": true,
-        "sort": 43,
+        "sort": 13,
         "sort_field": null,
         "translations": [
           {
@@ -1003,7 +972,7 @@
         "note": "Настройки баннера расчета стоимости.",
         "preview_url": null,
         "singleton": true,
-        "sort": 44,
+        "sort": 14,
         "sort_field": null,
         "translations": [
           {
@@ -1031,12 +1000,12 @@
         "display_template": "{{name}}",
         "group": "settings",
         "hidden": false,
-        "icon": "link",
+        "icon": "format_list_bulleted",
         "item_duplication_fields": null,
         "note": "Пункты списка преимуществ для баннера расчета. Обычно редактируются внутри singleton-коллекции calculate_settings.",
         "preview_url": null,
         "singleton": false,
-        "sort": 46,
+        "sort": 17,
         "sort_field": "sort",
         "translations": [
           {
@@ -1069,7 +1038,7 @@
         "note": "Контент блока «Почему выбирают нас».",
         "preview_url": null,
         "singleton": true,
-        "sort": 45,
+        "sort": 15,
         "sort_field": null,
         "translations": [
           {
@@ -1095,14 +1064,14 @@
         "collection": "city_select_modal_settings",
         "color": "#1E88E5",
         "display_template": "{{title}}",
-        "group": "settings",
+        "group": "modals",
         "hidden": false,
         "icon": "location_on",
         "item_duplication_fields": null,
         "note": "Настройки модального окна выбора города.",
         "preview_url": null,
         "singleton": true,
-        "sort": 50,
+        "sort": 10,
         "sort_field": null,
         "translations": [
           {
@@ -1128,14 +1097,14 @@
         "collection": "quiz_settings",
         "color": "#7CB342",
         "display_template": "{{brand_title}}",
-        "group": "settings",
+        "group": "quiz",
         "hidden": false,
         "icon": "fact_check",
         "item_duplication_fields": null,
         "note": "Настройки интерфейса квиза.",
         "preview_url": null,
         "singleton": true,
-        "sort": 51,
+        "sort": 12,
         "sort_field": null,
         "translations": [
           {
@@ -1168,7 +1137,7 @@
         "note": "Настройки модального окна продажи АКПП.",
         "preview_url": null,
         "singleton": true,
-        "sort": 52,
+        "sort": 11,
         "sort_field": null,
         "translations": [
           {
@@ -1201,7 +1170,7 @@
         "note": "Настройки модального окна записи на сервис.",
         "preview_url": null,
         "singleton": true,
-        "sort": 53,
+        "sort": 12,
         "sort_field": null,
         "translations": [
           {
@@ -1229,12 +1198,12 @@
         "display_template": "{{name}} | /{{slug}}",
         "group": "content",
         "hidden": false,
-        "icon": "article",
+        "icon": "description",
         "item_duplication_fields": null,
         "note": "Ручные статические страницы сайта. Для динамических URL используйте route_landings, а для городских подмен контента — route_landing_city_overrides.",
         "preview_url": null,
         "singleton": false,
-        "sort": 54,
+        "sort": 10,
         "sort_field": "sort",
         "translations": [
           {
@@ -1260,14 +1229,14 @@
         "collection": "route_landings",
         "color": "#1E88E5",
         "display_template": "{{title}} | {{page_type}} | {{service_id.name}} | {{brand_id.name}} | {{model_id.name}}",
-        "group": "content",
+        "group": "routing",
         "hidden": false,
-        "icon": "auto_awesome_motion",
+        "icon": "route",
         "item_duplication_fields": null,
         "note": "Реальные динамические посадочные страницы сайта. Одна запись = одна существующая страница. URL хранить не нужно: он собирается автоматически из page_type и связанных сущностей. Для каждой комбинации сущностей должна быть только одна запись.",
         "preview_url": null,
         "singleton": false,
-        "sort": 55,
+        "sort": 10,
         "sort_field": "sort",
         "translations": [
           {
@@ -1293,14 +1262,14 @@
         "collection": "route_landing_city_overrides",
         "color": "#546E7A",
         "display_template": "{{city_id.name}} | {{landing_id.title}} | {{landing_id.page_type}}",
-        "group": "content",
+        "group": "routing",
         "hidden": false,
-        "icon": "location_city",
+        "icon": "alt_route",
         "item_duplication_fields": null,
         "note": "Точечные переопределения H1, SEO и контента для конкретной динамической страницы в конкретном городе. URL не меняется. Одна запись = одна landing-страница в одном городе.",
         "preview_url": null,
         "singleton": false,
-        "sort": 56,
+        "sort": 11,
         "sort_field": "sort",
         "translations": [
           {
@@ -1333,7 +1302,7 @@
         "note": "Подписи, изображения и ссылки для блока кейсов и карточки кейса.",
         "preview_url": null,
         "singleton": true,
-        "sort": 43,
+        "sort": 16,
         "sort_field": null,
         "translations": [
           {
@@ -1347,6 +1316,161 @@
       "schema": {
         "name": "case_settings"
       }
+    },
+    {
+      "collection": "routing",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "routing",
+        "color": "#6D4C41",
+        "display_template": null,
+        "group": null,
+        "hidden": false,
+        "icon": "route",
+        "item_duplication_fields": null,
+        "note": "Коллекции маршрутов, SEO-посадок и городских переопределений.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 2,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Маршруты и SEO"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": null
+    },
+    {
+      "collection": "geo",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "geo",
+        "color": "#00897B",
+        "display_template": null,
+        "group": null,
+        "hidden": false,
+        "icon": "map",
+        "item_duplication_fields": null,
+        "note": "Коллекции городов, адресов и географических данных.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 3,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "География"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": null
+    },
+    {
+      "collection": "quiz",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "quiz",
+        "color": "#EF6C00",
+        "display_template": null,
+        "group": null,
+        "hidden": false,
+        "icon": "quiz",
+        "item_duplication_fields": null,
+        "note": "Коллекции для квиза, проблем и симптомов.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 4,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Квиз"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": null
+    },
+    {
+      "collection": "crm",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "crm",
+        "color": "#3949AB",
+        "display_template": null,
+        "group": null,
+        "hidden": false,
+        "icon": "assignment_ind",
+        "item_duplication_fields": null,
+        "note": "Заявки и клиентские обращения с сайта.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 5,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Заявки"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": null
+    },
+    {
+      "collection": "system_links",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "locked",
+        "collection": "system_links",
+        "color": "#757575",
+        "display_template": null,
+        "group": null,
+        "hidden": true,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Технические связующие таблицы. Используются автоматически через связи и обычно не открываются вручную.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 99,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Технические связи"
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": null
     }
   ],
   "fields": [
@@ -9266,6 +9390,69 @@
     },
     {
       "collection": "menus",
+      "field": "placement",
+      "type": "string",
+      "meta": {
+        "collection": "menus",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "placement",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": "Где должен показываться этот пункт меню: только в шапке, только в футере или в обоих местах.",
+        "options": {
+          "choices": [
+            {
+              "text": "Общий для всех",
+              "value": "common"
+            },
+            {
+              "text": "Только в шапке",
+              "value": "header"
+            },
+            {
+              "text": "Только в футере",
+              "value": "footer"
+            }
+          ]
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 23,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Где показывать"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "placement",
+        "table": "menus",
+        "data_type": "character varying",
+        "default_value": "common",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "menus",
       "field": "children",
       "type": "alias",
       "meta": {
@@ -16302,7 +16489,7 @@
         "readonly": false,
         "required": false,
         "searchable": false,
-        "sort": 23,
+        "sort": 30,
         "special": ["o2m"],
         "translations": [
           {

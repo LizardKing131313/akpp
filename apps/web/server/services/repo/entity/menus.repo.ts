@@ -1,4 +1,4 @@
-import type { MenuItem } from '#shared/types/menu'
+import type { MenuItem, MenuPlacement } from '#shared/types/menu'
 import type { RouteLandingItem } from '#shared/types/route-landing'
 
 import { RouteLandingsRepository } from '#server/services/repo/entity/route_landings.repo'
@@ -17,6 +17,7 @@ type RawMenuItem = {
   readonly slug: string
   readonly name: string
   readonly parent_id?: string | number | null
+  readonly placement?: MenuPlacement | null
   readonly source_type?: MenuSourceType | null
   readonly source_options?: string | null
 }
@@ -28,11 +29,14 @@ type DynamicMenuContext = {
 export class MenusRepository extends ListSlugRepository<MenuItem> {
   protected readonly collection = 'menus'
 
-  protected readonly fields = 'id,slug,name,parent_id,source_type,source_options,sort'
+  protected readonly fields = 'id,slug,name,parent_id,placement,source_type,source_options,sort'
 
   private readonly DEFAULT_SOURCE_TYPE: MenuSourceType = 'manual'
+  private readonly DEFAULT_PLACEMENT: MenuPlacement = 'common'
 
-  public override async list(): Promise<readonly MenuItem[]> {
+  public override async list(
+    placement: MenuPlacement = this.DEFAULT_PLACEMENT
+  ): Promise<readonly MenuItem[]> {
     const [rawMenus, routeLandings] = await Promise.all([
       this.getAll({
         'filter[status][_eq]': 'published',
@@ -46,6 +50,11 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
     const rootItems: RawMenuItem[] = []
 
     for (const rawMenuItem of rawMenus) {
+      const normalizedPlacement = this.normalizePlacement(rawMenuItem.placement)
+      if (!this.matchesPlacement(normalizedPlacement, placement)) {
+        continue
+      }
+
       const parentId = this.normalizeParentId(rawMenuItem.parent_id)
       if (!parentId) {
         rootItems.push(rawMenuItem)
@@ -84,6 +93,7 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
       id: rawMenuItem.id,
       slug: rawMenuItem.slug,
       name: rawMenuItem.name,
+      placement: this.normalizePlacement(rawMenuItem.placement),
       children: dynamicChildren.length > 0 ? [...dynamicChildren] : null,
     }
   }
@@ -105,6 +115,7 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
           id: `service:${landing.id}`,
           slug: landing.path,
           name: getRouteLandingMenuTitle(landing),
+          placement: this.DEFAULT_PLACEMENT,
           children: null,
         }))
     }
@@ -124,6 +135,7 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
               id: `brand-model:${childLanding.id}`,
               slug: childLanding.path,
               name: getRouteLandingMenuTitle(childLanding),
+              placement: this.DEFAULT_PLACEMENT,
               children: null,
             }))
 
@@ -131,6 +143,7 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
             id: `brand:${landing.id}`,
             slug: landing.path,
             name: getRouteLandingMenuTitle(landing),
+            placement: this.DEFAULT_PLACEMENT,
             children: children.length > 0 ? children : null,
           }
         })
@@ -150,6 +163,7 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
           id: `brand-model:${landing.id}`,
           slug: landing.path,
           name: getRouteLandingMenuTitle(landing),
+          placement: this.DEFAULT_PLACEMENT,
           children: null,
         }))
     }
@@ -193,6 +207,21 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
     }
 
     return this.DEFAULT_SOURCE_TYPE
+  }
+
+  private normalizePlacement(value: RawMenuItem['placement']): MenuPlacement {
+    if (value === 'header' || value === 'footer' || value === 'common') {
+      return value
+    }
+
+    return this.DEFAULT_PLACEMENT
+  }
+
+  private matchesPlacement(
+    itemPlacement: MenuPlacement,
+    requestedPlacement: MenuPlacement
+  ): boolean {
+    return itemPlacement === 'common' || itemPlacement === requestedPlacement
   }
 
   private parseSourceOptions(value: RawMenuItem['source_options']): MenuSourceOptions {

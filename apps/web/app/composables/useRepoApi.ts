@@ -9,7 +9,7 @@ import type { FooterSettings } from '#shared/types/footer'
 import type { HeaderSettings } from '#shared/types/header'
 import type { HeroItem } from '#shared/types/hero'
 import type { LocationItem } from '#shared/types/location'
-import type { MenuItem } from '#shared/types/menu'
+import type { MenuItem, MenuPlacement } from '#shared/types/menu'
 import type {
   CitySelectModalSettings,
   ShopModalSettings,
@@ -216,8 +216,19 @@ export const useLocationById = (idInput: MaybeRefOrGetter<string>) => {
   )
 }
 
-export const useMenus = () => {
-  return useStaticApiData<MenuItem[]>('menus:list', '/api/menus')
+export const useMenus = (placement: MaybeRefOrGetter<MenuPlacement> = 'common') => {
+  const normalizedPlacement = computed<MenuPlacement>(() => {
+    const value = toValue(placement)
+    return value === 'header' || value === 'footer' ? value : 'common'
+  })
+
+  return useAsyncData<MenuItem[]>(
+    () => `menus:list:${normalizedPlacement.value}`,
+    () => fetchFromApi<MenuItem[]>(`/api/menus?placement=${normalizedPlacement.value}`),
+    {
+      watch: [normalizedPlacement],
+    }
+  )
 }
 
 export const useModels = () => {
