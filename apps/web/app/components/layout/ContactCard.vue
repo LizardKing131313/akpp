@@ -42,7 +42,7 @@ const computedHref = computed<string>(() => {
     <CmsImage
       :src="iconSource"
       :alt="iconAlt"
-      sizes="(max-width: 1023px) 28px, 35px"
+      sizes="28px lg:35px"
       :class="cn('h-7 w-7 shrink-0 object-contain lg:h-8.75 lg:w-8.75', iconClass)" />
 
     <div class="flex flex-col text-left">

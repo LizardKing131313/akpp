@@ -101,6 +101,12 @@ useSimplePagePresentation({
   description: pageTitle,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
+
+definePageMeta({
+  footer: {
+    hideContacts: true,
+  },
+})
 </script>
 
 <template>

@@ -83,7 +83,7 @@ const handleSignupClick = (): void => {
           <CmsImage
             :src="settings.part_price_image"
             :alt="settings.part_price_image_alt"
-            sizes="(max-width: 1023px) 28px, 35px"
+            sizes="28px lg:35px"
             class="h-7 w-7 shrink-0 object-contain lg:h-8.75 lg:w-8.75" />
 
           <p class="text-brand-dark text-lg font-bold">{{ partMoney }}</p>
@@ -94,7 +94,7 @@ const handleSignupClick = (): void => {
           <CmsImage
             :src="settings.work_price_image"
             :alt="settings.work_price_image_alt"
-            sizes="(max-width: 1023px) 28px, 35px"
+            sizes="28px lg:35px"
             class="h-7 w-7 shrink-0 object-contain lg:h-8.75 lg:w-8.75" />
 
           <p class="text-brand-dark text-lg font-bold">{{ workMoney }}</p>
@@ -105,7 +105,7 @@ const handleSignupClick = (): void => {
           <CmsImage
             :src="settings.total_image"
             :alt="settings.total_image_alt"
-            sizes="(max-width: 1023px) 28px, 35px"
+            sizes="28px lg:35px"
             class="h-7 w-7 shrink-0 object-contain lg:h-8.75 lg:w-8.75" />
 
           <p class="text-brand-dark text-lg font-bold">{{ totalMoney }}</p>

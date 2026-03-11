@@ -13,7 +13,7 @@ export class ArticlesRepository extends ListSlugRepository<ArticleItem> {
     image_alt,
     content,
     date,
-    annotaion,
+    annotation,
     sort,
     recomended.id,
     recomended.name,
@@ -21,7 +21,7 @@ export class ArticlesRepository extends ListSlugRepository<ArticleItem> {
     recomended.image_source,
     recomended.image_alt,
     recomended.date,
-    recomended.annotaion,
+    recomended.annotation,
     recomended.sort,
   `
 }

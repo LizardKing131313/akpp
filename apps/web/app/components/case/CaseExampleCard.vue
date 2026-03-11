@@ -21,7 +21,7 @@ withDefaults(
         <CmsImage
           :src="caseItem.image_source"
           :alt="caseItem.image_alt"
-          sizes="(max-width: 640px) 50vw, 260px"
+          sizes="50vw sm:260px"
           class="aspect-16/10 w-full object-cover" />
       </div>
 

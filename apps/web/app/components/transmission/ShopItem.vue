@@ -28,7 +28,7 @@ const price = computed<string>(() => {
       <CmsImage
         :src="transmissionItem.image_source"
         :alt="transmissionItem.image_alt"
-        sizes="(max-width: 640px) 150px, 200px"
+        sizes="150px sm:200px"
         class="h-full w-full object-contain" />
     </div>
 

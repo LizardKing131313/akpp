@@ -22,7 +22,7 @@ const cardClass = computed<string>(() => {
     <CmsImage
       :src="service.image_source"
       :alt="service.image_alt"
-      sizes="(min-width: 1024px) 20vw, (min-width: 768px) 50vw, 50vw"
+      sizes="50vw md:50vw lg:20vw"
       :class="
         cn(`
           absolute inset-0 h-full w-full scale-100 object-cover

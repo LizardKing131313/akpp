@@ -1,5 +1,14 @@
 import tailwindcss from '@tailwindcss/vite'
 
+const directusUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL ?? 'http://localhost:8086'
+const directusHost = (() => {
+  try {
+    return new URL(directusUrl).host
+  } catch {
+    return ''
+  }
+})()
+
 const nitroRedisHost = process.env.NITRO_REDIS_HOST?.trim()
 const nitroRedisPortRaw = Number(process.env.NITRO_REDIS_PORT ?? 6379)
 const nitroRedisPort =
@@ -62,6 +71,7 @@ export default defineNuxtConfig({
 
   image: {
     provider: 'ipx',
+    ...(directusHost ? { domains: [directusHost] } : {}),
     format: ['avif', 'webp'],
     quality: 75,
   },
@@ -178,7 +188,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
-      directusUrl: process.env.NUXT_PUBLIC_DIRECTUS_URL ?? 'http://localhost:8086',
+      directusUrl,
       yandexMapApiKey: process.env.YANDEX_MAP_API_KEY ?? '',
       yandexOrgId: process.env.YANDEX_ORG_ID ?? '',
     },

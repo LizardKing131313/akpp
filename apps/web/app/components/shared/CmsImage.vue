@@ -11,15 +11,13 @@ const props = defineProps<{
 }>()
 
 const attrs = useAttrs()
-const image = useImage()
 const runtimeConfig = useRuntimeConfig()
 
 const resolvedSrc = computed<string>(() => {
   if (!props.src) return ''
 
   const directusUrl = runtimeConfig.public.directusUrl.replace(/\/+$/, '')
-
-  return image(`${directusUrl}/assets/${props.src}`)
+  return `${directusUrl}/assets/${props.src}`
 })
 </script>
 
