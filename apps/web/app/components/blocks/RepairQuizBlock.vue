@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { QuizSubmitPayload } from '#shared/types/quiz'
 
+import { defineAsyncComponent } from 'vue'
+
 import { useQuizSubmit } from '~/composables/useQuizSubmit'
 
+const AsyncRepairQuiz = defineAsyncComponent(() => import('~/components/quiz/RepairQuiz.vue'))
 const { submitQuiz } = useQuizSubmit()
 
 const handleQuizSubmit = (payload: QuizSubmitPayload): void => {
@@ -17,7 +20,7 @@ const handleQuizSubmit = (payload: QuizSubmitPayload): void => {
     <TwoColumns class="relative mx-auto grid max-w-6xl gap-2 lg:grid-cols-2">
       <CalculateBanner />
 
-      <RepairQuiz class="w-full px-4 py-12" @submit="handleQuizSubmit" />
+      <component :is="AsyncRepairQuiz" class="w-full px-4 py-12" @submit="handleQuizSubmit" />
     </TwoColumns>
   </section>
 </template>

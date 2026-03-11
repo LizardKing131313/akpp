@@ -56,10 +56,10 @@ const { pageContent } = useRouteLandingPagePresentation({
   <Why
     :image_source="landingData?.brand?.image_source ?? ''"
     :image_alt="landingData?.brand?.image_alt ?? landingData?.brand?.name ?? ''" />
-  <RepairQuizBlock />
+  <LazyRepairQuizBlock hydrate-on-visible />
   <ServiceAndCaseSection />
   <Article>
     {{ pageContent }}
   </Article>
-  <FaqAndReviews />
+  <LazyFaqAndReviews hydrate-on-visible />
 </template>

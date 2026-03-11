@@ -9,8 +9,8 @@ definePageMeta({
 <template>
   <BrandsGrid />
   <ServicesSection />
-  <RepairQuizBlock />
+  <LazyRepairQuizBlock hydrate-on-visible />
   <ServiceAndCaseSection />
-  <PerksSection />
-  <FaqAndReviews />
+  <LazyPerksSection hydrate-on-visible />
+  <LazyFaqAndReviews hydrate-on-visible />
 </template>

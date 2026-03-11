@@ -2,11 +2,14 @@
 import type { HeaderSettings } from '#shared/types/header'
 import type { MenuItem } from '#shared/types/menu'
 
-import { computed, ref } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 
 import { useHeaderSettings, useMenus } from '~/composables/useRepoApi'
 
 const isMobileMenuOpen = ref<boolean>(false)
+const AsyncMobileMenu = defineAsyncComponent(
+  () => import('~/components/layout/menu/MobileMenu.vue')
+)
 const { data: menusData } = useMenus()
 const menuItems = computed<MenuItem[]>(() => menusData.value ?? [])
 
@@ -30,6 +33,10 @@ const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as Hea
       </button>
     </div>
 
-    <MobileMenu v-model:open="isMobileMenuOpen" :items="menuItems" />
+    <component
+      :is="AsyncMobileMenu"
+      v-if="isMobileMenuOpen"
+      v-model:open="isMobileMenuOpen"
+      :items="menuItems" />
   </nav>
 </template>

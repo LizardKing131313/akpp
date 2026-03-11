@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HeaderSettings } from '#shared/types/header'
 
-import { computed, defineAsyncComponent } from 'vue'
+import { computed } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
 import { usePageHeaderMeta } from '~/composables/usePageHeaderMeta'
@@ -13,10 +13,6 @@ const { mode } = usePageHeaderMeta()
 
 const activeCity = useActiveCity()
 const city = computed<CityItem | undefined>(() => activeCity.value)
-const AsyncHero = defineAsyncComponent(() => import('~/components/layout/header/Hero.vue'))
-const AsyncBreadcrumbs = defineAsyncComponent(
-  () => import('~/components/layout/header/Breadcrumbs.vue')
-)
 
 const isHero = computed<boolean>(() => mode.value === 'hero')
 const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
@@ -53,7 +49,7 @@ const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
     <Menu />
   </header>
 
-  <component :is="AsyncHero" v-if="isHero" />
+  <LazyHero v-if="isHero" hydrate-on-idle />
 
-  <component :is="AsyncBreadcrumbs" v-else-if="isBreadcrumbs" />
+  <LazyBreadcrumbs v-else-if="isBreadcrumbs" hydrate-on-idle />
 </template>
