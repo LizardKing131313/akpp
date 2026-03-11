@@ -26,6 +26,7 @@ export type CaseSettings = {
   readonly model_date_label: string
   readonly engine_label: string
   readonly mileage_label: string
+  readonly problems_label: string
   readonly works_label: string
   readonly part_price_label: string
   readonly work_price_label: string

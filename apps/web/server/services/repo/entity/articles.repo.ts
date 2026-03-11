@@ -13,6 +13,15 @@ export class ArticlesRepository extends ListSlugRepository<ArticleItem> {
     image_alt,
     content,
     date,
+    annotaion,
     sort,
+    recomended.id,
+    recomended.name,
+    recomended.slug,
+    recomended.image_source,
+    recomended.image_alt,
+    recomended.date,
+    recomended.annotaion,
+    recomended.sort,
   `
 }

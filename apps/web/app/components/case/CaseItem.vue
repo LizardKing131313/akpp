@@ -62,6 +62,10 @@ const handleSignupClick = (): void => {
           <span class="text-brand-dark font-bold">{{ settings.reason_label }}</span>
           {{ caseItem.reason }}
         </p>
+        <p v-if="caseItem.problems">
+          <span class="text-brand-dark font-bold">{{ settings.problems_label }}</span>
+          {{ caseItem.problems }}
+        </p>
       </div>
 
       <div v-if="caseItem.works.length > 0" class="space-y-3">

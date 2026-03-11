@@ -17,6 +17,7 @@ export class CasesRepository extends ListSlugRepository<CaseItem> {
     engine,
     mileage,
     reason,
+    problems,
     part_price,
     work_price,
 

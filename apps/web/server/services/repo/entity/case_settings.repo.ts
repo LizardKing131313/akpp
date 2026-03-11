@@ -11,6 +11,7 @@ export class CaseSettingsRepository extends SingletonRepository<CaseSettings> {
     model_date_label,
     engine_label,
     mileage_label,
+    problems_label,
     works_label,
     part_price_label,
     work_price_label,
