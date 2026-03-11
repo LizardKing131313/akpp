@@ -11538,18 +11538,20 @@
         "collection": "transmission_range_model_variants",
         "conditions": null,
         "display": null,
-        "display_options": null,
+        "display_options": {
+          "template": "{{model}} | {{engine}} | {{drive}}"
+        },
         "field": "transmission_range_model_variants",
         "group": null,
         "hidden": false,
-        "interface": "list-o2m",
-        "note": "Список вариантов моделей, которые входят в этот диапазон.",
+        "interface": "list-m2m",
+        "note": "Выберите несколько вариантов моделей, которые входят в этот диапазон трансмиссии.",
         "options": null,
         "readonly": false,
         "required": false,
         "searchable": false,
         "sort": 23,
-        "special": ["o2m"],
+        "special": ["m2m"],
         "translations": [
           {
             "language": "ru-RU",
@@ -11720,13 +11722,13 @@
         "conditions": null,
         "display": null,
         "display_options": {
-          "template": "{{model}} | {{engine}}"
+          "template": "{{model}} | {{engine}} | {{drive}}"
         },
         "field": "model_variants_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
-        "note": "Вариант модели, который включен в диапазон.",
+        "note": "Выберите один вариант модели. Для диапазона можно добавить несколько таких связей автоматически через поле выше.",
         "options": null,
         "readonly": false,
         "required": true,
@@ -25439,7 +25441,7 @@
       "field": "transmission_range_model_variants_id",
       "related_collection": "transmission_range_model_variants",
       "meta": {
-        "junction_field": null,
+        "junction_field": "model_variants_id",
         "many_collection": "transmission_range_model_variants_items",
         "many_field": "transmission_range_model_variants_id",
         "one_allowed_collections": null,
@@ -25464,7 +25466,7 @@
       "field": "model_variants_id",
       "related_collection": "model_variants",
       "meta": {
-        "junction_field": null,
+        "junction_field": "transmission_range_model_variants_id",
         "many_collection": "transmission_range_model_variants_items",
         "many_field": "model_variants_id",
         "one_allowed_collections": null,
