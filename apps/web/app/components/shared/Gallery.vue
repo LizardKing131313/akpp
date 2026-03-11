@@ -31,7 +31,7 @@ const closeLightbox = (): void => {
       class="bg-brand-white aspect-4/3 w-full cursor-pointer overflow-hidden focus:outline-none"
       :disabled="!activeSrc"
       @click="openLightbox(activeIndex)">
-      <img v-if="activeSrc" :src="activeSrc" alt="" class="h-full w-full object-contain" />
+      <CmsImage v-if="activeSrc" :src="activeSrc" class="h-full w-full object-contain" />
     </button>
 
     <div class="mt-4 grid grid-cols-3 gap-3">
