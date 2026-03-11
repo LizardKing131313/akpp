@@ -51,10 +51,7 @@ const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
         </NuxtLink>
       </div>
 
-      <GoToLink
-        :href="settings.show_all_articles_href"
-        :ariaLabel="settings.show_all_articles_aria_label"
-        class="mt-8">
+      <GoToLink :href="normalizeAppPath(settings.show_all_articles_href)" class="mt-8">
         {{ settings.show_all_articles }}
       </GoToLink>
     </div>

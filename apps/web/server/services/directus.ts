@@ -43,11 +43,23 @@ const isDirectusErrorResponse = (value: unknown): value is DirectusErrorResponse
 
 export type DirectusQuery = Record<string, string | number | boolean | undefined>
 
+const normalizeQueryValue = (key: string, rawValue: string | number | boolean): string => {
+  if (key === 'fields' && typeof rawValue === 'string') {
+    return rawValue
+      .split(',')
+      .map((field) => field.trim())
+      .filter((field) => field.length > 0)
+      .join(',')
+  }
+
+  return String(rawValue)
+}
+
 const buildQueryString = (query: DirectusQuery): string => {
   const searchParams = new URLSearchParams()
   for (const [key, rawValue] of Object.entries(query)) {
     if (rawValue === undefined) continue
-    searchParams.set(key, String(rawValue))
+    searchParams.set(key, normalizeQueryValue(key, rawValue))
   }
   const queryString = searchParams.toString()
   return queryString.length > 0 ? `?${queryString}` : ''

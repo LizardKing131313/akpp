@@ -1,18 +1,28 @@
 <script setup lang="ts">
-import { useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue'
 
 defineOptions({
   inheritAttrs: false,
 })
 
-defineProps<{
+const props = defineProps<{
   src: string
   alt?: string | undefined
 }>()
 
 const attrs = useAttrs()
+const image = useImage()
+const runtimeConfig = useRuntimeConfig()
+
+const resolvedSrc = computed<string>(() => {
+  if (!props.src) return ''
+
+  const directusUrl = runtimeConfig.public.directusUrl.replace(/\/+$/, '')
+
+  return image(`${directusUrl}/assets/${props.src}`)
+})
 </script>
 
 <template>
-  <NuxtImg :src="src" :alt="alt ?? ''" quality="75" v-bind="attrs" />
+  <NuxtImg v-if="resolvedSrc" :src="resolvedSrc" :alt="alt ?? ''" v-bind="attrs" />
 </template>

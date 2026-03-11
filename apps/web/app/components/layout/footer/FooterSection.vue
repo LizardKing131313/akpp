@@ -75,12 +75,12 @@ const mapZoom = computed<number>(() => {
 
 const emailHref = computed<string>(() => {
   const emailValue = city.value?.email_value?.trim() ?? ''
-  return emailValue.length > 0 ? `mailto:${emailValue}` : ''
+  return emailValue.length > 0 ? `${emailValue}` : ''
 })
 
 const phoneHref = computed<string>(() => {
   const phoneValue = city.value?.phone_number?.replaceAll(/[^\d+]/g, '') ?? ''
-  return phoneValue.length > 0 ? `tel:${phoneValue}` : ''
+  return phoneValue.length > 0 ? `${phoneValue}` : ''
 })
 
 const menuHrefByItem = (menuItem: MenuItem): string => {

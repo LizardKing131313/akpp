@@ -61,13 +61,13 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
                     sm:text-4xl lg:text-5xl lg:whitespace-nowrap
                   `)
                 ">
+                <span>{{ slide.title_main }}</span>
+                <span v-if="slide.title_accent && slide.title_accent.length > 0" class="mr-4" />
                 <span
                   v-if="slide.title_accent && slide.title_accent.length > 0"
                   class="text-brand-red">
                   {{ slide.title_accent }}
                 </span>
-                <span v-if="slide.title_accent && slide.title_accent.length > 0" class="mr-4" />
-                <span>{{ slide.title_main }}</span>
               </h2>
 
               <p
