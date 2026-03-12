@@ -28,10 +28,7 @@ export type HeaderSettings = {
   readonly menu_mobile_logo_alt: string
 }
 
-export type HeaderSectionMode = 'none' | 'hero' | 'breadcrumbs'
-
 export type PageHeaderMeta = {
-  readonly kind?: HeaderSectionMode
   readonly breadcrumb?: string
   readonly breadcrumbs?: BreadcrumbItem[]
 }

@@ -48,7 +48,6 @@ const normalizeMeta = (meta: PageHeaderMeta): PageHeaderMeta => {
     : undefined
 
   return {
-    ...(meta.kind ? { kind: meta.kind } : {}),
     ...(breadcrumb.length > 0 ? { breadcrumb } : {}),
     ...(breadcrumbs && breadcrumbs.length > 0 ? { breadcrumbs } : {}),
   }
