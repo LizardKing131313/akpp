@@ -8,8 +8,8 @@ export type LocationItem = EntityItem &
     readonly worktime: string
     readonly phone: string
 
-    readonly metro: string
-    readonly metro_color: string
+    readonly metro: string | null
+    readonly metro_color: string | null
 
     readonly images: ImageListItem[]
   }

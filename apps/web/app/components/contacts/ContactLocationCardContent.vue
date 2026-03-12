@@ -34,8 +34,8 @@ const handleSignupClick = (): void => {
   <div v-if="location.metro" class="mt-3 flex items-center gap-2 text-left">
     <span
       class="h-2.5 w-2.5 rounded-full text-left"
-      :style="{ backgroundColor: location.metro_color }" />
-    <span class="text-brand-grey text-left text-sm">м. {{ location.metro }}</span>
+      :style="location.metro_color ? { backgroundColor: location.metro_color } : undefined" />
+    <span class="text-brand-grey text-left text-sm">{{ location.metro }}</span>
   </div>
 
   <div class="text-brand-grey mt-2 text-left text-sm">
@@ -53,7 +53,7 @@ const handleSignupClick = (): void => {
 
   <MainButton
     v-if="detail"
-    class="mt-6 flex w-auto items-center justify-center px-14"
+    class="mt-6 flex w-auto items-center justify-center px-4 text-sm"
     @click="handleSignupClick">
     Записаться на ремонт
   </MainButton>

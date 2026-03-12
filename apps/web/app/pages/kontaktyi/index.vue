@@ -8,13 +8,13 @@ import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { useSimplePagePresentation } from '~/composables/useSimplePagePresentation'
 
 const { data: citiesData } = await useCities()
-const { data: allLocationsData } = await useLocations()
 
 const cities = computed<CityItem[]>(() => citiesData.value ?? [])
-const allLocations = computed<LocationItem[]>(() => allLocationsData.value ?? [])
 
 const selectedCityId = ref<string>('')
 const selectedLocationId = ref<string | null>(null)
+
+const { data: filteredLocationsData } = await useLocations(selectedCityId)
 
 watch(
   () => cities.value,
@@ -30,7 +30,7 @@ watch(
 )
 
 const filteredLocations = computed<LocationItem[]>(() => {
-  return allLocations.value.filter((locationItem) => locationItem.city_id === selectedCityId.value)
+  return filteredLocationsData.value ?? []
 })
 
 const selectedLocation = computed<LocationItem | null>(() => {

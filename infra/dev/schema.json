@@ -13778,7 +13778,7 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Служебный код пункта меню. Нужен для связей и служебной логики.",
+        "note": "URL",
         "options": null,
         "readonly": false,
         "required": true,
@@ -13788,7 +13788,7 @@
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Служебный код"
+            "translation": "URL"
           }
         ],
         "validation": null,
