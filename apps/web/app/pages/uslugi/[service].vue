@@ -7,6 +7,10 @@ import { computed } from 'vue'
 import { useResolvedRouteLanding, useRouteLandings } from '~/composables/useRepoApi'
 import { useRouteLandingPagePresentation } from '~/composables/useRouteLandingPagePresentation'
 
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const route = useRoute()
 const activeCity = useActiveCity()
 const serviceSlug = computed<string>(() => String(route.params.service ?? '').trim())
@@ -48,10 +52,7 @@ const brandsForService = computed<BrandItem[]>(() => {
 
 const { pageContent } = useRouteLandingPagePresentation({
   landing: landingData,
-  baseItems: computed(() => [
-    { name: 'Главная', slug: '/' },
-    { name: 'Услуги', slug: '/uslugi' },
-  ]),
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }, { name: 'Услуги' }]),
 })
 
 const requestUrl = useRequestURL()

@@ -7,7 +7,7 @@ import { computed, ref } from 'vue'
 interface BrandsGridProps {
   baseHref?: string
   title?: string
-  brands?: BrandItem[]
+  brands?: BrandItem[] | undefined
   show?: string
   collapse?: string
 }
@@ -15,7 +15,6 @@ interface BrandsGridProps {
 const props = withDefaults(defineProps<BrandsGridProps>(), {
   baseHref: '',
   title: 'Выберите марку автомобиля',
-  brands: () => [],
   show: 'Показать еще',
   collapse: 'Свернуть',
 })
@@ -28,7 +27,7 @@ const initialMobileCount = 9
 const sectionRef = ref<HTMLElement | null>(null)
 
 const resolvedBrands = computed<BrandItem[]>(() => {
-  if (props.brands.length > 0) {
+  if (props.brands !== undefined) {
     return props.brands
   }
 

@@ -4,6 +4,10 @@ import { computed } from 'vue'
 import { useResolvedRouteLanding } from '~/composables/useRepoApi'
 import { useRouteLandingPagePresentation } from '~/composables/useRouteLandingPagePresentation'
 
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const route = useRoute()
 const activeCity = useActiveCity()
 

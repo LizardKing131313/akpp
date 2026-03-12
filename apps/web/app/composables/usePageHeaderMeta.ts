@@ -43,36 +43,18 @@ export const usePageHeaderMeta = () => {
     return routeMeta.pageHeader ?? {}
   })
 
-  const pageHeaderMeta = computed<PageHeaderMeta>(() => {
-    const routeMeta = routePageHeaderMeta.value
-    const override = overrideState.value
-
-    if (!override || override.path !== route.path) {
-      return routeMeta
-    }
-
-    return {
-      ...routeMeta,
-      ...override.meta,
-    }
-  })
-
   const mode = computed<HeaderSectionMode>(() => {
-    const metaKind = pageHeaderMeta.value.kind
-    if (metaKind === 'hero') {
-      return route.path === '/' ? 'hero' : 'none'
+    if (route.path === '/') {
+      return routePageHeaderMeta.value.kind === 'hero' ? 'hero' : 'none'
     }
 
-    if (metaKind === 'breadcrumbs') {
-      return 'breadcrumbs'
-    }
-
-    const hasBreadcrumbTitle = normalizeText(pageHeaderMeta.value.breadcrumb).length > 0
-    const hasBreadcrumbItems = Array.isArray(pageHeaderMeta.value.breadcrumbs)
-      ? pageHeaderMeta.value.breadcrumbs.length > 0
+    const override = overrideState.value
+    const hasBreadcrumbTitle = normalizeText(override?.breadcrumb).length > 0
+    const hasBreadcrumbItems = Array.isArray(override?.breadcrumbs)
+      ? override.breadcrumbs.length > 0
       : false
 
-    if (route.path !== '/' && (hasBreadcrumbTitle || hasBreadcrumbItems)) {
+    if (hasBreadcrumbTitle || hasBreadcrumbItems) {
       return 'breadcrumbs'
     }
 
@@ -80,14 +62,32 @@ export const usePageHeaderMeta = () => {
   })
 
   const breadcrumbTitle = computed<string>(() => {
-    return normalizeText(pageHeaderMeta.value.breadcrumb)
+    if (route.path === '/') {
+      return ''
+    }
+
+    const override = overrideState.value
+    if (!override) {
+      return ''
+    }
+
+    return normalizeText(override.breadcrumb)
   })
 
   const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
-    const rawBreadcrumbs = pageHeaderMeta.value.breadcrumbs
-    if (Array.isArray(rawBreadcrumbs) && rawBreadcrumbs.length > 0) {
-      return normalizeBreadcrumbs(rawBreadcrumbs)
+    if (route.path === '/') {
+      return []
     }
+
+    const override = overrideState.value
+    if (!override) {
+      return []
+    }
+
+    if (Array.isArray(override.breadcrumbs) && override.breadcrumbs.length > 0) {
+      return normalizeBreadcrumbs(override.breadcrumbs)
+    }
+
     return []
   })
 

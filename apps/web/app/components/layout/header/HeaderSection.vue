@@ -49,7 +49,7 @@ const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
     <Menu />
   </header>
 
-  <Hero v-if="isHero" />
+  <Hero v-show="isHero" />
 
-  <Breadcrumbs v-else-if="isBreadcrumbs" />
+  <Breadcrumbs v-show="isBreadcrumbs" />
 </template>

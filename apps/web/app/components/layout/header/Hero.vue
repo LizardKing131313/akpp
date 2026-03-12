@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { HeaderSettings } from '#shared/types/header'
 import type { HeroItem } from '#shared/types/hero'
+import type { Swiper as SwiperInstance } from 'swiper'
 
 import { cn } from '#shared/lib/cn'
 import { Autoplay, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { computed } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 
 import { useSignupModal } from '~/composables/modal/useSignupModal'
 import { useActiveCity } from '~/composables/useActiveCity'
@@ -15,6 +16,9 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 const swiperModules = computed(() => [Autoplay, Navigation])
+const swiperInstance = ref<SwiperInstance | null>(null)
+const prevButton = ref<HTMLElement | null>(null)
+const nextButton = ref<HTMLElement | null>(null)
 
 const { data: settingsData } = await useHeaderSettings()
 const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
@@ -25,8 +29,42 @@ const handleClick = (): void => {
   useSignupModal().openModal()
 }
 
+const bindNavigation = async (): Promise<void> => {
+  await nextTick()
+
+  const swiper = swiperInstance.value
+  if (!swiper || !prevButton.value || !nextButton.value) {
+    return
+  }
+
+  if (!swiper.params.navigation || swiper.params.navigation === true) {
+    swiper.params.navigation = {}
+  }
+
+  const navigationParams = swiper.params.navigation
+  if (typeof navigationParams === 'boolean') {
+    return
+  }
+
+  navigationParams.prevEl = prevButton.value
+  navigationParams.nextEl = nextButton.value
+
+  swiper.navigation.destroy()
+  swiper.navigation.init()
+  swiper.navigation.update()
+}
+
+const handleSwiper = (instance: SwiperInstance): void => {
+  swiperInstance.value = instance
+  void bindNavigation()
+}
+
 const { data: heroesData } = useHeroes(cityId)
 const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
+
+onMounted(() => {
+  void bindNavigation()
+})
 </script>
 
 <template>
@@ -37,7 +75,8 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
         :loop="true"
         :speed="700"
         :autoplay="{ delay: 6000, disableOnInteraction: false }"
-        :navigation="{ prevEl: '.hero-slider-prev', nextEl: '.hero-slider-next' }"
+        :navigation="true"
+        @swiper="handleSwiper"
         class="relative h-100 w-full sm:h-110 lg:h-120">
         <SwiperSlide v-for="slide in slides" :key="slide.id" class="relative h-full w-full">
           <CmsImage
@@ -96,6 +135,7 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
       <div class="pointer-events-none absolute inset-0 z-20 hidden lg:block">
         <div class="relative mx-auto h-full max-w-6xl px-4">
           <button
+            ref="prevButton"
             type="button"
             :aria-label="settings.hero_prev_slide_aria_label"
             :class="
@@ -110,6 +150,7 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
           </button>
 
           <button
+            ref="nextButton"
             type="button"
             :aria-label="settings.hero_next_slide_aria_label"
             :class="
@@ -127,3 +168,10 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
     </div>
   </section>
 </template>
+
+<style scoped>
+:deep(.swiper-button-prev),
+:deep(.swiper-button-next) {
+  display: none;
+}
+</style>

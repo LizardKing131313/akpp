@@ -7,6 +7,10 @@ import { computed } from 'vue'
 import { useResolvedRouteLanding, useRouteLandings } from '~/composables/useRepoApi'
 import { useRouteLandingPagePresentation } from '~/composables/useRouteLandingPagePresentation'
 
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const route = useRoute()
 const activeCity = useActiveCity()
 const brandSlug = computed<string>(() => String(route.params.brand ?? '').trim())

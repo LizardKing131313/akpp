@@ -4,6 +4,10 @@ import { computed } from 'vue'
 import { useResolvedRouteLanding } from '~/composables/useRepoApi'
 import { useRouteLandingPagePresentation } from '~/composables/useRouteLandingPagePresentation'
 
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const route = useRoute()
 const activeCity = useActiveCity()
 
@@ -33,10 +37,7 @@ if (!landingData.value) {
 const { pageContent } = useRouteLandingPagePresentation({
   landing: landingData,
   baseItems: computed(() => {
-    const items = [
-      { name: 'Главная', slug: '/' },
-      { name: 'Услуги', slug: '/uslugi' },
-    ]
+    const items = [{ name: 'Главная', slug: '/' }, { name: 'Услуги' }]
     const serviceName = landingData.value?.service?.name ?? ''
     const serviceSlugValue = landingData.value?.service?.slug ?? ''
 

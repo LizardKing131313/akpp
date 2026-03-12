@@ -4,6 +4,9 @@ import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
 const props = defineProps<{ service: ServiceItem }>()
+const href = computed<string>(() => {
+  return props.service.slug === '/' ? '/' : normalizeAppPath(`uslugi/${props.service.slug}`)
+})
 
 const cardClass = computed<string>(() => {
   const baseClass = cn(
@@ -18,7 +21,7 @@ const cardClass = computed<string>(() => {
 </script>
 
 <template>
-  <NuxtLink :to="normalizeAppPath(`uslugi/${service.slug}`)" :class="cardClass">
+  <NuxtLink :to="href" :class="cardClass">
     <CmsImage
       :src="service.image_source"
       :alt="service.image_alt"

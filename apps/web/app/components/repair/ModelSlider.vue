@@ -11,12 +11,12 @@ import 'swiper/css/navigation'
 
 const swiperModules = [Navigation]
 
-const props = withDefaults(defineProps<{ items?: ModelItem[] }>(), { items: () => [] })
+const props = defineProps<{ items?: ModelItem[] | undefined }>()
 
 const { data: modelsData } = await useModels()
 
 const resolvedItems = computed<ModelItem[]>(() => {
-  if (props.items.length > 0) {
+  if (props.items !== undefined) {
     return props.items
   }
 

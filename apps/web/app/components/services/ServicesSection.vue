@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { RouteLandingItem } from '#shared/types/route-landing'
 import type { ServiceItem } from '#shared/types/service'
 
 import { computed } from 'vue'
@@ -9,13 +10,22 @@ const props = withDefaults(defineProps<{ title?: string; items?: ServiceItem[] }
 })
 
 const { data: servicesData } = await useServices()
+const { data: serviceLandingsData } = await useRouteLandings(() => ({
+  page_type: 'service',
+}))
 
 const resolvedItems = computed<ServiceItem[]>(() => {
-  if (props.items.length > 0) {
-    return props.items
-  }
+  const items = props.items.length > 0 ? props.items : (servicesData.value ?? [])
+  const landingSlugs = new Set(
+    (serviceLandingsData.value ?? [])
+      .map((landing: RouteLandingItem) => landing.service?.slug ?? '')
+      .filter((slug) => slug.length > 0)
+  )
 
-  return servicesData.value ?? []
+  return items.map((service) => ({
+    ...service,
+    slug: landingSlugs.has(service.slug) ? service.slug : '/',
+  }))
 })
 </script>
 
