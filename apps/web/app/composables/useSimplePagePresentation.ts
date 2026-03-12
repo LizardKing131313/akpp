@@ -19,7 +19,8 @@ export const useSimplePagePresentation = (options: UseSimplePagePresentationOpti
     return toValue(options.baseItems) ?? []
   })
 
-  usePageEntityBreadcrumbs({
+  usePageHeader({
+    kind: 'breadcrumbs',
     title: pageTitle,
     baseItems,
   })

@@ -27,7 +27,8 @@ export const useRouteLandingPagePresentation = (
     )
   })
 
-  usePageEntityBreadcrumbs({
+  usePageHeader({
+    kind: 'breadcrumbs',
     title: pageTitle,
     baseItems: options.baseItems,
   })

@@ -36,29 +36,31 @@ const normalizeBreadcrumbs = (items: readonly BreadcrumbItem[]): BreadcrumbItem[
 
 export const usePageHeaderMeta = () => {
   const route = useRoute()
-  const { overrideState } = usePageHeaderState()
+  const pageHeaderState = usePageHeaderState()
 
   const routePageHeaderMeta = computed<PageHeaderMeta>(() => {
     const routeMeta = route.meta as RouteMetaWithHeader
     return routeMeta.pageHeader ?? {}
   })
 
-  const mode = computed<HeaderSectionMode>(() => {
-    if (route.path === '/') {
-      return routePageHeaderMeta.value.kind === 'hero' ? 'hero' : 'none'
+  const runtimeMeta = computed<PageHeaderMeta | null>(() => {
+    if (pageHeaderState.value?.path !== route.path) {
+      return null
     }
 
-    const override = overrideState.value
-    const hasBreadcrumbTitle = normalizeText(override?.breadcrumb).length > 0
-    const hasBreadcrumbItems = Array.isArray(override?.breadcrumbs)
-      ? override.breadcrumbs.length > 0
-      : false
+    return pageHeaderState.value.meta
+  })
 
-    if (hasBreadcrumbTitle || hasBreadcrumbItems) {
-      return 'breadcrumbs'
+  const activeMeta = computed<PageHeaderMeta>(() => {
+    const runtime = runtimeMeta.value
+    if (!runtime) {
+      return routePageHeaderMeta.value
     }
 
-    return 'none'
+    return {
+      ...routePageHeaderMeta.value,
+      ...runtime,
+    }
   })
 
   const breadcrumbTitle = computed<string>(() => {
@@ -66,12 +68,7 @@ export const usePageHeaderMeta = () => {
       return ''
     }
 
-    const override = overrideState.value
-    if (!override) {
-      return ''
-    }
-
-    return normalizeText(override.breadcrumb)
+    return normalizeText(activeMeta.value.breadcrumb)
   })
 
   const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
@@ -79,16 +76,35 @@ export const usePageHeaderMeta = () => {
       return []
     }
 
-    const override = overrideState.value
-    if (!override) {
-      return []
+    const items = activeMeta.value.breadcrumbs
+    if (!Array.isArray(items) || items.length === 0) {
+      if (breadcrumbTitle.value.length === 0) {
+        return []
+      }
+
+      return [{ name: breadcrumbTitle.value }]
     }
 
-    if (Array.isArray(override.breadcrumbs) && override.breadcrumbs.length > 0) {
-      return normalizeBreadcrumbs(override.breadcrumbs)
+    return normalizeBreadcrumbs(items)
+  })
+
+  const mode = computed<HeaderSectionMode>(() => {
+    if (route.path === '/') {
+      return activeMeta.value.kind === 'hero' ? 'hero' : 'none'
     }
 
-    return []
+    const hasBreadcrumbTitle = breadcrumbTitle.value.length > 0
+    const hasBreadcrumbItems = breadcrumbItems.value.length > 0
+
+    if (hasBreadcrumbTitle || hasBreadcrumbItems) {
+      return 'breadcrumbs'
+    }
+
+    if (activeMeta.value.kind === 'breadcrumbs') {
+      return 'breadcrumbs'
+    }
+
+    return 'none'
   })
 
   return {
