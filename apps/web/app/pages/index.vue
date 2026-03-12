@@ -12,5 +12,5 @@ definePageMeta({
   <LazyRepairQuizBlock hydrate-on-visible />
   <ServiceAndCaseSection />
   <LazyPerksSection hydrate-on-visible />
-  <LazyFaqAndReviews hydrate-on-visible />
+  <LazyFaqAndReviews :show-on-homepage="true" hydrate-on-visible />
 </template>

@@ -3,11 +3,21 @@ import type { FaqItem } from '#shared/types/faq'
 
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<{ items?: FaqItem[] }>(), {
-  items: () => [],
-})
+const props = withDefaults(
+  defineProps<{
+    items?: FaqItem[]
+    routeLandingId?: string | undefined
+    showOnHomepage?: boolean | undefined
+  }>(),
+  {
+    items: () => [],
+  }
+)
 
-const { data: faqsData } = await useFaqs()
+const { data: faqsData } = await useFaqs(() => ({
+  route_landing_id: props.routeLandingId,
+  show_on_homepage: props.showOnHomepage,
+}))
 
 const resolvedItems = computed<FaqItem[]>(() => {
   if (props.items.length > 0) {

@@ -4,7 +4,7 @@ import type { CalculateSettings } from '#shared/types/calculate'
 import type { CaseItem } from '#shared/types/case'
 import type { CityItem } from '#shared/types/city'
 import type { ErrorSettings } from '#shared/types/error'
-import type { FaqItem } from '#shared/types/faq'
+import type { FaqItem, FaqListFilters } from '#shared/types/faq'
 import type { FooterSettings } from '#shared/types/footer'
 import type { HeaderSettings } from '#shared/types/header'
 import type { HeroItem } from '#shared/types/hero'
@@ -172,8 +172,40 @@ export const useCityBySlug = (slugInput: MaybeRefOrGetter<string>) => {
   })
 }
 
-export const useFaqs = () => {
-  return useStaticApiData<FaqItem[]>('faqs:list', '/api/faqs')
+export const useFaqs = (filtersInput?: MaybeRefOrGetter<FaqListFilters | undefined>) => {
+  const normalizedFilters = computed<FaqListFilters>(() => {
+    const filters = toValue(filtersInput)
+
+    return {
+      route_landing_id: normalizeParamValue(filters?.route_landing_id) || undefined,
+      show_on_homepage:
+        typeof filters?.show_on_homepage === 'boolean' ? filters.show_on_homepage : undefined,
+    }
+  })
+
+  return useAsyncData<FaqItem[]>(
+    () =>
+      `faqs:list:${normalizedFilters.value.route_landing_id ?? ''}:${String(normalizedFilters.value.show_on_homepage ?? '')}`,
+    () => {
+      const searchParams = new URLSearchParams()
+
+      if (normalizedFilters.value.route_landing_id) {
+        searchParams.set('routeLandingId', normalizedFilters.value.route_landing_id)
+      }
+
+      if (typeof normalizedFilters.value.show_on_homepage === 'boolean') {
+        searchParams.set('showOnHomepage', String(normalizedFilters.value.show_on_homepage))
+      }
+
+      const queryString = searchParams.toString()
+      const path = queryString.length > 0 ? `/api/faqs?${queryString}` : '/api/faqs'
+
+      return fetchFromApi<FaqItem[]>(path)
+    },
+    {
+      watch: [normalizedFilters],
+    }
+  )
 }
 
 export const usePerks = () => {

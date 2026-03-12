@@ -63,5 +63,5 @@ const { pageContent } = useRouteLandingPagePresentation({
   <Article>
     {{ pageContent }}
   </Article>
-  <LazyFaqAndReviews hydrate-on-visible />
+  <LazyFaqAndReviews :route-landing-id="landingData?.id" hydrate-on-visible />
 </template>

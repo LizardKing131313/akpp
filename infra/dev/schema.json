@@ -8023,30 +8023,81 @@
     },
     {
       "collection": "faqs",
-      "field": "service_id",
+      "field": "show_on_homepage",
+      "type": "boolean",
+      "meta": {
+        "collection": "faqs",
+        "conditions": null,
+        "display": "boolean",
+        "display_options": null,
+        "field": "show_on_homepage",
+        "group": null,
+        "hidden": false,
+        "interface": "boolean",
+        "note": "Показывать этот FAQ на главной странице.",
+        "options": {
+          "label": "Показывать на главной"
+        },
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 26,
+        "special": ["cast-boolean"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "На главной"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "show_on_homepage",
+        "table": "faqs",
+        "data_type": "boolean",
+        "default_value": false,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "faqs",
+      "field": "route_landing_id",
       "type": "integer",
       "meta": {
         "collection": "faqs",
         "conditions": null,
         "display": null,
         "display_options": {
-          "template": "{{name}}"
+          "template": "{{title}}"
         },
-        "field": "service_id",
+        "field": "route_landing_id",
         "group": null,
         "hidden": false,
         "interface": "select-dropdown-m2o",
-        "note": "Если указать услугу, вопрос будет привязан только к ней. Иначе вопрос можно использовать шире.",
+        "note": "Если указано, FAQ будет показан только на этой landing-странице.",
         "options": null,
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 22,
+        "sort": 27,
         "special": null,
         "translations": [
           {
             "language": "ru-RU",
-            "translation": "Услуга"
+            "translation": "Landing-страница"
           }
         ],
         "validation": null,
@@ -8054,7 +8105,7 @@
         "width": "full"
       },
       "schema": {
-        "name": "service_id",
+        "name": "route_landing_id",
         "table": "faqs",
         "data_type": "integer",
         "default_value": null,
@@ -8068,7 +8119,7 @@
         "is_generated": false,
         "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": "services",
+        "foreign_key_table": "route_landings",
         "foreign_key_column": "id"
       }
     },
@@ -26165,14 +26216,14 @@
     },
     {
       "collection": "faqs",
-      "field": "service_id",
-      "related_collection": "services",
+      "field": "route_landing_id",
+      "related_collection": "route_landings",
       "meta": {
         "junction_field": null,
         "many_collection": "faqs",
-        "many_field": "service_id",
+        "many_field": "route_landing_id",
         "one_allowed_collections": null,
-        "one_collection": "services",
+        "one_collection": "route_landings",
         "one_collection_field": null,
         "one_deselect_action": "nullify",
         "one_field": null,
@@ -26180,10 +26231,10 @@
       },
       "schema": {
         "table": "faqs",
-        "column": "service_id",
-        "foreign_key_table": "services",
+        "column": "route_landing_id",
+        "foreign_key_table": "route_landings",
         "foreign_key_column": "id",
-        "constraint_name": "faqs_service_id_foreign",
+        "constraint_name": "faqs_route_landing_id_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
       }

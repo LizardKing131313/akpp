@@ -1,5 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 
+const isProduction = process.env.NODE_ENV === 'production'
 const directusUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL ?? 'http://localhost:8086'
 const directusHost = (() => {
   try {
@@ -34,6 +35,10 @@ const nitroCacheStorage = nitroRedisHost
   : {
       driver: 'memory' as const,
     }
+
+const prodOnlyRouteRule = <RuleType>(rule: RuleType): RuleType | Record<string, never> => {
+  return isProduction ? rule : {}
+}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // noinspection JSUnusedGlobalSymbols
@@ -83,10 +88,12 @@ export default defineNuxtConfig({
     },
     routeRules: {
       '/api/**': {
-        cache: {
-          maxAge: nitroApiCacheTtl,
-          staleMaxAge: 60,
-        },
+        ...prodOnlyRouteRule({
+          cache: {
+            maxAge: nitroApiCacheTtl,
+            staleMaxAge: 60,
+          },
+        }),
       },
       '/api/health/**': {
         cache: false,
@@ -95,64 +102,104 @@ export default defineNuxtConfig({
         cache: false,
       },
       '/': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/policy': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/articles': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/articles/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/kontaktyi': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/kontaktyi/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/opredelit-akpp': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/opredelit-akpp/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/remont-akpp-*': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/remont-akpp-*/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/sale-akpp': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/sale-akpp/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/transmission': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/transmission/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/uslugi': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/uslugi/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/work': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/work/**': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/sitemap.xml': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/robots.txt': {
-        swr: nitroSsrSwr,
+        ...prodOnlyRouteRule({
+          swr: nitroSsrSwr,
+        }),
       },
       '/_nuxt/**': {
         headers: {
