@@ -20,5 +20,6 @@ useSimplePagePresentation({
 </script>
 
 <template>
+  <Breadcrumbs />
   <ImageCardGrid :items="articlesData ?? []" baseHref="/articles" />
 </template>

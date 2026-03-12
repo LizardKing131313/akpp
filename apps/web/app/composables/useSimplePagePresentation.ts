@@ -20,7 +20,6 @@ export const useSimplePagePresentation = (options: UseSimplePagePresentationOpti
   })
 
   usePageHeader({
-    kind: 'breadcrumbs',
     title: pageTitle,
     baseItems,
   })

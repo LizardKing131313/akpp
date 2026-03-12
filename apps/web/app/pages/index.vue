@@ -23,7 +23,7 @@ definePageMeta({
 </script>
 
 <template>
-  <BrandsGrid baseHref="remont-akpp-" />
+  <BrandsGrid baseHref="remont-akpp-" class="pt-12" />
   <ServicesSection />
   <RepairQuizBlock />
   <ServiceAndCaseSection />

@@ -35,5 +35,6 @@ useSimplePagePresentation({
 </script>
 
 <template>
+  <Breadcrumbs />
   <ImageCardGrid :items="caseCards" />
 </template>

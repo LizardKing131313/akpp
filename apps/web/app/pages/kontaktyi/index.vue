@@ -164,6 +164,7 @@ definePageMeta({
 </script>
 
 <template>
+  <Breadcrumbs />
   <TwoColumns class="lg:grid-cols-[0.7fr_1.3fr]">
     <div class="hidden lg:flex lg:h-200 lg:flex-col">
       <template v-if="!selectedLocation">

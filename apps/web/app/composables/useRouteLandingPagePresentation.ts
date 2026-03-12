@@ -28,7 +28,6 @@ export const useRouteLandingPagePresentation = (
   })
 
   usePageHeader({
-    kind: 'breadcrumbs',
     title: pageTitle,
     baseItems: options.baseItems,
   })

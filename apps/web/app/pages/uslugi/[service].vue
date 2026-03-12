@@ -100,6 +100,7 @@ useHead(() => {
 </script>
 
 <template>
+  <Breadcrumbs />
   <BrandsGrid :brands="brandsForService" />
   <Why
     :image_source="landingData?.service?.image_source ?? ''"

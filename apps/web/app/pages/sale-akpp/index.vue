@@ -18,5 +18,6 @@ useSimplePagePresentation({
 </script>
 
 <template>
+  <Breadcrumbs />
   <ShopSection />
 </template>

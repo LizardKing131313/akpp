@@ -4,18 +4,16 @@ import type { HeaderSettings } from '#shared/types/header'
 import { computed } from 'vue'
 
 import { useActiveCity } from '~/composables/useActiveCity'
-import { usePageHeaderMeta } from '~/composables/usePageHeaderMeta'
 import { useHeaderSettings } from '~/composables/useRepoApi'
 
 const { data: settingsData } = await useHeaderSettings()
 const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
-const { mode } = usePageHeaderMeta()
+const route = useRoute()
 
 const activeCity = useActiveCity()
 const city = computed<CityItem | undefined>(() => activeCity.value)
 
-const isHero = computed<boolean>(() => mode.value === 'hero')
-const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
+const isHero = computed<boolean>(() => route.path === '/')
 </script>
 
 <template>
@@ -49,7 +47,5 @@ const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
     <Menu />
   </header>
 
-  <Hero v-show="isHero" />
-
-  <Breadcrumbs v-show="isBreadcrumbs" />
+  <Hero v-if="isHero" />
 </template>

@@ -14,5 +14,6 @@ useSimplePagePresentation({
 </script>
 
 <template>
+  <Breadcrumbs />
   <TransmissionTable />
 </template>

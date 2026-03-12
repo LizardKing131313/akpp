@@ -61,5 +61,6 @@ useHead(() => {
 </script>
 
 <template>
+  <Breadcrumbs />
   <CaseItem v-if="caseData" :caseItem="caseData" />
 </template>

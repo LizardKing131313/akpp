@@ -22,6 +22,8 @@ useSimplePagePresentation({
 
 <template>
   <div class="space-y-6">
+    <Breadcrumbs />
+
     <CenteredTitle v-if="showHeading">{{ title }}</CenteredTitle>
 
     <Article>

@@ -103,6 +103,7 @@ useHead(() => {
 </script>
 
 <template>
+  <Breadcrumbs />
   <Why
     :image_source="landingData?.brand?.image_source ?? ''"
     :image_alt="landingData?.brand?.image_alt ?? landingData?.brand?.name ?? ''" />

@@ -1,5 +1,5 @@
 import type { BreadcrumbItem } from '#shared/types/breadcrumb'
-import type { HeaderSectionMode, PageHeaderMeta } from '#shared/types/header'
+import type { PageHeaderMeta } from '#shared/types/header'
 
 import { computed } from 'vue'
 
@@ -88,27 +88,7 @@ export const usePageHeaderMeta = () => {
     return normalizeBreadcrumbs(items)
   })
 
-  const mode = computed<HeaderSectionMode>(() => {
-    if (route.path === '/') {
-      return activeMeta.value.kind === 'hero' ? 'hero' : 'none'
-    }
-
-    const hasBreadcrumbTitle = breadcrumbTitle.value.length > 0
-    const hasBreadcrumbItems = breadcrumbItems.value.length > 0
-
-    if (hasBreadcrumbTitle || hasBreadcrumbItems) {
-      return 'breadcrumbs'
-    }
-
-    if (activeMeta.value.kind === 'breadcrumbs') {
-      return 'breadcrumbs'
-    }
-
-    return 'none'
-  })
-
   return {
-    mode,
     breadcrumbTitle,
     breadcrumbItems,
   }

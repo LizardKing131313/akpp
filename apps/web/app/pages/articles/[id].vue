@@ -60,6 +60,7 @@ useHead(() => {
 </script>
 
 <template>
+  <Breadcrumbs />
   <Article>
     <div v-html="articleContent" />
   </Article>

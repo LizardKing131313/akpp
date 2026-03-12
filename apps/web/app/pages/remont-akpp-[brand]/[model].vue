@@ -54,6 +54,7 @@ const { pageContent } = useRouteLandingPagePresentation({
 </script>
 
 <template>
+  <Breadcrumbs />
   <Why
     :image_source="landingData?.model?.image_source ?? ''"
     :image_alt="landingData?.model?.image_alt ?? ''" />

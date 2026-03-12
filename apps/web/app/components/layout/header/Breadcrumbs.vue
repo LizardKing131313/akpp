@@ -26,6 +26,10 @@ const normalizedItems = computed(() =>
   })
 )
 
+const hasBreadcrumbs = computed<boolean>(() => {
+  return breadcrumbTitle.value.trim().length > 0 || normalizedItems.value.length > 0
+})
+
 const resolvedCurrentAbsoluteUrl = computed<string>(() => {
   return new URL(route.fullPath, currentOrigin.value).toString()
 })
@@ -68,7 +72,9 @@ const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as Hea
 </script>
 
 <template>
-  <section class="group relative w-full overflow-hidden">
+  <section
+    v-if="hasBreadcrumbs"
+    class="group relative left-1/2 w-screen -translate-x-1/2 overflow-hidden">
     <CmsImage
       :src="settings.breadcrumbs_background_source"
       :alt="settings.breadcrumbs_background_alt"

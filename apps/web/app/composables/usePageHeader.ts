@@ -10,7 +10,6 @@ type RuntimePageHeaderState = {
 } | null
 
 type UsePageHeaderOptions = {
-  readonly kind?: MaybeRefOrGetter<PageHeaderMeta['kind'] | undefined>
   readonly title?: MaybeRefOrGetter<string | undefined>
   readonly baseItems?: MaybeRefOrGetter<readonly BreadcrumbItem[] | undefined>
   readonly breadcrumb?: MaybeRefOrGetter<string | undefined>
@@ -69,7 +68,6 @@ export const usePageHeader = (options: UsePageHeaderOptions): void => {
   })
 
   const runtimeMeta = computed<PageHeaderMeta>(() => {
-    const kind = toValue(options.kind)
     const explicitBreadcrumb = toValue(options.breadcrumb)
     const explicitBreadcrumbs = toValue(options.breadcrumbs)
     const breadcrumb =
@@ -84,7 +82,6 @@ export const usePageHeader = (options: UsePageHeaderOptions): void => {
             : undefined
 
     return normalizeMeta({
-      ...(kind ? { kind } : {}),
       ...(typeof breadcrumb !== 'undefined' ? { breadcrumb } : {}),
       ...(typeof breadcrumbs !== 'undefined' ? { breadcrumbs } : {}),
     })
@@ -94,9 +91,7 @@ export const usePageHeader = (options: UsePageHeaderOptions): void => {
     const path = route.path
     const meta = runtimeMeta.value
     const hasMeta =
-      typeof meta.kind !== 'undefined' ||
-      typeof meta.breadcrumb !== 'undefined' ||
-      typeof meta.breadcrumbs !== 'undefined'
+      typeof meta.breadcrumb !== 'undefined' || typeof meta.breadcrumbs !== 'undefined'
 
     if (!hasMeta) {
       if (lastAppliedPath.value === path) {
