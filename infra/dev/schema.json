@@ -37,6 +37,39 @@
       }
     },
     {
+      "collection": "articles_recomended_items",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": false,
+        "archive_field": null,
+        "archive_value": null,
+        "collapse": "open",
+        "collection": "articles_recomended_items",
+        "color": null,
+        "display_template": "{{articles_id}} | {{recomended_articles_id}}",
+        "group": "system_links",
+        "hidden": true,
+        "icon": "link",
+        "item_duplication_fields": null,
+        "note": "Техническая связующая таблица для рекомендованных статей.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 14,
+        "sort_field": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Техническая связующая таблица для рекомендованных статей."
+          }
+        ],
+        "unarchive_value": null,
+        "versioning": false
+      },
+      "schema": {
+        "name": "articles_recomended_items"
+      }
+    },
+    {
       "collection": "brands",
       "meta": {
         "accountability": "all",
@@ -1375,7 +1408,7 @@
         "collapse": "open",
         "collection": "transmission_range_model_variants_items",
         "color": "#7B1FA2",
-        "display_template": "{{transmission_range_model_variants_id.name}} | {{model_variants_id.model}}",
+        "display_template": "{{transmission_range_model_variants_id}} | {{model_variants_id}}",
         "group": "system_links",
         "hidden": true,
         "icon": "link",
@@ -2169,6 +2202,219 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "articles",
+      "field": "recomended",
+      "type": "alias",
+      "meta": {
+        "collection": "articles",
+        "conditions": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}} | {{date}}"
+        },
+        "field": "recomended",
+        "group": null,
+        "hidden": false,
+        "interface": "list-m2m",
+        "note": "Список рекомендуемых статей. Ссылки на статьи",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 30,
+        "special": ["m2m"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Рекомендуемые статьи"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "articles_recomended_items",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "articles_recomended_items",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": null,
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "articles_recomended_items",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "articles_recomended_items",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "articles_recomended_items",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 2,
+        "special": ["sort"],
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "articles_recomended_items",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "articles_recomended_items",
+      "field": "articles_id",
+      "type": "integer",
+      "meta": {
+        "collection": "articles_recomended_items",
+        "conditions": null,
+        "display": null,
+        "display_options": {
+          "template": "{{name}}"
+        },
+        "field": "articles_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 3,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "articles_id",
+        "table": "articles_recomended_items",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "articles",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "articles_recomended_items",
+      "field": "recomended_articles_id",
+      "type": "integer",
+      "meta": {
+        "collection": "articles_recomended_items",
+        "conditions": null,
+        "display": null,
+        "display_options": {
+          "template": "{{name}}"
+        },
+        "field": "recomended_articles_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "recomended_articles_id",
+        "table": "articles_recomended_items",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "articles",
+        "foreign_key_column": "id"
       }
     },
     {
@@ -25315,6 +25561,56 @@
         "constraint_name": "articles_image_source_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "articles_recomended_items",
+      "field": "articles_id",
+      "related_collection": "articles",
+      "meta": {
+        "junction_field": "recomended_articles_id",
+        "many_collection": "articles_recomended_items",
+        "many_field": "articles_id",
+        "one_allowed_collections": null,
+        "one_collection": "articles",
+        "one_collection_field": null,
+        "one_deselect_action": "delete",
+        "one_field": "recomended",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "articles_recomended_items",
+        "column": "articles_id",
+        "foreign_key_table": "articles",
+        "foreign_key_column": "id",
+        "constraint_name": "articles_recomended_items_articles_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE"
+      }
+    },
+    {
+      "collection": "articles_recomended_items",
+      "field": "recomended_articles_id",
+      "related_collection": "articles",
+      "meta": {
+        "junction_field": "articles_id",
+        "many_collection": "articles_recomended_items",
+        "many_field": "recomended_articles_id",
+        "one_allowed_collections": null,
+        "one_collection": "articles",
+        "one_collection_field": null,
+        "one_deselect_action": "delete",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "articles_recomended_items",
+        "column": "recomended_articles_id",
+        "foreign_key_table": "articles",
+        "foreign_key_column": "id",
+        "constraint_name": "articles_recomended_items_recomended_articles_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE"
       }
     },
     {

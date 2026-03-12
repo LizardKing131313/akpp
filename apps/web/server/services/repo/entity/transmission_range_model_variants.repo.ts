@@ -17,4 +17,11 @@ export class TransmissionRangeModelVariantsRepository extends ListSlugRepository
     transmission_range_model_variants.model_variants_id.engine,
     transmission_range_model_variants.model_variants_id.drive,
   `
+
+  public override async list(): Promise<readonly TransmissionRangeWithVariants[]> {
+    return await this.getAll({
+      limit: -1,
+      'deep[transmission_range_model_variants][_limit]': -1,
+    })
+  }
 }
