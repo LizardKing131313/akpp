@@ -169,6 +169,7 @@ onMounted(() => {
   </section>
 </template>
 
+<!--suppress CssUnusedSymbol -->
 <style scoped>
 :deep(.swiper-button-prev),
 :deep(.swiper-button-next) {
