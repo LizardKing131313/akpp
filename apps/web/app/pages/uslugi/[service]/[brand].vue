@@ -104,13 +104,15 @@ useHead(() => {
 
 <template>
   <Breadcrumbs />
-  <Why
-    :image_source="landingData?.brand?.image_source ?? ''"
-    :image_alt="landingData?.brand?.image_alt ?? landingData?.brand?.name ?? ''" />
-  <RepairQuizBlock />
-  <ServiceAndCaseSection />
-  <Article>
-    {{ pageContent }}
-  </Article>
-  <FaqAndReviews :route-landing-id="landingData?.id" />
+  <Section>
+    <Why
+      :image_source="landingData?.brand?.image_source ?? ''"
+      :image_alt="landingData?.brand?.image_alt ?? landingData?.brand?.name ?? ''" />
+    <RepairQuizBlock />
+    <ServiceAndCaseSection />
+    <Article>
+      {{ pageContent }}
+    </Article>
+    <FaqAndReviews :route-landing-id="landingData?.id" />
+  </Section>
 </template>

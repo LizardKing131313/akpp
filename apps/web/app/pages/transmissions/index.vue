@@ -15,5 +15,7 @@ useSimplePagePresentation({
 
 <template>
   <Breadcrumbs />
-  <ShopSection />
+  <Section>
+    <ShopSection />
+  </Section>
 </template>

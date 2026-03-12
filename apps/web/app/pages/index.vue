@@ -14,19 +14,16 @@ usePageSeo({
   description: seoDescription,
   type: 'website',
 })
-
-definePageMeta({
-  pageHeader: {
-    kind: 'hero',
-  },
-})
 </script>
 
 <template>
-  <BrandsGrid baseHref="remont-akpp-" class="pt-12" />
-  <ServicesSection />
-  <RepairQuizBlock />
-  <ServiceAndCaseSection />
-  <PerksSection />
-  <FaqAndReviews :show-on-homepage="true" />
+  <Hero />
+  <Section>
+    <BrandsGrid baseHref="remont-akpp-" />
+    <ServicesSection />
+    <RepairQuizBlock />
+    <ServiceAndCaseSection />
+    <PerksSection />
+    <FaqAndReviews :show-on-homepage="true" />
+  </Section>
 </template>

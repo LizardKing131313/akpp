@@ -1,5 +1,5 @@
 <template>
-  <section class="pb-12">
+  <section class="py-12">
     <div class="mx-auto max-w-6xl space-y-12 px-4">
       <slot />
     </div>

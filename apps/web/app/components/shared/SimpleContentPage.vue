@@ -21,7 +21,7 @@ useSimplePagePresentation({
 </script>
 
 <template>
-  <div class="space-y-6">
+  <Section>
     <Breadcrumbs />
 
     <CenteredTitle v-if="showHeading">{{ title }}</CenteredTitle>
@@ -29,5 +29,5 @@ useSimplePagePresentation({
     <Article>
       <div v-html="content" />
     </Article>
-  </div>
+  </Section>
 </template>

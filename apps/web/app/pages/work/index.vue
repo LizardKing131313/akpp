@@ -36,5 +36,7 @@ useSimplePagePresentation({
 
 <template>
   <Breadcrumbs />
-  <ImageCardGrid :items="caseCards" />
+  <Section>
+    <ImageCardGrid :items="caseCards" />
+  </Section>
 </template>

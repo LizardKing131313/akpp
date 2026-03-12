@@ -101,14 +101,16 @@ useHead(() => {
 
 <template>
   <Breadcrumbs />
-  <BrandsGrid :brands="brandsForService" />
-  <Why
-    :image_source="landingData?.service?.image_source ?? ''"
-    :image_alt="landingData?.service?.image_alt ?? landingData?.service?.name ?? ''" />
-  <RepairQuizBlock />
-  <ServiceAndCaseSection />
-  <Article>
-    {{ pageContent }}
-  </Article>
-  <FaqAndReviews :route-landing-id="landingData?.id" />
+  <Section>
+    <BrandsGrid :brands="brandsForService" />
+    <Why
+      :image_source="landingData?.service?.image_source ?? ''"
+      :image_alt="landingData?.service?.image_alt ?? landingData?.service?.name ?? ''" />
+    <RepairQuizBlock />
+    <ServiceAndCaseSection />
+    <Article>
+      {{ pageContent }}
+    </Article>
+    <FaqAndReviews :route-landing-id="landingData?.id" />
+  </Section>
 </template>

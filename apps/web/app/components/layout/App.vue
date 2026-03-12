@@ -54,9 +54,7 @@ useHead(() => ({
   <div class="bg-brand-white text-brand-dark flex min-h-dvh flex-col overflow-x-hidden text-xl">
     <HeaderSection />
 
-    <Section>
-      <slot />
-    </Section>
+    <slot />
 
     <FooterSection class="mt-auto" />
   </div>

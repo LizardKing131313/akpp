@@ -55,13 +55,15 @@ const { pageContent } = useRouteLandingPagePresentation({
 
 <template>
   <Breadcrumbs />
-  <Why
-    :image_source="landingData?.model?.image_source ?? ''"
-    :image_alt="landingData?.model?.image_alt ?? ''" />
-  <RepairQuizBlock />
-  <ServiceAndCaseSection />
-  <Article>
-    {{ pageContent }}
-  </Article>
-  <FaqAndReviews :route-landing-id="landingData?.id" />
+  <Section>
+    <Why
+      :image_source="landingData?.model?.image_source ?? ''"
+      :image_alt="landingData?.model?.image_alt ?? ''" />
+    <RepairQuizBlock />
+    <ServiceAndCaseSection />
+    <Article>
+      {{ pageContent }}
+    </Article>
+    <FaqAndReviews :route-landing-id="landingData?.id" />
+  </Section>
 </template>

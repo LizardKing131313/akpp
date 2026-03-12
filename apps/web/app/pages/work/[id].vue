@@ -62,5 +62,7 @@ useHead(() => {
 
 <template>
   <Breadcrumbs />
-  <CaseItem v-if="caseData" :caseItem="caseData" />
+  <Section>
+    <CaseItem v-if="caseData" :caseItem="caseData" />
+  </Section>
 </template>

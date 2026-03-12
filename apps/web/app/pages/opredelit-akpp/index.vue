@@ -15,5 +15,7 @@ useSimplePagePresentation({
 
 <template>
   <Breadcrumbs />
-  <TransmissionTable />
+  <Section>
+    <TransmissionTable />
+  </Section>
 </template>

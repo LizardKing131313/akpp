@@ -8,12 +8,9 @@ import { useHeaderSettings } from '~/composables/useRepoApi'
 
 const { data: settingsData } = await useHeaderSettings()
 const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as HeaderSettings))
-const route = useRoute()
 
 const activeCity = useActiveCity()
 const city = computed<CityItem | undefined>(() => activeCity.value)
-
-const isHero = computed<boolean>(() => route.path === '/')
 </script>
 
 <template>
@@ -46,6 +43,4 @@ const isHero = computed<boolean>(() => route.path === '/')
 
     <Menu />
   </header>
-
-  <Hero v-if="isHero" />
 </template>

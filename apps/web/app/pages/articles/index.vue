@@ -21,5 +21,7 @@ useSimplePagePresentation({
 
 <template>
   <Breadcrumbs />
-  <ImageCardGrid :items="articlesData ?? []" baseHref="/articles" />
+  <Section>
+    <ImageCardGrid :items="articlesData ?? []" baseHref="/articles" />
+  </Section>
 </template>
