@@ -18,7 +18,7 @@ const articles = computed<ArticleItem[]>(() => articlesData.value ?? [])
     <FooterTitle>{{ settings.articles }}</FooterTitle>
     <div>
       <div
-        v-for="article in articles"
+        v-for="article in articles.slice(0, 2)"
         :key="article.id"
         class="border-b-brand-grey-light flex items-start border-b">
         <NuxtLink

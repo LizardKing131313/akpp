@@ -7984,7 +7984,7 @@
         "field": "answer",
         "group": null,
         "hidden": false,
-        "interface": "input-multiline",
+        "interface": "input-rich-text-html",
         "note": "Ответ на вопрос. Можно писать полноценно, как для сайта.",
         "options": null,
         "readonly": false,
