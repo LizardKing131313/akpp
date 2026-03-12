@@ -161,6 +161,7 @@ export class RouteLandingsRepository extends ListRepository<RouteLandingItem> {
   ): Promise<readonly RouteLandingItem[]> {
     const directus = this.getDirectus()
     const items = await directus.getItems<RawRouteLandingItem>(this.collection, {
+      limit: -1,
       fields: this.fields,
       sort: this.SORT_FIELD,
       'filter[status][_eq]': 'published',

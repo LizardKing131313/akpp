@@ -2,6 +2,8 @@
 import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { computed } from 'vue'
 
+import { useSimplePagePresentation } from '~/composables/useSimplePagePresentation'
+
 const { data: policyData } = await usePolicySettings()
 
 const policyTitle = computed<string>(() => {
@@ -10,6 +12,14 @@ const policyTitle = computed<string>(() => {
 
 const policyArticle = computed<string>(() => {
   return policyData.value?.article ?? ''
+})
+
+useSimplePagePresentation({
+  title: policyTitle,
+  description: computed(
+    () => 'Политика конфиденциальности и правила обработки персональных данных АКПП Центр.'
+  ),
+  baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>
 

@@ -7,10 +7,14 @@ import { useSimplePagePresentation } from '~/composables/useSimplePagePresentati
 const { data: articlesData } = await useArticles()
 
 const pageTitle = computed<string>(() => PAGE_LABELS.articles)
+const pageDescription = computed<string>(
+  () =>
+    'Полезные статьи по ремонту АКПП, вариаторов и DSG: признаки неисправностей, диагностика, обслуживание и практические рекомендации.'
+)
 
 useSimplePagePresentation({
   title: pageTitle,
-  description: pageTitle,
+  description: pageDescription,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>

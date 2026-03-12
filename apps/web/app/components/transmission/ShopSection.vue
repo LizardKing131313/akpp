@@ -14,6 +14,46 @@ const resolvedItems = computed<TransmissionItem[]>(() => {
 
   return transmissionsData.value ?? []
 })
+
+const requestUrl = useRequestURL()
+const productsJsonLd = computed<Record<string, unknown> | null>(() => {
+  if (resolvedItems.value.length === 0) {
+    return null
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': resolvedItems.value.map((item) => ({
+      '@type': 'Product',
+      '@id': `${requestUrl.origin}/sale-akpp#product-${item.id}`,
+      name: item.name,
+      description: item.description,
+      image: item.image_source ? [new URL(item.image_source, requestUrl.origin).toString()] : [],
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'RUB',
+        price: item.price,
+        availability: 'https://schema.org/InStock',
+        url: `${requestUrl.origin}/sale-akpp`,
+      },
+    })),
+  }
+})
+
+useHead(() => {
+  if (productsJsonLd.value === null) {
+    return {}
+  }
+
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(productsJsonLd.value),
+      },
+    ],
+  }
+})
 </script>
 
 <template>

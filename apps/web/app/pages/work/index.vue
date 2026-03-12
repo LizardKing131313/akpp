@@ -22,10 +22,14 @@ const caseCards = computed<ImageCardItem[]>(() => {
 })
 
 const pageTitle = computed<string>(() => PAGE_LABELS.cases)
+const pageDescription = computed<string>(
+  () =>
+    'Реальные кейсы по ремонту АКПП: симптомы, выполненные работы, стоимость ремонта и результат по конкретным автомобилям.'
+)
 
 useSimplePagePresentation({
   title: pageTitle,
-  description: pageTitle,
+  description: pageDescription,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
 })
 </script>

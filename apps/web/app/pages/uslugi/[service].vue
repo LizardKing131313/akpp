@@ -53,17 +53,60 @@ const { pageContent } = useRouteLandingPagePresentation({
     { name: 'Услуги', slug: '/uslugi' },
   ]),
 })
+
+const requestUrl = useRequestURL()
+const serviceJsonLd = computed<Record<string, unknown> | null>(() => {
+  if (!landingData.value?.service) {
+    return null
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': new URL(landingData.value.path, requestUrl.origin).toString(),
+    name: landingData.value.resolved_h1 || landingData.value.service.name,
+    description: landingData.value.resolved_seo_description || pageContent.value,
+    serviceType: landingData.value.service.name,
+    image: landingData.value.service.image_source
+      ? [new URL(landingData.value.service.image_source, requestUrl.origin).toString()]
+      : undefined,
+    provider: {
+      '@type': 'Organization',
+      name: 'АКПП Центр',
+      url: requestUrl.origin,
+    },
+    areaServed: {
+      '@type': 'City',
+      name: activeCity.value?.name ?? 'Москва',
+    },
+  }
+})
+
+useHead(() => {
+  if (serviceJsonLd.value === null) {
+    return {}
+  }
+
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(serviceJsonLd.value),
+      },
+    ],
+  }
+})
 </script>
 
 <template>
-  <BrandsGrid :brands="brandsForService" :baseHref="`uslugi/${serviceSlug}/`" />
+  <BrandsGrid :brands="brandsForService" />
   <Why
     :image_source="landingData?.service?.image_source ?? ''"
     :image_alt="landingData?.service?.image_alt ?? landingData?.service?.name ?? ''" />
-  <LazyRepairQuizBlock hydrate-on-visible />
+  <RepairQuizBlock />
   <ServiceAndCaseSection />
   <Article>
     {{ pageContent }}
   </Article>
-  <LazyFaqAndReviews :route-landing-id="landingData?.id" hydrate-on-visible />
+  <FaqAndReviews :route-landing-id="landingData?.id" />
 </template>

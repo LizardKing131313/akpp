@@ -49,7 +49,7 @@ const isBreadcrumbs = computed<boolean>(() => mode.value === 'breadcrumbs')
     <Menu />
   </header>
 
-  <LazyHero v-if="isHero" hydrate-on-idle />
+  <Hero v-if="isHero" />
 
-  <LazyBreadcrumbs v-else-if="isBreadcrumbs" hydrate-on-idle />
+  <Breadcrumbs v-else-if="isBreadcrumbs" />
 </template>

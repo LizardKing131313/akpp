@@ -95,11 +95,65 @@ const goBack = (): void => {
 }
 
 const pageTitle = computed<string>(() => PAGE_LABELS.contacts)
+const pageDescription = computed<string>(() => {
+  const cityName = cities.value.find((cityItem) => cityItem.id === selectedCityId.value)?.name
+
+  if (cityName) {
+    return `Контакты АКПП Центр в ${cityName}: адреса сервисов, телефоны, график работы и расположение на карте.`
+  }
+
+  return 'Контакты АКПП Центр: адреса сервисов, телефоны, график работы и расположение на карте.'
+})
+const requestUrl = useRequestURL()
+
+const localBusinessJsonLd = computed<Record<string, unknown> | null>(() => {
+  if (filteredLocations.value.length === 0) {
+    return null
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': filteredLocations.value.map((locationItem) => ({
+      '@type': 'AutoRepair',
+      '@id': `${requestUrl.origin}/kontaktyi#location-${locationItem.id}`,
+      name: locationItem.name || 'АКПП Центр',
+      url: `${requestUrl.origin}/kontaktyi`,
+      telephone: locationItem.phone || undefined,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: locationItem.address,
+        addressLocality: cities.value.find((cityItem) => cityItem.id === locationItem.city_id)
+          ?.name,
+        addressCountry: 'RU',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: locationItem.lat,
+        longitude: locationItem.lng,
+      },
+    })),
+  }
+})
 
 useSimplePagePresentation({
   title: pageTitle,
-  description: pageTitle,
+  description: pageDescription,
   baseItems: computed(() => [{ name: 'Главная', slug: '/' }]),
+})
+
+useHead(() => {
+  if (localBusinessJsonLd.value === null) {
+    return {}
+  }
+
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(localBusinessJsonLd.value),
+      },
+    ],
+  }
 })
 
 definePageMeta({

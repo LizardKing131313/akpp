@@ -2,11 +2,6 @@ import { createDirectusClient } from '#server/services/directus'
 import { RouteLandingsRepository } from '#server/services/repo/entity/route_landings.repo'
 import { xmlDoc, xmlRawTag, xmlTag } from '#server/utils/xml'
 
-type SitemapPageItem = {
-  slug: string | null
-  date_updated?: string | null
-}
-
 type SitemapEntityItem = {
   slug: string | null
   date_updated?: string | null
@@ -66,25 +61,10 @@ const addStaticRoutes = (paths: Map<string, string | null>): void => {
   addUrlItem(paths, '/', null)
   addUrlItem(paths, '/articles', null)
   addUrlItem(paths, '/work', null)
-  addUrlItem(paths, '/transmission', null)
   addUrlItem(paths, '/policy', null)
   addUrlItem(paths, '/kontaktyi', null)
   addUrlItem(paths, '/opredelit-akpp', null)
   addUrlItem(paths, '/sale-akpp', null)
-}
-
-const addPageRoutes = (
-  paths: Map<string, string | null>,
-  pages: readonly SitemapPageItem[]
-): void => {
-  for (const page of pages) {
-    const slug = normalizeSlug(page.slug)
-    if (slug.length === 0) {
-      continue
-    }
-
-    addUrlItem(paths, slug === 'home' ? '/' : `/${slug}`, page.date_updated)
-  }
 }
 
 const addArticleRoutes = (
@@ -136,29 +116,12 @@ export const buildSitemapXml = async (): Promise<string> => {
     throw createError({ statusCode: 500, statusMessage: 'SITE url is not configured' })
   }
 
-  const pagesCollection = (runtimeConfig.directusPagesCollection as string | undefined) ?? 'pages'
-
-  const slugField = (runtimeConfig.directusPagesSlugField as string | undefined) ?? 'slug'
-
-  const statusField = (runtimeConfig.directusPagesStatusField as string | undefined) ?? 'status'
-
   const publishedValue =
     (runtimeConfig.directusPagesPublishedValue as string | undefined) ?? 'published'
 
-  const updatedField =
-    (runtimeConfig.directusPagesUpdatedField as string | undefined) ?? 'date_updated'
-
   const directusClient = createDirectusClient()
 
-  const fields = `${slugField},${updatedField}`
-  const pagesQuery: Record<string, string> = {
-    fields,
-    limit: '5000',
-    [`filter[${statusField}][_eq]`]: publishedValue,
-  }
-
-  const [pages, articles, cases] = await Promise.all([
-    directusClient.getItems<SitemapPageItem>(pagesCollection, pagesQuery),
+  const [articles, cases] = await Promise.all([
     directusClient.getItems<SitemapEntityItem>('articles', {
       fields: SLUG_AND_UPDATED_FIELDS,
       limit: '5000',
@@ -174,7 +137,6 @@ export const buildSitemapXml = async (): Promise<string> => {
   const paths = new Map<string, string | null>()
 
   addStaticRoutes(paths)
-  addPageRoutes(paths, pages)
   addArticleRoutes(paths, articles)
   addCaseRoutes(paths, cases)
   await addRouteLandingRoutes(paths)

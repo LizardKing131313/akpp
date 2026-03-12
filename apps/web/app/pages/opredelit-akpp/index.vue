@@ -14,5 +14,5 @@ useSimplePagePresentation({
 </script>
 
 <template>
-  <LazyTransmissionTable hydrate-on-visible />
+  <TransmissionTable />
 </template>

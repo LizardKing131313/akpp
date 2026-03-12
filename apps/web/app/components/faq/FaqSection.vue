@@ -26,6 +26,47 @@ const resolvedItems = computed<FaqItem[]>(() => {
 
   return faqsData.value ?? []
 })
+
+const stripHtml = (value: string): string => {
+  return value
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+const faqJsonLd = computed<Record<string, unknown> | null>(() => {
+  if (resolvedItems.value.length === 0) {
+    return null
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: resolvedItems.value.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: stripHtml(item.answer),
+      },
+    })),
+  }
+})
+
+useHead(() => {
+  if (faqJsonLd.value === null) {
+    return {}
+  }
+
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify(faqJsonLd.value),
+      },
+    ],
+  }
+})
 </script>
 
 <template>

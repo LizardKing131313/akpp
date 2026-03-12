@@ -3,12 +3,11 @@ import type { BrandItem } from '#shared/types/brand'
 import type { QuizSubmitPayload } from '#shared/types/quiz'
 
 import { cn } from '#shared/lib/cn'
-import { computed, defineAsyncComponent } from 'vue'
+import { computed } from 'vue'
 
 import ModalClose from '~/components/modal/components/ModalClose.vue'
+import RepairQuiz from '~/components/quiz/RepairQuiz.vue'
 import { useQuizSubmit } from '~/composables/useQuizSubmit'
-
-const AsyncRepairQuiz = defineAsyncComponent(() => import('~/components/quiz/RepairQuiz.vue'))
 
 type QuizModalPayload = {
   readonly activeBrand?: BrandItem | null
@@ -50,7 +49,7 @@ const activeBrand = computed<BrandItem | null>(() => {
     <ModalClose @click="emitClose" />
 
     <div class="mt-12 max-h-[85svh] overflow-y-auto sm:max-h-none">
-      <component :is="AsyncRepairQuiz" :active-brand="activeBrand" @submit="handleQuizSubmit" />
+      <RepairQuiz :active-brand="activeBrand" @submit="handleQuizSubmit" />
     </div>
   </div>
 </template>

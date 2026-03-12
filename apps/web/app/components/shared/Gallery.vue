@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, ref } from 'vue'
+import { computed, ref } from 'vue'
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 const props = defineProps<{ images: ImageListItem[] }>()
-const AsyncLightbox = defineAsyncComponent(() => import('vue-easy-lightbox'))
 
 const activeIndex = ref<number>(0)
 const visible = ref<boolean>(false)
@@ -48,8 +48,7 @@ const closeLightbox = (): void => {
       </button>
     </div>
 
-    <component
-      :is="AsyncLightbox"
+    <VueEasyLightbox
       v-if="visible"
       :visible="visible"
       :imgs="displayImages"

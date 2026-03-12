@@ -18,15 +18,27 @@ export const useRouteLandingPagePresentation = (
 
   const pageTitle = computed<string>(() => resolvedLanding.value?.resolved_h1 ?? '')
   const pageContent = computed<string>(() => resolvedLanding.value?.resolved_content ?? '')
+  const seoImage = computed<string>(() => {
+    return (
+      resolvedLanding.value?.model?.image_source ??
+      resolvedLanding.value?.brand?.image_source ??
+      resolvedLanding.value?.service?.image_source ??
+      ''
+    )
+  })
 
   usePageEntityBreadcrumbs({
     title: pageTitle,
     baseItems: options.baseItems,
   })
 
-  useSeoMeta({
-    title: () => resolvedLanding.value?.resolved_seo_title ?? pageTitle.value,
-    description: () => resolvedLanding.value?.resolved_seo_description ?? pageContent.value,
+  usePageSeo({
+    title: computed(() => resolvedLanding.value?.resolved_seo_title ?? pageTitle.value),
+    description: computed(
+      () => resolvedLanding.value?.resolved_seo_description ?? pageContent.value
+    ),
+    image: seoImage,
+    type: 'website',
   })
 
   return {

@@ -59,8 +59,21 @@ export const usePageHeaderMeta = () => {
 
   const mode = computed<HeaderSectionMode>(() => {
     const metaKind = pageHeaderMeta.value.kind
-    if (metaKind === 'hero' || metaKind === 'breadcrumbs') {
-      return metaKind
+    if (metaKind === 'hero') {
+      return route.path === '/' ? 'hero' : 'none'
+    }
+
+    if (metaKind === 'breadcrumbs') {
+      return 'breadcrumbs'
+    }
+
+    const hasBreadcrumbTitle = normalizeText(pageHeaderMeta.value.breadcrumb).length > 0
+    const hasBreadcrumbItems = Array.isArray(pageHeaderMeta.value.breadcrumbs)
+      ? pageHeaderMeta.value.breadcrumbs.length > 0
+      : false
+
+    if (route.path !== '/' && (hasBreadcrumbTitle || hasBreadcrumbItems)) {
+      return 'breadcrumbs'
     }
 
     return 'none'
