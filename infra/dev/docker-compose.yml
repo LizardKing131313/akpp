@@ -239,6 +239,8 @@ services:
     build:
       context: ../..
       dockerfile: infra/dev/web.Dockerfile
+      args:
+        NUXT_PUBLIC_DIRECTUS_PUBLIC_URL: ${NUXT_PUBLIC_DIRECTUS_PUBLIC_URL}
     restart: unless-stopped
     depends_on:
       directus-settings-apply:
