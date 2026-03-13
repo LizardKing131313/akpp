@@ -4,6 +4,9 @@ WORKDIR /app
 
 RUN corepack enable && corepack prepare pnpm@10.29.3 --activate
 
+ARG NUXT_PUBLIC_DIRECTUS_PUBLIC_URL
+ENV NUXT_PUBLIC_DIRECTUS_PUBLIC_URL=$NUXT_PUBLIC_DIRECTUS_PUBLIC_URL
+
 COPY . .
 
 WORKDIR /app/apps/web
