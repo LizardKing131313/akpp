@@ -1,28 +1,30 @@
 import tailwindcss from '@tailwindcss/vite'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const directusUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL ?? ''
+
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL?.trim() ?? ''
+const directusPublicUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL?.trim() ?? ''
+
+const yandexMapApiKey = process.env.NUXT_PUBLIC_YANDEX_MAP_API_KEY?.trim() ?? ''
+const yandexOrgId = process.env.NUXT_PUBLIC_YANDEX_ORG_ID?.trim() ?? ''
+
+const directusToken = process.env.NUXT_DIRECTUS_TOKEN?.trim() ?? ''
+const directusInternalUrl = process.env.NUXT_DIRECTUS_INTERNAL_URL?.trim() ?? ''
+const directusCacheTtlSeconds = Number(process.env.NUXT_DIRECTUS_CACHE_TTL_SECONDS)
+
+const nitroRedisHost = process.env.NITRO_REDIS_HOST?.trim() ?? ''
+const nitroRedisPort = Number(process.env.NITRO_REDIS_PORT)
+const nitroRedisDb = Number(process.env.NITRO_REDIS_DB)
+const nitroApiCacheTtl = Number(process.env.NITRO_API_CACHE_TTL_SECONDS)
+const nitroSsrSwr = Number(process.env.NITRO_SSR_SWR_SECONDS)
+
 const directusHost = (() => {
   try {
-    return new URL(directusUrl).host
+    return new URL(directusPublicUrl).host
   } catch {
     return ''
   }
 })()
-
-const nitroRedisHost = process.env.NITRO_REDIS_HOST?.trim()
-const nitroRedisPortRaw = Number(process.env.NITRO_REDIS_PORT ?? 6379)
-const nitroRedisPort =
-  Number.isFinite(nitroRedisPortRaw) && nitroRedisPortRaw > 0 ? nitroRedisPortRaw : 6379
-const nitroRedisDbRaw = Number(process.env.NITRO_REDIS_DB ?? 0)
-const nitroRedisDb = Number.isFinite(nitroRedisDbRaw) && nitroRedisDbRaw >= 0 ? nitroRedisDbRaw : 0
-const nitroApiCacheTtlRaw = Number(
-  process.env.NITRO_API_CACHE_TTL_SECONDS ?? process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300
-)
-const nitroApiCacheTtl =
-  Number.isFinite(nitroApiCacheTtlRaw) && nitroApiCacheTtlRaw > 0 ? nitroApiCacheTtlRaw : 300
-const nitroSsrSwrRaw = Number(process.env.NITRO_SSR_SWR_SECONDS ?? 300)
-const nitroSsrSwr = Number.isFinite(nitroSsrSwrRaw) && nitroSsrSwrRaw > 0 ? nitroSsrSwrRaw : 300
 
 const nitroCacheStorage = nitroRedisHost
   ? {
@@ -234,14 +236,14 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? '',
-      directusUrl,
-      yandexMapApiKey: process.env.YANDEX_MAP_API_KEY ?? '',
-      yandexOrgId: process.env.YANDEX_ORG_ID ?? '',
+      siteUrl,
+      directusPublicUrl,
+      yandexMapApiKey,
+      yandexOrgId,
     },
-    directusToken: process.env.DIRECTUS_TOKEN ?? '',
-    directusCacheTtlSeconds: Number(process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300),
-    directusInternalUrl: process.env.DIRECTUS_INTERNAL_URL ?? '',
+    directusToken,
+    directusInternalUrl,
+    directusCacheTtlSeconds,
   },
 
   app: {

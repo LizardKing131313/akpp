@@ -38,3 +38,10 @@ report/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
+
+# Local data snapshots
+infra/dev/data/**
+!infra/dev/data/postgres/
+!infra/dev/data/uploads/
+!infra/dev/data/postgres/.gitkeep
+!infra/dev/data/uploads/.gitkeep

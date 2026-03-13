@@ -1,7 +1,7 @@
 export const useDirectusAssetUrl = () => {
   const runtimeConfig = useRuntimeConfig()
 
-  const directusUrl = runtimeConfig.public.directusUrl.replace(/\/+$/, '')
+  const directusPublicUrl = runtimeConfig.public.directusPublicUrl.replace(/\/+$/, '')
 
   return (assetId: string | null | undefined): string | null => {
     if (!assetId) return null
@@ -10,6 +10,6 @@ export const useDirectusAssetUrl = () => {
       return assetId
     }
 
-    return `${directusUrl}/assets/${assetId}`
+    return `${directusPublicUrl}/assets/${assetId}`
   }
 }
