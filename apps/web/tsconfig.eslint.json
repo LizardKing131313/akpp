@@ -3,6 +3,6 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.vue", "nuxt.config.ts", ".nuxt/**/*.ts"],
-  "exclude": ["node_modules", ".output", "dist"]
+  "include": ["app/**/*.ts", "app/**/*.vue", "server/**/*.ts", "shared/**/*.ts", "nuxt.config.ts"],
+  "exclude": ["node_modules", ".nuxt", ".output", "dist"]
 }
