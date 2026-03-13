@@ -11,13 +11,10 @@ const props = defineProps<{
 }>()
 
 const attrs = useAttrs()
-const runtimeConfig = useRuntimeConfig()
+const resolveDirectusAssetUrl = useDirectusAssetUrl()
 
 const resolvedSrc = computed<string>(() => {
-  if (!props.src) return ''
-
-  const directusUrl = runtimeConfig.public.directusUrl.replace(/\/+$/, '')
-  return `${directusUrl}/assets/${props.src}`
+  return resolveDirectusAssetUrl(props.src) ?? ''
 })
 </script>
 

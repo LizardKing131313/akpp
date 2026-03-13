@@ -49,6 +49,9 @@ services:
 
       PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
 
+    ports:
+      - '8055:8055'
+
     volumes:
       - akpp_prod_directus_uploads:/directus/uploads
       - akpp_prod_directus_extensions:/directus/extensions
@@ -65,6 +68,7 @@ services:
 
   directus-schema-apply:
     image: directus/directus:11
+    profiles: ['manual']
     depends_on:
       directus:
         condition: service_healthy
@@ -86,6 +90,7 @@ services:
 
   directus-restart-after-apply:
     image: docker:27-cli
+    profiles: ['manual']
     depends_on:
       directus-schema-apply:
         condition: service_completed_successfully
@@ -106,6 +111,7 @@ services:
 
   directus-settings-apply:
     image: directus/directus:11
+    profiles: ['manual']
     depends_on:
       directus-restart-after-apply:
         condition: service_completed_successfully
@@ -235,14 +241,15 @@ services:
       dockerfile: infra/prod/web.Dockerfile
     restart: unless-stopped
     depends_on:
-      directus-settings-apply:
-        condition: service_completed_successfully
+      directus:
+        condition: service_healthy
     environment:
       NODE_ENV: production
       NITRO_HOST: 0.0.0.0
       NITRO_PORT: 3000
-      NUXT_PUBLIC_DIRECTUS_URL: ${DIRECTUS_INTERNAL_URL}
+      NUXT_PUBLIC_DIRECTUS_URL: ${DIRECTUS_PUBLIC_URL}
       NUXT_PUBLIC_SITE_URL: ${SITE_URL}
+      DIRECTUS_INTERNAL_URL: ${DIRECTUS_INTERNAL_URL}
       DIRECTUS_TOKEN: ${DIRECTUS_TOKEN}
       DIRECTUS_CACHE_TTL_SECONDS: ${DIRECTUS_CACHE_TTL_SECONDS}
       NITRO_REDIS_HOST: ${NITRO_REDIS_HOST}

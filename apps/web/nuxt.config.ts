@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const directusUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL ?? 'http://localhost:8086'
+const directusUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL ?? ''
 const directusHost = (() => {
   try {
     return new URL(directusUrl).host
@@ -44,7 +44,7 @@ const prodOnlyRouteRule = <RuleType>(rule: RuleType): RuleType | Record<string, 
 // noinspection JSUnusedGlobalSymbols
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: process.env.NODE_ENV === 'development' },
+  devtools: { enabled: !isProduction },
   vue: {
     runtimeCompiler: true,
   },
@@ -234,13 +234,14 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? '',
       directusUrl,
       yandexMapApiKey: process.env.YANDEX_MAP_API_KEY ?? '',
       yandexOrgId: process.env.YANDEX_ORG_ID ?? '',
     },
-    directusToken: process.env.DIRECTUS_TOKEN ?? 'token',
+    directusToken: process.env.DIRECTUS_TOKEN ?? '',
     directusCacheTtlSeconds: Number(process.env.DIRECTUS_CACHE_TTL_SECONDS ?? 300),
+    directusInternalUrl: process.env.DIRECTUS_INTERNAL_URL ?? '',
   },
 
   app: {
