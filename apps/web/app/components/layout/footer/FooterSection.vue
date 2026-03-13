@@ -10,13 +10,9 @@ import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
 import BrandSlider from '~/components/brands/BrandSlider.vue'
+import YandexMap from '~/components/yandex/YandexMap.client.vue'
 import { useActiveCity } from '~/composables/useActiveCity'
 import { useFooterSettings, useLocations, useMenus } from '~/composables/useRepoApi'
-
-const LazyFooterMap = defineLazyHydrationComponent(
-  'visible',
-  () => import('./FooterMap.client.vue')
-)
 const activeCity = useActiveCity()
 const cityId = computed<string | undefined>(() => activeCity.value?.id)
 
@@ -92,12 +88,13 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           )
         ">
         <div class="relative h-full w-full overflow-hidden">
-          <LazyFooterMap
-            :locations="mapPoints"
-            :center="mapCenter"
-            :zoom="mapZoom"
-            :height-px="settings.map_height_px"
-            :hydrate-on-visible="{ rootMargin: '200px' }" />
+          <ClientOnly>
+            <YandexMap
+              :locations="mapPoints"
+              :center="mapCenter"
+              :zoom="mapZoom"
+              :height-px="settings.map_height_px" />
+          </ClientOnly>
         </div>
         <div class="absolute inset-x-4 bottom-0 z-10 mx-auto translate-y-1/2 lg:max-w-6xl">
           <div class="bg-brand-white rounded-full px-4 py-4 shadow-xl lg:px-8 lg:py-4">
