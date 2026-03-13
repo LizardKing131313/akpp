@@ -111,13 +111,31 @@ export class MenusRepository extends ListSlugRepository<MenuItem> {
     if (sourceType === 'services') {
       return dynamicContext.routeLandings
         .filter((landing) => landing.page_type === 'service')
-        .map((landing) => ({
-          id: `service:${landing.id}`,
-          slug: landing.path,
-          name: getRouteLandingMenuTitle(landing),
-          placement: this.DEFAULT_PLACEMENT,
-          children: null,
-        }))
+        .map((landing) => {
+          const serviceSlug = landing.service?.slug
+          const children = dynamicContext.routeLandings
+            .filter((childLanding) => {
+              return (
+                childLanding.page_type === 'service_brand' &&
+                childLanding.service?.slug === serviceSlug
+              )
+            })
+            .map((childLanding) => ({
+              id: `service-brand:${childLanding.id}`,
+              slug: childLanding.path,
+              name: getRouteLandingMenuTitle(childLanding),
+              placement: this.DEFAULT_PLACEMENT,
+              children: null,
+            }))
+
+          return {
+            id: `service:${landing.id}`,
+            slug: landing.path,
+            name: getRouteLandingMenuTitle(landing),
+            placement: this.DEFAULT_PLACEMENT,
+            children: children.length > 0 ? children : null,
+          }
+        })
     }
 
     if (sourceType === 'brands') {

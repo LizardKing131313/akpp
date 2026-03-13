@@ -13,7 +13,7 @@ const activeLeftId = ref<string | null>(null)
 
 let closeTimerId: ReturnType<typeof setTimeout> | null = null
 
-const leftColumnWidthPx = 225
+const leftColumnWidthPx = 220
 
 const leftItems = computed<MenuItem[]>(() => props.menuNode.children ?? [])
 const panelId = computed<string>(() => `desktop-mega-menu-${props.menuNode.id}`)
@@ -101,7 +101,7 @@ const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
               :to="node.slug ? normalizeAppPath(node.slug) : '#'"
               :class="[
                 `group/menu-item flex w-full cursor-pointer items-center justify-between
-                px-6 py-4 text-left text-sm font-semibold uppercase transition-colors`,
+                px-4 py-2.5 text-left text-[11px] font-semibold uppercase transition-colors`,
                 activeLeftId === node.id
                   ? 'bg-brand-red text-brand-white'
                   : 'text-brand-dark hover:bg-brand-red hover:text-brand-white',
@@ -125,12 +125,12 @@ const hasChildren = (menuItem: MenuItem) => menuItem.children !== null
 
             <div
               v-if="activeLeftId === node.id && hasChildren(node)"
-              class="border-brand-soft bg-brand-white absolute top-0 left-full min-w-56 border shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
+              class="border-brand-soft bg-brand-white absolute top-0 left-full min-w-44 border shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
               <NuxtLink
                 v-for="childNode in node.children ?? []"
                 :key="childNode.id"
                 :to="childNode.slug ? normalizeAppPath(childNode.slug) : '#'"
-                class="text-brand-grey hover:bg-brand-red hover:text-brand-white block px-6 py-4 text-sm font-semibold whitespace-nowrap uppercase transition-colors"
+                class="text-brand-grey hover:bg-brand-red hover:text-brand-white block px-4 py-2.5 text-[11px] font-semibold whitespace-nowrap uppercase transition-colors"
                 @click="isOpen = false">
                 {{ childNode.name }}
               </NuxtLink>
