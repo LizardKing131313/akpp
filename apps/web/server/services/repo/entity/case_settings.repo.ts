@@ -30,6 +30,7 @@ export class CaseSettingsRepository extends SingletonRepository<CaseSettings> {
     signup_label,
 
     page_title,
+    show_button,
     show_all_button,
     show_all_link,
   `

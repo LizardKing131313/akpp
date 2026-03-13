@@ -54,7 +54,7 @@
         "note": "Техническая связующая таблица для рекомендованных статей.",
         "preview_url": null,
         "singleton": false,
-        "sort": 14,
+        "sort": 6,
         "sort_field": null,
         "translations": [
           {
@@ -252,7 +252,7 @@
         "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 11,
+        "sort": 2,
         "sort_field": "sort",
         "translations": [
           {
@@ -285,7 +285,7 @@
         "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 10,
+        "sort": 1,
         "sort_field": "sort",
         "translations": [
           {
@@ -705,7 +705,7 @@
         "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 12,
+        "sort": 4,
         "sort_field": "sort",
         "translations": [
           {
@@ -1353,7 +1353,7 @@
         "note": "Технические связующие таблицы. Используются автоматически через связи и обычно не открываются вручную.",
         "preview_url": null,
         "singleton": false,
-        "sort": 99,
+        "sort": 8,
         "sort_field": null,
         "translations": [
           {
@@ -1416,7 +1416,7 @@
         "note": "Техническая связующая таблица. Обычно редактируется не напрямую, а через связанную основную коллекцию.",
         "preview_url": null,
         "singleton": false,
-        "sort": 13,
+        "sort": 5,
         "sort_field": "sort",
         "translations": [
           {
@@ -4439,7 +4439,7 @@
         "readonly": false,
         "required": true,
         "searchable": true,
-        "sort": 23,
+        "sort": 24,
         "special": null,
         "translations": [
           {
@@ -4488,7 +4488,7 @@
         "readonly": false,
         "required": true,
         "searchable": true,
-        "sort": 24,
+        "sort": 25,
         "special": null,
         "translations": [
           {
@@ -4658,6 +4658,55 @@
         "numeric_precision": null,
         "numeric_scale": null,
         "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "case_settings",
+      "field": "show_button",
+      "type": "string",
+      "meta": {
+        "collection": "case_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "show_button",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Текст кнопки показа кейса.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 23,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Подпись кнопки показать кейс"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "show_button",
+        "table": "case_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
         "is_unique": false,
         "is_indexed": false,
         "is_primary_key": false,
@@ -5771,6 +5820,55 @@
         "data_type": "text",
         "default_value": null,
         "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "cases",
+      "field": "service",
+      "type": "string",
+      "meta": {
+        "collection": "cases",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "service",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Выполненная услуга. Простой текст",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 24,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Выполненная услуга"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "service",
+        "table": "cases",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
         "numeric_precision": null,
         "numeric_scale": null,
         "is_nullable": true,

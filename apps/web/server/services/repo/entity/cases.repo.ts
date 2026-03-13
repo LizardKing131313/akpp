@@ -20,6 +20,7 @@ export class CasesRepository extends ListSlugRepository<CaseItem> {
     problems,
     part_price,
     work_price,
+    service,
 
     works.id,
     works.name,

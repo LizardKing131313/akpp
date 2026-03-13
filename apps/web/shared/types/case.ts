@@ -12,6 +12,7 @@ export type CaseItem = SlugEntityItem &
     readonly part_price: number
     readonly work_price: number
     readonly problems: string
+    readonly service: string
 
     readonly brand: BrandItem
 
@@ -45,6 +46,7 @@ export type CaseSettings = {
   readonly signup_label: string
 
   readonly page_title: string
+  readonly show_button: string
   readonly show_all_button: string
   readonly show_all_link: string
 }

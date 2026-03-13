@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { ImageCardItem } from '#shared/types/entity'
-
 import { PAGE_LABELS } from '#shared/constants/page-labels'
 import { computed } from 'vue'
 
@@ -8,17 +6,8 @@ import { useSimplePagePresentation } from '~/composables/useSimplePagePresentati
 
 const { data: casesData } = await useCases()
 
-const caseCards = computed<ImageCardItem[]>(() => {
-  const cases = casesData.value ?? []
-
-  return cases.map((caseItem: CaseItem) => ({
-    id: caseItem.id,
-    name: caseItem.name ?? '',
-    slug: `work/${caseItem.slug}`,
-    image_source: caseItem.image_source,
-    image_alt: caseItem.image_alt ?? '',
-    date: caseItem.case_date,
-  }))
+const caseCards = computed<CaseItem[]>(() => {
+  return casesData.value ?? []
 })
 
 const pageTitle = computed<string>(() => PAGE_LABELS.cases)
@@ -37,6 +26,8 @@ useSimplePagePresentation({
 <template>
   <Breadcrumbs />
   <Section>
-    <ImageCardGrid :items="caseCards" />
+    <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+      <CaseGridCard v-for="caseItem in caseCards" :key="caseItem.id" :caseItem />
+    </div>
   </Section>
 </template>

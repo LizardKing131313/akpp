@@ -62,8 +62,6 @@ useHead(() => {
 <template>
   <Breadcrumbs />
   <Section>
-    <Article>
-      <div v-html="articleContent" />
-    </Article>
+    <div v-html="articleContent" />
   </Section>
 </template>
