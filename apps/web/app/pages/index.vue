@@ -17,6 +17,7 @@ usePageSeo({
 </script>
 
 <template>
+  <h1 class="sr-only">{{ seoTitle }}</h1>
   <Hero />
   <Section>
     <BrandsGrid baseHref="remont-akpp-" />

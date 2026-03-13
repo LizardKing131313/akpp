@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CityItem } from '#shared/types/city'
 import type { YandexMapPoint } from '#shared/types/entity'
+import type { FooterSettings } from '#shared/types/footer'
 import type { LocationItem } from '#shared/types/location'
 import type { MenuItem } from '#shared/types/menu'
 
@@ -8,10 +9,14 @@ import { cn } from '#shared/lib/cn'
 import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
-import BrandSlider from '~/components/brands/BrandSlider.vue'
-import YandexMap from '~/components/yandex/YandexMap.client.vue'
 import { useActiveCity } from '~/composables/useActiveCity'
 import { useFooterSettings, useLocations, useMenus } from '~/composables/useRepoApi'
+
+const LazyFooterMap = defineLazyHydrationComponent('visible', () => import('./FooterMap.vue'))
+const LazyFooterBrandSlider = defineLazyHydrationComponent(
+  'visible',
+  () => import('./FooterBrandSlider.vue')
+)
 
 const activeCity = useActiveCity()
 const cityId = computed<string | undefined>(() => activeCity.value?.id)
@@ -88,13 +93,12 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           )
         ">
         <div class="relative h-full w-full overflow-hidden">
-          <ClientOnly>
-            <YandexMap
-              :locations="mapPoints"
-              :center="mapCenter"
-              :zoom="mapZoom"
-              :height-px="settings.map_height_px" />
-          </ClientOnly>
+          <LazyFooterMap
+            :locations="mapPoints"
+            :center="mapCenter"
+            :zoom="mapZoom"
+            :height-px="settings.map_height_px"
+            :hydrate-on-visible="{ rootMargin: '200px' }" />
         </div>
         <div class="absolute inset-x-4 bottom-0 z-10 mx-auto translate-y-1/2 lg:max-w-6xl">
           <div class="bg-brand-white rounded-full px-4 py-4 shadow-xl lg:px-8 lg:py-4">
@@ -133,7 +137,9 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
       </div>
     </div>
 
-    <BrandSlider :class="cn(hideContacts ? 'mt-0' : 'mt-18', 'mb-12')" />
+    <LazyFooterBrandSlider
+      :class="cn(hideContacts ? 'mt-0' : 'mt-18', 'mb-12')"
+      :hydrate-on-visible="{ rootMargin: '200px' }" />
 
     <div
       class="brand-gradient bg-brand-dark text-brand-grey-light relative space-y-12 px-4 py-12 text-sm">

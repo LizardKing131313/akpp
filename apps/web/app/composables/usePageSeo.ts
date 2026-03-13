@@ -14,6 +14,8 @@ type UsePageSeoOptions = PageSeoBaseOptions & {
   readonly locale?: MaybeRefOrGetter<string | undefined>
 }
 
+const DEFAULT_OG_IMAGE_PATH = '/images/og.webp'
+
 export const usePageSeo = (options: UsePageSeoOptions) => {
   const route = useRoute()
   const requestUrl = useRequestURL()
@@ -41,10 +43,7 @@ export const usePageSeo = (options: UsePageSeoOptions) => {
   )
   const seoLocale = computed<string>(() => normalizePageSeoText(toValue(options.locale) || 'ru_RU'))
   const seoImage = computed<string>(() => {
-    const rawValue = normalizePageSeoText(toValue(options.image))
-    if (rawValue.length === 0) {
-      return ''
-    }
+    const rawValue = normalizePageSeoText(toValue(options.image) || DEFAULT_OG_IMAGE_PATH)
 
     return new URL(rawValue, requestUrl.origin).toString()
   })

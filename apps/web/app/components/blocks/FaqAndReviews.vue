@@ -1,4 +1,9 @@
 <script setup lang="ts">
+const LazyFaqReviewsWidget = defineLazyHydrationComponent(
+  'visible',
+  () => import('./FaqReviewsWidget.vue')
+)
+
 withDefaults(
   defineProps<{
     title?: string | undefined
@@ -17,8 +22,6 @@ withDefaults(
   <TwoColumns>
     <FaqSection :route-landing-id="routeLandingId" :show-on-homepage="showOnHomepage" />
 
-    <ClientOnly>
-      <YandexReviews />
-    </ClientOnly>
+    <LazyFaqReviewsWidget :hydrate-on-visible="{ rootMargin: '200px' }" />
   </TwoColumns>
 </template>
