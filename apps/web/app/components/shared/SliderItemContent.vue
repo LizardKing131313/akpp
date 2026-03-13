@@ -26,7 +26,7 @@ const props = withDefaults(
     ">
     <CmsImage
       :src="props.image_source"
-      :alt="props.image_alt"
+      :alt="`Slider item ${props.image_alt ?? props.name}`"
       fill
       :sizes="props.sizes"
       class="absolute inset-0 h-full w-full object-contain" />

@@ -24,7 +24,7 @@ const cardClass = computed<string>(() => {
   <NuxtLink :to="href" :class="cardClass">
     <CmsImage
       :src="service.image_source"
-      :alt="service.image_alt"
+      :alt="`Service item ${service.image_alt}`"
       sizes="50vw md:50vw lg:20vw"
       :class="
         cn(`

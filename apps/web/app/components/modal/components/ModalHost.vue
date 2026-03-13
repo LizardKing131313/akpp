@@ -47,14 +47,11 @@ watch(
     const documentElement = document.documentElement
 
     if (isOpenNow) {
-      const scrollBarWidthPx = window.innerWidth - documentElement.clientWidth
-      documentElement.style.paddingRight = `${scrollBarWidthPx}px`
       documentElement.classList.add('overflow-hidden')
       return
     }
 
     documentElement.classList.remove('overflow-hidden')
-    documentElement.style.paddingRight = ''
   },
   { immediate: true }
 )

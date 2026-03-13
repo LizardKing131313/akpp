@@ -72,16 +72,6 @@ const mapZoom = computed<number>(() => {
   return 10
 })
 
-const emailHref = computed<string>(() => {
-  const emailValue = city.value?.email_value?.trim() ?? ''
-  return emailValue.length > 0 ? `${emailValue}` : ''
-})
-
-const phoneHref = computed<string>(() => {
-  const phoneValue = city.value?.phone_number?.replaceAll(/[^\d+]/g, '') ?? ''
-  return phoneValue.length > 0 ? `${phoneValue}` : ''
-})
-
 const menuHrefByItem = (menuItem: MenuItem): string => {
   return normalizeAppPath(menuItem.slug)
 }
@@ -111,7 +101,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
             <div class="text-brand-grey flex items-center justify-center text-sm">
               <ContactCard
                 :title="city?.email_value ?? ''"
-                :href="emailHref"
+                :href="city?.email_value"
                 :icon-source="settings.contact_email_icon_source"
                 :icon-alt="settings.contact_email_icon_alt"
                 :subtitle="city?.email_text"
@@ -122,7 +112,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
 
               <ContactCard
                 :title="city?.phone_number ?? ''"
-                :href="phoneHref"
+                :href="city?.phone_number"
                 :icon-source="settings.contact_phone_icon_source"
                 :icon-alt="settings.contact_phone_icon_alt"
                 :subtitle="city?.phone_text"

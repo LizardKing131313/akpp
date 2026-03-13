@@ -27,6 +27,8 @@ const location = computed<YMapLocationRequest>(() => {
 const components = shallowRef<YandexMapComponents | null>(null)
 const loadError = shallowRef<string | null>(null)
 const selectedPointId = shallowRef<string | null>(null)
+const mapRootElement = shallowRef<HTMLElement | null>(null)
+let tileImageObserver: MutationObserver | null = null
 
 const markerElements = shallowRef<Record<string, HTMLElement>>({})
 
@@ -78,6 +80,26 @@ const rebuildMarkers = (): void => {
   markerElements.value = createdElements
 }
 
+const patchTileImageAccessibility = (): void => {
+  const rootElement = mapRootElement.value
+  if (!rootElement) return
+
+  for (const imageElement of rootElement.querySelectorAll('img')) {
+    if (imageElement.closest('button')) continue
+
+    imageElement.alt = ''
+    imageElement.setAttribute('aria-hidden', 'true')
+  }
+
+  for (const linkElement of rootElement.querySelectorAll('a')) {
+    const className = linkElement.className
+    if (!className.includes('map-copyrights__logo')) continue
+
+    linkElement.setAttribute('aria-label', 'Яндекс Карты')
+    linkElement.setAttribute('title', 'Яндекс Карты')
+  }
+}
+
 onMounted(async () => {
   try {
     const apiKey = runtimeConfig.public.yandexMapApiKey
@@ -91,6 +113,24 @@ onMounted(async () => {
   } catch (caughtError: unknown) {
     loadError.value = caughtError instanceof Error ? caughtError.message : 'Unknown error'
   }
+
+  patchTileImageAccessibility()
+
+  if (mapRootElement.value) {
+    tileImageObserver = new MutationObserver(() => {
+      patchTileImageAccessibility()
+    })
+
+    tileImageObserver.observe(mapRootElement.value, {
+      childList: true,
+      subtree: true,
+    })
+  }
+})
+
+onBeforeUnmount(() => {
+  tileImageObserver?.disconnect()
+  tileImageObserver = null
 })
 
 watch(
@@ -111,7 +151,7 @@ watch(
 </script>
 
 <template>
-  <div class="relative w-full" :style="{ height: heightPx + 'px' }">
+  <div ref="mapRootElement" class="relative w-full" :style="{ height: heightPx + 'px' }">
     <div v-if="loadError" class="grid h-full place-items-center rounded-xl p-4">
       {{ loadError }}
     </div>
