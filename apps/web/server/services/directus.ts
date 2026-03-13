@@ -96,7 +96,7 @@ const toNuxtError = (unknownError: unknown): never => {
 
 export const createDirectusClient = () => {
   const runtimeConfig = useRuntimeConfig()
-  const directusBaseUrlRaw = runtimeConfig.public.directusUrl as string | undefined
+  const directusBaseUrlRaw = runtimeConfig.directusInternalUrl as string | undefined
   const directusBaseUrl = directusBaseUrlRaw?.replace(/\/+$/, '') ?? ''
 
   if (directusBaseUrl.length === 0) {
