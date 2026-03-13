@@ -1,20 +1,18 @@
 import type { BreadcrumbItem } from '#shared/types/breadcrumb'
 import type { MaybeRefOrGetter } from 'vue'
+import type { PageSeoBaseOptions } from '~/composables/pageSeo'
 
 import { computed, toValue } from 'vue'
 
-type UseSimplePagePresentationOptions = {
-  readonly title: MaybeRefOrGetter<string>
-  readonly description?: MaybeRefOrGetter<string | undefined>
-  readonly image?: MaybeRefOrGetter<string | undefined>
-  readonly type?: MaybeRefOrGetter<'website' | 'article' | undefined>
-  readonly robots?: MaybeRefOrGetter<string | undefined>
+import { normalizePageSeoText } from '~/composables/pageSeo'
+
+type UseSimplePagePresentationOptions = PageSeoBaseOptions & {
   readonly baseItems?: MaybeRefOrGetter<readonly BreadcrumbItem[] | undefined>
 }
 
 export const useSimplePagePresentation = (options: UseSimplePagePresentationOptions) => {
-  const pageTitle = computed<string>(() => String(toValue(options.title) ?? '').trim())
-  const pageDescription = computed<string>(() => String(toValue(options.description) ?? '').trim())
+  const pageTitle = computed<string>(() => normalizePageSeoText(toValue(options.title)))
+  const pageDescription = computed<string>(() => normalizePageSeoText(toValue(options.description)))
   const baseItems = computed<readonly BreadcrumbItem[]>(() => {
     return toValue(options.baseItems) ?? []
   })

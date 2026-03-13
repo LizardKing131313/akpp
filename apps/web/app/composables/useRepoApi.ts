@@ -86,6 +86,38 @@ const useByParamApiData = <ResponseType>(
   )
 }
 
+const useOptionalQueryParamApiData = <ResponseType>(
+  keyPrefix: string,
+  path: string,
+  queryParamName: string,
+  paramInput?: MaybeRefOrGetter<string | undefined>
+) => {
+  const paramValue = computed<string | undefined>(() => {
+    if (!paramInput) {
+      return undefined
+    }
+
+    const normalizedValue = normalizeParamValue(toValue(paramInput))
+    return normalizedValue.length > 0 ? normalizedValue : undefined
+  })
+
+  return useAsyncData<ResponseType[]>(
+    () => `${keyPrefix}:${paramValue.value ?? 'all'}`,
+    () => {
+      if (!paramValue.value) {
+        return fetchFromApi<ResponseType[]>(path)
+      }
+
+      return fetchFromApi<ResponseType[]>(
+        `${path}?${queryParamName}=${encodeURIComponent(paramValue.value)}`
+      )
+    },
+    {
+      watch: [paramValue],
+    }
+  )
+}
+
 export const useCalculateSettings = () => {
   return useStaticApiData<CalculateSettings>('calculate:settings', '/api/calculate')
 }
@@ -213,54 +245,15 @@ export const usePerks = () => {
 }
 
 export const useHeroes = (cityIdInput?: MaybeRefOrGetter<string | undefined>) => {
-  const cityIdValue = computed<string | undefined>(() => {
-    if (!cityIdInput) {
-      return undefined
-    }
-
-    const normalizedValue = normalizeParamValue(toValue(cityIdInput))
-    return normalizedValue.length > 0 ? normalizedValue : undefined
-  })
-
-  return useAsyncData<HeroItem[]>(
-    () => `heroes:list:${cityIdValue.value ?? 'all'}`,
-    () => {
-      if (!cityIdValue.value) {
-        return fetchFromApi<HeroItem[]>('/api/heroes')
-      }
-
-      return fetchFromApi<HeroItem[]>(`/api/heroes?cityId=${encodeURIComponent(cityIdValue.value)}`)
-    },
-    {
-      watch: [cityIdValue],
-    }
-  )
+  return useOptionalQueryParamApiData<HeroItem>('heroes:list', '/api/heroes', 'cityId', cityIdInput)
 }
 
 export const useLocations = (cityIdInput?: MaybeRefOrGetter<string | undefined>) => {
-  const cityIdValue = computed<string | undefined>(() => {
-    if (!cityIdInput) {
-      return undefined
-    }
-
-    const normalizedValue = normalizeParamValue(toValue(cityIdInput))
-    return normalizedValue.length > 0 ? normalizedValue : undefined
-  })
-
-  return useAsyncData<LocationItem[]>(
-    () => `locations:list:${cityIdValue.value ?? 'all'}`,
-    () => {
-      if (!cityIdValue.value) {
-        return fetchFromApi<LocationItem[]>('/api/locations')
-      }
-
-      return fetchFromApi<LocationItem[]>(
-        `/api/locations?cityId=${encodeURIComponent(cityIdValue.value)}`
-      )
-    },
-    {
-      watch: [cityIdValue],
-    }
+  return useOptionalQueryParamApiData<LocationItem>(
+    'locations:list',
+    '/api/locations',
+    'cityId',
+    cityIdInput
   )
 }
 
@@ -418,56 +411,20 @@ export const useServicePrices = () => {
 }
 
 export const useQuizProblems = (brandIdInput?: MaybeRefOrGetter<string | undefined>) => {
-  const brandIdValue = computed<string | undefined>(() => {
-    if (!brandIdInput) {
-      return undefined
-    }
-
-    const normalizedValue = normalizeParamValue(toValue(brandIdInput))
-    return normalizedValue.length > 0 ? normalizedValue : undefined
-  })
-
-  return useAsyncData<QuizProblemItem[]>(
-    () => `quiz-problems:list:${brandIdValue.value ?? 'all'}`,
-    () => {
-      if (!brandIdValue.value) {
-        return fetchFromApi<QuizProblemItem[]>('/api/quiz/problems')
-      }
-
-      return fetchFromApi<QuizProblemItem[]>(
-        `/api/quiz/problems?brandId=${encodeURIComponent(brandIdValue.value)}`
-      )
-    },
-    {
-      watch: [brandIdValue],
-    }
+  return useOptionalQueryParamApiData<QuizProblemItem>(
+    'quiz-problems:list',
+    '/api/quiz/problems',
+    'brandId',
+    brandIdInput
   )
 }
 
 export const useQuizSymptoms = (problemIdInput?: MaybeRefOrGetter<string | undefined>) => {
-  const problemIdValue = computed<string | undefined>(() => {
-    if (!problemIdInput) {
-      return undefined
-    }
-
-    const normalizedValue = normalizeParamValue(toValue(problemIdInput))
-    return normalizedValue.length > 0 ? normalizedValue : undefined
-  })
-
-  return useAsyncData<QuizSymptomItem[]>(
-    () => `quiz-symptoms:list:${problemIdValue.value ?? 'all'}`,
-    () => {
-      if (!problemIdValue.value) {
-        return fetchFromApi<QuizSymptomItem[]>('/api/quiz/symptoms')
-      }
-
-      return fetchFromApi<QuizSymptomItem[]>(
-        `/api/quiz/symptoms?problemId=${encodeURIComponent(problemIdValue.value)}`
-      )
-    },
-    {
-      watch: [problemIdValue],
-    }
+  return useOptionalQueryParamApiData<QuizSymptomItem>(
+    'quiz-symptoms:list',
+    '/api/quiz/symptoms',
+    'problemId',
+    problemIdInput
   )
 }
 

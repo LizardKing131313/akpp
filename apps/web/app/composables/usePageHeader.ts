@@ -4,6 +4,8 @@ import type { MaybeRefOrGetter } from 'vue'
 
 import { computed, onBeforeUnmount, ref, toValue, watch } from 'vue'
 
+import { normalizePageHeaderMeta, normalizePageHeaderText } from '~/composables/pageHeader'
+
 type RuntimePageHeaderState = {
   readonly path: string
   readonly meta: PageHeaderMeta
@@ -18,41 +20,6 @@ type UsePageHeaderOptions = {
 
 const pageHeaderStateKey = 'page-header:runtime'
 
-const normalizeText = (value: unknown): string => {
-  if (typeof value !== 'string') {
-    return ''
-  }
-
-  return value.trim()
-}
-
-const normalizeMeta = (meta: PageHeaderMeta): PageHeaderMeta => {
-  const breadcrumb = normalizeText(meta.breadcrumb)
-  const breadcrumbs = Array.isArray(meta.breadcrumbs)
-    ? meta.breadcrumbs
-        .map((item) => {
-          const name = normalizeText(item.name)
-          const slug = normalizeText(item.slug)
-
-          if (name.length === 0) {
-            return null
-          }
-
-          if (slug.length === 0) {
-            return { name }
-          }
-
-          return { name, slug }
-        })
-        .filter((item) => item !== null)
-    : undefined
-
-  return {
-    ...(breadcrumb.length > 0 ? { breadcrumb } : {}),
-    ...(breadcrumbs && breadcrumbs.length > 0 ? { breadcrumbs } : {}),
-  }
-}
-
 export const usePageHeaderState = () => {
   return useState<RuntimePageHeaderState>(pageHeaderStateKey, () => null)
 }
@@ -61,7 +28,7 @@ export const usePageHeader = (options: UsePageHeaderOptions): void => {
   const route = useRoute()
   const pageHeaderState = usePageHeaderState()
   const lastAppliedPath = ref<string | null>(null)
-  const normalizedTitle = computed<string>(() => normalizeText(toValue(options.title)))
+  const normalizedTitle = computed<string>(() => normalizePageHeaderText(toValue(options.title)))
   const normalizedBaseItems = computed<readonly BreadcrumbItem[]>(() => {
     return toValue(options.baseItems) ?? []
   })
@@ -80,7 +47,7 @@ export const usePageHeader = (options: UsePageHeaderOptions): void => {
             ? [...normalizedBaseItems.value]
             : undefined
 
-    return normalizeMeta({
+    return normalizePageHeaderMeta({
       ...(typeof breadcrumb !== 'undefined' ? { breadcrumb } : {}),
       ...(typeof breadcrumbs !== 'undefined' ? { breadcrumbs } : {}),
     })
