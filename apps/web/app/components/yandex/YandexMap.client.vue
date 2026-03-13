@@ -87,7 +87,7 @@ const patchTileImageAccessibility = (): void => {
   for (const imageElement of rootElement.querySelectorAll('img')) {
     if (imageElement.closest('button')) continue
 
-    imageElement.alt = ''
+    imageElement.alt = 'Локация'
     imageElement.setAttribute('aria-hidden', 'true')
   }
 
