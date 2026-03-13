@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CaseItem, CaseSettings } from '#shared/types/case'
 
+import { cn } from '#shared/lib/cn'
 import { getMoneyView } from '#shared/lib/money'
 import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
@@ -26,7 +27,13 @@ const totalMoney = computed<string>(() => {
 
 <template>
   <article
-    class="group border-brand-soft/70 bg-brand-white flex h-full flex-col overflow-hidden rounded-[28px] border shadow-[0_18px_45px_rgba(43,42,41,0.08)] transition-transform duration-300 hover:-translate-y-1">
+    :class="
+      cn(`
+        group border-brand-soft/70 bg-brand-white flex h-full flex-col overflow-hidden
+        rounded-[28px] border shadow-[0_18px_45px_rgba(43,42,41,0.08)] transition-transform
+        duration-300 hover:-translate-y-1
+      `)
+    ">
     <div class="border-brand-soft/70 flex items-center border-b px-5 py-4">
       <BrandLogo :brand="caseItem.brand" />
     </div>
@@ -71,7 +78,14 @@ const totalMoney = computed<string>(() => {
 
       <NuxtLink
         :href="normalizeAppPath(`work/${caseItem.slug}`)"
-        class="bg-brand-red/92 text-brand-white mt-auto inline-flex min-h-14 items-center justify-center rounded-full px-6 text-lg font-bold shadow-[0_14px_30px_rgba(230,42,42,0.22)] transition-transform duration-200 hover:scale-[1.01] hover:bg-[#d92525] active:scale-[0.99]">
+        :class="
+          cn(`
+            bg-brand-red/92 text-brand-white mt-auto inline-flex min-h-14 items-center
+            justify-center rounded-full px-6 text-lg font-bold
+            shadow-[0_14px_30px_rgba(230,42,42,0.22)] transition-transform duration-200
+            hover:scale-[1.01] hover:bg-[#d92525] active:scale-[0.99]
+          `)
+        ">
         {{ settings.show_button }}
       </NuxtLink>
     </div>
