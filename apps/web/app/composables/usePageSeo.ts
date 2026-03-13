@@ -30,6 +30,7 @@ type UsePageSeoOptions = {
 export const usePageSeo = (options: UsePageSeoOptions) => {
   const route = useRoute()
   const requestUrl = useRequestURL()
+  const runtimeConfig = useRuntimeConfig()
 
   const seoTitle = computed<string>(() => normalizeText(toValue(options.title)))
   const seoDescription = computed<string>(() => normalizeDescription(toValue(options.description)))
@@ -38,7 +39,15 @@ export const usePageSeo = (options: UsePageSeoOptions) => {
     const value = toValue(options.type)
     return value === 'article' ? 'article' : 'website'
   })
-  const seoRobots = computed<string>(() => normalizeText(toValue(options.robots) || 'index,follow'))
+  const seoRobots = computed<string>(() => {
+    const explicitRobots = normalizeText(toValue(options.robots))
+
+    if (explicitRobots.length > 0) {
+      return explicitRobots
+    }
+
+    return runtimeConfig.public.siteIndexable ? 'index,follow' : 'noindex,nofollow'
+  })
   const seoSiteName = computed<string>(() =>
     normalizeText(toValue(options.siteName) || 'АКПП Центр')
   )
