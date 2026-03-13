@@ -49,6 +49,9 @@ services:
 
       PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
 
+    ports:
+      - '8055:8055'
+
     volumes:
       - akpp_prod_directus_uploads:/directus/uploads
       - akpp_prod_directus_extensions:/directus/extensions
