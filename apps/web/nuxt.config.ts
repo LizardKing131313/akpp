@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+const siteIndexable = process.env.NUXT_PUBLIC_SITE_INDEXABLE === 'true'
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL?.trim() ?? ''
 const directusPublicUrl = process.env.NUXT_PUBLIC_DIRECTUS_PUBLIC_URL?.trim() ?? ''
 
@@ -236,6 +237,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      siteIndexable,
       siteUrl,
       directusPublicUrl,
       yandexMapApiKey,

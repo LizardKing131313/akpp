@@ -3,6 +3,7 @@ import { setCacheHeaders, setTextHeaders } from '#server/utils/http'
 // noinspection JSUnusedGlobalSymbols
 export default defineEventHandler((event) => {
   const runtimeConfig = useRuntimeConfig()
+  const siteIndexable = runtimeConfig.public.siteIndexable === true
   const siteUrlRaw = runtimeConfig.public.siteUrl as string | undefined
   const siteUrl = siteUrlRaw?.replace(/\/+$/, '') ?? ''
   const siteHostname = (() => {
@@ -17,7 +18,7 @@ export default defineEventHandler((event) => {
 
   setTextHeaders(event, 'text/plain; charset=utf-8')
 
-  if (isDev || isDevSubdomain) {
+  if (isDev || isDevSubdomain || !siteIndexable) {
     return `User-agent: *\nDisallow: /\n`
   }
 
