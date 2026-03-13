@@ -3,15 +3,31 @@ import { computed, ref } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
 const props = defineProps<{ images: ImageListItem[] }>()
+const runtimeConfig = useRuntimeConfig()
 
 const activeIndex = ref<number>(0)
 const visible = ref<boolean>(false)
 
-const activeSrc = computed<string | null>(
-  () => props.images[activeIndex.value]?.directus_files_id ?? null
-)
+const resolveAssetUrl = (assetId: string | null | undefined): string | null => {
+  if (!assetId) return null
 
-const displayImages = computed<string[]>(() => props.images.map((item) => item.directus_files_id))
+  if (/^(?:https?:)?\/\//.test(assetId) || assetId.startsWith('/')) {
+    return assetId
+  }
+
+  const directusUrl = runtimeConfig.public.directusUrl.replace(/\/+$/, '')
+  return `${directusUrl}/assets/${assetId}`
+}
+
+const activeSrc = computed<string | null>(() => {
+  return props.images[activeIndex.value]?.directus_files_id ?? null
+})
+
+const displayImages = computed<string[]>(() => {
+  return props.images
+    .map((item) => resolveAssetUrl(item.directus_files_id))
+    .filter((item): item is string => Boolean(item))
+})
 
 const openLightbox = (index: number): void => {
   if (props.images.length === 0) return
