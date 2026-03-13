@@ -12,7 +12,5 @@ defineProps<{
 </script>
 
 <template>
-  <ClientOnly>
-    <YandexMap :locations="locations" :center="center" :zoom="zoom" :height-px="heightPx ?? 300" />
-  </ClientOnly>
+  <YandexMap :locations="locations" :center="center" :zoom="zoom" :height-px="heightPx ?? 300" />
 </template>

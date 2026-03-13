@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const LazyFaqReviewsWidget = defineLazyHydrationComponent(
   'visible',
-  () => import('./FaqReviewsWidget.vue')
+  () => import('./FaqReviewsWidget.client.vue')
 )
 
 withDefaults(

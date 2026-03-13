@@ -9,15 +9,14 @@ import { cn } from '#shared/lib/cn'
 import { normalizeAppPath } from '#shared/lib/route'
 import { computed } from 'vue'
 
+import BrandSlider from '~/components/brands/BrandSlider.vue'
 import { useActiveCity } from '~/composables/useActiveCity'
 import { useFooterSettings, useLocations, useMenus } from '~/composables/useRepoApi'
 
-const LazyFooterMap = defineLazyHydrationComponent('visible', () => import('./FooterMap.vue'))
-const LazyFooterBrandSlider = defineLazyHydrationComponent(
+const LazyFooterMap = defineLazyHydrationComponent(
   'visible',
-  () => import('./FooterBrandSlider.vue')
+  () => import('./FooterMap.client.vue')
 )
-
 const activeCity = useActiveCity()
 const cityId = computed<string | undefined>(() => activeCity.value?.id)
 
@@ -137,9 +136,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
       </div>
     </div>
 
-    <LazyFooterBrandSlider
-      :class="cn(hideContacts ? 'mt-0' : 'mt-18', 'mb-12')"
-      :hydrate-on-visible="{ rootMargin: '200px' }" />
+    <BrandSlider :class="cn(hideContacts ? 'mt-0' : 'mt-18', 'mb-12')" />
 
     <div
       class="brand-gradient bg-brand-dark text-brand-grey-light relative space-y-12 px-4 py-12 text-sm">
