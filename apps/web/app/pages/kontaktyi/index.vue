@@ -53,7 +53,8 @@ const mapPoints = computed<YandexMapPoint[]>(() => {
     return [
       {
         id: selectedLocation.value.id,
-        title: selectedLocation.value.name ?? selectedLocation.value.address,
+        name: selectedLocation.value.name ?? selectedLocation.value.address,
+        address: selectedLocation.value.address,
         lng: selectedLocation.value.lng,
         lat: selectedLocation.value.lat,
       },
@@ -62,7 +63,8 @@ const mapPoints = computed<YandexMapPoint[]>(() => {
 
   return filteredLocations.value.map((locationItem) => ({
     id: locationItem.id,
-    title: locationItem.name ?? locationItem.address,
+    name: locationItem.name ?? locationItem.address,
+    address: locationItem.address,
     lng: locationItem.lng,
     lat: locationItem.lat,
   }))

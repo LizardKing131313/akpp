@@ -48,7 +48,8 @@ const locations = computed<readonly LocationItem[]>(() => {
 const mapPoints = computed<YandexMapPoint[]>(() => {
   return locations.value.map((locationItem) => ({
     id: locationItem.id,
-    title: locationItem.name ?? locationItem.address,
+    name: locationItem.name ?? locationItem.address,
+    address: locationItem.address,
     lat: locationItem.lat,
     lng: locationItem.lng,
   }))

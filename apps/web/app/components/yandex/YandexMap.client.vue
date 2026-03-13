@@ -26,21 +26,41 @@ const location = computed<YMapLocationRequest>(() => {
 
 const components = shallowRef<YandexMapComponents | null>(null)
 const loadError = shallowRef<string | null>(null)
+const selectedPointId = shallowRef<string | null>(null)
 
 const markerElements = shallowRef<Record<string, HTMLElement>>({})
 
 const MARKER_SOURCE_ID = 'marker-source'
 
-const createMarkerElement = (title: string): HTMLElement => {
-  const wrapperElement = document.createElement('div')
+const selectedPoint = computed<YandexMapPoint | null>(() => {
+  if (!selectedPointId.value) {
+    return null
+  }
+
+  return props.locations.find((point) => point.id === selectedPointId.value) ?? null
+})
+
+const createMarkerElement = (point: YandexMapPoint): HTMLElement => {
+  const wrapperElement = document.createElement('button')
+  wrapperElement.type = 'button'
   wrapperElement.style.width = '32px'
   wrapperElement.style.height = '32px'
   wrapperElement.style.transform = 'translate(-50%, -100%)'
-  wrapperElement.style.pointerEvents = 'none'
+  wrapperElement.style.pointerEvents = 'auto'
+  wrapperElement.style.background = 'transparent'
+  wrapperElement.style.border = '0'
+  wrapperElement.style.padding = '0'
+  wrapperElement.style.cursor = 'pointer'
+  wrapperElement.setAttribute('aria-label', point.name)
+  wrapperElement.addEventListener('click', (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    selectedPointId.value = point.id
+  })
 
   const imageElement = document.createElement('img')
   imageElement.src = '/images/icons/location.svg'
-  imageElement.alt = title
+  imageElement.alt = point.name
   imageElement.draggable = false
   imageElement.style.width = '32px'
   imageElement.style.height = '32px'
@@ -53,7 +73,7 @@ const createMarkerElement = (title: string): HTMLElement => {
 const rebuildMarkers = (): void => {
   const createdElements: Record<string, HTMLElement> = {}
   for (const point of props.locations) {
-    createdElements[point.id] = createMarkerElement(point.name ?? '')
+    createdElements[point.id] = createMarkerElement(point)
   }
   markerElements.value = createdElements
 }
@@ -78,13 +98,20 @@ watch(
   () => {
     if (!import.meta.client) return
     rebuildMarkers()
+
+    if (
+      selectedPointId.value !== null &&
+      !props.locations.some((point) => point.id === selectedPointId.value)
+    ) {
+      selectedPointId.value = null
+    }
   },
   { deep: true }
 )
 </script>
 
 <template>
-  <div class="w-full" :style="{ height: heightPx + 'px' }">
+  <div class="relative w-full" :style="{ height: heightPx + 'px' }">
     <div v-if="loadError" class="grid h-full place-items-center rounded-xl p-4">
       {{ loadError }}
     </div>
@@ -105,5 +132,26 @@ watch(
         :coordinates="[point.lng, point.lat]"
         :markerElement="markerElements[point.id]" />
     </component>
+
+    <div
+      v-if="selectedPoint"
+      class="bg-brand-white absolute right-4 bottom-4 z-20 max-w-80 rounded-2xl px-4 py-3 shadow-[0_18px_40px_rgba(43,42,41,0.18)]">
+      <div class="flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <p class="text-brand-dark text-sm font-bold">{{ selectedPoint.name }}</p>
+          <p v-if="selectedPoint.address" class="text-brand-grey mt-1 text-sm">
+            {{ selectedPoint.address }}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="text-brand-grey-light hover:text-brand-red shrink-0 text-sm transition-colors"
+          aria-label="Закрыть"
+          @click="selectedPointId = null">
+          ×
+        </button>
+      </div>
+    </div>
   </div>
 </template>

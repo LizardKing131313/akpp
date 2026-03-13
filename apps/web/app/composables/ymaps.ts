@@ -10,7 +10,7 @@ type Ymaps3Global = {
 type VuefyImport = {
   vuefy: {
     bindTo: (vue: typeof Vue) => {
-      module: (ymaps3: Ymaps3Global) => {
+      module: <ModuleType>(ymaps3: ModuleType) => {
         YMap: Component
         YMapDefaultSchemeLayer: Component
         YMapDefaultFeaturesLayer: Component
@@ -99,5 +99,5 @@ export const loadYandexMapComponents = (params: {
     }
   })()
 
-  return cachedPromise
+  return cachedPromise as Promise<YandexMapComponents>
 }

@@ -31,7 +31,11 @@ export interface MapPoint {
   readonly lng: number
 }
 
-export type YandexMapPoint = EntityItem & MapPoint
+export type YandexMapPoint = MapPoint & {
+  readonly id: string
+  readonly name: string
+  readonly address?: string
+}
 
 export type EntityId = string
 
