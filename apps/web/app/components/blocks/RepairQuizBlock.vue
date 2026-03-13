@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { QuizSubmitPayload } from '#shared/types/quiz'
 
-import RepairQuiz from '~/components/quiz/RepairQuiz.vue'
 import { useQuizSubmit } from '~/composables/useQuizSubmit'
 
 const { submitQuiz } = useQuizSubmit()

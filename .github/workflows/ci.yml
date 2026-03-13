@@ -20,18 +20,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.29.3
+          run_install: false
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
 
-      - name: Enable Corepack and pnpm
+      - name: Check pnpm
         shell: bash
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.29.3 --activate
-          pnpm --version
+        run: pnpm --version
 
       - name: Install dependencies
         shell: bash
@@ -39,14 +42,20 @@ jobs:
 
       - name: Lint
         shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm lint
 
       - name: Typecheck web
         shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm -C apps/web typecheck
 
       - name: Build web
         shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm -C apps/web build
 
       - name: Format check
