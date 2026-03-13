@@ -17,7 +17,6 @@ type UsePageSeoOptions = PageSeoBaseOptions & {
 export const usePageSeo = (options: UsePageSeoOptions) => {
   const route = useRoute()
   const requestUrl = useRequestURL()
-  const runtimeConfig = useRuntimeConfig()
 
   const seoTitle = computed<string>(() => normalizePageSeoText(toValue(options.title)))
   const seoDescription = computed<string>(() =>
@@ -35,7 +34,7 @@ export const usePageSeo = (options: UsePageSeoOptions) => {
       return explicitRobots
     }
 
-    return runtimeConfig.public.siteIndexable ? 'index,follow' : 'noindex,nofollow'
+    return 'index,follow'
   })
   const seoSiteName = computed<string>(() =>
     normalizePageSeoText(toValue(options.siteName) || 'АКПП Центр')
