@@ -39,10 +39,15 @@ const slides = computed<HeroItem[]>(() => heroesData.value ?? [])
         :autoplay="{ delay: 6000, disableOnInteraction: false }"
         :navigation="{ prevEl: '.hero-slider-prev', nextEl: '.hero-slider-next' }"
         class="relative h-100 w-full sm:h-110 lg:h-120">
-        <SwiperSlide v-for="slide in slides" :key="slide.id" class="relative h-full w-full">
+        <SwiperSlide
+          v-for="(slide, index) in slides"
+          :key="slide.id"
+          class="relative h-full w-full">
           <CmsImage
             :src="slide.image_source"
             :alt="slide.image_alt"
+            :fetchpriority="index === 0 ? 'high' : undefined"
+            :loading="index === 0 ? 'eager' : undefined"
             class="absolute inset-0 h-full w-full object-cover" />
 
           <div class="bg-brand-dark/60 absolute inset-0"></div>

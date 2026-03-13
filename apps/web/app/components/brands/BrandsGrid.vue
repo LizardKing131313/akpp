@@ -66,7 +66,7 @@ const toggle = async (): Promise<void> => {
 <template>
   <section ref="sectionRef" class="w-full">
     <div class="border-brand-grey-light/20 bg-brand-white rounded-xl border p-4">
-      <h3 class="text-brand-grey-light/50 text-xs font-bold tracking-wide uppercase">
+      <h3 class="text-brand-grey-light text-xs font-bold tracking-wide uppercase">
         {{ title }}
       </h3>
 

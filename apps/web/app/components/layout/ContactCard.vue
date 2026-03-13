@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { computed } from 'vue'
 
 export type LinkType = 'tel' | 'email' | 'url'
 
@@ -30,8 +31,15 @@ const props = withDefaults(defineProps<ContactCardProps>(), {
 const computedHref = computed<string>(() => {
   if (!props.href) return ''
 
-  if (props.linkType === 'tel') return `tel:${props.href}`
-  if (props.linkType === 'email') return `mailto:${props.href}`
+  if (props.linkType === 'tel') {
+    const emailValue = props.href.trim() ?? ''
+    return `tel:${emailValue}`
+  }
+
+  if (props.linkType === 'email') {
+    const phoneValue = props.href.replaceAll(/[^\d+]/g, '') ?? ''
+    return `mailto:${phoneValue}`
+  }
 
   return props.href
 })

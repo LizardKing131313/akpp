@@ -18,6 +18,8 @@ const nitroRedisDb = Number(process.env.NITRO_REDIS_DB)
 const nitroApiCacheTtl = Number(process.env.NITRO_API_CACHE_TTL_SECONDS)
 const nitroSsrSwr = Number(process.env.NITRO_SSR_SWR_SECONDS)
 
+const yandexUrl = 'https://*.yandex'
+
 const directusHost = (() => {
   try {
     return new URL(directusPublicUrl).host
@@ -25,6 +27,71 @@ const directusHost = (() => {
     return ''
   }
 })()
+
+const directusOrigin = (() => {
+  try {
+    return new URL(directusPublicUrl).origin
+  } catch {
+    return ''
+  }
+})()
+
+const compactDirective = (...values: Array<string | false | null | undefined>): string => {
+  return values.filter(Boolean).join(' ')
+}
+
+const contentSecurityPolicy = [
+  `default-src 'self'`,
+  `base-uri 'self'`,
+  `object-src 'none'`,
+  `frame-ancestors 'self'`,
+  `form-action 'self'`,
+  compactDirective(
+    'script-src',
+    `'self'`,
+    `'unsafe-inline'`,
+    `'unsafe-eval'`,
+    'https://api-maps.yandex.ru',
+    'https://yastatic.net',
+    'https://*.yastatic.net'
+  ),
+  compactDirective('style-src', `'self'`, `'unsafe-inline'`),
+  compactDirective(
+    'img-src',
+    `'self'`,
+    'data:',
+    'blob:',
+    `${yandexUrl}.ru`,
+    `${yandexUrl}.net`,
+    directusOrigin
+  ),
+  compactDirective('font-src', `'self'`, 'data:'),
+  compactDirective(
+    'connect-src',
+    `'self'`,
+    'https://api-maps.yandex.ru',
+    `${yandexUrl}.ru`,
+    `${yandexUrl}.net`,
+    directusOrigin
+  ),
+  compactDirective('frame-src', `'self'`, 'https://yandex.ru', `${yandexUrl}.ru`),
+  compactDirective('worker-src', `'self'`, 'blob:'),
+  `manifest-src 'self'`,
+  `upgrade-insecure-requests`,
+].join('; ')
+
+const securityHeaders = {
+  'content-security-policy': contentSecurityPolicy,
+  'cross-origin-opener-policy': 'same-origin',
+  'x-frame-options': 'SAMEORIGIN',
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  ...(isProduction
+    ? {
+        'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+      }
+    : {}),
+}
 
 const nitroCacheStorage = nitroRedisHost
   ? {
@@ -89,6 +156,9 @@ export default defineNuxtConfig({
       cache: nitroCacheStorage,
     },
     routeRules: {
+      '/**': {
+        headers: securityHeaders,
+      },
       '/api/**': {
         ...prodOnlyRouteRule({
           cache: {
@@ -248,6 +318,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'ru',
+      },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
