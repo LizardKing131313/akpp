@@ -3,35 +3,10 @@ import type { PageHeaderMeta } from '#shared/types/header'
 
 import { computed } from 'vue'
 
+import { normalizePageHeaderBreadcrumbs, normalizePageHeaderText } from '~/composables/pageHeader'
+
 type RouteMetaWithHeader = {
   readonly pageHeader?: PageHeaderMeta
-}
-
-const normalizeText = (value: unknown): string => {
-  if (typeof value !== 'string') {
-    return ''
-  }
-
-  return value.trim()
-}
-
-const normalizeBreadcrumbs = (items: readonly BreadcrumbItem[]): BreadcrumbItem[] => {
-  return items
-    .map((item) => {
-      const name = normalizeText(item.name)
-      const slug = normalizeText(item.slug)
-
-      if (name.length === 0) {
-        return null
-      }
-
-      if (slug.length === 0) {
-        return { name }
-      }
-
-      return { name, slug }
-    })
-    .filter((item): item is BreadcrumbItem => item !== null)
 }
 
 export const usePageHeaderMeta = () => {
@@ -68,7 +43,7 @@ export const usePageHeaderMeta = () => {
       return ''
     }
 
-    return normalizeText(activeMeta.value.breadcrumb)
+    return normalizePageHeaderText(activeMeta.value.breadcrumb)
   })
 
   const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
@@ -85,7 +60,7 @@ export const usePageHeaderMeta = () => {
       return [{ name: breadcrumbTitle.value }]
     }
 
-    return normalizeBreadcrumbs(items)
+    return normalizePageHeaderBreadcrumbs(items) ?? []
   })
 
   return {

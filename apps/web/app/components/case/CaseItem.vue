@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import type { CaseItem, CaseSettings } from '#shared/types/case'
-
-import { getMoneyView } from '#shared/lib/money'
-import { computed } from 'vue'
+import type { CaseItem } from '#shared/types/case'
 
 import { useRepairQuizModal } from '~/composables/modal/useRepairQuizModal'
 import { useSignupModal } from '~/composables/modal/useSignupModal'
@@ -11,21 +8,9 @@ const props = defineProps<{
   caseItem: CaseItem
 }>()
 
-const { data: settingsData } = await useCaseSettings()
-
-const settings = computed<CaseSettings>(() => settingsData.value ?? ({} as CaseSettings))
-
-const partMoney = computed<string>(() => {
-  return getMoneyView(props.caseItem.part_price).value
-})
-
-const workMoney = computed<string>(() => {
-  return getMoneyView(props.caseItem.work_price).value
-})
-
-const totalMoney = computed<string>(() => {
-  return getMoneyView(props.caseItem.part_price + props.caseItem.work_price).value
-})
+const { settings, partMoney, workMoney, totalMoney } = await useCasePresentation(
+  () => props.caseItem
+)
 
 const handleCalculateClick = (): void => {
   useRepairQuizModal().openModal()
