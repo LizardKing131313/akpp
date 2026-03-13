@@ -42,14 +42,20 @@ jobs:
 
       - name: Lint
         shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm lint
 
       - name: Typecheck web
         shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm -C apps/web typecheck
 
       - name: Build web
         shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm -C apps/web build
 
       - name: Format check

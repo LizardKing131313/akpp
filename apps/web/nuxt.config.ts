@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 const isProduction = process.env.NODE_ENV === 'production'
 
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL?.trim() ?? ''
-const directusPublicUrl = process.env.NUXT_PUBLIC_DIRECTUS_URL?.trim() ?? ''
+const directusPublicUrl = process.env.NUXT_PUBLIC_DIRECTUS_PUBLIC_URL?.trim() ?? ''
 
 const yandexMapApiKey = process.env.NUXT_PUBLIC_YANDEX_MAP_API_KEY?.trim() ?? ''
 const yandexOrgId = process.env.NUXT_PUBLIC_YANDEX_ORG_ID?.trim() ?? ''
