@@ -63,6 +63,8 @@ export type QuizSubmitPayload = {
   readonly brandTitle: string
   readonly problemTitle: string
   readonly symptomTitle: string
+  readonly contextTitles: readonly string[]
+  readonly contextText: string
   readonly customerName: string
   readonly customerPhone: string
 }

@@ -20,13 +20,18 @@ export const useQuizSubmit = (options?: UseQuizSubmitOptions) => {
     isSubmitting.value = true
 
     try {
+      const contextParts = [
+        payload.contextTitles.length > 0 ? `Контекст: ${payload.contextTitles.join(', ')}` : '',
+        payload.contextText.length > 0 ? `Дополнительно: ${payload.contextText}` : '',
+      ].filter((contextPart) => contextPart.length > 0)
+
       await submitLead({
         source: 'quiz',
         name: payload.customerName,
         phone: payload.customerPhone,
         problem: payload.problemTitle,
         symptoms: payload.symptomTitle,
-        comment: `Марка: ${payload.brandTitle}`,
+        comment: [`Марка: ${payload.brandTitle}`, ...contextParts].join('; '),
       })
 
       await options?.onSuccess?.()

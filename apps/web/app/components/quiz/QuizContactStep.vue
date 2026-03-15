@@ -6,6 +6,7 @@ withDefaults(
     readonly brandTitle: string
     readonly problemTitle: string
     readonly symptomTitle: string
+    readonly contextSummary?: string
 
     readonly title?: string
     readonly description?: string
@@ -89,6 +90,10 @@ const handleSubmit = (): void => {
 
       <div class="text-brand-grey-light">
         {{ symptomTitle }}
+      </div>
+
+      <div v-if="contextSummary" class="text-brand-grey-light">
+        {{ contextSummary }}
       </div>
     </div>
 

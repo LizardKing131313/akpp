@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { BrandItem } from '#shared/types/brand'
-import type { QuizProblemItem, QuizSubmitPayload } from '#shared/types/quiz'
+import type { QuizContextItem, QuizProblemItem, QuizSubmitPayload } from '#shared/types/quiz'
 
 import { cn } from '#shared/lib/cn'
 import { computed, ref, watch } from 'vue'
 
 import { useQuizSettings } from '~/composables/useRepoApi'
 
-type QuizStep = 'brand' | 'problem' | 'symptom' | 'contact' | 'success'
+type QuizStep = 'brand' | 'problem' | 'symptom' | 'context' | 'contact' | 'success'
 
 const props = withDefaults(
   defineProps<{
@@ -31,6 +31,8 @@ const selectedBrandTitle = ref<string>(props.activeBrand?.name ?? '')
 const selectedProblemId = ref<string | undefined>(undefined)
 const selectedProblemTitle = ref<string>('')
 const selectedSymptomTitle = ref<string>('')
+const selectedContextTitles = ref<string[]>([])
+const customContextText = ref<string>('')
 
 const { data: settingsData } = await useQuizSettings()
 const settings = computed<QuizSettings>(() => settingsData.value ?? ({} as QuizSettings))
@@ -38,6 +40,7 @@ const settings = computed<QuizSettings>(() => settingsData.value ?? ({} as QuizS
 const { data: brandsData } = await useBrands()
 const { data: problemItemsData } = await useQuizProblems(selectedBrandId)
 const { data: symptomItemsData } = await useQuizSymptoms(selectedProblemId)
+const { data: contextItemsData } = await useQuizContexts()
 
 const normalizeTitle = (value: string | undefined): string => {
   return value?.trim().toLowerCase() ?? ''
@@ -47,24 +50,28 @@ const brands = computed<readonly BrandItem[]>(() => {
   return brandsData.value ?? []
 })
 
-const problems = computed<readonly string[]>(() => {
-  return (problemItemsData.value ?? [])
-    .map((problemItem) => problemItem.name?.trim() ?? '')
-    .filter((problemTitle) => problemTitle.length > 0)
+const problems = computed<readonly QuizProblemItem[]>(() => {
+  return (problemItemsData.value ?? []).filter((problemItem: QuizProblemItem) => {
+    return (problemItem.name?.trim().length ?? 0) > 0
+  })
 })
 
-const stepLabels = computed<readonly string[]>(() => [
-  settings.value.step_label_brand,
-  settings.value.step_label_problem,
-  settings.value.step_label_symptom,
-  settings.value.step_label_contact,
-])
+const stepLabels = computed<readonly string[]>(() => {
+  return [
+    settings.value.step_label_brand,
+    settings.value.step_label_problem,
+    settings.value.step_label_symptom,
+    'Контекст',
+    settings.value.step_label_contact,
+  ]
+})
 
 const activeStepIndex = computed<number>(() => {
   if (currentStep.value === 'brand') return 0
   if (currentStep.value === 'problem') return 1
   if (currentStep.value === 'symptom') return 2
-  return 3
+  if (currentStep.value === 'context') return 3
+  return 4
 })
 
 const canGoBack = computed<boolean>(
@@ -83,6 +90,8 @@ watch(
     selectedProblemId.value = undefined
     selectedProblemTitle.value = ''
     selectedSymptomTitle.value = ''
+    selectedContextTitles.value = []
+    customContextText.value = ''
     currentStep.value = 'problem'
   }
 )
@@ -97,17 +106,26 @@ const goBack = (): void => {
     selectedProblemId.value = undefined
     selectedProblemTitle.value = ''
     selectedSymptomTitle.value = ''
+    selectedContextTitles.value = []
+    customContextText.value = ''
     return
   }
 
   if (currentStep.value === 'symptom') {
     currentStep.value = 'problem'
     selectedSymptomTitle.value = ''
+    selectedContextTitles.value = []
+    customContextText.value = ''
+    return
+  }
+
+  if (currentStep.value === 'context') {
+    currentStep.value = 'symptom'
     return
   }
 
   if (currentStep.value === 'contact') {
-    currentStep.value = 'symptom'
+    currentStep.value = 'context'
   }
 }
 
@@ -118,6 +136,8 @@ const goToBrandAndReset = (): void => {
   selectedProblemId.value = undefined
   selectedProblemTitle.value = ''
   selectedSymptomTitle.value = ''
+  selectedContextTitles.value = []
+  customContextText.value = ''
 }
 
 const handleBrandNext = (payload: { brandTitle: string }): void => {
@@ -132,6 +152,8 @@ const handleBrandNext = (payload: { brandTitle: string }): void => {
   selectedProblemId.value = undefined
   selectedProblemTitle.value = ''
   selectedSymptomTitle.value = ''
+  selectedContextTitles.value = []
+  customContextText.value = ''
   currentStep.value = 'problem'
 }
 
@@ -145,6 +167,8 @@ const handleProblemSelect = (payload: { problemTitle: string }): void => {
   selectedProblemId.value = matchedProblem?.id
   selectedProblemTitle.value = problemTitle
   selectedSymptomTitle.value = ''
+  selectedContextTitles.value = []
+  customContextText.value = ''
   currentStep.value = 'symptom'
 }
 
@@ -154,8 +178,34 @@ const availableSymptoms = computed<readonly string[]>(() => {
     .filter((symptomTitle) => symptomTitle.length > 0)
 })
 
+const availableContexts = computed<readonly string[]>(() => {
+  return (contextItemsData.value ?? [])
+    .map((contextItem: QuizContextItem) => contextItem.name?.trim() ?? '')
+    .filter((contextTitle) => contextTitle.length > 0)
+})
+
+const contextSummary = computed<string>(() => {
+  const normalizedCustomContextText = customContextText.value.trim()
+  const parts = [selectedContextTitles.value.join(', '), normalizedCustomContextText].filter(
+    (contextValue) => contextValue.length > 0
+  )
+
+  return parts.join('. ')
+})
+
 const handleSymptomSelect = (payload: { symptomTitle: string }): void => {
   selectedSymptomTitle.value = payload.symptomTitle.trim()
+  selectedContextTitles.value = []
+  customContextText.value = ''
+  currentStep.value = 'context'
+}
+
+const handleContextNext = (payload: {
+  selectedContextTitles: readonly string[]
+  customContextText: string
+}): void => {
+  selectedContextTitles.value = [...payload.selectedContextTitles]
+  customContextText.value = payload.customContextText.trim()
   currentStep.value = 'contact'
 }
 
@@ -164,6 +214,8 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
     brandTitle: selectedBrandTitle.value,
     problemTitle: selectedProblemTitle.value,
     symptomTitle: selectedSymptomTitle.value,
+    contextTitles: selectedContextTitles.value,
+    contextText: customContextText.value.trim(),
     customerName: payload.customerName,
     customerPhone: payload.customerPhone,
   })
@@ -177,7 +229,9 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
     <div
       class="bg-brand-white relative mx-auto w-full max-w-140 rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)]">
       <div v-if="currentStep !== 'success'" class="px-7.5 pt-7.5">
-        <div class="grid grid-cols-4 gap-x-5">
+        <div
+          class="grid gap-x-5"
+          :style="{ gridTemplateColumns: `repeat(${stepLabels.length}, minmax(0, 1fr))` }">
           <div v-for="(label, labelIndex) in stepLabels" :key="label" class="min-w-0">
             <div
               class="h-1.25 w-full rounded-full transition-colors"
@@ -227,6 +281,7 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
           :brand-title="selectedBrandTitle"
           :problems="problems"
           :title="settings.problem_title"
+          :description="settings.problem_description"
           :brand-label="settings.problem_badge_label"
           :empty-text="settings.options_empty_text"
           @select="handleProblemSelect" />
@@ -238,13 +293,26 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
           :title="settings.symptom_title"
           :problem-label="settings.symptom_badge_label"
           :empty-text="settings.options_empty_text"
+          :custom-label="settings.symptom_custom_label"
+          :custom-placeholder="settings.symptom_custom_placeholder"
+          :custom-button="settings.symptom_custom_button"
           @select="handleSymptomSelect" />
+
+        <QuizContextStep
+          v-else-if="currentStep === 'context'"
+          :contexts="availableContexts"
+          :description="settings.context_label"
+          :custom-label="settings.context_custom_label"
+          :custom-placeholder="settings.context_custom_placeholder"
+          :next-label="settings.context_next_button"
+          @next="handleContextNext" />
 
         <QuizContactStep
           v-else-if="currentStep === 'contact'"
           :brand-title="selectedBrandTitle"
           :problem-title="selectedProblemTitle"
           :symptom-title="selectedSymptomTitle"
+          :context-summary="contextSummary"
           :title="settings.contact_title"
           :description="settings.contact_description"
           :auto-label="settings.contact_auto_label"
