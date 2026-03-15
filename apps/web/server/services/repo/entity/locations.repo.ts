@@ -31,18 +31,18 @@ export class LocationsRepository extends ListRepository<LocationItem> {
   }
 
   public override async list(): Promise<readonly LocationItem[]> {
-    const items = await super.list()
+    const items = await this.getAll(this.PUBLISHED_STATUS_QUERY)
     return items.map((item) => this.normalizeLocation(item))
   }
 
   public override async getById(id: string): Promise<LocationItem | null> {
-    const item = await super.getById(id)
+    const item = await this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
     return item ? this.normalizeLocation(item) : null
   }
 
   // noinspection JSUnusedGlobalSymbols
   public async getByCity(city_id: string): Promise<readonly LocationItem[]> {
-    const items = await this.getManyByField('city_id', city_id)
+    const items = await this.getManyByField('city_id', city_id, this.PUBLISHED_STATUS_QUERY)
     return items.map((item) => this.normalizeLocation(item))
   }
 }

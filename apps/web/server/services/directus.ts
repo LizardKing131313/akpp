@@ -116,12 +116,23 @@ export const createDirectusClient = () => {
   const collectionUrl = (collection: string) =>
     `${directusBaseUrl}/items/${encodeURIComponent(collection)}`
 
+  const request = async <Item>(url: string): Promise<Item> => {
+    const response = await $fetch<DirectusItemsResponse<Item>>(url, {
+      method: 'GET',
+      headers: {
+        ...getAuthHeader(),
+      },
+    })
+
+    return normalizeDirectusIds(response.data)
+  }
+
   const getSingleton = async <Item>(
     collection: string,
     query: DirectusQuery = {}
   ): Promise<Item> => {
     const url = `${collectionUrl(collection)}${buildQueryString(query)}`
-    return await get(url)
+    return await get<Item>(url)
   }
 
   const getItems = async <Item>(
@@ -129,7 +140,7 @@ export const createDirectusClient = () => {
     query: DirectusQuery
   ): Promise<readonly Item[]> => {
     const url = `${collectionUrl(collection)}${buildQueryString(query)}`
-    return await get(url)
+    return await get<readonly Item[]>(url)
   }
 
   const getItem = async <Item>(
@@ -138,18 +149,12 @@ export const createDirectusClient = () => {
     query: DirectusQuery = {}
   ): Promise<Item> => {
     const url = `${collectionUrl(collection)}/${encodeURIComponent(id)}${buildQueryString(query)}`
-    return await get(url)
+    return await get<Item>(url)
   }
 
   const get = async <Item>(url: string): Promise<Item> => {
     try {
-      const response = await $fetch<DirectusItemsResponse<Item>>(url, {
-        method: 'GET',
-        headers: {
-          ...getAuthHeader(),
-        },
-      })
-      return normalizeDirectusIds(response.data)
+      return await request(url)
     } catch (unknownError: unknown) {
       return toNuxtError(unknownError)
     }

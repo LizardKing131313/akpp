@@ -9,6 +9,9 @@ export abstract class Repository<ItemType extends EntityItem> {
   protected abstract readonly fields: string
 
   protected readonly SORT_FIELD: string = 'sort'
+  protected readonly PUBLISHED_STATUS_QUERY: DirectusQuery = {
+    'filter[status][_eq]': 'published',
+  }
 
   protected readonly NOT_IMPLEMENTED: string = 'Not implemented'
 
@@ -68,7 +71,8 @@ export abstract class Repository<ItemType extends EntityItem> {
 
   protected async getOneByField(
     field: string,
-    value: string | number | boolean
+    value: string | number | boolean,
+    query?: DirectusQuery
   ): Promise<ItemType | null> {
     const directus = this.getDirectus()
 
@@ -76,6 +80,7 @@ export abstract class Repository<ItemType extends EntityItem> {
       limit: 1,
       fields: this.fields,
       ...directus.equals(field, value),
+      ...query,
     })
 
     return items[0] ?? null
@@ -83,7 +88,8 @@ export abstract class Repository<ItemType extends EntityItem> {
 
   protected async getManyByField(
     field: string,
-    value: string | number | boolean
+    value: string | number | boolean,
+    query?: DirectusQuery
   ): Promise<readonly ItemType[]> {
     const directus = this.getDirectus()
 
@@ -91,6 +97,7 @@ export abstract class Repository<ItemType extends EntityItem> {
       fields: this.fields,
       sort: this.SORT_FIELD,
       ...directus.equals(field, value),
+      ...query,
     })
   }
 }

@@ -21,7 +21,16 @@ export class TransmissionRangeModelVariantsRepository extends ListSlugRepository
   public override async list(): Promise<readonly TransmissionRangeWithVariants[]> {
     return await this.getAll({
       limit: -1,
+      ...this.PUBLISHED_STATUS_QUERY,
       'deep[transmission_range_model_variants][_limit]': -1,
     })
+  }
+
+  public override async getBySlug(slug: string): Promise<TransmissionRangeWithVariants | null> {
+    return this.getOneByField('slug', slug, this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<TransmissionRangeWithVariants | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
   }
 }

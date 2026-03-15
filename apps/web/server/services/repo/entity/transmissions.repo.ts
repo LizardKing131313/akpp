@@ -14,4 +14,12 @@ export class TransmissionsRepository extends ListRepository<TransmissionItem> {
     image_alt,
     sort,
   `
+
+  public override async list(): Promise<readonly TransmissionItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<TransmissionItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

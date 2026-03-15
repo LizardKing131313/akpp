@@ -30,8 +30,17 @@ export class HeroesRepository extends ListRepository<HeroItem> {
     return await directus.getItems<HeroItem>(this.collection, {
       fields: this.fields,
       sort: this.SORT_FIELD,
+      ...this.PUBLISHED_STATUS_QUERY,
       'filter[_or][0][city_id][_eq]': normalizedCityId,
       'filter[_or][1][city_id][_null]': true,
     })
+  }
+
+  public override async list(): Promise<readonly HeroItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<HeroItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
   }
 }

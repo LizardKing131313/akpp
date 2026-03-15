@@ -10,4 +10,12 @@ export class QuizContextsRepository extends ListRepository<QuizContextItem> {
     name,
     sort,
   `
+
+  public override async list(): Promise<readonly QuizContextItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<QuizContextItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

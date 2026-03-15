@@ -13,4 +13,16 @@ export class BrandsRepository extends ListSlugRepository<BrandItem> {
     image_alt,
     sort,
   `
+
+  public override async list(): Promise<readonly BrandItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getBySlug(slug: string): Promise<BrandItem | null> {
+    return this.getOneByField('slug', slug, this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<BrandItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

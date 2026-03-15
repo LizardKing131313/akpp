@@ -18,4 +18,16 @@ export class CitiesRepository extends ListSlugRepository<CityItem> {
     email_text,
     sort,
   `
+
+  public override async list(): Promise<readonly CityItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getBySlug(slug: string): Promise<CityItem | null> {
+    return this.getOneByField('slug', slug, this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<CityItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

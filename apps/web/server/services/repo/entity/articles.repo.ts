@@ -51,6 +51,7 @@ export class ArticlesRepository extends ListSlugRepository<ArticleItem> {
   public override async list(): Promise<readonly ArticleItem[]> {
     const items = await this.getAll({
       limit: -1,
+      ...this.PUBLISHED_STATUS_QUERY,
       'deep[recomended][_limit]': -1,
       'deep[recomended][_sort]': 'sort',
     })
@@ -58,7 +59,13 @@ export class ArticlesRepository extends ListSlugRepository<ArticleItem> {
   }
 
   public override async getBySlug(slug: string): Promise<ArticleItem | null> {
-    const rawItem = await this.getOneByField('slug', slug)
+    const rawItem = await this.getOneByField('slug', slug, this.PUBLISHED_STATUS_QUERY)
+    if (!rawItem) return null
+    return this.mapArticle(rawItem as RawArticleItem)
+  }
+
+  public override async getById(id: string): Promise<ArticleItem | null> {
+    const rawItem = await this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
     if (!rawItem) return null
     return this.mapArticle(rawItem as RawArticleItem)
   }

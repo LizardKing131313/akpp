@@ -13,4 +13,12 @@ export class PerksRepository extends ListRepository<PerkItem> {
     image_alt,
     sort,
   `
+
+  public override async list(): Promise<readonly PerkItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<PerkItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

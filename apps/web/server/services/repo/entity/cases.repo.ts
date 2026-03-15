@@ -34,4 +34,16 @@ export class CasesRepository extends ListSlugRepository<CaseItem> {
     brand.image_source,
     brand.image_alt,
   `
+
+  public override async list(): Promise<readonly CaseItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getBySlug(slug: string): Promise<CaseItem | null> {
+    return this.getOneByField('slug', slug, this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<CaseItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

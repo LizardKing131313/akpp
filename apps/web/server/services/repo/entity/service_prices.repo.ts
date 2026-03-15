@@ -12,4 +12,12 @@ export class ServicePricesRepository extends ListRepository<ServicePriceItem> {
     price,
     sort,
   `
+
+  public override async list(): Promise<readonly ServicePriceItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<ServicePriceItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
+  }
 }

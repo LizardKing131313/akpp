@@ -24,8 +24,17 @@ export class QuizSymptomsRepository extends ListRepository<QuizSymptomItem> {
     return await directus.getItems<QuizSymptomItem>(this.collection, {
       fields: this.fields,
       sort: this.SORT_FIELD,
+      ...this.PUBLISHED_STATUS_QUERY,
       'filter[_or][0][problem_id][_eq]': normalizedProblemId,
       'filter[_or][1][problem_id][_null]': true,
     })
+  }
+
+  public override async list(): Promise<readonly QuizSymptomItem[]> {
+    return this.getAll(this.PUBLISHED_STATUS_QUERY)
+  }
+
+  public override async getById(id: string): Promise<QuizSymptomItem | null> {
+    return this.getOneByField('id', id, this.PUBLISHED_STATUS_QUERY)
   }
 }
