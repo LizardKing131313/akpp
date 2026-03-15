@@ -4,6 +4,7 @@ import {
   type LeadDirectusCreatePayload,
   LeadsRepository,
 } from '#server/services/repo/entity/leads.repo'
+import { sendRoistatProxyLead } from '#server/services/roistat/proxylead'
 
 const normalizeText = (value: unknown): string | undefined => {
   if (typeof value !== 'string') {
@@ -63,6 +64,15 @@ export default defineEventHandler(async (event) => {
   const directusPayload = toDirectusPayload(payload)
   const repo = new LeadsRepository()
   const leadItem = await repo.create(directusPayload)
+  const roistatVisitCookie = getCookie(event, 'roistat_visit')?.trim()
+  const roistatVisit = normalizeText(payload.roistatVisit) ?? roistatVisitCookie
+
+  await sendRoistatProxyLead({
+    event,
+    payload,
+    comment: directusPayload.comment,
+    roistatVisit,
+  })
 
   return {
     id: leadItem.id,

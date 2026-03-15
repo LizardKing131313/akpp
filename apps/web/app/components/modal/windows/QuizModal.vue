@@ -25,6 +25,7 @@ const emitClose = (): void => {
 
 const { submitQuiz } = useQuizSubmit({
   onSuccess: emitClose,
+  onFinally: emitClose,
 })
 
 const { data: settingsData } = await useQuizModalSettings()

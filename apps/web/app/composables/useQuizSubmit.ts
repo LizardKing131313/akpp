@@ -6,6 +6,7 @@ import { useLeadSubmit } from '~/composables/useLeadSubmit'
 
 type UseQuizSubmitOptions = {
   readonly onSuccess?: (() => void | Promise<void>) | undefined
+  readonly onFinally?: (() => void | Promise<void>) | undefined
 }
 
 export const useQuizSubmit = (options?: UseQuizSubmitOptions) => {
@@ -39,6 +40,7 @@ export const useQuizSubmit = (options?: UseQuizSubmitOptions) => {
       console.error('[lead] quiz submit failed')
     } finally {
       isSubmitting.value = false
+      await options?.onFinally?.()
     }
   }
 

@@ -161,7 +161,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
           </div>
         </TwoColumns>
 
-        <FooterArticles />
+        <div />
       </TwoColumns>
 
       <TwoColumns class="relative mx-auto max-w-6xl">

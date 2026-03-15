@@ -7,4 +7,5 @@ export type LeadSubmitPayload = {
   readonly problem?: string
   readonly symptoms?: string
   readonly comment?: string
+  readonly roistatVisit?: string
 }

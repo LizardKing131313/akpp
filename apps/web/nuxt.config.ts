@@ -7,10 +7,14 @@ const directusPublicUrl = process.env.NUXT_PUBLIC_DIRECTUS_PUBLIC_URL?.trim() ??
 
 const yandexMapApiKey = process.env.NUXT_PUBLIC_YANDEX_MAP_API_KEY?.trim() ?? ''
 const yandexOrgId = process.env.NUXT_PUBLIC_YANDEX_ORG_ID?.trim() ?? ''
+const yandexMetrikaId = process.env.NUXT_PUBLIC_YANDEX_METRIKA_ID?.trim() ?? ''
+const roistatProjectId = process.env.NUXT_PUBLIC_ROISTAT_PROJECT_ID?.trim() ?? ''
+const roistatHost = process.env.NUXT_PUBLIC_ROISTAT_HOST?.trim() ?? 'cloud.roistat.com'
 
 const directusToken = process.env.NUXT_DIRECTUS_TOKEN?.trim() ?? ''
 const directusInternalUrl = process.env.NUXT_DIRECTUS_INTERNAL_URL?.trim() ?? ''
 const directusCacheTtlSeconds = Number(process.env.NUXT_DIRECTUS_CACHE_TTL_SECONDS)
+const roistatProxyleadUrl = process.env.NUXT_ROISTAT_PROXYLEAD_URL?.trim() ?? ''
 
 const nitroRedisHost = process.env.NITRO_REDIS_HOST?.trim() ?? ''
 const nitroRedisPort = Number(process.env.NITRO_REDIS_PORT)
@@ -19,6 +23,10 @@ const nitroApiCacheTtl = Number(process.env.NITRO_API_CACHE_TTL_SECONDS)
 const nitroSsrSwr = Number(process.env.NITRO_SSR_SWR_SECONDS)
 
 const yandexUrl = 'https://*.yandex'
+const yandexMetrikaUrl = 'https://mc.yandex.ru'
+const yandexMetrikaComUrl = 'https://mc.yandex.com'
+const yandexMetrikaWebSocketUrl = 'wss://mc.yandex.com'
+const roistatUrl = 'https://*.roistat.com'
 
 const directusHost = (() => {
   try {
@@ -52,6 +60,9 @@ const contentSecurityPolicy = [
     `'unsafe-inline'`,
     `'unsafe-eval'`,
     'https://api-maps.yandex.ru',
+    yandexMetrikaUrl,
+    yandexMetrikaComUrl,
+    roistatUrl,
     'https://yastatic.net',
     'https://*.yastatic.net'
   ),
@@ -63,6 +74,9 @@ const contentSecurityPolicy = [
     'blob:',
     `${yandexUrl}.ru`,
     `${yandexUrl}.net`,
+    yandexMetrikaUrl,
+    yandexMetrikaComUrl,
+    roistatUrl,
     directusOrigin
   ),
   compactDirective('font-src', `'self'`, 'data:'),
@@ -72,6 +86,10 @@ const contentSecurityPolicy = [
     'https://api-maps.yandex.ru',
     `${yandexUrl}.ru`,
     `${yandexUrl}.net`,
+    yandexMetrikaUrl,
+    yandexMetrikaComUrl,
+    yandexMetrikaWebSocketUrl,
+    roistatUrl,
     directusOrigin
   ),
   compactDirective('frame-src', `'self'`, 'https://yandex.ru', `${yandexUrl}.ru`),
@@ -304,16 +322,22 @@ export default defineNuxtConfig({
     },
   ],
 
+  plugins: ['~/plugins/analytics.client'],
+
   runtimeConfig: {
     public: {
       siteUrl,
       directusPublicUrl,
       yandexMapApiKey,
       yandexOrgId,
+      yandexMetrikaId,
+      roistatProjectId,
+      roistatHost,
     },
     directusToken,
     directusInternalUrl,
     directusCacheTtlSeconds,
+    roistatProxyleadUrl,
   },
 
   app: {

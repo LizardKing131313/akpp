@@ -51,12 +51,11 @@ const submit = (): void => {
         name: name.value.trim(),
         phone: phone.value.trim(),
       })
-
-      emitClose()
     } catch {
       console.error('[lead] signup submit failed')
     } finally {
       isSubmitting.value = false
+      emitClose()
     }
   })()
 }

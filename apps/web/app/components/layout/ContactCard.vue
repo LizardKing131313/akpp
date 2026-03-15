@@ -31,14 +31,14 @@ const props = withDefaults(defineProps<ContactCardProps>(), {
 const computedHref = computed<string>(() => {
   if (!props.href) return ''
 
-  if (props.linkType === 'tel') {
+  if (props.linkType === 'email') {
     const emailValue = props.href.trim() ?? ''
-    return `tel:${emailValue}`
+    return `mailto:${emailValue}`
   }
 
-  if (props.linkType === 'email') {
+  if (props.linkType === 'tel') {
     const phoneValue = props.href.replaceAll(/[^\d+]/g, '') ?? ''
-    return `mailto:${phoneValue}`
+    return `tel:${phoneValue}`
   }
 
   return props.href

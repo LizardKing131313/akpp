@@ -48,12 +48,11 @@ const submit = (): void => {
         phone: phone.value.trim(),
         comment: vinValue.length > 0 ? `Авто: ${carValue}\nVIN: ${vinValue}` : `Авто: ${carValue}`,
       })
-
-      emitClose()
     } catch {
       console.error('[lead] shop submit failed')
     } finally {
       isSubmitting.value = false
+      emitClose()
     }
   })()
 }
