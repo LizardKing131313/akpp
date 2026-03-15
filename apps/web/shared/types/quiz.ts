@@ -28,10 +28,19 @@ export type QuizSettings = {
   readonly brand_empty_label: string
 
   readonly problem_title: string
+  readonly problem_description: string
   readonly problem_badge_label: string
 
   readonly symptom_title: string
   readonly symptom_badge_label: string
+  readonly symptom_custom_label: string
+  readonly symptom_custom_placeholder: string
+  readonly symptom_custom_button: string
+
+  readonly context_label: string
+  readonly context_custom_label: string
+  readonly context_custom_placeholder: string
+  readonly context_next_button: string
 
   readonly contact_title: string
   readonly contact_description: string
