@@ -17,7 +17,12 @@ import type {
 } from '#shared/types/modal'
 import type { ModelItem } from '#shared/types/model'
 import type { PolicySettings } from '#shared/types/policy'
-import type { QuizProblemItem, QuizSettings, QuizSymptomItem } from '#shared/types/quiz'
+import type {
+  QuizContextItem,
+  QuizProblemItem,
+  QuizSettings,
+  QuizSymptomItem,
+} from '#shared/types/quiz'
 import type {
   ResolvedRouteLandingItem,
   RouteLandingItem,
@@ -417,6 +422,10 @@ export const useQuizProblems = (brandIdInput?: MaybeRefOrGetter<string | undefin
     'brandId',
     brandIdInput
   )
+}
+
+export const useQuizContexts = () => {
+  return useStaticApiData<QuizContextItem[]>('quiz-contexts:list', '/api/quiz/contexts')
 }
 
 export const useQuizSymptoms = (problemIdInput?: MaybeRefOrGetter<string | undefined>) => {

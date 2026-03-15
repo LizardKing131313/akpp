@@ -2,11 +2,15 @@ import type { EntityItem } from '#shared/types/entity'
 
 export type QuizProblemItem = EntityItem & {
   readonly brand_id?: string
+  readonly image_source?: string
+  readonly image_alt?: string
 }
 
 export type QuizSymptomItem = EntityItem & {
   readonly problem_id?: string
 }
+
+export type QuizContextItem = EntityItem
 
 export type QuizSettings = {
   readonly step_label_brand: string

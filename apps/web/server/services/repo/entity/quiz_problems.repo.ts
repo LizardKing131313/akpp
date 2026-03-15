@@ -9,6 +9,8 @@ export class QuizProblemsRepository extends ListRepository<QuizProblemItem> {
     id,
     name,
     brand_id,
+    image_source,
+    image_alt,
     sort,
   `
 
