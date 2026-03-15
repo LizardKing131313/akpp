@@ -11,6 +11,21 @@ export type CitySelectModalSettings = {
   readonly empty_text: string
 }
 
+export type QuizModalPerkItem = {
+  readonly id: string
+  readonly name?: string
+  readonly image_source?: string
+  readonly image_alt?: string
+}
+
+export type QuizModalSettings = {
+  readonly image_source?: string
+  readonly image_alt?: string
+  readonly name?: string
+  readonly description?: string
+  readonly perks: readonly QuizModalPerkItem[]
+}
+
 export type ShopModalSettings = {
   readonly title: string
   readonly form_aria_label: string

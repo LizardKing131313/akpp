@@ -12,6 +12,7 @@ import type { LocationItem } from '#shared/types/location'
 import type { MenuItem, MenuPlacement } from '#shared/types/menu'
 import type {
   CitySelectModalSettings,
+  QuizModalSettings,
   ShopModalSettings,
   SignupModalSettings,
 } from '#shared/types/modal'
@@ -152,6 +153,10 @@ export const useCitySelectModalSettings = () => {
 
 export const useShopModalSettings = () => {
   return useStaticApiData<ShopModalSettings>('shop-modal:settings', '/api/shop_modal')
+}
+
+export const useQuizModalSettings = () => {
+  return useStaticApiData<QuizModalSettings>('quiz-modal:settings', '/api/quiz_modal')
 }
 
 export const useSignupModalSettings = () => {
