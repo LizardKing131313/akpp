@@ -18509,6 +18509,104 @@
     },
     {
       "collection": "quiz_problems",
+      "field": "image_source",
+      "type": "uuid",
+      "meta": {
+        "collection": "quiz_problems",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "image_source",
+        "group": null,
+        "hidden": false,
+        "interface": "file-image",
+        "note": "Изображение проблемы для шага выбора в квизе.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 21,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Изображение"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "image_source",
+        "table": "quiz_problems",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "quiz_problems",
+      "field": "image_alt",
+      "type": "string",
+      "meta": {
+        "collection": "quiz_problems",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "image_alt",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Alt-текст изображения проблемы.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 22,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Alt-текст изображения"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "image_alt",
+        "table": "quiz_problems",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_problems",
       "field": "brand_id",
       "type": "integer",
       "meta": {
@@ -18527,7 +18625,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 22,
+        "sort": 23,
         "special": null,
         "translations": [
           {
@@ -29001,6 +29099,31 @@
         "foreign_key_table": "brands",
         "foreign_key_column": "id",
         "constraint_name": "quiz_problems_brand_id_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "quiz_problems",
+      "field": "image_source",
+      "related_collection": "directus_files",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "quiz_problems",
+        "many_field": "image_source",
+        "one_allowed_collections": null,
+        "one_collection": "directus_files",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "quiz_problems",
+        "column": "image_source",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "constraint_name": "quiz_problems_image_source_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
       }
