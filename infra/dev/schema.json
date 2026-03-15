@@ -979,6 +979,39 @@
       }
     },
     {
+      "collection": "quiz_contexts",
+      "meta": {
+        "accountability": "all",
+        "archive_app_filter": true,
+        "archive_field": "status",
+        "archive_value": "archived",
+        "collapse": "open",
+        "collection": "quiz_contexts",
+        "color": "#F9A825",
+        "display_template": "{{name}}",
+        "group": "quiz",
+        "hidden": false,
+        "icon": "healing",
+        "item_duplication_fields": null,
+        "note": "Контексты для квиза подбора услуги.",
+        "preview_url": null,
+        "singleton": false,
+        "sort": 13,
+        "sort_field": "sort",
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Контексты квиза"
+          }
+        ],
+        "unarchive_value": "draft",
+        "versioning": true
+      },
+      "schema": {
+        "name": "quiz_contexts"
+      }
+    },
+    {
       "collection": "quiz_modal_settings",
       "meta": {
         "accountability": "all",
@@ -1141,39 +1174,6 @@
       },
       "schema": {
         "name": "quiz_symptoms"
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": "status",
-        "archive_value": "archived",
-        "collapse": "open",
-        "collection": "quiz_contexts",
-        "color": "#F9A825",
-        "display_template": "{{name}}",
-        "group": "quiz",
-        "hidden": false,
-        "icon": "healing",
-        "item_duplication_fields": null,
-        "note": "Контексты для квиза подбора услуги.",
-        "preview_url": null,
-        "singleton": false,
-        "sort": 13,
-        "sort_field": "sort",
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Контексты квиза"
-          }
-        ],
-        "unarchive_value": "draft",
-        "versioning": true
-      },
-      "schema": {
-        "name": "quiz_contexts"
       }
     },
     {
@@ -17160,6 +17160,417 @@
       }
     },
     {
+      "collection": "quiz_contexts",
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Системный идентификатор записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 1,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "ID"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "quiz_contexts",
+        "data_type": "integer",
+        "default_value": "nextval('quiz_contexts_id_seq'::regclass)",
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_indexed": false,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "status",
+      "type": "string",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": "labels",
+        "display_options": null,
+        "field": "status",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown",
+        "note": "Статус публикации записи.",
+        "options": {
+          "choices": [
+            {
+              "text": "Черновик",
+              "value": "draft"
+            },
+            {
+              "text": "Опубликовано",
+              "value": "published"
+            },
+            {
+              "text": "Архив",
+              "value": "archived"
+            }
+          ]
+        },
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 2,
+        "special": ["status"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Статус"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "status",
+        "table": "quiz_contexts",
+        "data_type": "character varying",
+        "default_value": "draft",
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "sort",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": "Порядок сортировки в списке.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 3,
+        "special": ["sort"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Сортировка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "sort",
+        "table": "quiz_contexts",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_created",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время создания записи.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 10,
+        "special": ["date-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата создания"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_created",
+        "table": "quiz_contexts",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "field": "date_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "datetime",
+        "note": "Дата и время последнего обновления.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 11,
+        "special": ["date-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Дата обновления"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_updated",
+        "table": "quiz_contexts",
+        "data_type": "timestamp with time zone",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "user_created",
+      "type": "uuid",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_created",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, создавший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 12,
+        "special": ["user-created"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто создал"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_created",
+        "table": "quiz_contexts",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "user_updated",
+      "type": "uuid",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": "user",
+        "display_options": null,
+        "field": "user_updated",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Пользователь, обновивший запись.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 13,
+        "special": ["user-updated"],
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Кто обновил"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_updated",
+        "table": "quiz_contexts",
+        "data_type": "uuid",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "name",
+      "type": "string",
+      "meta": {
+        "collection": "quiz_contexts",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "name",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Название контекста, которое показывается пользователю в квизе.",
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "searchable": true,
+        "sort": 20,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Контекст"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "name",
+        "table": "quiz_contexts",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": false,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
       "collection": "quiz_modal_settings",
       "field": "id",
       "type": "integer",
@@ -17731,55 +18142,6 @@
     },
     {
       "collection": "quiz_modal_settings_perks",
-      "field": "quiz_modal_settings_id",
-      "type": "integer",
-      "meta": {
-        "collection": "quiz_modal_settings_perks",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "quiz_modal_settings_id",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Служебная связь с singleton-коллекцией quiz_modal_settings. Заполняется автоматически.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 4,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Настройки модалки квиза"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "quiz_modal_settings_id",
-        "table": "quiz_modal_settings_perks",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "quiz_modal_settings",
-        "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "quiz_modal_settings_perks",
       "field": "user_created",
       "type": "uuid",
       "meta": {
@@ -18126,6 +18488,55 @@
         "generation_expression": null,
         "has_auto_increment": false,
         "foreign_key_table": "directus_files",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "quiz_modal_settings_perks",
+      "field": "quiz_modal_settings_id",
+      "type": "integer",
+      "meta": {
+        "collection": "quiz_modal_settings_perks",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "quiz_modal_settings_id",
+        "group": null,
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "note": "Служебная связь с singleton-коллекцией quiz_modal_settings. Заполняется автоматически.",
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "searchable": true,
+        "sort": 4,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Настройки модалки квиза"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "quiz_modal_settings_id",
+        "table": "quiz_modal_settings_perks",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "quiz_modal_settings",
         "foreign_key_column": "id"
       }
     },
@@ -18542,6 +18953,57 @@
     },
     {
       "collection": "quiz_problems",
+      "field": "brand_id",
+      "type": "integer",
+      "meta": {
+        "collection": "quiz_problems",
+        "conditions": null,
+        "display": null,
+        "display_options": {
+          "template": "{{name}}"
+        },
+        "field": "brand_id",
+        "group": null,
+        "hidden": false,
+        "interface": "select-dropdown-m2o",
+        "note": "Опциональная привязка проблемы к конкретной марке. Если пусто, проблема доступна для всех марок.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 23,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Марка"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "brand_id",
+        "table": "quiz_problems",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": "brands",
+        "foreign_key_column": "id"
+      }
+    },
+    {
+      "collection": "quiz_problems",
       "field": "image_source",
       "type": "uuid",
       "meta": {
@@ -18636,57 +19098,6 @@
         "has_auto_increment": false,
         "foreign_key_table": null,
         "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_problems",
-      "field": "brand_id",
-      "type": "integer",
-      "meta": {
-        "collection": "quiz_problems",
-        "conditions": null,
-        "display": null,
-        "display_options": {
-          "template": "{{name}}"
-        },
-        "field": "brand_id",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown-m2o",
-        "note": "Опциональная привязка проблемы к конкретной марке. Если пусто, проблема доступна для всех марок.",
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 23,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Марка"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "brand_id",
-        "table": "quiz_problems",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "brands",
-        "foreign_key_column": "id"
       }
     },
     {
@@ -18942,12 +19353,12 @@
         "group": null,
         "hidden": false,
         "interface": "input",
-        "note": "Лейбл четвертого шага квиза.",
+        "note": "Лейбл финального шага квиза.",
         "options": null,
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 8,
+        "sort": 9,
         "special": null,
         "translations": [
           {
@@ -18996,7 +19407,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 9,
+        "sort": 10,
         "special": null,
         "translations": [
           {
@@ -19045,7 +19456,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 10,
+        "sort": 11,
         "special": null,
         "translations": [
           {
@@ -19094,7 +19505,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 11,
+        "sort": 12,
         "special": null,
         "translations": [
           {
@@ -19143,7 +19554,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 12,
+        "sort": 13,
         "special": null,
         "translations": [
           {
@@ -19192,7 +19603,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 13,
+        "sort": 14,
         "special": null,
         "translations": [
           {
@@ -19241,7 +19652,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 14,
+        "sort": 15,
         "special": null,
         "translations": [
           {
@@ -19290,7 +19701,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 15,
+        "sort": 16,
         "special": null,
         "translations": [
           {
@@ -19339,7 +19750,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 16,
+        "sort": 17,
         "special": null,
         "translations": [
           {
@@ -19388,7 +19799,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 17,
+        "sort": 18,
         "special": null,
         "translations": [
           {
@@ -19437,7 +19848,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 19,
+        "sort": 20,
         "special": null,
         "translations": [
           {
@@ -19486,7 +19897,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 20,
+        "sort": 21,
         "special": null,
         "translations": [
           {
@@ -19535,7 +19946,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 21,
+        "sort": 22,
         "special": null,
         "translations": [
           {
@@ -19584,7 +19995,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 29,
+        "sort": 30,
         "special": null,
         "translations": [
           {
@@ -19633,7 +20044,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 30,
+        "sort": 31,
         "special": null,
         "translations": [
           {
@@ -19682,7 +20093,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 31,
+        "sort": 32,
         "special": null,
         "translations": [
           {
@@ -19731,7 +20142,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 32,
+        "sort": 33,
         "special": null,
         "translations": [
           {
@@ -19780,7 +20191,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 33,
+        "sort": 34,
         "special": null,
         "translations": [
           {
@@ -19829,7 +20240,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 34,
+        "sort": 35,
         "special": null,
         "translations": [
           {
@@ -19878,7 +20289,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 37,
+        "sort": 38,
         "special": null,
         "translations": [
           {
@@ -19927,7 +20338,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 38,
+        "sort": 39,
         "special": null,
         "translations": [
           {
@@ -19976,7 +20387,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 39,
+        "sort": 40,
         "special": null,
         "translations": [
           {
@@ -20025,7 +20436,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 40,
+        "sort": 41,
         "special": null,
         "translations": [
           {
@@ -20074,7 +20485,7 @@
         "readonly": false,
         "required": true,
         "searchable": true,
-        "sort": 35,
+        "sort": 36,
         "special": null,
         "translations": [
           {
@@ -20123,7 +20534,7 @@
         "readonly": false,
         "required": true,
         "searchable": true,
-        "sort": 36,
+        "sort": 37,
         "special": null,
         "translations": [
           {
@@ -20272,7 +20683,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 18,
+        "sort": 19,
         "special": null,
         "translations": [
           {
@@ -20321,7 +20732,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 25,
+        "sort": 26,
         "special": null,
         "translations": [
           {
@@ -20370,7 +20781,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 22,
+        "sort": 23,
         "special": null,
         "translations": [
           {
@@ -20419,7 +20830,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 23,
+        "sort": 24,
         "special": null,
         "translations": [
           {
@@ -20468,7 +20879,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 24,
+        "sort": 25,
         "special": null,
         "translations": [
           {
@@ -20517,7 +20928,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 26,
+        "sort": 27,
         "special": null,
         "translations": [
           {
@@ -20566,7 +20977,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 27,
+        "sort": 28,
         "special": null,
         "translations": [
           {
@@ -20615,7 +21026,7 @@
         "readonly": false,
         "required": false,
         "searchable": true,
-        "sort": 28,
+        "sort": 29,
         "special": null,
         "translations": [
           {
@@ -20629,6 +21040,55 @@
       },
       "schema": {
         "name": "context_next_button",
+        "table": "quiz_settings",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_indexed": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "collection": "quiz_settings",
+      "field": "step_label_context",
+      "type": "string",
+      "meta": {
+        "collection": "quiz_settings",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "step_label_context",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": "Лейбл четвертого шага квиза.",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "searchable": true,
+        "sort": 8,
+        "special": null,
+        "translations": [
+          {
+            "language": "ru-RU",
+            "translation": "Шаг: контекст"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "step_label_context",
         "table": "quiz_settings",
         "data_type": "character varying",
         "default_value": null,
@@ -21106,417 +21566,6 @@
         "has_auto_increment": false,
         "foreign_key_table": "quiz_problems",
         "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "id",
-      "type": "integer",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "id",
-        "group": null,
-        "hidden": true,
-        "interface": "input",
-        "note": "Системный идентификатор записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 1,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "ID"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "id",
-        "table": "quiz_contexts",
-        "data_type": "integer",
-        "default_value": "nextval('quiz_contexts_id_seq'::regclass)",
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_indexed": false,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": true,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "status",
-      "type": "string",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": "labels",
-        "display_options": null,
-        "field": "status",
-        "group": null,
-        "hidden": false,
-        "interface": "select-dropdown",
-        "note": "Статус публикации записи.",
-        "options": {
-          "choices": [
-            {
-              "text": "Черновик",
-              "value": "draft"
-            },
-            {
-              "text": "Опубликовано",
-              "value": "published"
-            },
-            {
-              "text": "Архив",
-              "value": "archived"
-            }
-          ]
-        },
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 2,
-        "special": ["status"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Статус"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "status",
-        "table": "quiz_contexts",
-        "data_type": "character varying",
-        "default_value": "draft",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "sort",
-      "type": "integer",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "sort",
-        "group": null,
-        "hidden": true,
-        "interface": "input",
-        "note": "Порядок сортировки в списке.",
-        "options": null,
-        "readonly": false,
-        "required": false,
-        "searchable": true,
-        "sort": 3,
-        "special": ["sort"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Сортировка"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "sort",
-        "table": "quiz_contexts",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_created",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время создания записи.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 10,
-        "special": ["date-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата создания"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "quiz_contexts",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "date_updated",
-      "type": "timestamp",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": "datetime",
-        "display_options": {
-          "relative": true
-        },
-        "field": "date_updated",
-        "group": null,
-        "hidden": true,
-        "interface": "datetime",
-        "note": "Дата и время последнего обновления.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 11,
-        "special": ["date-updated"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Дата обновления"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "date_updated",
-        "table": "quiz_contexts",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "user_created",
-      "type": "uuid",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_created",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, создавший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 12,
-        "special": ["user-created"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто создал"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_created",
-        "table": "quiz_contexts",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "user_updated",
-      "type": "uuid",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": "user",
-        "display_options": null,
-        "field": "user_updated",
-        "group": null,
-        "hidden": true,
-        "interface": "select-dropdown-m2o",
-        "note": "Пользователь, обновивший запись.",
-        "options": null,
-        "readonly": true,
-        "required": false,
-        "searchable": true,
-        "sort": 13,
-        "special": ["user-updated"],
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Кто обновил"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "half"
-      },
-      "schema": {
-        "name": "user_updated",
-        "table": "quiz_contexts",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id"
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "name",
-      "type": "string",
-      "meta": {
-        "collection": "quiz_contexts",
-        "conditions": null,
-        "display": null,
-        "display_options": null,
-        "field": "name",
-        "group": null,
-        "hidden": false,
-        "interface": "input",
-        "note": "Название контекста, которое показывается пользователю в квизе.",
-        "options": null,
-        "readonly": false,
-        "required": true,
-        "searchable": true,
-        "sort": 20,
-        "special": null,
-        "translations": [
-          {
-            "language": "ru-RU",
-            "translation": "Контекст"
-          }
-        ],
-        "validation": null,
-        "validation_message": null,
-        "width": "full"
-      },
-      "schema": {
-        "name": "name",
-        "table": "quiz_contexts",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_indexed": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
       }
     },
     {
@@ -29323,6 +29372,56 @@
       }
     },
     {
+      "collection": "quiz_contexts",
+      "field": "user_created",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "quiz_contexts",
+        "many_field": "user_created",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "quiz_contexts",
+        "column": "user_created",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "quiz_contexts_user_created_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
+      "collection": "quiz_contexts",
+      "field": "user_updated",
+      "related_collection": "directus_users",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "quiz_contexts",
+        "many_field": "user_updated",
+        "one_allowed_collections": null,
+        "one_collection": "directus_users",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": null,
+        "sort_field": null
+      },
+      "schema": {
+        "table": "quiz_contexts",
+        "column": "user_updated",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "constraint_name": "quiz_contexts_user_updated_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION"
+      }
+    },
+    {
       "collection": "quiz_modal_settings",
       "field": "user_updated",
       "related_collection": "directus_users",
@@ -29368,31 +29467,6 @@
         "foreign_key_table": "directus_files",
         "foreign_key_column": "id",
         "constraint_name": "quiz_modal_settings_image_source_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "SET NULL"
-      }
-    },
-    {
-      "collection": "quiz_modal_settings_perks",
-      "field": "quiz_modal_settings_id",
-      "related_collection": "quiz_modal_settings",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "quiz_modal_settings_perks",
-        "many_field": "quiz_modal_settings_id",
-        "one_allowed_collections": null,
-        "one_collection": "quiz_modal_settings",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": "perks",
-        "sort_field": "sort"
-      },
-      "schema": {
-        "table": "quiz_modal_settings_perks",
-        "column": "quiz_modal_settings_id",
-        "foreign_key_table": "quiz_modal_settings",
-        "foreign_key_column": "id",
-        "constraint_name": "quiz_modal_settings_perks_quiz_modal_settings_id_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
       }
@@ -29468,6 +29542,31 @@
         "foreign_key_table": "directus_files",
         "foreign_key_column": "id",
         "constraint_name": "quiz_modal_settings_perks_image_source_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "quiz_modal_settings_perks",
+      "field": "quiz_modal_settings_id",
+      "related_collection": "quiz_modal_settings",
+      "meta": {
+        "junction_field": null,
+        "many_collection": "quiz_modal_settings_perks",
+        "many_field": "quiz_modal_settings_id",
+        "one_allowed_collections": null,
+        "one_collection": "quiz_modal_settings",
+        "one_collection_field": null,
+        "one_deselect_action": "nullify",
+        "one_field": "perks",
+        "sort_field": "sort"
+      },
+      "schema": {
+        "table": "quiz_modal_settings_perks",
+        "column": "quiz_modal_settings_id",
+        "foreign_key_table": "quiz_modal_settings",
+        "foreign_key_column": "id",
+        "constraint_name": "quiz_modal_settings_perks_quiz_modal_settings_id_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
       }
@@ -29670,56 +29769,6 @@
         "constraint_name": "quiz_symptoms_problem_id_foreign",
         "on_update": "NO ACTION",
         "on_delete": "SET NULL"
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "user_created",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "quiz_contexts",
-        "many_field": "user_created",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "quiz_contexts",
-        "column": "user_created",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "quiz_contexts_user_created_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
-      }
-    },
-    {
-      "collection": "quiz_contexts",
-      "field": "user_updated",
-      "related_collection": "directus_users",
-      "meta": {
-        "junction_field": null,
-        "many_collection": "quiz_contexts",
-        "many_field": "user_updated",
-        "one_allowed_collections": null,
-        "one_collection": "directus_users",
-        "one_collection_field": null,
-        "one_deselect_action": "nullify",
-        "one_field": null,
-        "sort_field": null
-      },
-      "schema": {
-        "table": "quiz_contexts",
-        "column": "user_updated",
-        "foreign_key_table": "directus_users",
-        "foreign_key_column": "id",
-        "constraint_name": "quiz_contexts_user_updated_foreign",
-        "on_update": "NO ACTION",
-        "on_delete": "NO ACTION"
       }
     },
     {
