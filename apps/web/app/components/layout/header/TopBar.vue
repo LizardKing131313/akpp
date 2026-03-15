@@ -107,7 +107,7 @@ const handleClick = (): void => {
       <div class="relative hidden w-64 md:block">
         <CmsImage
           :src="settings.search_icon_source"
-          alt="Поиск"
+          :alt="settings.search_icon_alt"
           aria-hidden="true"
           width="16px"
           height="16px"

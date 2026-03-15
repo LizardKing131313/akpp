@@ -34,7 +34,8 @@ const { settings, partMoney, workMoney, totalMoney } = await useCasePresentation
     </div>
 
     <div class="flex flex-1 flex-col gap-5 px-7 py-6">
-      <h3 class="text-brand-dark min-h-20 text-[1.85rem] leading-tight font-bold">
+      <h3
+        class="text-brand-dark min-h-0 max-w-full text-[1.3rem] leading-[1.1] font-bold tracking-[-0.02em] [text-wrap:balance] break-words hyphens-auto sm:min-h-20 sm:text-[1.55rem] lg:text-[1.85rem]">
         {{ caseItem.name }}
       </h3>
 
