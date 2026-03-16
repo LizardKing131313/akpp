@@ -78,6 +78,8 @@ const handleNext = (): void => {
         v-for="contextTitle in props.contexts"
         :key="contextTitle"
         type="button"
+        data-roistat-field="quiz_context_option"
+        :data-roistat-value="contextTitle"
         class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red flex items-center gap-4 rounded-2xl border px-4 py-5 text-left transition-colors"
         :class="isSelected(contextTitle) ? 'border-brand-red' : ''"
         @click="toggleContext(contextTitle)">
@@ -115,13 +117,20 @@ const handleNext = (): void => {
       </div>
 
       <textarea
+        id="quiz-context-custom-text"
+        name="quiz_context_custom"
+        data-roistat-field="quiz_context_custom"
         v-model.trim="customContextText"
         rows="3"
         class="border-brand-grey-light/20 text-brand-dark placeholder:text-brand-grey-light mt-3 w-full rounded-2xl border px-5 py-4 text-xl leading-8 outline-none"
         :placeholder="customPlaceholder" />
     </div>
 
-    <MainButton @click="handleNext" class="mt-6 flex w-full items-center justify-center gap-3">
+    <MainButton
+      id="quiz-context-next"
+      data-roistat-step="context_next"
+      @click="handleNext"
+      class="mt-6 flex w-full items-center justify-center gap-3">
       {{ nextLabel }}
       <Arrow direction="right" class="text-brand-white" />
     </MainButton>

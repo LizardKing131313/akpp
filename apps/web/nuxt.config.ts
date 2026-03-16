@@ -14,7 +14,7 @@ const roistatHost = process.env.NUXT_PUBLIC_ROISTAT_HOST?.trim() ?? 'cloud.roist
 const directusToken = process.env.NUXT_DIRECTUS_TOKEN?.trim() ?? ''
 const directusInternalUrl = process.env.NUXT_DIRECTUS_INTERNAL_URL?.trim() ?? ''
 const directusCacheTtlSeconds = Number(process.env.NUXT_DIRECTUS_CACHE_TTL_SECONDS)
-const roistatProxyleadUrl = process.env.NUXT_ROISTAT_PROXYLEAD_URL?.trim() ?? ''
+const roistatApiKey = process.env.NUXT_ROISTAT_API_KEY?.trim() ?? ''
 
 const nitroRedisHost = process.env.NITRO_REDIS_HOST?.trim() ?? ''
 const nitroRedisPort = Number(process.env.NITRO_REDIS_PORT)
@@ -337,7 +337,7 @@ export default defineNuxtConfig({
     directusToken,
     directusInternalUrl,
     directusCacheTtlSeconds,
-    roistatProxyleadUrl,
+    roistatApiKey,
   },
 
   app: {

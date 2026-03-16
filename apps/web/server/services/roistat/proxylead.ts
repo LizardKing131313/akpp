@@ -14,7 +14,19 @@ type RoistatProxyLeadPayload = {
   fields: Record<string, string>
   name?: string
   comment?: string
-  roistat_visit?: string
+  roistat?: string
+}
+
+const roistatApiEndpoint = 'https://cloud.roistat.com/api/proxy/1.0/leads/add'
+
+type RoistatProxyLeadRequest = {
+  key: string
+  title: string
+  phone: string
+  fields: string
+  name?: string
+  comment?: string
+  roistat?: string
 }
 
 const normalizeText = (value: string | undefined): string | undefined => {
@@ -59,7 +71,7 @@ const buildRoistatPayload = (
   }
 
   if (roistatVisit) {
-    roistatPayload.roistat_visit = roistatVisit
+    roistatPayload.roistat = roistatVisit
   }
 
   const refererHeader = getHeader(event, 'referer')
@@ -75,6 +87,32 @@ const buildRoistatPayload = (
   return roistatPayload
 }
 
+const toRequestPayload = (
+  payload: RoistatProxyLeadPayload,
+  apiKey: string
+): RoistatProxyLeadRequest => {
+  const requestPayload: RoistatProxyLeadRequest = {
+    key: apiKey,
+    title: payload.title,
+    phone: payload.phone,
+    fields: JSON.stringify(payload.fields),
+  }
+
+  if (payload.name) {
+    requestPayload.name = payload.name
+  }
+
+  if (payload.comment) {
+    requestPayload.comment = payload.comment
+  }
+
+  if (payload.roistat) {
+    requestPayload.roistat = payload.roistat
+  }
+
+  return requestPayload
+}
+
 export const sendRoistatProxyLead = async ({
   event,
   payload,
@@ -82,18 +120,38 @@ export const sendRoistatProxyLead = async ({
   roistatVisit,
 }: SendRoistatProxyLeadInput): Promise<void> => {
   const runtimeConfig = useRuntimeConfig(event)
-  const proxyleadUrl = runtimeConfig.roistatProxyleadUrl?.trim()
+  const roistatApiKey = runtimeConfig.roistatApiKey?.trim()
 
-  if (!proxyleadUrl) {
+  if (!roistatApiKey) {
     return
   }
 
+  const roistatPayload = buildRoistatPayload(event, payload, comment, roistatVisit)
+  const requestPayload = toRequestPayload(roistatPayload, roistatApiKey)
+  const requestBody = new URLSearchParams()
+  requestBody.set('key', requestPayload.key)
+  requestBody.set('title', requestPayload.title)
+  requestBody.set('phone', requestPayload.phone)
+  requestBody.set('fields', requestPayload.fields)
+
+  if (requestPayload.name) {
+    requestBody.set('name', requestPayload.name)
+  }
+
+  if (requestPayload.comment) {
+    requestBody.set('comment', requestPayload.comment)
+  }
+
+  if (requestPayload.roistat) {
+    requestBody.set('roistat', requestPayload.roistat)
+  }
+
   try {
-    await $fetch(proxyleadUrl, {
+    await $fetch(roistatApiEndpoint, {
       method: 'POST',
-      body: buildRoistatPayload(event, payload, comment, roistatVisit),
+      body: requestBody.toString(),
       headers: {
-        'content-type': 'application/json',
+        'content-type': 'application/x-www-form-urlencoded',
       },
     })
   } catch (error) {

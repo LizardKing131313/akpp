@@ -102,12 +102,17 @@ onMounted(() => {
       </div>
 
       <form
+        id="signup-modal-form"
+        data-roistat-form="signup"
         class="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
         :aria-label="settings.form_aria_label"
         @submit.prevent="submit">
         <LeadFields
           :phoneLabel="settings.phone_label"
           :phonePlaceholder="settings.phone_placeholder"
+          phoneInputId="signup-modal-phone"
+          phoneInputName="phone"
+          phoneInputDataRole="phone"
           v-model:phone="phone"
           v-model:consent="agree"
           @enter="submit">
@@ -116,10 +121,16 @@ onMounted(() => {
             v-model="name"
             :label="settings.name_label"
             :placeholder="settings.name_placeholder"
+            inputId="signup-modal-name"
+            inputName="name"
+            inputDataRole="name"
             autocomplete="name" />
         </LeadFields>
 
-        <SubmitButton :disabled="isSubmitDisabled || isSubmitting">
+        <SubmitButton
+          id="signup-modal-submit"
+          data-roistat-form-submit="signup"
+          :disabled="isSubmitDisabled || isSubmitting">
           {{ settings.submit_label }}
         </SubmitButton>
       </form>

@@ -1,5 +1,5 @@
 <template>
-  <MainButton type="submit">
+  <MainButton type="submit" data-roistat-submit="true">
     <slot />
   </MainButton>
 </template>

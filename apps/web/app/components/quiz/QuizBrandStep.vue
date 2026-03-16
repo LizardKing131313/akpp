@@ -86,6 +86,9 @@ watch(
 
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
       <input
+        id="quiz-brand-input"
+        name="quiz_brand"
+        data-roistat-field="quiz_brand"
         v-model.trim="inputValue"
         type="text"
         class="bg-brand-white text-brand-dark focus:border-brand-red h-11.5 w-full rounded-xl px-5 text-lg outline-none"
@@ -94,7 +97,12 @@ watch(
         autocomplete="off"
         @keydown.enter.prevent="handleNext" />
 
-      <MainButton :disabled="isNextDisabled" @click="handleNext" class="w-auto px-8 py-2">
+      <MainButton
+        id="quiz-brand-next"
+        data-roistat-step="brand_next"
+        :disabled="isNextDisabled"
+        @click="handleNext"
+        class="w-auto px-8 py-2">
         {{ props.nextLabel }}
       </MainButton>
     </div>
@@ -111,6 +119,8 @@ watch(
             v-for="brandItem in filteredBrands"
             :key="brandItem.name"
             type="button"
+            :data-roistat-field="'quiz_brand_option'"
+            :data-roistat-value="brandItem.name"
             :class="
               cn(`
                 border-brand-grey-light/20 bg-brand-white text-brand-dark

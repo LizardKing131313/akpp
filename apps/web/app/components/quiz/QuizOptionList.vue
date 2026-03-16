@@ -2,10 +2,12 @@
 type QuizOptionListProps = {
   items: readonly string[]
   emptyText?: string
+  fieldName?: string
 }
 
 const props = withDefaults(defineProps<QuizOptionListProps>(), {
   emptyText: 'Нет вариантов',
+  fieldName: 'quiz_option',
 })
 
 const emit = defineEmits<{
@@ -24,6 +26,8 @@ const handleSelect = (value: string): void => {
         v-for="item in props.items"
         :key="item"
         type="button"
+        :data-roistat-field="props.fieldName"
+        :data-roistat-value="item"
         class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red group flex w-full items-center justify-between rounded-2xl border p-4 text-left transition-colors"
         @click="handleSelect(item)">
         <span class="flex items-center gap-4">

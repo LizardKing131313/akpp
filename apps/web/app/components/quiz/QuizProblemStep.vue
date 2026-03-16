@@ -43,6 +43,8 @@ const handleSelect = (problemItem: QuizProblemItem): void => {
         v-for="problemItem in problems"
         :key="problemItem.id"
         type="button"
+        data-roistat-field="quiz_problem"
+        :data-roistat-value="problemItem.name"
         class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red flex min-h-34 flex-col items-center justify-center rounded-2xl border px-4 py-6 text-center transition-colors"
         @click="handleSelect(problemItem)">
         <CmsImage

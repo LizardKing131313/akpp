@@ -68,7 +68,7 @@ const handleSubmit = (): void => {
 </script>
 
 <template>
-  <div class="w-full">
+  <div id="quiz-contact-form" data-roistat-form="quiz" class="w-full">
     <QuizStepTitle :title="title">
       {{ description }}
     </QuizStepTitle>
@@ -97,9 +97,29 @@ const handleSubmit = (): void => {
       </div>
     </div>
 
+    <input type="hidden" name="quiz_brand" :value="brandTitle" data-roistat-field="quiz_brand" />
+    <input
+      type="hidden"
+      name="quiz_problem"
+      :value="problemTitle"
+      data-roistat-field="quiz_problem" />
+    <input
+      type="hidden"
+      name="quiz_symptom"
+      :value="symptomTitle"
+      data-roistat-field="quiz_symptom" />
+    <input
+      type="hidden"
+      name="quiz_context"
+      :value="contextSummary ?? ''"
+      data-roistat-field="quiz_context" />
+
     <LeadFields
       :phoneLabel="phoneLabel"
       :phonePlaceholder="phonePlaceholder"
+      phoneInputId="quiz-contact-phone"
+      phoneInputName="phone"
+      phoneInputDataRole="phone"
       v-model:phone="customerPhone"
       v-model:consent="isConsentAccepted"
       @enter="handleSubmit">
@@ -107,10 +127,16 @@ const handleSubmit = (): void => {
         v-model="customerName"
         :label="nameLabel"
         :placeholder="namePlaceholder"
+        inputId="quiz-contact-name"
+        inputName="name"
+        inputDataRole="name"
         autocomplete="name" />
     </LeadFields>
 
     <MainButton
+      id="quiz-contact-submit"
+      data-roistat-submit="true"
+      data-roistat-form-submit="quiz"
       :disabled="isSubmitDisabled"
       @click="handleSubmit"
       class="mt-8 flex items-center justify-center gap-3">

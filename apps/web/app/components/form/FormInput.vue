@@ -10,6 +10,9 @@ interface InputProps {
   type?: string
   inputmode?: InputMode
   autocomplete?: string
+  inputId?: string
+  inputName?: string
+  inputDataRole?: string
   containerClass?: string
   labelClass?: string
   inputClass?: string
@@ -50,6 +53,9 @@ const handleKeydown = (event: KeyboardEvent): void => {
     <input
       ref="inputElementRef"
       v-model.trim="modelValue"
+      :id="inputId"
+      :name="inputName"
+      :data-roistat-field="inputDataRole"
       :type="type"
       :inputmode="inputmode"
       :placeholder="placeholder || label"
