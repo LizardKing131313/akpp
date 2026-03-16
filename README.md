@@ -1,5 +1,8 @@
 # AKPP
 
+[![CI](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![CI Meta](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml)
+
 Монорепозиторий проекта `AKPPCenter` (Nuxt + Directus + PostgreSQL).
 
 ## Что внутри
