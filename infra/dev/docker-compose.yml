@@ -241,6 +241,13 @@ services:
       dockerfile: infra/dev/web.Dockerfile
       args:
         NUXT_PUBLIC_DIRECTUS_PUBLIC_URL: ${NUXT_PUBLIC_DIRECTUS_PUBLIC_URL}
+        NUXT_DIRECTUS_CACHE_TTL_SECONDS: ${NUXT_DIRECTUS_CACHE_TTL_SECONDS}
+        NITRO_REDIS_HOST: ${NITRO_REDIS_HOST}
+        NITRO_REDIS_PORT: ${NITRO_REDIS_PORT}
+        NITRO_REDIS_DB: ${NITRO_REDIS_DB}
+        NITRO_REDIS_PASSWORD: ${NITRO_REDIS_PASSWORD}
+        NITRO_API_CACHE_TTL_SECONDS: ${NITRO_API_CACHE_TTL_SECONDS}
+        NITRO_SSR_SWR_SECONDS: ${NITRO_SSR_SWR_SECONDS}
     restart: unless-stopped
     depends_on:
       directus-settings-apply:
