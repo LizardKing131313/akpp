@@ -46,8 +46,8 @@ jobs:
       - name: Lint
         shell: bash
         env:
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: pnpm exec eslint --no-error-on-unmatched-pattern apps/web/app apps/web/server apps/web/shared apps/web/*.ts
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm lint
 
       - name: Typecheck web
         shell: bash

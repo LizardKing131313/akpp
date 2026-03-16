@@ -47,89 +47,120 @@ const nuxtAutoImports = {
   useState: 'readonly',
 }
 
+const sharedLanguageOptions = {
+  ecmaVersion: 'latest',
+  sourceType: 'module',
+  globals: {
+    ...nuxtAutoImports,
+  },
+}
+
+const sharedPlugins = {
+  '@typescript-eslint': tseslint,
+  import: importPlugin,
+  n: nPlugin,
+  perfectionist,
+  promise,
+  sonarjs,
+  unicorn,
+}
+
+const sharedRules = {
+  'no-console': ['error', { allow: ['warn', 'error'] }],
+  'no-debugger': 'error',
+  eqeqeq: ['error', 'always', { null: 'ignore' }],
+
+  '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+  '@typescript-eslint/no-explicit-any': 'error',
+  '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+
+  'import/no-unresolved': 'off',
+  'import/order': 'off',
+
+  'perfectionist/sort-imports': [
+    'error',
+    {
+      type: 'natural',
+      order: 'asc',
+      newlinesBetween: 1,
+      groups: [
+        'type',
+        ['builtin', 'external'],
+        ['internal', 'parent', 'sibling', 'index'],
+        'side-effect',
+        'unknown',
+      ],
+    },
+  ],
+  'perfectionist/sort-named-imports': ['error', { type: 'natural', order: 'asc' }],
+
+  'promise/catch-or-return': 'error',
+  'promise/no-nesting': 'warn',
+  'promise/no-return-wrap': 'error',
+
+  'unicorn/prefer-node-protocol': 'error',
+  'unicorn/prefer-ternary': 'warn',
+  'unicorn/no-null': 'off',
+
+  'sonarjs/no-duplicate-string': ['warn', { threshold: 3 }],
+  'sonarjs/no-identical-functions': 'warn',
+  'sonarjs/no-redundant-boolean': 'warn',
+  'sonarjs/cognitive-complexity': ['warn', 20],
+}
+
 // noinspection JSUnresolvedReference
 export default [
   {
     ignores: ['**/.nuxt/**', '**/.output/**', '**/dist/**', '**/node_modules/**', '**/coverage/**'],
   },
   {
-    files: ['apps/web/**/*.{ts,tsx,js,jsx,vue}'],
+    files: ['apps/web/**/*.{ts,tsx,js,jsx}'],
+    languageOptions: {
+      parser: tsParser,
+      ...sharedLanguageOptions,
+    },
+    plugins: sharedPlugins,
+    rules: sharedRules,
+  },
+  {
+    files: ['apps/web/**/*.vue'],
     languageOptions: {
       parser: vueParser,
       parserOptions: {
         parser: tsParser,
-        ecmaVersion: 'latest',
-        sourceType: 'module',
         extraFileExtensions: ['.vue'],
-        project: ['apps/web/tsconfig.eslint.json'],
-        tsconfigRootDir: process.cwd(),
       },
-      globals: {
-        ...nuxtAutoImports,
-      },
+      ...sharedLanguageOptions,
     },
     plugins: {
-      '@typescript-eslint': tseslint,
-      import: importPlugin,
-      n: nPlugin,
-      perfectionist,
-      promise,
-      sonarjs,
-      unicorn,
+      ...sharedPlugins,
       vue: vuePlugin,
     },
     rules: {
-      'no-console': ['error', { allow: ['warn', 'error'] }],
-      'no-debugger': 'error',
-      eqeqeq: ['error', 'always', { null: 'ignore' }],
-
-      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-      '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-floating-promises': 'error',
-      '@typescript-eslint/no-misused-promises': 'error',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-      ],
-
-      'import/no-unresolved': 'off',
-      'import/order': 'off',
-
-      'perfectionist/sort-imports': [
-        'error',
-        {
-          type: 'natural',
-          order: 'asc',
-          newlinesBetween: 1,
-          groups: [
-            'type',
-            ['builtin', 'external'],
-            ['internal', 'parent', 'sibling', 'index'],
-            'side-effect',
-            'unknown',
-          ],
-        },
-      ],
-      'perfectionist/sort-named-imports': ['error', { type: 'natural', order: 'asc' }],
-
-      'promise/catch-or-return': 'error',
-      'promise/no-nesting': 'warn',
-      'promise/no-return-wrap': 'error',
-
-      'unicorn/prefer-node-protocol': 'error',
-      'unicorn/prefer-ternary': 'warn',
-      'unicorn/no-null': 'off',
-
+      ...sharedRules,
       'vue/no-mutating-props': 'error',
       'vue/no-unused-components': 'error',
       'vue/no-unused-vars': 'error',
       'vue/require-default-prop': 'off',
       'vue/require-prop-types': 'off',
-
-      'sonarjs/no-duplicate-string': ['warn', { threshold: 3 }],
-      'sonarjs/no-identical-functions': 'warn',
-      'sonarjs/no-redundant-boolean': 'warn',
-      'sonarjs/cognitive-complexity': ['warn', 20],
+    },
+  },
+  {
+    files: ['apps/web/**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: ['apps/web/tsconfig.eslint.json'],
+        tsconfigRootDir: process.cwd(),
+      },
+      ...sharedLanguageOptions,
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/no-misused-promises': 'error',
     },
   },
 ]
