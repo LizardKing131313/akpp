@@ -41,11 +41,7 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: pnpm -w install --frozen-lockfile
-
-      - name: Prepare Nuxt
-        shell: bash
-        run: pnpm --filter web run postinstall
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         shell: bash
