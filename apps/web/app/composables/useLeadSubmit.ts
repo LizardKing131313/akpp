@@ -4,7 +4,9 @@ export const useLeadSubmit = () => {
   const roistatVisitCookie = useCookie<string | null>('roistat_visit')
 
   const submitLead = async (payload: LeadSubmitPayload): Promise<void> => {
-    const roistatVisit = roistatVisitCookie.value?.trim()
+    const roistatVisitValue = roistatVisitCookie.value
+    const roistatVisit =
+      typeof roistatVisitValue === 'string' ? roistatVisitValue.trim() : undefined
 
     await $fetch('/api/leads', {
       method: 'POST',

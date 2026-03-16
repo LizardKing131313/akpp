@@ -36,8 +36,8 @@ export const useQuizSubmit = (options?: UseQuizSubmitOptions) => {
       })
 
       await options?.onSuccess?.()
-    } catch {
-      console.error('[lead] quiz submit failed')
+    } catch (error: unknown) {
+      console.error('[lead] quiz submit failed', error)
     } finally {
       isSubmitting.value = false
       await options?.onFinally?.()

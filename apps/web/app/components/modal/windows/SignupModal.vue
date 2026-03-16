@@ -51,8 +51,8 @@ const submit = (): void => {
         name: name.value.trim(),
         phone: phone.value.trim(),
       })
-    } catch {
-      console.error('[lead] signup submit failed')
+    } catch (error: unknown) {
+      console.error('[lead] signup submit failed', error)
     } finally {
       isSubmitting.value = false
       emitClose()
