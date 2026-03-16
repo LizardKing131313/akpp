@@ -79,12 +79,12 @@ watch(
 </script>
 
 <template>
-  <div class="w-full space-y-5">
+  <div class="flex h-full w-full flex-col">
     <QuizStepTitle :title="props.title">
       {{ props.description }}
     </QuizStepTitle>
 
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
       <input
         id="quiz-brand-input"
         name="quiz_brand"
@@ -107,14 +107,15 @@ watch(
       </MainButton>
     </div>
 
-    <div>
+    <div class="mt-5 flex min-h-0 flex-1 flex-col">
       <div class="text-brand-grey-light text-[13px] leading-5 font-bold tracking-wide uppercase">
         {{ props.popularLabel }}
       </div>
 
-      <div class="mt-5">
+      <div class="mt-4 min-h-0 flex-1">
         <div
-          class="scrollbar-thin grid max-h-27.5 flex-1 grid-cols-1 gap-4 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3">
+          v-if="filteredBrands.length > 0"
+          class="scrollbar-thin grid h-full grid-cols-1 gap-4 overflow-y-auto [scrollbar-gutter:stable] sm:grid-cols-2 lg:grid-cols-3">
           <button
             v-for="brandItem in filteredBrands"
             :key="brandItem.name"
@@ -133,9 +134,7 @@ watch(
           </button>
         </div>
 
-        <div
-          v-if="filteredBrands.length === 0"
-          class="text-brand-grey-light bg-brand-white text-base">
+        <div v-else class="text-brand-grey-light bg-brand-white flex h-full items-center text-base">
           {{ props.emptyLabel }}
         </div>
       </div>

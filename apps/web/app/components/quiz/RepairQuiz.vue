@@ -264,72 +264,74 @@ const handleContactSubmit = (payload: { customerName: string; customerPhone: str
         {{ settings.back_label }}
       </button>
 
-      <div class="p-7.5">
-        <QuizBrandStep
-          v-if="currentStep === 'brand'"
-          :brands="brands"
-          :title="settings.brand_title"
-          :description="settings.brand_description"
-          :input-placeholder="settings.brand_input_placeholder"
-          :next-label="settings.brand_next_label"
-          :popular-label="settings.brand_popular_label"
-          :empty-label="settings.brand_empty_label"
-          @next="handleBrandNext" />
+      <div class="flex h-[34rem] flex-col overflow-hidden p-7.5">
+        <div class="h-full w-full max-w-[32rem]">
+          <QuizBrandStep
+            v-if="currentStep === 'brand'"
+            :brands="brands"
+            :title="settings.brand_title"
+            :description="settings.brand_description"
+            :input-placeholder="settings.brand_input_placeholder"
+            :next-label="settings.brand_next_label"
+            :popular-label="settings.brand_popular_label"
+            :empty-label="settings.brand_empty_label"
+            @next="handleBrandNext" />
 
-        <QuizProblemStep
-          v-else-if="currentStep === 'problem'"
-          :brand-title="selectedBrandTitle"
-          :problems="problems"
-          :title="settings.problem_title"
-          :description="settings.problem_description"
-          :brand-label="settings.problem_badge_label"
-          :empty-text="settings.options_empty_text"
-          @select="handleProblemSelect" />
+          <QuizProblemStep
+            v-else-if="currentStep === 'problem'"
+            :brand-title="selectedBrandTitle"
+            :problems="problems"
+            :title="settings.problem_title"
+            :description="settings.problem_description"
+            :brand-label="settings.problem_badge_label"
+            :empty-text="settings.options_empty_text"
+            @select="handleProblemSelect" />
 
-        <QuizSymptomsStep
-          v-else-if="currentStep === 'symptom'"
-          :problem-title="selectedProblemTitle"
-          :symptoms="availableSymptoms"
-          :title="settings.symptom_title"
-          :problem-label="settings.symptom_badge_label"
-          :empty-text="settings.options_empty_text"
-          :custom-label="settings.symptom_custom_label"
-          :custom-placeholder="settings.symptom_custom_placeholder"
-          :custom-button="settings.symptom_custom_button"
-          @select="handleSymptomSelect" />
+          <QuizSymptomsStep
+            v-else-if="currentStep === 'symptom'"
+            :problem-title="selectedProblemTitle"
+            :symptoms="availableSymptoms"
+            :title="settings.symptom_title"
+            :problem-label="settings.symptom_badge_label"
+            :empty-text="settings.options_empty_text"
+            :custom-label="settings.symptom_custom_label"
+            :custom-placeholder="settings.symptom_custom_placeholder"
+            :custom-button="settings.symptom_custom_button"
+            @select="handleSymptomSelect" />
 
-        <QuizContextStep
-          v-else-if="currentStep === 'context'"
-          :contexts="availableContexts"
-          :description="settings.context_label"
-          :custom-label="settings.context_custom_label"
-          :custom-placeholder="settings.context_custom_placeholder"
-          :next-label="settings.context_next_button"
-          @next="handleContextNext" />
+          <QuizContextStep
+            v-else-if="currentStep === 'context'"
+            :contexts="availableContexts"
+            :description="settings.context_label"
+            :custom-label="settings.context_custom_label"
+            :custom-placeholder="settings.context_custom_placeholder"
+            :next-label="settings.context_next_button"
+            @next="handleContextNext" />
 
-        <QuizContactStep
-          v-else-if="currentStep === 'contact'"
-          :brand-title="selectedBrandTitle"
-          :problem-title="selectedProblemTitle"
-          :symptom-title="selectedSymptomTitle"
-          :context-summary="contextSummary"
-          :title="settings.contact_title"
-          :description="settings.contact_description"
-          :auto-label="settings.contact_auto_label"
-          :problem-label="settings.contact_problem_label"
-          :name-label="settings.contact_name_label"
-          :name-placeholder="settings.contact_name_placeholder"
-          :phoneLabel="settings.contact_phone_label"
-          :phonePlaceholder="settings.contact_phone_placeholder"
-          :submit-label="settings.contact_submit_label"
-          @edit="goToBrandAndReset"
-          @submit="handleContactSubmit" />
+          <QuizContactStep
+            v-else-if="currentStep === 'contact'"
+            :brand-title="selectedBrandTitle"
+            :problem-title="selectedProblemTitle"
+            :symptom-title="selectedSymptomTitle"
+            :context-summary="contextSummary"
+            :title="settings.contact_title"
+            :description="settings.contact_description"
+            :auto-label="settings.contact_auto_label"
+            :problem-label="settings.contact_problem_label"
+            :name-label="settings.contact_name_label"
+            :name-placeholder="settings.contact_name_placeholder"
+            :phoneLabel="settings.contact_phone_label"
+            :phonePlaceholder="settings.contact_phone_placeholder"
+            :submit-label="settings.contact_submit_label"
+            @edit="goToBrandAndReset"
+            @submit="handleContactSubmit" />
 
-        <QuizSuccessStep
-          v-else-if="currentStep === 'success'"
-          :title="settings.success_title"
-          :line1="settings.success_line_1"
-          :line2="settings.success_line_2" />
+          <QuizSuccessStep
+            v-else-if="currentStep === 'success'"
+            :title="settings.success_title"
+            :line1="settings.success_line_1"
+            :line2="settings.success_line_2" />
+        </div>
       </div>
     </div>
   </section>

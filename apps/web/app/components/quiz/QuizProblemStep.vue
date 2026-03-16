@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { QuizProblemItem } from '#shared/types/quiz'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     readonly brandTitle: string
     readonly problems: readonly QuizProblemItem[]
@@ -28,47 +28,56 @@ const handleSelect = (problemItem: QuizProblemItem): void => {
 </script>
 
 <template>
-  <div class="w-full">
-    <QuizStepTitle :title="title">
-      <span v-if="description">{{ description }}</span>
-      <template v-else>{{ brandLabel }}</template>
+  <div class="flex h-full w-full flex-col">
+    <QuizStepTitle :title="props.title">
+      <span v-if="props.description">{{ props.description }}</span>
+      <template v-else>{{ props.brandLabel }}</template>
       <span
         class="bg-brand-red text-brand-white ml-2 inline-flex items-center rounded-md px-2 py-1 text-sm font-bold">
-        {{ brandTitle }}
+        {{ props.brandTitle }}
       </span>
     </QuizStepTitle>
 
-    <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <button
-        v-for="problemItem in problems"
-        :key="problemItem.id"
-        type="button"
-        data-roistat-field="quiz_problem"
-        :data-roistat-value="problemItem.name"
-        class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red flex min-h-34 flex-col items-center justify-center rounded-2xl border px-4 py-6 text-center transition-colors"
-        @click="handleSelect(problemItem)">
-        <CmsImage
-          v-if="problemItem.image_source"
-          :src="problemItem.image_source"
-          :alt="problemItem.image_alt ?? problemItem.name"
-          width="40"
-          height="40"
-          class="h-10 w-10 object-contain text-[#6b7280]" />
+    <div class="scrollbar-thin mt-5 min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]">
+      <div v-if="props.problems.length > 0" class="space-y-4">
+        <button
+          v-for="problemItem in props.problems"
+          :key="problemItem.id"
+          type="button"
+          data-roistat-field="quiz_problem"
+          :data-roistat-value="problemItem.name"
+          class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red group flex w-full items-center justify-between rounded-2xl border p-4 text-left transition-colors"
+          @click="handleSelect(problemItem)">
+          <span class="flex min-w-0 items-center gap-3">
+            <CmsImage
+              v-if="problemItem.image_source"
+              :src="problemItem.image_source"
+              :alt="problemItem.image_alt ?? problemItem.name"
+              width="20"
+              height="20"
+              class="h-5 w-5 shrink-0 object-contain text-[#6b7280]" />
 
-        <span
-          v-else
-          class="bg-brand-soft/40 text-brand-grey-light flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold">
-          !
-        </span>
+            <span
+              v-else
+              class="bg-brand-soft/40 text-brand-grey-light flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold">
+              !
+            </span>
 
-        <span class="text-brand-dark mt-5 text-[15px] leading-5.5 font-bold">
-          {{ problemItem.name }}
-        </span>
-      </button>
-    </div>
+            <span class="text-brand-dark truncate text-sm font-bold">
+              {{ problemItem.name }}
+            </span>
+          </span>
 
-    <div v-if="problems.length === 0" class="text-brand-dark mt-5">
-      {{ emptyText }}
+          <Arrow
+            direction="right"
+            class="text-brand-dark group-hover:text-brand-red shrink-0"
+            aria-hidden="true" />
+        </button>
+      </div>
+
+      <div v-else class="text-brand-dark mt-5">
+        {{ props.emptyText }}
+      </div>
     </div>
   </div>
 </template>

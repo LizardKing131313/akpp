@@ -48,7 +48,7 @@ const handleCustomSubmit = (): void => {
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex h-full w-full flex-col">
     <QuizStepTitle :title="title">
       {{ problemLabel }}
       <span class="text-brand-dark ml-2 font-semibold">{{ problemTitle }}</span>
@@ -58,22 +58,23 @@ const handleCustomSubmit = (): void => {
       :items="symptoms"
       field-name="quiz_symptom"
       :empty-text="emptyText"
+      fill-height
       @select="handleSelect" />
 
-    <div class="border-brand-grey-light/20 mt-6 border-t pt-5">
+    <div class="mt-4">
       <div class="text-brand-grey-light text-sm leading-5 font-bold">
         {{ customLabel }}
       </div>
 
       <div
-        class="border-brand-soft focus-within:border-brand-red mt-3 flex items-stretch overflow-hidden rounded-xl border transition-colors">
+        class="border-brand-soft focus-within:border-brand-red mt-2 flex items-stretch overflow-hidden rounded-xl border transition-colors">
         <input
           id="quiz-symptom-custom-input"
           name="quiz_symptom_custom"
           data-roistat-field="quiz_symptom_custom"
           v-model.trim="customSymptomTitle"
           type="text"
-          class="text-brand-dark placeholder:text-brand-grey-light min-w-0 flex-1 bg-transparent px-4 py-2.5 text-base outline-none"
+          class="text-brand-dark placeholder:text-brand-grey-light min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none"
           :placeholder="customPlaceholder"
           @keydown.enter.prevent="handleCustomSubmit" />
 
@@ -81,7 +82,7 @@ const handleCustomSubmit = (): void => {
           id="quiz-symptom-custom-submit"
           data-roistat-step="symptom_custom_next"
           type="button"
-          class="bg-brand-red hover:bg-brand-red-dark text-brand-white min-w-14 px-4 py-2.5 text-sm font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+          class="bg-brand-red hover:bg-brand-red-dark text-brand-white min-w-14 px-3 py-2 text-xs font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-60"
           :disabled="isCustomSubmitDisabled"
           @click="handleCustomSubmit">
           {{ customButton }}

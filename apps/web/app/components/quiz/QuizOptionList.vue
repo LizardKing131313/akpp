@@ -3,11 +3,13 @@ type QuizOptionListProps = {
   items: readonly string[]
   emptyText?: string
   fieldName?: string
+  fillHeight?: boolean
 }
 
 const props = withDefaults(defineProps<QuizOptionListProps>(), {
   emptyText: 'Нет вариантов',
   fieldName: 'quiz_option',
+  fillHeight: false,
 })
 
 const emit = defineEmits<{
@@ -20,7 +22,9 @@ const handleSelect = (value: string): void => {
 </script>
 
 <template>
-  <div class="scrollbar-thin mt-5 max-h-50 overflow-y-auto">
+  <div
+    class="scrollbar-thin mt-5 overflow-y-auto [scrollbar-gutter:stable]"
+    :class="props.fillHeight ? 'min-h-0 flex-1' : 'max-h-50'">
     <div class="space-y-4">
       <button
         v-for="item in props.items"
@@ -30,15 +34,8 @@ const handleSelect = (value: string): void => {
         :data-roistat-value="item"
         class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red group flex w-full items-center justify-between rounded-2xl border p-4 text-left transition-colors"
         @click="handleSelect(item)">
-        <span class="flex items-center gap-4">
-          <span
-            class="bg-brand-soft/40 group-hover:bg-brand-red flex h-5 w-5 items-center justify-center rounded-full">
-            <span class="bg-brand-grey-light h-2 w-2 rounded-full" />
-          </span>
-
-          <span class="text-brand-dark text-sm font-bold">
-            {{ item }}
-          </span>
+        <span class="text-brand-dark min-w-0 truncate text-sm font-bold">
+          {{ item }}
         </span>
 
         <Arrow

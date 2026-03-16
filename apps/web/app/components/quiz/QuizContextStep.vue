@@ -68,51 +68,53 @@ const handleNext = (): void => {
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="flex h-full w-full flex-col">
     <QuizStepTitle :title="title">
       {{ description }}
     </QuizStepTitle>
 
-    <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <button
-        v-for="contextTitle in props.contexts"
-        :key="contextTitle"
-        type="button"
-        data-roistat-field="quiz_context_option"
-        :data-roistat-value="contextTitle"
-        class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red flex items-center gap-4 rounded-2xl border px-4 py-5 text-left transition-colors"
-        :class="isSelected(contextTitle) ? 'border-brand-red' : ''"
-        @click="toggleContext(contextTitle)">
-        <span
-          class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border"
-          :class="
-            isSelected(contextTitle)
-              ? 'border-brand-red bg-brand-red'
-              : 'border-brand-grey-light/40'
-          ">
-          <svg
-            v-if="isSelected(contextTitle)"
-            class="h-4 w-4 text-white"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true">
-            <path
-              d="M3.5 8.5L6.5 11.5L12.5 4.5"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </span>
+    <div class="scrollbar-thin mt-5 min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]">
+      <div class="space-y-4">
+        <button
+          v-for="contextTitle in props.contexts"
+          :key="contextTitle"
+          type="button"
+          data-roistat-field="quiz_context_option"
+          :data-roistat-value="contextTitle"
+          class="border-brand-grey-light/20 bg-brand-white hover:border-brand-red flex w-full items-center gap-3 rounded-2xl border p-4 text-left transition-colors"
+          :class="isSelected(contextTitle) ? 'border-brand-red' : ''"
+          @click="toggleContext(contextTitle)">
+          <span
+            class="flex h-5 w-5 shrink-0 items-center justify-center rounded border"
+            :class="
+              isSelected(contextTitle)
+                ? 'border-brand-red bg-brand-red'
+                : 'border-brand-grey-light/40'
+            ">
+            <svg
+              v-if="isSelected(contextTitle)"
+              class="h-3 w-3 text-white"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true">
+              <path
+                d="M3.5 8.5L6.5 11.5L12.5 4.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
 
-        <span class="text-brand-dark text-xl leading-8 font-medium">
-          {{ contextTitle }}
-        </span>
-      </button>
+          <span class="text-brand-dark text-sm font-bold">
+            {{ contextTitle }}
+          </span>
+        </button>
+      </div>
     </div>
 
-    <div class="mt-8">
-      <div class="text-brand-grey-light text-xl leading-8 font-bold">
+    <div class="mt-4">
+      <div class="text-brand-grey-light text-sm leading-5 font-bold">
         {{ customLabel }}
       </div>
 
@@ -121,8 +123,8 @@ const handleNext = (): void => {
         name="quiz_context_custom"
         data-roistat-field="quiz_context_custom"
         v-model.trim="customContextText"
-        rows="3"
-        class="border-brand-grey-light/20 text-brand-dark placeholder:text-brand-grey-light mt-3 w-full rounded-2xl border px-5 py-4 text-xl leading-8 outline-none"
+        rows="2"
+        class="border-brand-grey-light/20 text-brand-dark placeholder:text-brand-grey-light mt-2 w-full rounded-xl border px-3 py-2 text-sm outline-none"
         :placeholder="customPlaceholder" />
     </div>
 
@@ -130,7 +132,7 @@ const handleNext = (): void => {
       id="quiz-context-next"
       data-roistat-step="context_next"
       @click="handleNext"
-      class="mt-6 flex w-full items-center justify-center gap-3">
+      class="mt-4 flex w-full items-center justify-center gap-2 py-2">
       {{ nextLabel }}
       <Arrow direction="right" class="text-brand-white" />
     </MainButton>

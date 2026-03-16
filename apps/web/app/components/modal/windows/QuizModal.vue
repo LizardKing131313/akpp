@@ -62,8 +62,8 @@ const activeBrand = computed<BrandItem | null>(() => {
       class="text-brand-white hover:bg-brand-red hover:text-brand-white z-20" />
 
     <div
-      class="max-h-[85svh] overflow-y-auto sm:max-h-none lg:grid lg:grid-cols-[minmax(0,1fr)_260px]">
-      <div class="min-w-0">
+      class="max-h-[85svh] overflow-y-auto sm:max-h-none sm:overflow-y-hidden lg:grid lg:grid-cols-[32rem_300px] lg:justify-center">
+      <div class="min-w-0 lg:w-[32rem]">
         <RepairQuiz :active-brand="activeBrand" @submit="handleQuizSubmit" />
       </div>
 

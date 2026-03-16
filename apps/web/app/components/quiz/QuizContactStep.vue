@@ -68,70 +68,72 @@ const handleSubmit = (): void => {
 </script>
 
 <template>
-  <div id="quiz-contact-form" data-roistat-form="quiz" class="w-full">
+  <div id="quiz-contact-form" data-roistat-form="quiz" class="flex h-full w-full flex-col">
     <QuizStepTitle :title="title">
       {{ description }}
     </QuizStepTitle>
 
-    <div class="text-brand-dark mt-5 space-y-2 text-sm font-bold">
-      <div>
-        {{ autoLabel }}
-        <span class="font-medium">
-          {{ brandTitle }}
-        </span>
+    <div class="mt-5 min-h-0 flex-1">
+      <div class="text-brand-dark space-y-2 text-sm font-bold">
+        <div>
+          {{ autoLabel }}
+          <span class="font-medium">
+            {{ brandTitle }}
+          </span>
+        </div>
+
+        <div>
+          {{ problemLabel }}
+          <span class="font-medium">
+            {{ problemTitle }}
+          </span>
+        </div>
+
+        <div class="text-brand-grey-light">
+          {{ symptomTitle }}
+        </div>
+
+        <div v-if="contextSummary" class="text-brand-grey-light">
+          {{ contextSummary }}
+        </div>
       </div>
 
-      <div>
-        {{ problemLabel }}
-        <span class="font-medium">
-          {{ problemTitle }}
-        </span>
-      </div>
+      <input type="hidden" name="quiz_brand" :value="brandTitle" data-roistat-field="quiz_brand" />
+      <input
+        type="hidden"
+        name="quiz_problem"
+        :value="problemTitle"
+        data-roistat-field="quiz_problem" />
+      <input
+        type="hidden"
+        name="quiz_symptom"
+        :value="symptomTitle"
+        data-roistat-field="quiz_symptom" />
+      <input
+        type="hidden"
+        name="quiz_context"
+        :value="contextSummary ?? ''"
+        data-roistat-field="quiz_context" />
 
-      <div class="text-brand-grey-light">
-        {{ symptomTitle }}
-      </div>
-
-      <div v-if="contextSummary" class="text-brand-grey-light">
-        {{ contextSummary }}
-      </div>
+      <LeadFields
+        :phoneLabel="phoneLabel"
+        :phonePlaceholder="phonePlaceholder"
+        phoneInputId="quiz-contact-phone"
+        phoneInputName="phone"
+        phoneInputDataRole="phone"
+        v-model:phone="customerPhone"
+        v-model:consent="isConsentAccepted"
+        @enter="handleSubmit">
+        <FormInput
+          v-model="customerName"
+          :label="nameLabel"
+          :placeholder="namePlaceholder"
+          inputId="quiz-contact-name"
+          inputName="name"
+          inputDataRole="name"
+          autocomplete="name" />
+      </LeadFields>
     </div>
-
-    <input type="hidden" name="quiz_brand" :value="brandTitle" data-roistat-field="quiz_brand" />
-    <input
-      type="hidden"
-      name="quiz_problem"
-      :value="problemTitle"
-      data-roistat-field="quiz_problem" />
-    <input
-      type="hidden"
-      name="quiz_symptom"
-      :value="symptomTitle"
-      data-roistat-field="quiz_symptom" />
-    <input
-      type="hidden"
-      name="quiz_context"
-      :value="contextSummary ?? ''"
-      data-roistat-field="quiz_context" />
-
-    <LeadFields
-      :phoneLabel="phoneLabel"
-      :phonePlaceholder="phonePlaceholder"
-      phoneInputId="quiz-contact-phone"
-      phoneInputName="phone"
-      phoneInputDataRole="phone"
-      v-model:phone="customerPhone"
-      v-model:consent="isConsentAccepted"
-      @enter="handleSubmit">
-      <FormInput
-        v-model="customerName"
-        :label="nameLabel"
-        :placeholder="namePlaceholder"
-        inputId="quiz-contact-name"
-        inputName="name"
-        inputDataRole="name"
-        autocomplete="name" />
-    </LeadFields>
 
     <MainButton
       id="quiz-contact-submit"
@@ -139,7 +141,7 @@ const handleSubmit = (): void => {
       data-roistat-form-submit="quiz"
       :disabled="isSubmitDisabled"
       @click="handleSubmit"
-      class="mt-8 flex items-center justify-center gap-3">
+      class="mt-4 flex items-center justify-center gap-3">
       {{ submitLabel }}
       <Arrow direction="right" class="text-brand-white" />
     </MainButton>
