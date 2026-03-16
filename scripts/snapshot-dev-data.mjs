@@ -7,7 +7,13 @@ const rootDirectory = process.cwd()
 const dataDirectory = path.join(rootDirectory, 'infra', 'dev', 'data')
 const postgresDirectory = path.join(dataDirectory, 'postgres')
 const uploadsDirectory = path.join(dataDirectory, 'uploads')
-const composeArgs = ['compose', '--env-file', 'infra/dev/.env', '-f', 'infra/dev/docker-compose.yml']
+const composeArgs = [
+  'compose',
+  '--env-file',
+  'infra/dev/.env',
+  '-f',
+  'infra/dev/docker-compose.yml',
+]
 const timestamp = new Date().toISOString().replaceAll(':', '-').replaceAll('.', '-')
 
 const run = (command, args) => {
