@@ -45,7 +45,7 @@ jobs:
 
       - name: Prepare Nuxt
         shell: bash
-        run: pnpm -C apps/web exec nuxi prepare
+        run: pnpm -C apps/web exec nuxt prepare
 
       - name: Lint
         shell: bash
