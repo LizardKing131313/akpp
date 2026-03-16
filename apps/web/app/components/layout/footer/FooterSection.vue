@@ -7,12 +7,16 @@ import type { MenuItem } from '#shared/types/menu'
 
 import { cn } from '#shared/lib/cn'
 import { normalizeAppPath } from '#shared/lib/route'
-import { computed } from 'vue'
+import { computed, shallowRef } from 'vue'
 
-import BrandSlider from '~/components/brands/BrandSlider.vue'
 import YandexMap from '~/components/yandex/YandexMap.client.vue'
 import { useActiveCity } from '~/composables/useActiveCity'
 import { useFooterSettings, useLocations, useMenus } from '~/composables/useRepoApi'
+
+const LazyBrandSlider = defineLazyHydrationComponent(
+  'visible',
+  () => import('~/components/brands/BrandSlider.vue')
+)
 const activeCity = useActiveCity()
 const cityId = computed<string | undefined>(() => activeCity.value?.id)
 
@@ -75,6 +79,41 @@ const mapZoom = computed<number>(() => {
 const menuHrefByItem = (menuItem: MenuItem): string => {
   return normalizeAppPath(menuItem.slug)
 }
+
+const mapContainerElement = shallowRef<HTMLElement | null>(null)
+const showMap = shallowRef(false)
+let mapObserver: IntersectionObserver | null = null
+
+onMounted(() => {
+  if (!mapContainerElement.value) {
+    showMap.value = true
+    return
+  }
+
+  mapObserver = new IntersectionObserver(
+    (entries) => {
+      const visibleEntry = entries.find((entry) => entry.isIntersecting)
+      if (!visibleEntry) {
+        return
+      }
+
+      showMap.value = true
+      mapObserver?.disconnect()
+      mapObserver = null
+    },
+    {
+      rootMargin: '0px',
+      threshold: 0.01,
+    }
+  )
+
+  mapObserver.observe(mapContainerElement.value)
+})
+
+onBeforeUnmount(() => {
+  mapObserver?.disconnect()
+  mapObserver = null
+})
 </script>
 
 <template>
@@ -87,9 +126,10 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
             settings.map_height_px ? `h-[${settings.map_height_px}px]` : 'h-75'
           )
         ">
-        <div class="relative h-full w-full overflow-hidden">
+        <div ref="mapContainerElement" class="relative h-full w-full overflow-hidden">
           <ClientOnly>
             <YandexMap
+              v-if="showMap"
               :locations="mapPoints"
               :center="mapCenter"
               :zoom="mapZoom"
@@ -133,7 +173,7 @@ const menuHrefByItem = (menuItem: MenuItem): string => {
       </div>
     </div>
 
-    <BrandSlider :class="cn(hideContacts ? 'mt-0' : 'mt-18', 'mb-12')" />
+    <LazyBrandSlider :class="cn(hideContacts ? 'mt-0' : 'mt-18', 'mb-12')" />
 
     <div
       class="brand-gradient bg-brand-dark text-brand-grey-light relative space-y-12 px-4 py-12 text-sm">

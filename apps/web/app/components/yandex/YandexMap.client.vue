@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import type { YandexMapPoint } from '#shared/types/entity'
-import type { YMapLocationRequest } from '@yandex/ymaps3-types'
+import type {
+  YMapDefaultFeaturesLayer as YMapDefaultFeaturesLayerInstance,
+  YMapDefaultSchemeLayer as YMapDefaultSchemeLayerInstance,
+  YMap as YMapInstance,
+  YMapLocationRequest,
+  YMapMarker as YMapMarkerInstance,
+} from '@yandex/ymaps3-types'
 
 import { computed, shallowRef, watch } from 'vue'
 
-import { loadYandexMapComponents, type YandexMapComponents } from '~/composables/ymaps'
+import { loadYandexMapsApi } from '~/composables/ymaps'
 
 interface YandexMapProps {
   locations: YandexMapPoint[]
@@ -24,15 +30,17 @@ const location = computed<YMapLocationRequest>(() => {
   }
 })
 
-const components = shallowRef<YandexMapComponents | null>(null)
 const loadError = shallowRef<string | null>(null)
+const isMapReady = shallowRef(false)
 const selectedPointId = shallowRef<string | null>(null)
 const mapRootElement = shallowRef<HTMLElement | null>(null)
+const mapContainerElement = shallowRef<HTMLElement | null>(null)
 let tileImageObserver: MutationObserver | null = null
 
-const markerElements = shallowRef<Record<string, HTMLElement>>({})
-
-const MARKER_SOURCE_ID = 'marker-source'
+let mapInstance: YMapInstance | null = null
+let schemeLayer: YMapDefaultSchemeLayerInstance | null = null
+let featuresLayer: YMapDefaultFeaturesLayerInstance | null = null
+let markerInstances: YMapMarkerInstance[] = []
 
 const selectedPoint = computed<YandexMapPoint | null>(() => {
   if (!selectedPointId.value) {
@@ -72,12 +80,29 @@ const createMarkerElement = (point: YandexMapPoint): HTMLElement => {
   return wrapperElement
 }
 
-const rebuildMarkers = (): void => {
-  const createdElements: Record<string, HTMLElement> = {}
-  for (const point of props.locations) {
-    createdElements[point.id] = createMarkerElement(point)
+const syncMarkers = (): void => {
+  if (!mapInstance) return
+
+  for (const markerInstance of markerInstances) {
+    mapInstance.removeChild(markerInstance)
   }
-  markerElements.value = createdElements
+
+  markerInstances = []
+
+  for (const point of props.locations) {
+    const markerInstance = new ymaps3.YMapMarker(
+      { coordinates: [point.lng, point.lat] },
+      createMarkerElement(point)
+    )
+
+    mapInstance.addChild(markerInstance)
+    markerInstances.push(markerInstance)
+  }
+}
+
+const syncLocation = (): void => {
+  if (!mapInstance) return
+  mapInstance.setLocation(location.value)
 }
 
 const patchTileImageAccessibility = (): void => {
@@ -108,8 +133,21 @@ onMounted(async () => {
       throw new Error('Missing runtimeConfig.public.yandexMapApiKey')
     }
 
-    components.value = await loadYandexMapComponents({ apiKey, lang: 'ru_RU' })
-    rebuildMarkers()
+    await loadYandexMapsApi({ apiKey, lang: 'ru_RU' })
+
+    if (!mapContainerElement.value) {
+      throw new Error('Missing map container element')
+    }
+
+    mapInstance = new ymaps3.YMap(mapContainerElement.value, {
+      location: location.value,
+    })
+    schemeLayer = new ymaps3.YMapDefaultSchemeLayer({})
+    featuresLayer = new ymaps3.YMapDefaultFeaturesLayer({})
+
+    mapInstance.addChild(schemeLayer).addChild(featuresLayer)
+    syncMarkers()
+    isMapReady.value = true
   } catch (caughtError: unknown) {
     loadError.value = caughtError instanceof Error ? caughtError.message : 'Unknown error'
   }
@@ -131,13 +169,20 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   tileImageObserver?.disconnect()
   tileImageObserver = null
+
+  isMapReady.value = false
+  markerInstances = []
+  featuresLayer = null
+  schemeLayer = null
+  mapInstance?.destroy()
+  mapInstance = null
 })
 
 watch(
   () => props.locations,
   () => {
     if (!import.meta.client) return
-    rebuildMarkers()
+    syncMarkers()
 
     if (
       selectedPointId.value !== null &&
@@ -148,6 +193,11 @@ watch(
   },
   { deep: true }
 )
+
+watch(location, () => {
+  if (!import.meta.client) return
+  syncLocation()
+})
 </script>
 
 <template>
@@ -156,22 +206,10 @@ watch(
       {{ loadError }}
     </div>
 
-    <div v-else-if="!components" class="h-full w-full animate-pulse rounded-xl" />
-
-    <component v-else :is="components.YMap" :location="location">
-      <component :is="components.YMapDefaultSchemeLayer" />
-      <component :is="components.YMapDefaultFeaturesLayer" />
-      <component :is="components.YMapFeatureDataSource" :id="MARKER_SOURCE_ID" />
-      <component :is="components.YMapLayer" :source="MARKER_SOURCE_ID" type="markers" />
-
-      <component
-        v-for="point in locations"
-        :key="point.id"
-        :is="components.YMapMarker"
-        :source="MARKER_SOURCE_ID"
-        :coordinates="[point.lng, point.lat]"
-        :markerElement="markerElements[point.id]" />
-    </component>
+    <div v-else ref="mapContainerElement" class="h-full w-full rounded-xl" />
+    <div
+      v-if="!loadError && !isMapReady"
+      class="absolute inset-0 h-full w-full animate-pulse rounded-xl" />
 
     <div
       v-if="selectedPoint"

@@ -133,9 +133,12 @@ const prodOnlyRouteRule = <RuleType>(rule: RuleType): RuleType | Record<string, 
 // noinspection JSUnusedGlobalSymbols
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+
   devtools: { enabled: !isProduction },
-  vue: {
-    runtimeCompiler: true,
+
+  sourcemap: {
+    client: isProduction,
+    server: false,
   },
 
   css: ['~/assets/css/main.css'],
@@ -145,21 +148,17 @@ export default defineNuxtConfig({
       // @ts-ignore
       tailwindcss(),
     ],
-    build: {
-      sourcemap: false,
-    },
   },
 
   modules: ['@nuxtjs/google-fonts', '@nuxt/image'],
 
   googleFonts: {
     families: {
-      'Open Sans': [400, 600, 700],
+      'Open Sans': [400, 500, 600, 700, 800],
     },
     subsets: ['cyrillic', 'latin'],
     display: 'swap',
-    preconnect: true,
-    preload: true,
+    preload: false,
     download: true,
   },
 

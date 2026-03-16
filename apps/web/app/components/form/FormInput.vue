@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '#shared/lib/cn'
+import { vMaska } from 'maska/vue'
 import { ref } from 'vue'
 
 type InputMode = 'text' | 'search' | 'email' | 'tel' | 'url' | 'none' | 'numeric' | 'decimal'

@@ -16,12 +16,12 @@ const settings = computed<HeaderSettings>(() => settingsData.value ?? ({} as Hea
       <CmsImage
         :src="settings.logo_source"
         :alt="settings.logo_alt"
-        class="hidden h-auto w-65 lg:block" />
+        class="hidden h-10.25 w-65 lg:block" />
 
       <CmsImage
         :src="settings.logo_source_mobile"
         :alt="settings.logo_alt"
-        class="h-auto w-23.75 lg:hidden" />
+        class="h-11 w-23.75 lg:hidden" />
     </NuxtLink>
   </div>
 </template>

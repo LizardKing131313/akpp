@@ -15,11 +15,10 @@ defineProps<{
   settings: HeaderSettings
 }>()
 
+const swiperModules = computed(() => [Autoplay, Navigation])
 defineEmits<{
   ctaClick: []
 }>()
-
-const swiperModules = computed(() => [Autoplay, Navigation])
 </script>
 
 <template>

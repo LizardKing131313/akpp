@@ -56,6 +56,11 @@ export default defineNuxtPlugin(() => {
   const metrikaId = runtimeConfig.public.yandexMetrikaId
 
   if (metrikaId) {
-    setupYandexMetrika(metrikaId)
+    if (document.readyState === 'complete') {
+      setupYandexMetrika(metrikaId)
+      return
+    }
+
+    window.addEventListener('load', () => setupYandexMetrika(metrikaId), { once: true })
   }
 })
