@@ -93,7 +93,9 @@ const handleSubmit = (): void => {
           {{ symptomTitle }}
         </div>
 
-        <div v-if="contextSummary" class="text-brand-grey-light">
+        <div
+          v-if="contextSummary"
+          class="text-brand-grey-light max-w-full overflow-hidden pr-2 text-ellipsis whitespace-nowrap">
           {{ contextSummary }}
         </div>
       </div>
