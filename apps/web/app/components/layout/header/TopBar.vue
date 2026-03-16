@@ -114,6 +114,8 @@ const handleClick = (): void => {
           class="text-brand-grey-light pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
         <input
           v-model="searchValue"
+          id="site-search"
+          name="search"
           type="search"
           :placeholder="settings.search_placeholder"
           :aria-label="settings.search_input_aria_label"

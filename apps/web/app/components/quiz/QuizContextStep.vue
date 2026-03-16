@@ -74,7 +74,7 @@ const handleNext = (): void => {
     </QuizStepTitle>
 
     <div class="scrollbar-thin mt-5 min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]">
-      <div class="space-y-4">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <button
           v-for="contextTitle in props.contexts"
           :key="contextTitle"
