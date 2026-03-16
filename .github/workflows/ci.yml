@@ -43,6 +43,10 @@ jobs:
         shell: bash
         run: pnpm -w install --frozen-lockfile
 
+      - name: Prepare Nuxt
+        shell: bash
+        run: pnpm -C apps/web exec nuxi prepare
+
       - name: Lint
         shell: bash
         env:
