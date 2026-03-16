@@ -10,6 +10,7 @@ interface InputProps {
   type?: string
   inputmode?: InputMode
   autocomplete?: string
+  inputMask?: string
   inputId?: string
   inputName?: string
   inputDataRole?: string
@@ -23,6 +24,7 @@ withDefaults(defineProps<InputProps>(), {
   type: 'text',
   inputmode: 'none',
   autocomplete: '',
+  inputMask: '',
   containerClass: '',
   labelClass: '',
   inputClass: '',
@@ -53,9 +55,11 @@ const handleKeydown = (event: KeyboardEvent): void => {
     <input
       ref="inputElementRef"
       v-model.trim="modelValue"
+      v-maska
       :id="inputId"
       :name="inputName"
       :data-roistat-field="inputDataRole"
+      :data-maska="inputMask || undefined"
       :type="type"
       :inputmode="inputmode"
       :placeholder="placeholder || label"

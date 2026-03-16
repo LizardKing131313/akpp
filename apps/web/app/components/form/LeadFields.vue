@@ -5,6 +5,7 @@ withDefaults(
   defineProps<{
     phoneLabel?: string
     phonePlaceholder?: string
+    phoneInputMask?: string
     phoneInputId?: string
     phoneInputName?: string
     phoneInputDataRole?: string
@@ -12,6 +13,7 @@ withDefaults(
   {
     phoneLabel: 'Телефон',
     phonePlaceholder: '+7 (___) ___-__-__',
+    phoneInputMask: '+7 (###) ###-##-##',
     phoneInputName: 'phone',
     phoneInputDataRole: 'phone',
   }
@@ -49,6 +51,7 @@ const handlePhoneEnter = (): void => {
         v-model="phoneModel"
         :label="phoneLabel"
         :placeholder="phonePlaceholder"
+        :inputMask="phoneInputMask"
         :inputName="phoneInputName"
         :inputDataRole="phoneInputDataRole"
         v-bind="phoneInputId ? { inputId: phoneInputId } : {}"

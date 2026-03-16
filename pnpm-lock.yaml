@@ -92,6 +92,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      maska:
+        specifier: ^3.2.0
+        version: 3.2.0
       nuxt:
         specifier: ^4.3.1
         version: 4.3.1(@parcel/watcher@2.5.6)(@types/node@25.2.3)(@vue/compiler-sfc@3.5.28)(cac@6.7.14)(db0@0.3.4)(eslint@10.0.0(jiti@2.6.1))(ioredis@5.9.3)(lightningcss@1.30.2)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.59.0)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.2))(vue-tsc@3.2.5(typescript@5.9.3))(yaml@2.8.2)
@@ -5829,6 +5832,12 @@ packages:
     resolution:
       {
         integrity: sha512-Ezda85ToJUBhM6WGaG6veasyym+Tbs3cMAw/ZhOPqXiYsr0jgocBV3j3nx+4lk47plLlIqjwuTm/ywVI+zjJ/A==,
+      }
+
+  maska@3.2.0:
+    resolution:
+      {
+        integrity: sha512-zSmSgs5/q9vMSmrdZT3rKOv9uLznNWR/niuuAdBZDTvB3SMKOX9vhMtDijFyExz+B4UClu2rvksylUh/ea1bLA==,
       }
 
   math-intrinsics@1.1.0:
@@ -12225,6 +12234,8 @@ snapshots:
   markdown-table@2.0.0:
     dependencies:
       repeat-string: 1.6.1
+
+  maska@3.2.0: {}
 
   math-intrinsics@1.1.0: {}
 
