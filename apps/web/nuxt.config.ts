@@ -14,6 +14,7 @@ const roistatHost = process.env.NUXT_PUBLIC_ROISTAT_HOST?.trim() ?? 'cloud.roist
 const directusToken = process.env.NUXT_DIRECTUS_TOKEN?.trim() ?? ''
 const directusInternalUrl = process.env.NUXT_DIRECTUS_INTERNAL_URL?.trim() ?? ''
 const directusCacheTtlSeconds = Number(process.env.NUXT_DIRECTUS_CACHE_TTL_SECONDS)
+const cachePurgeToken = process.env.NUXT_CACHE_PURGE_TOKEN?.trim() ?? ''
 const roistatApiKey = process.env.NUXT_ROISTAT_API_KEY?.trim() ?? ''
 const roistatTrace = process.env.NUXT_ROISTAT_TRACE?.trim() ?? '0'
 
@@ -192,6 +193,9 @@ export default defineNuxtConfig({
       '/api/leads': {
         cache: false,
       },
+      '/api/cache/purge': {
+        cache: false,
+      },
       '/': {
         ...prodOnlyRouteRule({
           swr: nitroSsrSwr,
@@ -338,6 +342,7 @@ export default defineNuxtConfig({
     directusToken,
     directusInternalUrl,
     directusCacheTtlSeconds,
+    cachePurgeToken,
     roistatApiKey,
     roistatTrace,
   },
