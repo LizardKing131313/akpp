@@ -50,6 +50,7 @@ const setupYandexMetrika = (counterId: string): void => {
   )
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
   const metrikaId = runtimeConfig.public.yandexMetrikaId

@@ -1,3 +1,4 @@
+// noinspection JSUnusedGlobalSymbols
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
   const projectId = runtimeConfig.public.roistatProjectId?.trim()
@@ -13,19 +14,11 @@ export default defineNuxtPlugin(() => {
         id: 'roistat-counter-static',
         innerHTML: `
           (function(w, d, s, h, id) {
-            w.roistatProjectId = id
-            w.roistatHost = h
-            var protocol = d.location.protocol === 'https:' ? 'https://' : 'http://'
-            var source = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie)
-              ? '/dist/module.js'
-              : '/api/site/1.0/' + id + '/init?referrer=' + encodeURIComponent(d.location.href)
-            var scriptElement = d.createElement(s)
-            scriptElement.charset = 'UTF-8'
-            scriptElement.async = 1
-            scriptElement.src = protocol + h + source
-            var firstScript = d.getElementsByTagName(s)[0]
-            firstScript.parentNode.insertBefore(scriptElement, firstScript)
-          })(window, document, 'script', '${host}', '${projectId}')
+              w.roistatProjectId = id; w.roistatHost = h;
+              var p = d.location.protocol == "https:" ? "https://" : "http://";
+              var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+              var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+          })(window, document, 'script', '${host}', '${projectId}');
         `,
         tagPosition: 'bodyClose',
       },
