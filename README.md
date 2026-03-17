@@ -179,6 +179,7 @@ JSON для бейджей генерируются командой `pnpm badge
 ## Lighthouse
 
 Lighthouse вынесен в отдельный workflow и ходит в реальный production-сайт `https://expertakpp.ru/`.
+Режим аудита: `Navigation` + `Desktop`.
 
 Команда:
 
@@ -186,15 +187,9 @@ Lighthouse вынесен в отдельный workflow и ходит в реа
 pnpm lighthouse:prod
 ```
 
-Пороговые значения:
-
-- `performance >= 90`
-- `accessibility >= 90`
-- `best-practices >= 90`
-- `seo = 100`
-
 Локально команда тоже пишет артефакты в `.lighthouseci`.
 В GitHub Actions production-отчет публикуется отдельным artifact.
+Workflow не валит CI по score и используется как внешний мониторинг с бейджами.
 
 ### Directus schema/settings
 
@@ -270,13 +265,6 @@ Coverage-отчет из CI публикуется как artifact `web-coverage
 Проверяет:
 
 - `pnpm lighthouse:prod`
-
-Пороговые значения:
-
-- `performance >= 90`
-- `accessibility >= 90`
-- `best-practices >= 90`
-- `seo = 100`
 
 Production Lighthouse-отчет публикуется как artifact `expertakpp-ru-lighthouse`.
 После успешного прогона на `main` workflow также обновляет `.github/badges/lighthouse-performance.json` и `.github/badges/lighthouse-seo.json`.
