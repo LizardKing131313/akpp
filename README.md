@@ -1,10 +1,10 @@
 # AKPP
 
 [![CI](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/tests.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/coverage.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![LH Perf](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/lighthouse-performance.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
-[![LH SEO](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/lighthouse-seo.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![Tests](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/develop/.github/badges/tests.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/develop/.github/badges/coverage.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![LH Perf](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/develop/.github/badges/lighthouse-performance.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![LH SEO](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/develop/.github/badges/lighthouse-seo.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 [![Lighthouse Prod](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 [![CI Meta](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml)
 

@@ -73,7 +73,7 @@ jobs:
         run: pnpm -C apps/web test:coverage
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: web-coverage
           path: apps/web/coverage
@@ -90,7 +90,7 @@ jobs:
         run: pnpm badges:generate
 
       - name: Commit badge updates
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         shell: bash
         run: |
           if git diff --quiet -- .github/badges; then

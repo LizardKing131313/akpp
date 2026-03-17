@@ -6,7 +6,7 @@ on:
     - cron: '17 3 * * *'
   push:
     branches:
-      - main
+      - develop
     paths:
       - .github/workflows/lighthouse-prod.yml
       - .lighthouserc.prod.json
@@ -57,7 +57,7 @@ jobs:
         run: pnpm lighthouse:prod
 
       - name: Upload Lighthouse report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: expertakpp-ru-lighthouse
           path: .lighthouseci/**
@@ -69,7 +69,7 @@ jobs:
         run: pnpm badges:generate
 
       - name: Commit Lighthouse badge updates
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/develop'
         shell: bash
         run: |
           if git diff --quiet -- .github/badges/lighthouse-performance.json .github/badges/lighthouse-seo.json; then
