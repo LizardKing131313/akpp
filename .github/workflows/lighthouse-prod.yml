@@ -1,0 +1,81 @@
+name: Lighthouse Prod
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/lighthouse-prod.yml
+      - .lighthouserc.prod.json
+      - scripts/generate-badges.mjs
+      - package.json
+      - pnpm-lock.yaml
+      - README.md
+
+concurrency:
+  group: lighthouse-prod-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  lighthouse-prod:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.29.3
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Lighthouse against production
+        shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm lighthouse:prod
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: expertakpp-ru-lighthouse
+          path: .lighthouseci
+          if-no-files-found: error
+
+      - name: Generate Lighthouse badges
+        shell: bash
+        run: pnpm badges:generate
+
+      - name: Commit Lighthouse badge updates
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          if git diff --quiet -- .github/badges/lighthouse-performance.json .github/badges/lighthouse-seo.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/badges/lighthouse-performance.json .github/badges/lighthouse-seo.json
+          git commit -m "chore: update lighthouse badges"
+          git push

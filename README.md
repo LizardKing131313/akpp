@@ -3,6 +3,9 @@
 [![CI](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/tests.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/coverage.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![LH Perf](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/lighthouse-performance.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![LH SEO](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/lighthouse-seo.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![Lighthouse Prod](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 [![CI Meta](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml)
 
 Монорепозиторий проекта `AKPPCenter` (Nuxt + Directus + PostgreSQL).
@@ -136,6 +139,7 @@ pnpm test:web:unit
 pnpm test:web:nuxt
 pnpm test:web:e2e
 pnpm test:web:coverage
+pnpm lighthouse:prod
 pnpm format
 pnpm duplicates
 pnpm duplicates:deep
@@ -157,6 +161,7 @@ pnpm test:web:unit
 pnpm test:web:nuxt
 pnpm test:web:e2e
 pnpm test:web:coverage
+pnpm lighthouse:prod
 pnpm badges:generate
 ```
 
@@ -170,6 +175,26 @@ pnpm badges:generate
 
 Отчет coverage генерируется командой `pnpm test:web:coverage` в каталог `apps/web/coverage`.
 JSON для бейджей генерируются командой `pnpm badges:generate` в каталог `.github/badges`.
+
+## Lighthouse
+
+Lighthouse вынесен в отдельный workflow и ходит в реальный production-сайт `https://expertakpp.ru/`.
+
+Команда:
+
+```bash
+pnpm lighthouse:prod
+```
+
+Пороговые значения:
+
+- `performance >= 90`
+- `accessibility >= 90`
+- `best-practices >= 90`
+- `seo = 100`
+
+Локально команда тоже пишет артефакты в `.lighthouseci`.
+В GitHub Actions production-отчет публикуется отдельным artifact.
 
 ### Directus schema/settings
 
@@ -239,6 +264,22 @@ docker compose --env-file infra/prod/.env -f infra/prod/docker-compose.yml logs 
 
 Coverage-отчет из CI публикуется как artifact `web-coverage`.
 После успешного прогона на `main` CI также обновляет `.github/badges/tests.json` и `.github/badges/coverage.json`.
+
+Отдельный production workflow: [lighthouse-prod.yml](.github/workflows/lighthouse-prod.yml)
+
+Проверяет:
+
+- `pnpm lighthouse:prod`
+
+Пороговые значения:
+
+- `performance >= 90`
+- `accessibility >= 90`
+- `best-practices >= 90`
+- `seo = 100`
+
+Production Lighthouse-отчет публикуется как artifact `expertakpp-ru-lighthouse`.
+После успешного прогона на `main` workflow также обновляет `.github/badges/lighthouse-performance.json` и `.github/badges/lighthouse-seo.json`.
 
 ## Pre-commit
 

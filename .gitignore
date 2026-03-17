@@ -30,6 +30,8 @@ build/
 .cache/
 coverage/
 report/
+.lighthouseci/
+apps/web/coverage/
 
 # IDEs
 .idea/

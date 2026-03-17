@@ -72,16 +72,22 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm -C apps/web test:coverage
 
-      - name: Generate badges
-        shell: bash
-        run: pnpm badges:generate
-
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: web-coverage
           path: apps/web/coverage
           if-no-files-found: error
+
+      - name: Build web
+        shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm -C apps/web build
+
+      - name: Generate badges
+        shell: bash
+        run: pnpm badges:generate
 
       - name: Commit badge updates
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -95,12 +101,6 @@ jobs:
           git add .github/badges
           git commit -m "chore: update badges"
           git push
-
-      - name: Build web
-        shell: bash
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096
-        run: pnpm -C apps/web build
 
       - name: Format check
         shell: bash
