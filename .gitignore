@@ -31,6 +31,8 @@ build/
 coverage/
 report/
 .lighthouseci/
+.lighthouseci-performance/
+.lighthouseci-quality/
 apps/web/coverage/
 
 # IDEs

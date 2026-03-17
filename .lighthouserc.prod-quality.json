@@ -5,12 +5,13 @@
       "settings": {
         "chromeFlags": "--headless=new --no-sandbox --disable-dev-shm-usage",
         "formFactor": "desktop",
+        "throttlingMethod": "provided",
         "screenEmulation": {
           "mobile": false,
           "width": 1350,
           "height": 940,
           "deviceScaleFactor": 1,
-          "disabled": false
+          "disabled": true
         },
         "onlyCategories": ["accessibility", "best-practices", "seo"]
       },
