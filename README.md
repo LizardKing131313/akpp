@@ -1,10 +1,10 @@
 # AKPP
 
 [![CI](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/endpoint?url=https://lizardking131313.github.io/akpp/badges/tests.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/endpoint?url=https://lizardking131313.github.io/akpp/badges/coverage.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![LH Perf](https://img.shields.io/endpoint?url=https://lizardking131313.github.io/akpp/badges/lighthouse-performance.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
-[![LH SEO](https://img.shields.io/endpoint?url=https://lizardking131313.github.io/akpp/badges/lighthouse-seo.json)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![Tests](.github/badges/tests.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![Coverage](.github/badges/coverage.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![LH Perf](.github/badges/lighthouse-performance.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![LH SEO](.github/badges/lighthouse-seo.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 [![Lighthouse Prod](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 [![CI Meta](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml)
 
@@ -171,10 +171,10 @@ pnpm badges:generate
 - helper composables в `app/composables`
 - базовые Nitro маршруты
 
-Бейджи тестов и покрытия в README обновляются автоматически из CI на ветке `main`.
+Бейджи в README обновляются автоматически из CI файлами в `.github/badges` на ветке `develop`.
 
 Отчет coverage генерируется командой `pnpm test:web:coverage` в каталог `apps/web/coverage`.
-JSON для бейджей генерируются командой `pnpm badges:generate` в каталог `.github/badges`.
+Команда `pnpm badges:generate` генерирует JSON и SVG для бейджей в каталог `.github/badges`.
 
 ## Lighthouse
 
@@ -258,7 +258,7 @@ docker compose --env-file infra/prod/.env -f infra/prod/docker-compose.yml logs 
 - `pnpm prettier --check .`
 
 Coverage-отчет из CI публикуется как artifact `web-coverage`.
-После успешного прогона на `main` CI также обновляет `.github/badges/tests.json` и `.github/badges/coverage.json`.
+После успешного прогона на `develop` CI также обновляет `.github/badges/tests.json` и `.github/badges/coverage.json`.
 
 Отдельный production workflow: [lighthouse-prod.yml](.github/workflows/lighthouse-prod.yml)
 

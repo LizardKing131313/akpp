@@ -72,11 +72,11 @@ jobs:
         if: github.ref == 'refs/heads/develop'
         shell: bash
         run: |
-          if git diff --quiet -- .github/badges/lighthouse-performance.json .github/badges/lighthouse-seo.json; then
+          if git diff --quiet -- .github/badges/lighthouse-performance.json .github/badges/lighthouse-performance.svg .github/badges/lighthouse-seo.json .github/badges/lighthouse-seo.svg; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/badges/lighthouse-performance.json .github/badges/lighthouse-seo.json
+          git add .github/badges/lighthouse-performance.json .github/badges/lighthouse-performance.svg .github/badges/lighthouse-seo.json .github/badges/lighthouse-seo.svg
           git commit -m "chore: update lighthouse badges"
           git push
