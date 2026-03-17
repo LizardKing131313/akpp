@@ -1,2 +1,3 @@
 pnpm lint-staged
 pnpm typecheck:web
+pnpm test:web

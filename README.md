@@ -1,6 +1,8 @@
 # AKPP
 
 [![CI](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/tests.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LizardKing131313/akpp/main/.github/badges/coverage.json)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
 [![CI Meta](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml)
 
 Монорепозиторий проекта `AKPPCenter` (Nuxt + Directus + PostgreSQL).
@@ -89,11 +91,12 @@ docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml ps
 Минимально необходимые:
 
 - `NUXT_PUBLIC_SITE_URL`
-- `NUXT_PUBLIC_DIRECTUS_URL`
-- `DIRECTUS_TOKEN`
-- `DIRECTUS_CACHE_TTL_SECONDS`
-- `YANDEX_MAP_API_KEY`
-- `YANDEX_ORG_ID`
+- `NUXT_PUBLIC_DIRECTUS_PUBLIC_URL`
+- `NUXT_DIRECTUS_INTERNAL_URL`
+- `NUXT_DIRECTUS_TOKEN`
+- `NUXT_DIRECTUS_CACHE_TTL_SECONDS`
+- `NUXT_PUBLIC_YANDEX_MAP_API_KEY`
+- `NUXT_PUBLIC_YANDEX_ORG_ID`
 
 Шаблон: [apps/web/.env.example](/apps/web/.env.example)
 
@@ -105,7 +108,9 @@ docker compose --env-file infra/dev/.env -f infra/dev/docker-compose.yml ps
 
 - `DIRECTUS_KEY` и `DIRECTUS_SECRET` (минимум 32 символа)
 - `DIRECTUS_ADMIN_EMAIL` и `DIRECTUS_ADMIN_PASSWORD`
-- `DIRECTUS_TOKEN` (токен для web API запросов к Directus)
+- `NUXT_DIRECTUS_TOKEN` (токен для web API запросов к Directus)
+- `NUXT_PUBLIC_DIRECTUS_PUBLIC_URL` (публичный URL Directus для браузера)
+- `NUXT_DIRECTUS_INTERNAL_URL` (внутренний URL Directus внутри compose-сети)
 
 ### `infra/prod/.env`
 
@@ -126,10 +131,45 @@ pnpm preview:web
 ```bash
 pnpm lint
 pnpm typecheck:web
+pnpm test:web
+pnpm test:web:unit
+pnpm test:web:nuxt
+pnpm test:web:e2e
+pnpm test:web:coverage
 pnpm format
 pnpm duplicates
 pnpm duplicates:deep
 ```
+
+## Тесты
+
+В проекте настроены три уровня тестов для `apps/web`:
+
+- `unit` - чистая логика и утилиты
+- `nuxt` - composables и код, которому нужен Nuxt runtime
+- `e2e` - smoke-проверки Nitro маршрутов
+
+Основные команды:
+
+```bash
+pnpm test:web
+pnpm test:web:unit
+pnpm test:web:nuxt
+pnpm test:web:e2e
+pnpm test:web:coverage
+pnpm badges:generate
+```
+
+Что сейчас проверяется:
+
+- pure helpers в `shared/lib`
+- helper composables в `app/composables`
+- базовые Nitro маршруты
+
+Бейджи тестов и покрытия в README обновляются автоматически из CI на ветке `main`.
+
+Отчет coverage генерируется командой `pnpm test:web:coverage` в каталог `apps/web/coverage`.
+JSON для бейджей генерируются командой `pnpm badges:generate` в каталог `.github/badges`.
 
 ### Directus schema/settings
 
@@ -192,14 +232,27 @@ docker compose --env-file infra/prod/.env -f infra/prod/docker-compose.yml logs 
 
 - `pnpm lint`
 - `pnpm -C apps/web typecheck`
+- `pnpm -C apps/web test`
+- `pnpm -C apps/web test:coverage`
 - `pnpm -C apps/web build`
 - `pnpm prettier --check .`
+
+Coverage-отчет из CI публикуется как artifact `web-coverage`.
+После успешного прогона на `main` CI также обновляет `.github/badges/tests.json` и `.github/badges/coverage.json`.
+
+## Pre-commit
+
+Перед коммитом выполняются:
+
+- `pnpm lint-staged`
+- `pnpm typecheck:web`
+- `pnpm test:web`
 
 ## Частые проблемы
 
 ### `Directus url is not configured`
 
-Проверь `NUXT_PUBLIC_DIRECTUS_URL` в `apps/web/.env` или env docker-сервиса `web`.
+Проверь `NUXT_DIRECTUS_INTERNAL_URL` в `apps/web/.env` или env docker-сервиса `web`.
 
 ### `No access token in login response` при settings apply/export
 
@@ -213,9 +266,9 @@ docker compose --env-file infra/prod/.env -f infra/prod/docker-compose.yml logs 
 
 Проверь:
 
-- `DIRECTUS_TOKEN`
-- доступность `DIRECTUS_INTERNAL_URL` внутри compose-сети
-- статус API `web`: `http://<host>:<web_port>/api/health/directus`
+- `NUXT_DIRECTUS_TOKEN`
+- доступность `NUXT_DIRECTUS_INTERNAL_URL` внутри compose-сети
+- доступность Directus из контейнера `web`
 
 ## Структура репозитория
 
