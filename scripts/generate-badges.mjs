@@ -5,8 +5,15 @@ import path from 'node:path'
 const rootDir = process.cwd()
 const coverageDir = path.join(rootDir, 'apps', 'web', 'coverage')
 const badgesDir = path.join(rootDir, '.github', 'badges')
-const lighthouseDir = path.join(rootDir, '.lighthouseci')
+const lighthouseQualityDir = path.join(rootDir, '.lighthouseci-quality')
+const lighthousePerformanceDir = path.join(rootDir, '.lighthouseci-performance')
 const productionLighthouseUrl = 'https://expertakpp.ru/'
+const lighthouseBadgeNames = [
+  'lighthouse-performance',
+  'lighthouse-accessibility',
+  'lighthouse-best-practices',
+  'lighthouse-seo',
+]
 
 const readJson = async (filePath) => {
   const fileContents = await readFile(filePath, 'utf8')
@@ -98,6 +105,25 @@ const formatScore = (value) => {
   return `${Math.round(Number(value) * 100)}%`
 }
 
+const findProductionRuns = (manifest) =>
+  manifest.filter(
+    (entry) =>
+      typeof entry?.url === 'string' &&
+      entry.url.startsWith(productionLighthouseUrl) &&
+      entry.summary
+  )
+
+const getMedian = (values) => {
+  const sortedValues = [...values].sort((left, right) => left - right)
+  const middleIndex = Math.floor(sortedValues.length / 2)
+
+  if (sortedValues.length % 2 === 1) {
+    return sortedValues[middleIndex]
+  }
+
+  return (sortedValues[middleIndex - 1] + sortedValues[middleIndex]) / 2
+}
+
 const writeBadgeFiles = async (name, label, message, color) => {
   const badge = createBadge(label, message, color)
 
@@ -145,51 +171,72 @@ if (existsSync(coverageSummaryPath) && existsSync(testResultsPath)) {
   generatedBadges.push('tests', 'coverage')
 }
 
-const lighthouseManifestPath = path.join(lighthouseDir, 'manifest.json')
+const lighthouseQualityManifestPath = path.join(lighthouseQualityDir, 'manifest.json')
 
-if (existsSync(lighthouseManifestPath)) {
-  const lighthouseManifest = await readJson(lighthouseManifestPath)
+if (existsSync(lighthouseQualityManifestPath)) {
+  const lighthouseQualityManifest = await readJson(lighthouseQualityManifestPath)
   const representativeRun =
-    lighthouseManifest.find(
-      (entry) =>
-        entry.isRepresentativeRun &&
-        typeof entry.url === 'string' &&
-        entry.url.startsWith(productionLighthouseUrl)
-    ) ?? null
+    findProductionRuns(lighthouseQualityManifest).find((entry) => entry.isRepresentativeRun) ?? null
 
-  if (representativeRun && !representativeRun.summary) {
-    throw new Error('Lighthouse representative run summary is missing')
+  if (!representativeRun) {
+    throw new Error('Lighthouse quality representative run summary is missing')
   }
 
-  if (representativeRun?.summary) {
-    const lighthousePerformance = Number(representativeRun.summary.performance ?? 0)
-    const lighthouseSeo = Number(representativeRun.summary.seo ?? 0)
+  const lighthouseAccessibility = Number(representativeRun.summary.accessibility ?? 0)
+  const lighthouseBestPractices = Number(representativeRun.summary['best-practices'] ?? 0)
+  const lighthouseSeo = Number(representativeRun.summary.seo ?? 0)
 
-    await writeBadgeFiles(
-      'lighthouse-performance',
-      'lh perf',
-      formatScore(lighthousePerformance),
-      getCoverageColor(lighthousePerformance * 100)
-    )
+  await writeBadgeFiles(
+    'lighthouse-accessibility',
+    'lh a11y',
+    formatScore(lighthouseAccessibility),
+    getCoverageColor(lighthouseAccessibility * 100)
+  )
+  await writeBadgeFiles(
+    'lighthouse-best-practices',
+    'lh best',
+    formatScore(lighthouseBestPractices),
+    getCoverageColor(lighthouseBestPractices * 100)
+  )
+  await writeBadgeFiles(
+    'lighthouse-seo',
+    'lh seo',
+    formatScore(lighthouseSeo),
+    getCoverageColor(lighthouseSeo * 100)
+  )
 
-    await writeBadgeFiles(
-      'lighthouse-seo',
-      'lh seo',
-      formatScore(lighthouseSeo),
-      getCoverageColor(lighthouseSeo * 100)
-    )
+  generatedBadges.push('lighthouse-accessibility', 'lighthouse-best-practices', 'lighthouse-seo')
+}
 
-    generatedBadges.push('lighthouse-performance', 'lighthouse-seo')
+const lighthousePerformanceManifestPath = path.join(lighthousePerformanceDir, 'manifest.json')
+
+if (existsSync(lighthousePerformanceManifestPath)) {
+  const lighthousePerformanceManifest = await readJson(lighthousePerformanceManifestPath)
+  const performanceRuns = findProductionRuns(lighthousePerformanceManifest)
+  const performanceValues = performanceRuns
+    .map((entry) => Number(entry.summary.performance ?? Number.NaN))
+    .filter((value) => Number.isFinite(value))
+
+  if (performanceValues.length === 0) {
+    throw new Error('Lighthouse performance run summary is missing')
   }
+
+  const lighthousePerformance = getMedian(performanceValues)
+
+  await writeBadgeFiles(
+    'lighthouse-performance',
+    'lh perf',
+    formatScore(lighthousePerformance),
+    getCoverageColor(lighthousePerformance * 100)
+  )
+
+  generatedBadges.push('lighthouse-performance')
 }
 
 if (generatedBadges.length === 0) {
-  const existingBadgeNames = [
-    'tests',
-    'coverage',
-    'lighthouse-performance',
-    'lighthouse-seo',
-  ].filter((name) => existsSync(path.join(badgesDir, `${name}.json`)))
+  const existingBadgeNames = ['tests', 'coverage', ...lighthouseBadgeNames].filter((name) =>
+    existsSync(path.join(badgesDir, `${name}.json`))
+  )
 
   for (const name of existingBadgeNames) {
     const badge = await readJson(path.join(badgesDir, `${name}.json`))

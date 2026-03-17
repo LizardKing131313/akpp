@@ -1,12 +1,19 @@
 # AKPP
 
+**Статус**
+
 [![CI](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
 [![Tests](.github/badges/tests.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
 [![Coverage](.github/badges/coverage.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci.yml)
-[![LH Perf](.github/badges/lighthouse-performance.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
-[![LH SEO](.github/badges/lighthouse-seo.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
-[![Lighthouse Prod](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 [![CI Meta](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/ci-meta.yml)
+[![Lighthouse Prod](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml/badge.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+
+**Lighthouse Prod**
+
+[![LH Perf](.github/badges/lighthouse-performance.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![LH A11y](.github/badges/lighthouse-accessibility.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![LH Best](.github/badges/lighthouse-best-practices.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
+[![LH SEO](.github/badges/lighthouse-seo.svg)](https://github.com/LizardKing131313/akpp/actions/workflows/lighthouse-prod.yml)
 
 Монорепозиторий проекта `AKPPCenter` (Nuxt + Directus + PostgreSQL).
 
@@ -140,6 +147,8 @@ pnpm test:web:nuxt
 pnpm test:web:e2e
 pnpm test:web:coverage
 pnpm lighthouse:prod
+pnpm lighthouse:prod:quality
+pnpm lighthouse:prod:performance
 pnpm format
 pnpm duplicates
 pnpm duplicates:deep
@@ -162,6 +171,8 @@ pnpm test:web:nuxt
 pnpm test:web:e2e
 pnpm test:web:coverage
 pnpm lighthouse:prod
+pnpm lighthouse:prod:quality
+pnpm lighthouse:prod:performance
 pnpm badges:generate
 ```
 
@@ -180,6 +191,7 @@ pnpm badges:generate
 
 Lighthouse вынесен в отдельный workflow и ходит в реальный production-сайт `https://expertakpp.ru/`.
 Режим аудита: `Navigation` + `Desktop`.
+`accessibility`, `best-practices` и `seo` снимаются одним прогоном, `performance` считается отдельно по медиане из трех прогонов.
 
 Команда:
 
@@ -187,7 +199,7 @@ Lighthouse вынесен в отдельный workflow и ходит в реа
 pnpm lighthouse:prod
 ```
 
-Локально команда тоже пишет артефакты в `.lighthouseci`.
+Локально команды пишут артефакты в `.lighthouseci-quality` и `.lighthouseci-performance`.
 В GitHub Actions production-отчет публикуется отдельным artifact.
 Workflow не валит CI по score и используется как внешний мониторинг с бейджами.
 
@@ -267,7 +279,7 @@ Coverage-отчет из CI публикуется как artifact `web-coverage
 - `pnpm lighthouse:prod`
 
 Production Lighthouse-отчет публикуется как artifact `expertakpp-ru-lighthouse`.
-После успешного прогона на `main` workflow также обновляет `.github/badges/lighthouse-performance.json` и `.github/badges/lighthouse-seo.json`.
+После успешного прогона на `develop` workflow также обновляет `.github/badges/lighthouse-performance.json`, `.github/badges/lighthouse-accessibility.json`, `.github/badges/lighthouse-best-practices.json` и `.github/badges/lighthouse-seo.json`.
 
 ## Pre-commit
 

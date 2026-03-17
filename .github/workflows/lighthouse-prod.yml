@@ -9,7 +9,8 @@ on:
       - develop
     paths:
       - .github/workflows/lighthouse-prod.yml
-      - .lighthouserc.prod.json
+      - .lighthouserc.prod-quality.json
+      - .lighthouserc.prod-performance.json
       - scripts/generate-badges.mjs
       - package.json
       - pnpm-lock.yaml
@@ -50,17 +51,25 @@ jobs:
         shell: bash
         run: pnpm install --frozen-lockfile
 
-      - name: Run Lighthouse against production
+      - name: Run Lighthouse quality checks against production
         shell: bash
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-        run: pnpm lighthouse:prod
+        run: pnpm lighthouse:prod:quality
 
-      - name: Upload Lighthouse report
+      - name: Run Lighthouse performance checks against production
+        shell: bash
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm lighthouse:prod:performance
+
+      - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v5
         with:
           name: expertakpp-ru-lighthouse
-          path: .lighthouseci/**
+          path: |
+            .lighthouseci-quality/**
+            .lighthouseci-performance/**
           include-hidden-files: true
           if-no-files-found: error
 
@@ -72,11 +81,11 @@ jobs:
         if: github.ref == 'refs/heads/develop'
         shell: bash
         run: |
-          if git diff --quiet -- .github/badges/lighthouse-performance.json .github/badges/lighthouse-performance.svg .github/badges/lighthouse-seo.json .github/badges/lighthouse-seo.svg; then
+          if git diff --quiet -- .github/badges/lighthouse-performance.json .github/badges/lighthouse-performance.svg .github/badges/lighthouse-accessibility.json .github/badges/lighthouse-accessibility.svg .github/badges/lighthouse-best-practices.json .github/badges/lighthouse-best-practices.svg .github/badges/lighthouse-seo.json .github/badges/lighthouse-seo.svg; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/badges/lighthouse-performance.json .github/badges/lighthouse-performance.svg .github/badges/lighthouse-seo.json .github/badges/lighthouse-seo.svg
+          git add .github/badges/lighthouse-performance.json .github/badges/lighthouse-performance.svg .github/badges/lighthouse-accessibility.json .github/badges/lighthouse-accessibility.svg .github/badges/lighthouse-best-practices.json .github/badges/lighthouse-best-practices.svg .github/badges/lighthouse-seo.json .github/badges/lighthouse-seo.svg
           git commit -m "chore: update lighthouse badges"
           git push

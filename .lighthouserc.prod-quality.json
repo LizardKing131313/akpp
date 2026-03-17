@@ -12,13 +12,13 @@
           "deviceScaleFactor": 1,
           "disabled": false
         },
-        "onlyCategories": ["performance", "accessibility", "best-practices", "seo"]
+        "onlyCategories": ["accessibility", "best-practices", "seo"]
       },
       "url": ["https://expertakpp.ru/"]
     },
     "upload": {
       "target": "filesystem",
-      "outputDir": ".lighthouseci"
+      "outputDir": ".lighthouseci-quality"
     }
   }
 }
