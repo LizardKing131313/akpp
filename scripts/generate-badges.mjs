@@ -101,8 +101,16 @@ const formatScore = (value) => {
 const writeBadgeFiles = async (name, label, message, color) => {
   const badge = createBadge(label, message, color)
 
-  await writeFile(path.join(badgesDir, `${name}.json`), `${JSON.stringify(badge, null, 2)}\n`, 'utf8')
-  await writeFile(path.join(badgesDir, `${name}.svg`), createBadgeSvg(label, message, color), 'utf8')
+  await writeFile(
+    path.join(badgesDir, `${name}.json`),
+    `${JSON.stringify(badge, null, 2)}\n`,
+    'utf8'
+  )
+  await writeFile(
+    path.join(badgesDir, `${name}.svg`),
+    createBadgeSvg(label, message, color),
+    'utf8'
+  )
 }
 
 await mkdir(badgesDir, { recursive: true })
