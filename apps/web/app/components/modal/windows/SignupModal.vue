@@ -47,7 +47,6 @@ const submit = (): void => {
 
     try {
       await submitLead({
-        source: 'signup',
         name: name.value.trim(),
         phone: phone.value.trim(),
       })

@@ -66,17 +66,6 @@ const normalizeText = (value: string | undefined): string | undefined => {
   return normalizedValue && normalizedValue.length > 0 ? normalizedValue : undefined
 }
 
-const buildLeadTitle = (source: LeadSubmitPayload['source']): string => {
-  switch (source) {
-    case 'signup':
-      return 'Заявка с формы записи'
-    case 'shop':
-      return 'Заявка с формы магазина'
-    case 'quiz':
-      return 'Заявка с квиза'
-  }
-}
-
 const buildRoistatPayload = (
   event: H3Event,
   payload: LeadSubmitPayload,
@@ -85,12 +74,41 @@ const buildRoistatPayload = (
 ): RoistatProxyLeadPayload => {
   const requestUrl = getRequestURL(event)
   const roistatPayload: RoistatProxyLeadPayload = {
-    title: buildLeadTitle(payload.source),
+    title: 'Заявка с сайта',
     phone: payload.phone,
     fields: {
-      source: payload.source,
       source_page: `${requestUrl.origin}${requestUrl.pathname}`,
     },
+  }
+
+  const source = normalizeText(payload.source)
+  if (source) {
+    roistatPayload.fields.source = source
+  }
+
+  const utmCampaign = normalizeText(payload.utmCampaign)
+  if (utmCampaign) {
+    roistatPayload.fields.utmCampaign = utmCampaign
+  }
+
+  const utmContent = normalizeText(payload.utmContent)
+  if (utmContent) {
+    roistatPayload.fields.utmContent = utmContent
+  }
+
+  const utmMedium = normalizeText(payload.utmMedium)
+  if (utmMedium) {
+    roistatPayload.fields.utmMedium = utmMedium
+  }
+
+  const utmSource = normalizeText(payload.utmSource)
+  if (utmSource) {
+    roistatPayload.fields.utmSource = utmSource
+  }
+
+  const utmTerm = normalizeText(payload.utmTerm)
+  if (utmTerm) {
+    roistatPayload.fields.utmTerm = utmTerm
   }
 
   const customerName = normalizeText(payload.name)
@@ -186,7 +204,7 @@ export const sendRoistatProxyLead = async ({
   traceRoistat(isTraceEnabled, 'request prepared', {
     endpoint: roistatApiEndpoint,
     key: maskApiKey(requestPayload.key),
-    source: payload.source,
+    source: payload.source ?? 'unknown',
     phone: requestPayload.phone,
     roistat: requestPayload.roistat ?? 'nocookie',
     fields: roistatPayload.fields,

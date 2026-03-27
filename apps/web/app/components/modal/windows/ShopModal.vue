@@ -44,7 +44,6 @@ const submit = (): void => {
 
     try {
       await submitLead({
-        source: 'shop',
         phone: phone.value.trim(),
         comment: vinValue.length > 0 ? `Авто: ${carValue}\nVIN: ${vinValue}` : `Авто: ${carValue}`,
       })

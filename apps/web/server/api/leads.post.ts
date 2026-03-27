@@ -27,10 +27,27 @@ const normalizeRequiredText = (value: unknown, fieldName: string): string => {
   })
 }
 
+const buildTrackingComment = (payload: LeadSubmitPayload): string[] => {
+  const trackingEntries = [
+    ['source', payload.source],
+    ['utmCampaign', payload.utmCampaign],
+    ['utmContent', payload.utmContent],
+    ['utmMedium', payload.utmMedium],
+    ['utmSource', payload.utmSource],
+    ['utmTerm', payload.utmTerm],
+  ] as const
+
+  return trackingEntries.flatMap(([key, value]) => {
+    const normalizedValue = normalizeText(value)
+    return normalizedValue ? [`${key}: ${normalizedValue}`] : []
+  })
+}
+
 const toDirectusPayload = (payload: LeadSubmitPayload): LeadDirectusCreatePayload => {
+  const normalizedSource = normalizeText(payload.source) ?? 'unknown'
   const directusPayload: LeadDirectusCreatePayload = {
     phone: normalizeRequiredText(payload.phone, 'phone'),
-    source: normalizeRequiredText(payload.source, 'source'),
+    source: normalizedSource,
   }
 
   const normalizedName = normalizeText(payload.name)
@@ -49,11 +66,14 @@ const toDirectusPayload = (payload: LeadSubmitPayload): LeadDirectusCreatePayloa
   }
 
   const normalizedComment = normalizeText(payload.comment)
-  const sourceComment = `source: ${payload.source}`
+  const commentParts = [
+    ...buildTrackingComment(payload),
+    ...(normalizedComment ? [normalizedComment] : []),
+  ]
 
-  directusPayload.comment = normalizedComment
-    ? `${sourceComment}\n${normalizedComment}`
-    : sourceComment
+  if (commentParts.length > 0) {
+    directusPayload.comment = commentParts.join('\n')
+  }
 
   return directusPayload
 }

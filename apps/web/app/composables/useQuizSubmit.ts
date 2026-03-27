@@ -27,7 +27,6 @@ export const useQuizSubmit = (options?: UseQuizSubmitOptions) => {
       ].filter((contextPart) => contextPart.length > 0)
 
       await submitLead({
-        source: 'quiz',
         name: payload.customerName,
         phone: payload.customerPhone,
         problem: payload.problemTitle,

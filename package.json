@@ -32,8 +32,8 @@
     "lint": "eslint apps/web",
     "lint:fix": "eslint apps/web --fix",
     "format": "prettier --write .",
-    "duplicates": "jscpd --min-lines 8 --min-tokens 80 --reporters console,html --ignore \"**/node_modules/**,**/.nuxt/**,**/.output/**,**/dist/**\" apps/web",
-    "duplicates:deep": "jscpd --min-lines 5 --min-tokens 50 --reporters console,html --ignore \"**/node_modules/**,**/.nuxt/**,**/.output/**,**/dist/**\" apps/web",
+    "duplicates": "jscpd --min-lines 8 --min-tokens 80 --reporters console,html --ignore \"**/node_modules/**,**/.nuxt/**,**/.output/**,**/dist/**,**/coverage/**\" apps/web",
+    "duplicates:deep": "jscpd --min-lines 5 --min-tokens 50 --reporters console,html --ignore \"**/node_modules/**,**/.nuxt/**,**/.output/**,**/dist/**,**/coverage/**\" apps/web",
     "prepare": "husky"
   },
   "devDependencies": {
